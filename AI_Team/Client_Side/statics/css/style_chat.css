@@ -11,6 +11,9 @@ body {
     background-position: top left; 
     margin: 0; 
 }
+.sebas-boton {
+    
+}
 
 .chat-header, .chat-footer {
     background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
