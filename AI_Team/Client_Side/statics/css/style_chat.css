@@ -77,6 +77,7 @@ body {
 }
 
 .menu-items {
+    transform: translateX(-100%); top: 70px;
     padding-top: 5px; /* Espacio en la parte superior */
     width: 250px;
     height: 88%;
@@ -191,13 +192,50 @@ body {
     border: none;
 }
 .message-content {
-    line-height: 1.5; /* Ajusta el espacio entre líneas según tus preferencias */
+    line-height: 1; /* Ajusta el espacio entre líneas según tus preferencias */
+}
+
+.metallic-text {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 210px;
+    height: 40px;
+    margin: 10px auto; 
+    font-size: 0.75em;
+    background: linear-gradient(45deg, 
+                                rgba(255,255,255,1) 0%, 
+                                rgba(230,230,230,1) 15%, 
+                                rgba(179,179,179,1) 50%, 
+                                rgba(230,230,230,1) 85%, 
+                                rgba(255,255,255,1) 100%);
+    background-size: 300% 100%;
+    background-position: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    color: #111;
+    text-shadow: 0 0 5px rgba(255,255,255,0.7), 0 1px 2px rgba(0,0,0,0.5);
+    letter-spacing: 0.5px;
+    animation: shimmer 6s infinite; /* Adjusted the time for a more relaxed pace */
+}
+
+@keyframes shimmer {
+    0%, 33% {
+        background-position: -100%;
+    }
+    50% {
+        background-position: 100%;
+    }
+    66%, 100% {
+        background-position: -100%;
+    }
 }
 
 
 .chat-footer {
     width: 100%;  /* Asegura que ocupe todo el ancho */
     position: fixed;
+    flex-direction: column;
     bottom: 0;
     left: 0;
 }
@@ -208,6 +246,24 @@ body {
     margin-right: auto;
     margin-top: 10px;  /* Espacio en la parte superior */
     padding-bottom: 5px;  /* Este espacio será el que separará el input del borde inferior */
+}
+
+.loading-dots-container {
+    display: none;   
+}
+
+.loading-dots {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: grey;
+    border-radius: 50%;
 }
 
 .btn-send {
@@ -227,4 +283,25 @@ body {
 .messages-container {
     max-width: 70%;
     margin: 0 auto;
+}
+
+@keyframes dotAnimation {
+    0%, 100% {
+        background-color: grey;
+    }
+    50% {
+        background-color: deepskyblue;
+    }
+}
+
+.dot-1 {
+    animation: dotAnimation 1s infinite 0s;
+}
+
+.dot-2 {
+    animation: dotAnimation 1s infinite 0.33s;
+}
+
+.dot-3 {
+    animation: dotAnimation 1s infinite 0.66s;
 }

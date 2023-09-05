@@ -1,1 +1,0 @@
-Everything that is DB and server API calls goes here

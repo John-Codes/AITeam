@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +9,7 @@
     <title> AI Team</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="../statics/css/style_chat.css" rel="stylesheet">
+    <link href={% static 'css/style_chat.css' %} rel="stylesheet"> 
 
 </head>
 
@@ -19,7 +21,7 @@
             <div class="chat-header d-flex justify-content-between align-items-center px-3 py-2 glass">
                 <div class="nav-container">
                     <!-- Asegúrate de que el checkbox tiene el id correcto -->
-                    <input class="checkbox" type="checkbox" id="hamburgerToggle" />
+                    <input class="checkbox" type="checkbox" id="hamburgerToggle" placeholder="a" />
                     <!-- Vincula el label (hamburger-lines) con el checkbox mediante el atributo "for" -->
                     <label class="hamburger-lines" for="hamburgerToggle">
                         <span class="line line1"></span>
@@ -33,50 +35,61 @@
             <!-- Chat Content -->
             <div class="col-12 messages-container px-0">
                 <div class="chat-body px-3 py-2">
+                    <!-- Metallic Text -->
+                    <div class="metallic-text">
+                        Un AI Tem está escribiendo
+                    </div>
                     <div class="clearfix"></div>
-                    <div class="message-right glass float-end"><p class="message-content">"Hello! I was intrigued by your AI solutions. I'm curious to learn more about how your technology can transform businesses. Can you provide me more information abaut ?</p></div>
+                    <div class="message-right glass float-end">
+                        <p class="message-content">"Hello! I was intrigued by your AI solutions. I'm curious to learn more about how your technology can transform businesses. Can you provide me more information about it?</p>
+                    </div>
                     <div class="clearfix"></div>
                     <div class="message-left glass">
                         <p>Nobody can help you improve your business more than your clients:</p>
                         <p class="message-content">
                             Data-Driven Insights: Machine learning algorithms analyze user behavior in real time, providing invaluable insights into customer preferences and pain points.
-                            <br>
-                            <br>
+                            <br><br>
                             Personalization: AI enables dynamic content changes, allowing each visitor to have a personalized experience, thus increasing engagement and conversion rates.
-                            <br>
-                            <br>
+                            <br><br>
                             Automated A/B Testing: AI can run continuous A/B tests to identify the most effective layout, content, and CTAs, significantly shortening the optimization cycle.
-                            <br>
-                            <br>
+                            <br><br>
                             Improved ROI: By understanding user behavior better, you can allocate resources more efficiently, resulting in higher returns on your marketing investments.
-                            <br>
-                            <br>
+                            <br><br>
                             Client Retention: Knowing what the client is thinking through data analytics enables proactive service adjustments, fostering loyalty and repeat business.
                         </p>
-
-                        <p>We can help you transform your business with AI</p>
+                        <p>We can help you transform your business with AI.</p>
                         <div class="mt-2">
                             <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                             <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
                             <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
                         </div>
                     </div>
-                    
                     <!-- Add more chat bubbles here... -->
                 </div>
             </div>
+            
     
             <!-- Chat Footer -->
             <div class="chat-footer">
-                <div class="footer-content">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Escribe un mensaje...">
-                        <button class="btn btn-send">Enviar</button>
+                <div class="chat-footer">
+                    <div class="footer-content">
+                        <div class="loading-dots-container">
+                            <div class="loading-dots">
+                                <span class="dot dot-1"></span>
+                                <span class="dot dot-2"></span>
+                                <span class="dot dot-3"></span>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" id="userMessage" placeholder="Escribe un mensaje..." onkeydown="handleKeyDown(event)">
+                            <button class="btn btn-send" onclick="sendMessage()">Enviar</button>                            
+                        </div>
                     </div>
                 </div>
-            </div>
+                
             <!-- Añade esta línea para el menú -->
-            <div class="menu-items glass" style="transform: translateX(-100%); top: 70px;"> <!-- Ajusta la posición vertical -->
+            <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Refresh</a></li>
@@ -85,8 +98,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../statics/js/landing_menu.js"></script>
-</body>
 
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src={% static 'js/landing.js' %} ></script> 
 </html>
