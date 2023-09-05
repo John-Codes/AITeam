@@ -6,6 +6,7 @@ import google.generativeai as palm
 def main():
     #result = CallChatGPT("Make python helloworld program")
     #result = CallPalm2("Make python helloworld program")
+    #test
     Call("Make python helloworld program", "Palm2")
 
 
