@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import google.generativeai as palm
-from ..Logic.LLMs import Call
-import os
+from AI_Team.Logic.LLMs import Call
 #key = 'AIzaSyDW2ul61CVxQCyFM591byBSyC587YDey7o'
 
 def chat_ui(request):  
@@ -31,3 +30,12 @@ def chat_ui(request):
         return JsonResponse(response_data)
 
     return render(request, 'chat_ui.html')
+
+def login(request):  
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        print(email, password)      
+
+    return render(request, 'login.html')

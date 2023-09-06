@@ -3,11 +3,13 @@
 import os
 import sys
 
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# add the nescesary paths for the imports we need to make
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Server_Config.settings")
-    sys.path.append('C:/Users/rsant/OneDrive/Documentos/Proyectos/landing_page/landingpage')
 
     try:
         from django.core.management import execute_from_command_line

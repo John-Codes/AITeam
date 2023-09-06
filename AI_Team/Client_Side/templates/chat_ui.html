@@ -21,13 +21,22 @@
             <div class="chat-header d-flex justify-content-between align-items-center px-3 py-2 glass">
                 <div class="nav-container">
                     <!-- Asegúrate de que el checkbox tiene el id correcto -->
-                    <input class="checkbox" type="checkbox" id="hamburgerToggle" placeholder="a" />
+                    <input class="checkbox" type="checkbox" id="hamburgerToggle" />
                     <!-- Vincula el label (hamburger-lines) con el checkbox mediante el atributo "for" -->
                     <label class="hamburger-lines" for="hamburgerToggle">
                         <span class="line line1"></span>
                         <span class="line line2"></span>
                         <span class="line line3"></span>
                     </label>
+                     <!-- Añade esta línea para el menú -->
+                    <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Refresh</a></li>
+                            <li><a href="{% url 'login' %}">Login</a></li>
+
+                        </ul>
+                    </div>
                 </div>
             
                 <h5 class="chat-title mb-0">Escribe cualquier duda que tengas</h5>            
@@ -41,7 +50,9 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="message-right glass float-end">
-                        <p class="message-content">"Hello! I was intrigued by your AI solutions. I'm curious to learn more about how your technology can transform businesses. Can you provide me more information about it?</p>
+                        <div class="w3-card"> <!-- aqui tiene que ir el div que tienes que agregar-->
+                            <p class="message-content">"Hello! I was intrigued by your AI solutions. I'm curious to learn more about how your technology can transform businesses. Can you provide me more information about it?</p>
+                        </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="message-left glass">
@@ -88,17 +99,9 @@
                     </div>
                 </div>
                 
-            <!-- Añade esta línea para el menú -->
-            <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Refresh</a></li>
-                </ul>
-            </div>
+           
         </div>
     </div>
-
-
 </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src={% static 'js/landing.js' %} ></script> 

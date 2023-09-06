@@ -75,20 +75,31 @@ body {
     transform-origin: 0% 100%;
     transition: transform 0.4s ease-in-out;
 }
+.nav-links {
+    transform: translateX(0);
+}
+
+.nav-links:hover {
+    transform: translateX(-100%);
+}
+.nav-links {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
 
 .menu-items {
-    transform: translateX(-100%); top: 70px;
-    padding-top: 5px; /* Espacio en la parte superior */
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+    padding-top: 5px; 
     width: 250px;
     height: 88%;
-    transform: translateX(-100%);
     position: fixed;
-    top: 120px; /* Ajusta la posición vertical */
+    top: 150px;
     left: 0;
     z-index: 1000;
-    transition: transform 0.5s ease-in-out;
     text-align: left;
-    /* Estas son las propiedades para el efecto glass */
     background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -96,10 +107,16 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+
 .menu-items ul {
     margin-top: 0; /* Elimina el margen superior */
     padding-top: 5px; /* Agrega espacio superior */
 }
+
+.menu-items.show {
+    transform: translateY(0);
+}
+
 
 .menu-items li {
     margin-bottom: 1.2rem;
@@ -122,11 +139,9 @@ body {
     display: none;
 }
 
-
-
 /* Cambia la posición del menú cuando el checkbox esté marcado */
 #hamburgerToggle:checked ~ .menu-items {
-    transform: translateY(0);
+    transform: translateX(0); /* Adjust this, the translate function doesn't need any parameters */
 }
 
 .chat-body {
