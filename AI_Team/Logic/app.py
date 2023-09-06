@@ -28,7 +28,8 @@ completion = palm.generate_text(
     temperature=0,
 )
 # se imprime la respuesta
-print(completion.result)
+print('the unique result',completion.result)
+print('the entire result',completion)
 
 """
 FUnctions with google.generativa AI

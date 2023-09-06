@@ -1,35 +1,26 @@
-
-// Variables related to the UI
-let isDotsVisible = false;
-
 function toggleDotsAnimation(shouldShow) {
     const loadingDots = document.querySelector('.loading-dots-container');
     const metallicText = document.querySelector('.metallic-text');
+    const displayValue = shouldShow ? 'flex' : 'none';
 
-    if (shouldShow && !isDotsVisible) {
-        loadingDots.style.display = 'inline-flex';
-        metallicText.style.display = 'flex';
-        isDotsVisible = true;
-    } else if (!shouldShow && isDotsVisible) {
-        loadingDots.style.display = 'none';
-        metallicText.style.display = 'none';
-        isDotsVisible = false;
-    }
+    loadingDots.style.display = displayValue;
+    metallicText.style.display = displayValue;
 }
 
 function sendMessage() {
-    let message = document.getElementById("userMessage").value; // Corregido el ID
+    let message = document.getElementById("userMessage").value;
+
     if(message.trim() !== "") {
         toggleDotsAnimation(true);
 
-        let csrfToken = getCookie('csrftoken'); // Obtiene el token CSRF
+        let csrfToken = getCookie('csrftoken'); 
 
         fetch("/aiteam/", {
             method: "POST",
             body: new URLSearchParams({ "message": message }),
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
-                "X-CSRFToken": csrfToken // Envía el token CSRF
+                "X-CSRFToken": csrfToken 
             }
         })
         .then(response => {
@@ -48,27 +39,17 @@ function sendMessage() {
             toggleDotsAnimation(false);
         });
 
-        document.getElementById("userMessage").value = ""; // Corregido el ID
+        document.getElementById("userMessage").value = "";
     }
 }
-
-
 
 function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+// Send message
 function handleKeyDown(event) {
     if (event.keyCode === 13) {  // 13 es el keyCode para la tecla Enter
         sendMessage();
@@ -76,18 +57,24 @@ function handleKeyDown(event) {
     }
 }
 
-// Event listeners
+//Event listeners for send messages
 const sendButton = document.querySelector('.btn-send');
 sendButton.addEventListener('click', sendMessage);
 
-const hamburgerToggle = document.getElementById('hamburgerToggle');
-const menuItems = document.querySelector('.menu-items');
+const userMessageInput = document.getElementById('userMessage');
+sendButton.addEventListener('keydown', handleKeyDown);
 
-hamburgerToggle.addEventListener('change', () => {
-    if (hamburgerToggle.checked) {
-        menuItems.style.transform = 'translateX(0)';
-    } else {
-        menuItems.style.transform = 'translateX(-100%)';
-    }
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Hamburger toggle
+    const hamburgerToggle = document.querySelector("#hamburgerToggle");
+    const menuItems = document.querySelector(".menu-items");
+
+    hamburgerToggle.addEventListener("change", function() {
+        if (this.checked) {
+            menuItems.style.transform = 'translateX(0)';
+        } else {
+            menuItems.style.transform = 'translateX(-100%)';
+        }
+    });
 });
-

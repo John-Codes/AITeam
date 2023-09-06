@@ -19,6 +19,6 @@ from django.urls import path, include
 
 print("Inside Server_Config.urls")
 urlpatterns = [
-    path('', include('AI_Team.Server_Side.urls')),
+    path('', include('Server_Config.Server_Side.urls')), # here we import the urls of our app, the urls is inside Server_Side folder, django searches for the file urls.py
     path("admin/", admin.site.urls),
 ]
