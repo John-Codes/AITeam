@@ -28,6 +28,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# email send config
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'rsanty.jw@gmail.com'
+EMAIL_HOST_PASSWORD = 'jwbr0@dcast1ng'
 
 # Application definition
 

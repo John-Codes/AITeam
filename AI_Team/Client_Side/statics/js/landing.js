@@ -16,12 +16,17 @@ function getCookie(name) {
 }
 
 // Function to send the user's message and receive the response.
-function addUserMessage() {
-    const message = document.getElementById("userMessage").value;
+function sendMessage() {
+    console.log("Función sendMessage invocada");
+    const message = document.getElementById("userMessage").value.trim();  // Obtiene el mensaje y elimina espacios en blanco
 
+    // Luego, verifica si el mensaje es idéntico al anterior.
     if (message.trim() !== "") {
+
+        toggleDotsAnimation(true); // Activar animaciones
         const csrfToken = getCookie('csrftoken');
-        toggleDotsAnimation(true)
+        console.log("Enviando solicitud 'user_message'...");
+
         fetch("/aiteam/", {
             method: "POST",
             body: new URLSearchParams({ "message": message, "phase": "user_message" }),
@@ -39,7 +44,9 @@ function addUserMessage() {
         .then(data => {
             const chatBox = document.getElementById("chatBox");
             chatBox.insertAdjacentHTML('beforeend', data.user_message_div);
-            
+            document.getElementById("userMessage").value = "";
+            console.log("Enviando solicitud 'ai_response'...");
+            chatBox.scrollTop = chatBox.scrollHeight;
             // Now make a request for the AI's response here, inside the .then()
             return fetch("/aiteam/", {
                 method: "POST",
@@ -59,68 +66,36 @@ function addUserMessage() {
         .then(data => {
             const chatBox = document.getElementById("chatBox");
             chatBox.insertAdjacentHTML('beforeend', data.ia_message_div);
+            chatBox.scrollTop = chatBox.scrollHeight;
         })
         .catch(error => {
             console.error('Error:', error);
+        })
+        .finally(() => {
+            toggleDotsAnimation(false); // Desactivar animaciones
         });
-        toggleDotsAnimation(false)
-        // Clear the user input field.
-        document.getElementById("userMessage").value = "";
     }
-}
-
-// Function to receive the AI's response.
-function sendMessage(message) {
-    //const message = document.getElementById("userMessage").value;
-    const csrfToken = getCookie('csrftoken');
-
-    fetch("/aiteam/", {
-        method: "POST",
-        body: new URLSearchParams({ "message": message, "phase": "ai_response" }),
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRFToken": csrfToken
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.error) {
-            console.error('Error from server:', data.error);
-        } else {
-            const chatBox = document.getElementById("chatBox");
-            chatBox.insertAdjacentHTML('beforeend', data.ia_message_div);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
-    // Clear the user input field.
-    document.getElementById("userMessage").value = "";
 }
 
 // Handle Enter key press to send the message.
 function handleKeyDown(event) {
     if (event.keyCode === 13) {  // 13 is the keyCode for Enter key.
-        addUserMessage();
+        sendMessage();
+        console.log("Tecla presionada", event.keyCode);
         event.preventDefault();  // Prevents the Enter action from triggering a page reload.
     }
 }
 
 // Initialize event listeners.
 document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOMContentLoaded ejecutado");
     // Send message using the button.
-    const sendButton = document.querySelector('.btn-send');
-    sendButton.addEventListener('click', addUserMessage);
+    //const sendButton = document.querySelector('.btn-send');
+    //sendButton.addEventListener('click', sendMessage);
 
     // Send message using the Enter key.
-    const userMessageInput = document.getElementById('userMessage');
-    userMessageInput.addEventListener('keydown', handleKeyDown);
+    //const userMessageInput = document.getElementById('userMessage');
+    //userMessageInput.addEventListener('keydown', handleKeyDown);
 
     // Toggle hamburger menu.
     const hamburgerToggle = document.querySelector("#hamburgerToggle");

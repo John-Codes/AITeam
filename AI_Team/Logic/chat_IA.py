@@ -1,4 +1,4 @@
-key = 'AIzaSyDW2ul61CVxQCyFM591byBSyC587YDey7o'
+#key = 'AIzaSyDW2ul61CVxQCyFM591byBSyC587YDey7o'
 import google.generativeai as palm
 
 Successfully = True
@@ -27,7 +27,7 @@ if Successfully:
             # check if the conversation starts or continues
             if num_message == 0:
                 # start with method palm
-                response = palm.chat(messages=user_input, temperature=0.7)
+                response = palm.chat(context="Respond only with yes or no", messages=user_input, temperature=1)
                 # once started in the next step of the loop it should start saving the conversation
                 num_message += 1
             else:
