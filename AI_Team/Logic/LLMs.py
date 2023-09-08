@@ -1,7 +1,7 @@
 import os
 import openai
 import google.generativeai as palm
-
+from .sender_mails import email_send
 
 def main():
     #result = CallChatGPT("Make python helloworld program")
@@ -36,17 +36,11 @@ def CallChatGPT( projectDescription):
         print(e.message)
 
 def CallPalm2(projectDescription, key):
-            
+    #print("Función CallPalm2 invocada con:", projectDescription)
     try:
         palm.configure(api_key=os.getenv("Palm2APIKey"))
     except Exception as e:
         print('something was wrong when trying to connect to the api', e)
-    """else:
-        try:
-            palm.configure(api_key=str(key))
-        except Exception as e:
-            print(key)
-            print('something was wrong when trying to connect to the api', e)"""
     
     prompt = f"""{projectDescription}"""
 
@@ -68,18 +62,45 @@ def CallPalm2(projectDescription, key):
         response = str(e)
         print('error when generating text by the AI', e)
         print(response)
-    
-    
+
     """response = palm.generate_text(
     **defaults,
     prompt=prompt
     )"""
 
-    print('this the prompt', prompt)
-    print('this is the unique result', response.result)
-    print('this is the entire result', response)
+    #print('this the prompt', prompt)
+    #print('this is the unique result', response.result)
+    #print('this is the entire result', response)
+
     return response.result
 
+def Check_Cuestion(prompt):
+    #print("Función CallPalm2 invocada con:", projectDescription)
+    try:
+        palm.configure(api_key=os.getenv("Palm2APIKey"))
+        print('conectamos con check email')
+    except Exception as e:
+        print('something was wrong when trying to connect to the api', e)
+
+    cuestion = f'Keep in mind the grammar of the following text and answer me if it is a question or not:{prompt}'
+    response = palm.chat(context="Respond only with yes or no", messages=cuestion, temperature=0)
+    response_lower = str(response.last).lower()
+    print('yes or not:',response_lower)
+
+    affirmative_expressions = ['is a question','yes' ]
+    negative_expressions = ['not,' 'no', 'statement']
+    affirmative = False
+    for expr in affirmative_expressions:
+        if expr in response_lower:
+            affirmative = True
+            break
+    for expr in negative_expressions:
+        if expr in response_lower:
+            affirmative = False
+            break
+    if affirmative:
+        email_send(prompt)
+        
 
 if __name__ == "__main__":
     main()
