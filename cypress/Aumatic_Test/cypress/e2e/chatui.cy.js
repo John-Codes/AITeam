@@ -36,6 +36,29 @@ describe("ChatUI Page Tests", () => {
     // Verify that the input is empty after sending the message
     cy.get("#userMessage").should("have.value", "");
   });
+  it("Should show the menu when checkbox is checked", () => {
+    // Verifica que el menú no esté visible inicialmente
+    cy.get(".menu-items").should("not.be.visible");
 
-  // Add more tests if needed...
+    // Haz clic en el label asociado al checkbox para activarlo
+    cy.get("label[for='hamburgerToggle']").click();
+
+    // Verifica que el menú esté visible después de hacer clic en el checkbox
+    cy.get(".menu-items").should("be.visible");
+  });
+
+  it("Should hide the menu when checkbox is unchecked", () => {
+    // Haz clic en el label asociado al checkbox para desactivarlo
+    cy.get("label[for='hamburgerToggle']").click();
+
+    // Verifica que el menú esté visible antes de hacer clic en el checkbox
+    cy.get(".menu-items").should("be.visible");
+
+    // Haz clic nuevamente en el label asociado al checkbox para desactivarlo
+    cy.get("label[for='hamburgerToggle']").click();
+
+    // Verifica que el menú esté oculto después de hacer clic nuevamente en el checkbox
+    cy.get(".menu-items").should("not.be.visible");
+  });
+
 });

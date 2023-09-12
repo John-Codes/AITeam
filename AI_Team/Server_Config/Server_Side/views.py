@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm # handle defaults forms o
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView 
 from django.views import View
+from django.contrib.sessions.models import Session
 from .forms import PasswordResetForm, SignUpForm # class to clean an prosces form reset_password
 from django.contrib import messages 
 from django.contrib.auth.models import User
@@ -39,6 +40,7 @@ class ChatUIView(View):
         elif phase == 'ai_response':
             try:
                 ai_response = Call(user_message, "Palm2")
+
             except Exception as e:
                 response_data['error'] = f"Something went wrong: {e}"
                 return JsonResponse(response_data, status=500)  # Respond with a 500 status code for internal errors.
@@ -46,7 +48,7 @@ class ChatUIView(View):
             # Ensure the AI returned a response.
             if ai_response:
                 response_data['ia_message_div'] = render_html('chat_messages/ia_message.html', ai_response, format=True)
-                #Check_Cuestion(user_message)
+                Check_Cuestion(user_message)
             else:
                 response_data['error'] = 'The API could not respond.'
                 return JsonResponse(response_data, status=400)  # Respond with a 400 status code for bad requests.
