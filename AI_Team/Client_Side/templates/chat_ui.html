@@ -32,6 +32,7 @@
                     <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
                         <ul>
                             <li><a href="{% url 'chat_ui' %}">Home</a></li>
+                            <li><a href="{% url 'login' %}">Login</a></li>
 
                         </ul>
                     </div>
@@ -90,7 +91,7 @@
                     </div>
                     <div class="input-group">
                         {% csrf_token %}
-                        <input type="text" class="form-control" id="userMessage" placeholder="Escribe un mensaje..." onkeydown="handleKeyDown(event)">
+                        <input type="text" class=" form_input" id="userMessage" placeholder="Escribe un mensaje..." onkeydown="handleKeyDown(event)">
                         <button class="btn btn-send" onclick="sendMessage()">Enviar</button>                            
                     </div>
                 </div>
