@@ -15,40 +15,38 @@ Sign Up
         {% for message in messages %}
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 <strong>{{ message }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close position-absolute top-0 end-0" data-bs-dismiss="alert" aria-label="Close">x</button>
             </div>
         {% endfor %}
     {% endif %}
-    <br>
     
     <!-- Email -->
     <div class="input-group">
         <label for="id_email">Email</label>
-        <input type="email" name="email" id="id_email" required>
+        <input type="email" name="email" id="id_email" required class="focus">
     </div>
     
     <!-- Username -->
     <div class="input-group">
         <label for="id_username">Username</label>
-        <input type="text" name="username" id="id_username" required>
+        <input type="text" name="username" id="id_username" required class="focus">
     </div>
     
     <!-- Password -->
     <div class="input-group">
         <label for="id_password1">Password</label>
-        <input type="password" name="password1" id="id_password1" required>
+        <input type="password" name="password1" id="id_password1" required class="focus">
     </div>
     
     <!-- Confirm Password -->
     <div class="input-group">
         <label for="id_password2">Confirm Password</label>
-        <input type="password" name="password2" id="id_password2" required>
+        <input type="password" name="password2" id="id_password2" required class="focus">
     </div>
     
-    <br>
     <button type="submit" class="btn-dark-submit">Register</button>
     <br>
-    <br>
+
 </form>
 {% endblock %}
 
