@@ -6,10 +6,10 @@ body {
     background-color: #181818;
     
     /* Imagen de fondo */
-    background-image: url('../img/stars_resized.jpg');
+    background-image: url('../img/hubble.jpg');
     
     /* Tamaño de fondo: Esto garantiza que la imagen cubra todo el espacio disponible. */
-    background-size: 2000px 1070px;
+    background-size: 100% 100%;
     background-repeat: no-repeat; 
     background-position: top left; 
     margin: 0; 
@@ -26,13 +26,17 @@ body {
 .chat-header {
     width: 100%;
 }
-.chat-title {
-    /*color: #2a1a5e;*/
+.chat-title {    
     color: #ffffff;
-    font-family: 'Roboto Slab', serif;
+    font-family: "Montserrat";
+    /*font-family: 'Roboto Slab', serif;*/
     position: absolute;
     left: 50%;
+    letter-spacing: 3px; /* Aumenta el espaciado entre letras */
+    word-spacing: 3px;
+    font-size: 40px; 
     transform: translateX(-50%);
+    
 }
 
 .nav-container {
@@ -187,16 +191,17 @@ body {
 }
 
 .message-left.glass, .message-right.glass {
-    background: linear-gradient(135deg, rgba(11,61,145,0.3), rgba(26,42,108,0.3));
+    background:linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.37);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+    
     /*color: white;*/
     padding: 10px;
     margin: 10px 0;
+    font-weight: bold;
 }
 
 .chat-content {
@@ -291,13 +296,24 @@ body {
 }
 
 .btn-send {
-    background-color: #2c3e50;
-    color: #7f8c8d;
     margin-left: 5px;
+    border-radius: 5px;
+    background-color: black; /* Fondo negro */
+    border-color: gray; /* Cambia el color de borde al enfocar (azul claro) */
+    margin-bottom: 5px;
+    color: white; /* Letra blanca */
+    font-family: "Montserrat", Arial, sans-serif; /* Fuente de letra profesional (usando Montserrat como ejemplo) */
+    transition: border 0.3s, box-shadow 0.3s;
 }
 
 .btn-send:hover {
-    background-color: #34495e;
+    border-radius: 5px;
+    color: white; /* Letra blanca */
+    outline: none; /* Elimina el borde de resaltado predeterminado */
+    border-color: #3498db; /* Cambia el color de borde al enfocar (azul claro) */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    font-family: "Montserrat", Arial, sans-serif; /* Fuente de letra profesional (usando Montserrat como ejemplo) */
+    background-color: black; /* Fondo negro */
 }
 
 .message-left, .message-right {
@@ -329,3 +345,26 @@ body {
 .dot-3 {
     animation: dotAnimation 1s infinite 0.66s;
 }
+
+.form_input {
+    margin-right: 5px;
+    width: 80%;
+    height: 40px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background-color: black; /* Fondo negro */
+    border-color: gray; /* Cambia el color de borde al enfocar (azul claro) */
+    color: white; /* Letra blanca */
+    font-family: "Montserrat", Arial, sans-serif; /* Fuente de letra profesional (usando Montserrat como ejemplo) */
+    transition: border 0.3s, box-shadow 0.3s;
+  }
+  
+.form_input:focus {
+    border-radius: 5px;
+    color: white; /* Letra blanca */
+    outline: none; /* Elimina el borde de resaltado predeterminado */
+    border-color: #3498db; /* Cambia el color de borde al enfocar (azul claro) */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    font-family: "Montserrat", Arial, sans-serif; /* Fuente de letra profesional (usando Montserrat como ejemplo) */
+    background-color: black; /* Fondo negro */
+  }
