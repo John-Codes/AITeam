@@ -23,8 +23,7 @@ body {
   align-items: center; 
   justify-content: center;
   width: 35%; /* Incremento de tamaño */
-  min-width: 300px;
-  height: 60%;
+  min-width: 310px;
   margin: 0 auto;
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
   backdrop-filter: blur(10px);
@@ -32,16 +31,19 @@ body {
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.37);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  padding: 0;
   text-align: center;
 }
 
 .logo {
   font-family: 'Space Age';
   font-size: 40px; /* Aumento de tamaño para el logo */
-  color: #3498db; /* Un azul relajante */
-  margin-bottom: 10px;
-  margin-bottom: 10px;
+  /*color: #3498db; Un azul relajante */
+  margin-bottom: 0px;
+  background: linear-gradient(to bottom, #ffffff 0%, #a3a3a3 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: none;
 }
 
 h2 {
@@ -52,27 +54,46 @@ h2 {
 }
 
 .input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 15px 0;
+  width: 100%;
 }
+
 
 label, p {
   display: block;
   margin-bottom: 5px;
   color: #f4f4f4;
+  width: 100%;
+}
+p {
+  text-align: center; /* unica propiedad que p no comparte con label*/
 }
 
 input[type="email"], 
 input[type="text"],
 input[type="password"] {
-  width: 80%; /* Dejamos un espacio al borde */
-  padding: 10px;
+  width: 295px; /* Dejamos un espacio al borde */
+  min-width: 250px;
+  padding: 5px;
   border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 16px; /* Aumento de tamaño de letra */
-  margin-left: 2.5%; /* Centra el input */
-  margin-right: 2.5%; /* Centra el input */
+  /*margin-left: 2.5%; /* Centra el input */
+  /*margin-right: 2.5%; /* Centra el input */
   background: transparent;
   color: #f4f4f4;
+  box-sizing: border-box;
+}
+/* Estilos para los inputs enfocados */
+input[type="email"]:focus, 
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border: solid;
+  border-color: #3778a3; /* Cambiar el color del borde al azul deseado cuando está enfocado */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Agregar una sombra alrededor cuando está enfocado */
 }
 
 .btn-dark-submit {
@@ -103,4 +124,5 @@ input[type="password"] {
   font-size: 16px; /* Aumento de tamaño de letra */
   display: block; /* En una nueva línea */
   margin-top: 5px;
+  margin-bottom: 15px;
 }
