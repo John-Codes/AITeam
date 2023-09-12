@@ -9,11 +9,11 @@ def main():
     Call("Make python helloworld program", "Palm2")
 
 
-def Call(projectDescription, LLMName, key=None):
+def Call(projectDescription, LLMName):
     if LLMName == "ChatGPT":
         return CallChatGPT(projectDescription)
     elif LLMName == "Palm2":
-        return CallPalm2(projectDescription, key)
+        return CallPalm2(projectDescription)
 
 
 def CallChatGPT( projectDescription):
@@ -35,7 +35,7 @@ def CallChatGPT( projectDescription):
     except Exception as e:
         print(e.message)
 
-def CallPalm2(projectDescription, key):
+def CallPalm2(projectDescription):
     #print("Función CallPalm2 invocada con:", projectDescription)
     try:
         palm.configure(api_key=os.getenv("Palm2APIKey"))
@@ -63,22 +63,13 @@ def CallPalm2(projectDescription, key):
         print('error when generating text by the AI', e)
         print(response)
 
-    """response = palm.generate_text(
-    **defaults,
-    prompt=prompt
-    )"""
-
-    #print('this the prompt', prompt)
-    #print('this is the unique result', response.result)
-    #print('this is the entire result', response)
-
     return response.result
 
 def Check_Cuestion(prompt):
     #print("Función CallPalm2 invocada con:", projectDescription)
     try:
         palm.configure(api_key=os.getenv("Palm2APIKey"))
-        print('conectamos con check email')
+        #print('conectamos con check email')
     except Exception as e:
         print('something was wrong when trying to connect to the api', e)
 
