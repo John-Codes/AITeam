@@ -1,20 +1,12 @@
-/* Global styles for the page */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
-@font-face {
-  font-family: 'Space Age';
-  src: url('../fonts/space-age/space_age.ttf');
-}
 body { 
   background-image: url('../img/blue_space.jpg');
-  font-family: 'Open Sans', sans-serif; /* Fuente profesional */
   background-color: #f4f4f4;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  margin: 20px 0;
 }
 
 .glass-effect {
@@ -22,23 +14,24 @@ body {
   flex-direction: column; 
   align-items: center; 
   justify-content: center;
+  height: auto;
   width: 35%; /* Incremento de tamaño */
   min-width: 310px;
-  margin: 0 auto;
+  margin: 30px 0;
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.37);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 0;
   text-align: center;
 }
 
 .logo {
-  font-family: 'Space Age';
-  font-size: 40px; /* Aumento de tamaño para el logo */
-  /*color: #3498db; Un azul relajante */
+  font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 40px;
   margin-bottom: 0px;
   background: linear-gradient(to bottom, #ffffff 0%, #a3a3a3 100%);
   -webkit-background-clip: text;
@@ -47,6 +40,9 @@ body {
 }
 
 h2 {
+  font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;
+  font-weight: 700;
+  font-style: normal;
   font-size: 15px; /* Aumento de tamaño del texto */
   margin-bottom: 10px;
   margin-top: 10px;
@@ -63,26 +59,31 @@ h2 {
 
 
 label, p {
+  font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;
+  font-weight: 700;
+  font-style: normal;
   display: block;
   margin-bottom: 5px;
   color: #f4f4f4;
   width: 100%;
 }
 p {
+  margin-bottom: 10px;
+  margin-top: 10px;
   text-align: center; /* unica propiedad que p no comparte con label*/
 }
 
 input[type="email"], 
 input[type="text"],
 input[type="password"] {
+  margin-bottom: 10px;
+  margin-top: 10px;
   width: 295px; /* Dejamos un espacio al borde */
   min-width: 250px;
   padding: 5px;
   border: 1px solid #e0e0e0;
-  border-radius: 5px;
+  border-radius: 15px;
   font-size: 16px; /* Aumento de tamaño de letra */
-  /*margin-left: 2.5%; /* Centra el input */
-  /*margin-right: 2.5%; /* Centra el input */
   background: transparent;
   color: #f4f4f4;
   box-sizing: border-box;
@@ -97,29 +98,29 @@ input[type="password"]:focus {
 }
 
 .btn-dark-submit {
-  width: 50%; /* Ajuste al tamaño del botón */
-  background-color: #34495e; /* Azul relajante */
-  color: #ffffff;
-  border-color: gray;
-  border-radius: 5px;
+  width: 50%;
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  border: 2px solid #fff; /* Borde blanco */
+  border-radius: 15px;
   transition: 0.3s;
   margin: 0 auto;
   display: block;
-  font-size: 16px; /* Aumento de tamaño de letra */
-  padding: 10px 0; /* Ajuste del padding */
+  font-size: 16px;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .btn-dark-submit:hover {
-  color: white;
-  border-radius: 5px;
-  outline: none;
+  background-color: #222; /* Cambia el fondo al hacer hover */
   border-color: #3498db;
   box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-  background-color: #2c3e50;
   cursor: pointer;
 }
 
 .register-link {
+  margin-top: 10px;
   color: #3498db;
   font-size: 16px; /* Aumento de tamaño de letra */
   display: block; /* En una nueva línea */
