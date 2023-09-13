@@ -19,16 +19,14 @@ Log In
     {% endif %}
     {% csrf_token %}
     <div class="input-group">
-        <label for="username">username</label>
+        <label for="username">username</label> 
         <input type="text"  name="username" id="id_username" required>
     </div>
     <div class="input-group">
         <label for="password">Password</label>
         <input type="password"  name="password" id="id_password" required>
     </div>
-
     <button type="submit" class="btn-dark-submit">Enter</button>
-    <br>
     
 </form>
 {% endblock %}
