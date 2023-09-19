@@ -57,7 +57,8 @@ def CallPalm2(projectDescription):
             safety_settings= [{"category":"HARM_CATEGORY_DEROGATORY","threshold":1},{"category":"HARM_CATEGORY_TOXICITY","threshold":1},{"category":"HARM_CATEGORY_VIOLENCE","threshold":2},{"category":"HARM_CATEGORY_SEXUAL","threshold":2},{"category":"HARM_CATEGORY_MEDICAL","threshold":2},{"category":"HARM_CATEGORY_DANGEROUS","threshold":2}],
             prompt = prompt
             
-    )    
+    )
+
     except Exception as e:
         response = str(e)
         print('error when generating text by the AI', e)

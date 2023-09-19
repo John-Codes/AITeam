@@ -3,19 +3,31 @@ from django.conf import settings
 
 def email_send(prompt):
     # check variables
-        subject = 'La función de envio de email ya esta enviando correos'
+        subject = 'Someone asked in the chat of AI Team'
         message = f"""
-        Hola soy tu asistente IA de AITEAM y he detectado una pregunta de un usuario con correo: correo_ de usuario
-        ahora sigue analizar la respuesta en busca de correos para que se envie y convertir eso en una variable global 
-        para que envie preguntas del usuario de toda la conversación, el correo que llegue seguirá diciendo:
-        Solo tu puedes responder la pregunta: (a continuación el prompt)
+        This email is to show the questions that potential customers have when visiting the page, which helps us to
+        Have a better vision about the vision that customers have, their concerns, doubts and what they think about the product
+        The question asked is as follows:
+
         {prompt}"""
         from_email = settings.EMAIL_HOST_USER
-        print('this is from email:',from_email)
-        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']
-        print('all config variables will get')        
+        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']        
         try:
             send_mail(subject, message, from_email, recipient_list)
-            print('correo enviado')
+        except Exception as e:
+            print('correo no enviado porque:', e)
+
+def Contac_us_mail(prompt):
+    # check variables
+        subject = 'A client has contacted AI Team through the decorator @myemail'
+        message = f""" 
+        Remember that those who send messages with this decorator is because they know it will come to us and will be waiting for a response
+        The message is as follows
+            {prompt}
+            """
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']
+        try:
+            send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
             print('correo no enviado porque:', e)
