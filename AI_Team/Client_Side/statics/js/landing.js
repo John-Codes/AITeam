@@ -86,16 +86,64 @@ function handleKeyDown(event) {
     }
 }
 
+function checkAndAutocomplete() {
+    const message = document.getElementById("userMessage");
+    const value = message.value;
+
+    // Si el primer carácter es "@" y no contiene "@myemail" al principio
+    if (value.charAt(0) === "@" && !value.startsWith("@myemail")) {
+        message.value = "@myemail: (replace these parenteses with your email)" + value.slice(1); // Eliminamos el "@" inicial para evitar duplicados
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var templateLinks = document.querySelectorAll("[data-template]");
+
+    templateLinks.forEach(function(link) {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            var templateName = e.target.getAttribute("data-template");
+
+            toggleDotsAnimation(true); // Activar animaciones
+            const csrfToken = getCookie('csrftoken');
+            console.log("Enviando solicitud del template...");
+
+            fetch("/aiteam/", {
+                method: "POST",
+                body: new URLSearchParams({ "template_name": templateName }),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": csrfToken
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const chatBox = document.getElementById("chatBox");
+                chatBox.insertAdjacentHTML('beforeend', data.template_message_div);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                toggleDotsAnimation(false); // Desactivar animaciones
+            });
+        });
+    });
+});
+
+
+
 // Initialize event listeners.
+document.getElementById("userMessage").addEventListener("input", checkAndAutocomplete);
+
 document.addEventListener("DOMContentLoaded", function() {
     console.log("DOMContentLoaded ejecutado");
-    // Send message using the button.
-    //const sendButton = document.querySelector('.btn-send');
-    //sendButton.addEventListener('click', sendMessage);
-
-    // Send message using the Enter key.
-    //const userMessageInput = document.getElementById('userMessage');
-    //userMessageInput.addEventListener('keydown', handleKeyDown);
 
     // Toggle hamburger menu.
     const hamburgerToggle = document.querySelector("#hamburgerToggle");
