@@ -3,10 +3,12 @@ from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
 import google.generativeai as palm
+from pathlib import Path
 # Query:
 def consulta_IA_openai(pregunta):
     # Absolute path to the .txt file
-    ruta_absoluta = ".memory_text\memoryAI.txt"
+    current_dir = Path(__file__).parent
+    ruta_absoluta = current_dir / "memory_text" / "memoryAI.txt"
 
     # Data preparation:
     with open(ruta_absoluta, 'r', encoding='utf-8') as f:
