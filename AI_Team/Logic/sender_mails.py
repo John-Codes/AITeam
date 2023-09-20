@@ -19,10 +19,10 @@ def email_send(prompt):
 
 def Contac_us_mail(prompt):
     # check variables
-        subject = 'A client has contacted AI Team through the decorator @myemail'
+        subject = 'A client has contacted AI Team'
         message = f""" 
-        Remember that those who send messages with this decorator is because they know it will come to us and will be waiting for a response
-        The message is as follows
+        the email is send because they client want to contac us, that could contain any message
+        Email for contact:
             {prompt}
             """
         from_email = settings.EMAIL_HOST_USER

@@ -29,69 +29,60 @@ class ChatUIView(View):
         return render(request, 'chat_ui.html')
 
     def post(self, request, *args, **kwargs):
-        # Initializing the response_data dictionary.
-        response_data = {}
-
+        template_name = request.POST.get('template_name', None)
         user_message = request.POST.get('message')
         phase = request.POST.get('phase')
-        template_name = request.POST.get('template_name', None)
 
-        # handle default messages, faqs message, contact us message and about us message
         if template_name:
-            if template_name == 'faqs_messages':
-                response_data['template_message_div'] = render_html('chat_messages/faqs_messages.html', '')
-            elif template_name == 'contact_us':
-                response_data['template_message_div'] = render_html('chat_messages/contact_us_message.html', '')
-            elif template_name == 'about_us':
-                response_data['template_message_div'] = render_html('chat_messages/about_us_message.html', '')
-            time.sleep(5)
+            return self.handle_template_messages(request, template_name)
+        
+        if phase == 'user_message':
+            return self.handle_user_message(request, user_message)
+        
+        if phase == 'ai_response':
+            return self.handle_ai_response(request, user_message)
+        
+        return JsonResponse({"error": "Invalid request"})
+
+    def handle_template_messages(self, request, template_name):
+        response_data = {}
+        if template_name == 'faqs_messages':
+            response_data['template_message_div'] = render_html('chat_messages/faqs_messages.html', '')
+        elif template_name == 'contact_us':
+            request.session['send_us_email'] = True
+            response_data['template_message_div'] = render_html('chat_messages/contact_us_message.html', '')
+        elif template_name == 'about_us':
+            response_data['template_message_div'] = render_html('chat_messages/about_us_message.html', '')
+        
+        return JsonResponse(response_data)
+
+    def handle_user_message(self, request, user_message):
+        response_data = {}
+        response_data['user_message_div'] = render_html('chat_messages/user_message.html', user_message)
+        return JsonResponse(response_data)
+
+    def handle_ai_response(self, request, user_message):
+        response_data = {}
+        if request.session.get('send_us_email', False):
+            # Handle email sending logic
+            self.send_email(user_message)
+            request.session['send_us_email'] = False
+            del request.session['send_us_email']
             return JsonResponse(response_data)
         
-        # Handle the user's message.
-        if phase == 'user_message':
-            response_data['user_message_div'] = render_html('chat_messages/user_message.html', user_message)
-            return JsonResponse(response_data)
+        # AI consultation logic
+        ai_response = consulta_IA_openai(user_message)
+        if ai_response:
+            response_data['ia_message_div'] = render_html('chat_messages/ia_message.html', ai_response, format=True)
+        else:
+            response_data['error'] = 'The API could not respond.'
+        
+        return JsonResponse(response_data)
 
-        # Handle the AI's response.
-        elif phase == 'ai_response':
-            try:
-                if '@myemail' in user_message and user_message[0] == '@':
-                    Contac_us_mail(user_message)
-                    
-                ai_response = consulta_IA_openai(user_message)
+    def send_email(self, user_message):
+        if ('@' and '.') in user_message:
+            Contac_us_mail(user_message)
 
-            except Exception as e:
-                response_data['error'] = f"Something went wrong: {e}"
-                return JsonResponse(response_data, status=500)  # Respond with a 500 status code for internal errors.
-
-            # Ensure the AI returned a response.
-            if ai_response:
-                response_data['ia_message_div'] = render_html('chat_messages/ia_message.html', ai_response, format=True)
-                Check_Cuestion(user_message)
-            else:
-                response_data['error'] = 'The API could not respond.'
-                return JsonResponse(response_data, status=400)  # Respond with a 400 status code for bad requests.
-            
-            return JsonResponse(response_data)
-
-
-class FAQView(View):
-    template_name = 'faqs.html'
-
-    def get(self, request, *args, **kwargs):
-        # Puedes añadir lógica aquí si quieres recuperar ciertos datos antes de renderizar la plantilla
-        return render(request, self.template_name)
-
-    def post(self, request, *args, **kwargs):
-        # Recuperar la pregunta del usuario desde el formulario
-        user_question = request.POST.get('userMessage')
-
-        if user_question:
-            # Guardar la pregunta en la base de datos
-            UserQuestion.objects.create(question_text=user_question)
-
-        # Redirigir al usuario de vuelta a la página de FAQs después de enviar su pregunta
-        return redirect('faqs')  # Asegúrate de que 'faqs' es el nombre correcto de la URL para esta vista en tu urls.py
 
 # Class to handle the form of Reset Password
 class PasswordResetView(View):

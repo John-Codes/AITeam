@@ -388,3 +388,28 @@ body {
         margin-right: 0;
     }
 }
+
+:root {
+    --leader: url('../img/leader.jpg');
+    /*--developer: url('../img/developer.jpg');*/
+}
+
+.img_firstbio {
+    width: 50px;
+    height: 50px;
+    background-image: var(--leader);
+    background-size: cover; /* Asegura que la imagen cubra todo el espacio del div */
+    background-position: center; /* Centra la imagen en el div */
+    border-radius: 50%; /* Hace que la imagen/div sea redondo */
+    border: 2px solid #000; /* Agrega un borde sólido de 2px de color negro (puedes cambiar el color según prefieras) */
+}
+
+/*.img_thirdbio {
+    width: 50px;
+    height: 50px;
+    background-image: var(--developer);
+    background-size: cover; /* Asegura que la imagen cubra todo el espacio del div */
+    background-position: center; /* Centra la imagen en el div */
+    border-radius: 50%; /* Hace que la imagen/div sea redondo */
+    border: 2px solid #000; /* Agrega un borde sólido de 2px de color negro (puedes cambiar el color según prefieras) */
+}*/

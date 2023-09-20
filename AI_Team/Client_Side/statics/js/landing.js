@@ -123,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 return response.json();
             })
             .then(data => {
+                console.log('this is the data response ai', data.template_message_div)
                 const chatBox = document.getElementById("chatBox");
                 chatBox.insertAdjacentHTML('beforeend', data.template_message_div);
                 chatBox.scrollTop = chatBox.scrollHeight;
