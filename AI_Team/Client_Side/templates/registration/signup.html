@@ -1,0 +1,56 @@
+{% extends "registration/base_auth.html" %}
+
+{% block title %}
+Sign Up for EFEXZIUM
+{% endblock %}
+
+{% block header %}
+Sign Up
+{% endblock %}
+
+{% block form_content %}
+<form method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close position-absolute top-0 end-0" data-bs-dismiss="alert" aria-label="Close">x</button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <!-- Email -->
+    <div class="input-group">
+        <label for="id_email">Email</label>
+        <input type="email" name="email" id="id_email" required class="focus">
+    </div>
+    
+    <!-- Username -->
+    <div class="input-group">
+        <label for="id_username">Username</label>
+        <input type="text" name="username" id="id_username" required class="focus">
+    </div>
+    
+    <!-- Password -->
+    <div class="input-group">
+        <label for="id_password1">Password</label>
+        <input type="password" name="password1" id="id_password1" required class="focus">
+    </div>
+    
+    <!-- Confirm Password -->
+    <div class="input-group">
+        <label for="id_password2">Confirm Password</label>
+        <input type="password" name="password2" id="id_password2" required class="focus">
+    </div>
+    
+    <button type="submit" class="btn-dark-submit">Register</button>
+    <br>
+
+</form>
+{% endblock %}
+
+{% block additional_content %}
+<p>Already have an account?</p>
+<a href="{% url 'login' %}" class="register-link">Log in</a>
+{% endblock %}

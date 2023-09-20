@@ -1,5 +1,5 @@
 import google.generativeai as palm
-import pprint
+"""import pprint
 # configuración de api
 api_key = 'AIzaSyDW2ul61CVxQCyFM591byBSyC587YDey7o'
 palm.configure(api_key=api_key)
@@ -7,7 +7,7 @@ palm.configure(api_key=api_key)
 models = [m for m in palm.list_models() if 'generateText' in m.supported_generation_methods]
 model = models[0].name
 # variable string, entrada al usuario
-pregunta = """
+pregunta =
 You are an expert at solving word problems.
 
 Solve the following problem:
@@ -18,7 +18,7 @@ knit from 7m of yarn, each hat from 4m.
 How much yarn was needed to make all the items?
 
 Think about it step by step, and show your work.
-"""
+
 
 
 # generación de respuesta con IA 
@@ -28,7 +28,8 @@ completion = palm.generate_text(
     temperature=0,
 )
 # se imprime la respuesta
-print(completion.result)
+print('the unique result',completion.result)
+print('the entire result',completion)"""
 
 """
 FUnctions with google.generativa AI
@@ -54,3 +55,10 @@ implementación más facil menos configurable y personalizada
 #print('respuesta')
 #print(response.result) #  'cold.
 """
+def continue_conversation(response, user_input):
+    try:
+        response = response.reply(user_input)
+    except Exception as e:
+        print('hubo en error al continuar conversancion', e)
+    # response has a format where the conversation is fixed in the impression so you know how to interpret this format on the client side
+    return response

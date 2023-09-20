@@ -1,0 +1,129 @@
+body { 
+  background-image: url('../img/blue_space.jpg');
+  background-color: #f4f4f4;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 20px 0;
+}
+
+.glass-effect {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  height: auto;
+  width: 35%; /* Incremento de tamaño */
+  min-width: 310px;
+  margin: 30px 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.37);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.logo {
+  font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  margin-bottom: 0px;
+  background: linear-gradient(to bottom, #ffffff 0%, #a3a3a3 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+h2 {
+  font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px; /* Aumento de tamaño del texto */
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: #f4f4f4;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0;
+  width: 100%;
+}
+
+
+label, p {
+  font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  display: block;
+  margin-bottom: 5px;
+  color: #f4f4f4;
+  width: 100%;
+}
+p {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center; /* unica propiedad que p no comparte con label*/
+}
+
+input[type="email"], 
+input[type="text"],
+input[type="password"] {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 295px; /* Dejamos un espacio al borde */
+  min-width: 250px;
+  padding: 5px;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  font-size: 16px; /* Aumento de tamaño de letra */
+  background: transparent;
+  color: #f4f4f4;
+  box-sizing: border-box;
+}
+/* Estilos para los inputs enfocados */
+input[type="email"]:focus, 
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border: solid;
+  border-color: #3778a3; /* Cambiar el color del borde al azul deseado cuando está enfocado */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Agregar una sombra alrededor cuando está enfocado */
+}
+
+.btn-dark-submit {
+  width: 50%;
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  border: 2px solid #fff; /* Borde blanco */
+  border-radius: 15px;
+  transition: 0.3s;
+  margin: 0 auto;
+  display: block;
+  font-size: 16px;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.btn-dark-submit:hover {
+  background-color: #222; /* Cambia el fondo al hacer hover */
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  cursor: pointer;
+}
+
+.register-link {
+  margin-top: 10px;
+  color: #3498db;
+  font-size: 16px; /* Aumento de tamaño de letra */
+  display: block; /* En una nueva línea */
+  margin-top: 5px;
+  margin-bottom: 15px;
+}

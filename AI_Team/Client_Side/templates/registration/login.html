@@ -1,0 +1,39 @@
+{% extends "registration/base_auth.html" %}
+
+{% block title %}Log In to EFEXZIUM{% endblock %}
+
+{% block header %}
+Log In
+{% endblock %}
+
+{% block form_content %}
+<form method="post" action="{% url 'login' %}">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                
+                <button type="button" class="btn-close position-absolute top-0 end-0" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% csrf_token %}
+    <div class="input-group">
+        <label for="username">username</label> 
+        <input type="text"  name="username" id="id_username" required>
+    </div>
+    <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password"  name="password" id="id_password" required>
+    </div>
+    <button type="submit" class="btn-dark-submit">Enter</button>
+    
+</form>
+{% endblock %}
+
+{% block additional_content %}
+<p>Don't have an account?</p>
+<a href="{% url 'signup' %}" class="register-link">Create account</a>
+<p>Forgot your password?</p>
+<a href="{% url 'password_reset' %}" class="register-link">Reset password</a>
+{% endblock %}

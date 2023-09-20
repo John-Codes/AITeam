@@ -1,5 +1,6 @@
 key = 'AIzaSyDW2ul61CVxQCyFM591byBSyC587YDey7o'
 import google.generativeai as palm
+from app import continue_conversation
 
 Successfully = True
 # gives the AI context to personalize messages
@@ -27,17 +28,21 @@ if Successfully:
             # check if the conversation starts or continues
             if num_message == 0:
                 # start with method palm
-                response = palm.chat(messages=user_input, temperature=0.7)
+                response = palm.chat(context="Respond only with yes or no", messages=user_input, temperature=1)
                 # once started in the next step of the loop it should start saving the conversation
+                print('IA:', response.last)
+                print('the entire response', response)
+
                 num_message += 1
             else:
+                print('continuamos conversación')
+                next_message = continue_conversation(response, str(user_input))
                 # continue with the reply method, this is important so that the AI takes previous messages into account
-                response = response.reply(user_input)
+                print('IA:', next_message.last)
+                print('the entire response', next_message)
             
             # Print the response from the AI
-            print("IA: ", response.last)
-            # response has a format where the conversation is fixed in the impression so you know how to interpret this format on the client side
-            print('conversacion:', response)
+           
         except Exception as e:
             print(f"something was wrong, please try again: {e}")
 else:
