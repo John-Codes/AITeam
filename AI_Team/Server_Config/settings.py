@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-x#@g(83fg26+c*bpz*0vepc=#eei3a&58zj3x@8z_k(2)*3n+_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['testserver', '127.0.0.1']
 
 # email send config
 email_sender =os.environ.get('email_sender')
@@ -48,8 +48,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     'Server_Config.Server_Side', # path where we found it the Server config of our app
+    "django_check_seo",
+    'cms',
+    'menus',
+    'treebeard',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -143,4 +150,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Model User for Auth
 #AUTH_USER_MODEL = 'Server_Side.CustomUser'
-LOGIN_REDIRECT_URL = 'chat_ui'
+LOGIN_REDIRECT_URL = 'ai-team'

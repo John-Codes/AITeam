@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="AI Team Chat: Gain insights and consult on our artificial intelligence services.">
+    <meta name="keywords" content=",EFEXZIUM, AI Team, AI, Team, Chat, Artificial Intelligence">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Team Chat - Artificial Intelligence Services</title>
+    
+    <link rel="canonical" href="{% url 'ai-team' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href={% static 'css/style_chat.css' %} rel="stylesheet"> 
+
+</head>
+
+<body>
+    <div class="container-fluid h-100">
+        <div class="row h-100 justify-content-center">
+    
+            <!-- Chat Header -->
+            <div class="chat-header d-flex justify-content-between align-items-center px-3 py-2 glass">
+                <div class="nav-container">
+                    <!-- Asegúrate de que el checkbox tiene el id correcto -->
+                    <input class="checkbox" type="checkbox" id="hamburgerToggle" />
+                    <!-- Vincula el label (hamburger-lines) con el checkbox mediante el atributo "for" -->
+                    <label class="hamburger-lines" for="hamburgerToggle">
+                        <span class="line line1"></span>
+                        <span class="line line2"></span>
+                        <span class="line line3"></span>
+                    </label>
+                     <!-- Añade esta línea para el menú -->
+                    <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
+                        <ul>
+                            <li><a href="{% url 'ai-team' %}" title="Main page of AI Team Chat">Home</a></li>
+                            <li><a href="{% url 'login' %}" title="login to AI Team for more">Login</a></li>
+                            <li cy-data="faq-link"><a href="#" data-template="faqs_messages" title="frequently asked questions about AI Team">FAQs</a></li>
+                            <li cy-data="contact-link"><a href="#" data-template="contact_us" title="How to Contac us">Contact Us</a></li>
+                            <li cy-data="about-link"><a href="#" data-template="about_us" title="Who we are and our members">About US</a></li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <h1 class="chat-title ">EFEXZIUM =$=</h1>         
+            </div>
+            <!-- Chat Content -->
+            <div class="col-12 messages-container px-0">
+                <!-- Metallic Text -->
+                <div class="metallic-text">
+                    An AI Team is writing
+                </div>   
+                <div class="chat-body px-3 py-2" id="chatBox">
+                    </div>
+                </div>
+            </div>
+            
+    
+            <!-- Chat Footer -->
+            <div class="chat-footer">
+                <div class="footer-content">
+                    <div class="loading-dots-container">
+                        <div class="loading-dots">
+                            <span class="dot dot-1"></span>
+                            <span class="dot dot-2"></span>
+                            <span class="dot dot-3"></span>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="formulary">
+                        {% csrf_token %}
+                        <input type="text" class=" form_input" id="userMessage" placeholder="Send a message..." onkeydown="handleKeyDown(event)">
+                        <button class="btn btn-send" onclick="sendMessage()">Send</button>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src={% static 'js/landing.js' %} ></script> 
+</html>

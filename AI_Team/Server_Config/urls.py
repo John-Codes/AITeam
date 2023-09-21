@@ -21,4 +21,5 @@ print("Inside Server_Config.urls")
 urlpatterns = [
     path('', include('Server_Config.Server_Side.urls')), # here we import the urls of our app, the urls is inside Server_Side folder, django searches for the file urls.py
     path("admin/", admin.site.urls),
+    path("django-check-seo/", include("django_check_seo.urls")),
 ]
