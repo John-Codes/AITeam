@@ -13,20 +13,19 @@ from AI_Team.Logic.LLMs import Call, Check_Cuestion # IA methods
 from AI_Team.Logic.Memory import consulta_IA_openai
 from AI_Team.Logic.response_utils import render_html # IA message render templates method
 from AI_Team.Logic.sender_mails import Contac_us_mail
-from .models import UserQuestion
 import time
 
 # redirect the pattern url to chatui
-def home(request):
+"""def home(request):
     if request.method =='GET':
-        return redirect('chat_ui')
+        return redirect('ai-team')"""
 
-# chat_ui handle events and requests
+# ai-team handle events and requests
 
 class ChatUIView(View):
     def get(self, request, *args, **kwargs):
         # Render the chat UI template for non-POST requests.
-        return render(request, 'chat_ui.html')
+        return render(request, 'ai-team.html')
 
     def post(self, request, *args, **kwargs):
         template_name = request.POST.get('template_name', None)
@@ -53,7 +52,7 @@ class ChatUIView(View):
             response_data['template_message_div'] = render_html('chat_messages/contact_us_message.html', '')
         elif template_name == 'about_us':
             response_data['template_message_div'] = render_html('chat_messages/about_us_message.html', '')
-        
+        time.sleep(5)
         return JsonResponse(response_data)
 
     def handle_user_message(self, request, user_message):
