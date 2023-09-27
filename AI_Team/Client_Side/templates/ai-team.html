@@ -5,7 +5,7 @@
 
 <head>
     <meta name="description" content="AI Team Chat: Gain insights and consult on our artificial intelligence services.">
-    <meta name="keywords" content=",EFEXZIUM, AI Team, AI, Team, Chat, Artificial Intelligence">
+    <meta name="keywords" content=",EFEXZIUM, AI Team, AI, Team, Chat, Artificial Intelligence, EFEXZIUM =$=">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Team Chat - Artificial Intelligence Services</title>
@@ -35,11 +35,18 @@
                      <!-- Añade esta línea para el menú -->
                     <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
                         <ul>
-                            <li><a href="{% url 'ai-team' %}" title="Main page of AI Team Chat">Home</a></li>
-                            <li><a href="{% url 'login' %}" title="login to AI Team for more">Login</a></li>
-                            <li cy-data="faq-link"><a href="#" data-template="faqs_messages" title="frequently asked questions about AI Team">FAQs</a></li>
-                            <li cy-data="contact-link"><a href="#" data-template="contact_us" title="How to Contac us">Contact Us</a></li>
-                            <li cy-data="about-link"><a href="#" data-template="about_us" title="Who we are and our members">About US</a></li>
+                            <li><a href="{% url 'ai-team' %}" title="Main page of AI Team Chat"><h2 class="reset-styles" >Home</h2></a></li>
+                            
+                            {% if user.is_authenticated %}
+                                <li cy-data="logout-link"><a href="{% url 'logout' %}" title="logout"><h2 class="reset-styles" >Logout</h2></a></li>
+                                <li cy-data="panel-link"><a href="{{ panel_admin }}" id="panel-admin-link" title="Your Panel Admin to create a site-web"><h2 class="reset-styles" >Admin Panel</h2></a></li>
+                            {% else %}
+                                <li><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >Login</h2></a></li>
+                            {% endif %}
+                            <li><a href="{% url 'subscription' %}" title="login to AI Team for more"><h2 class="reset-styles" >Subscription</h2></a></li>
+                            <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">FAQs</a></h2></li>
+                            <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">Contact Us</a></h2></li>
+                            <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">About US</a></h2></li>
                         </ul>
                     </div>
                 </div>
@@ -50,7 +57,7 @@
             <div class="col-12 messages-container px-0">
                 <!-- Metallic Text -->
                 <div class="metallic-text">
-                    An AI Team is writing
+                    <h2 class="reset-styles">An AI Team is writing</h2>
                 </div>   
                 <div class="chat-body px-3 py-2" id="chatBox">
                     </div>
@@ -76,6 +83,64 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="visible-content">
+        
+        <div class="visible-content">
+            <h2>data of Efexzium and the developers behind Ai Team Chat and her Artificial Intelligence </h2>
+            <!--about us message-->
+            <p><strong>Johnny Rodriguez Cardona</strong> is a seasoned software engineer with 7 years of experience specializing in full-stack 
+                .NET development, mobile app creation, Python scripting, and data science. As the founder and lead developer of Efexzium, he oversees 
+                AITeam—an AI-based coding platform designed to accelerate software development while adhering to industry best practices. Johnny's expertise
+                also spans HTML, CSS, and JavaScript. He's passionate about contributing to open-source projects and advocating for data privacy.</p>
+        
+            <p ><strong>Santiago Reina Hernandez</strong> Experienced Python developer with expertise in HTML, CSS, and Java. 
+                Managed Docker containers and crafted multiple webpages using Python. Holds a degree from Universidad del Rosario and is certified by Samsung Innovation Campus, 
+                boasting 2 years of professional experience."</p>
+        
+        </div>
+        <div class="visible-content">
+            <h2>how to contact with EFEXZIUM to consult Team Chat</h2>
+            <p class="message-content">To contact us, send us your email in the next message</p>
+        </div>
+        <div class="visible-content">
+            <h2 class="reset-style">FAQs about ai-Team, our Artificial Intelligence</h2>
+            <p>
+                <!--Faqs message-->
+                I understand that the focus is on empowering individual developers to become significantly more productive with AITeam. 
+                With that in mind, here's a revised list of questions that highlight the advantages of using your product:
+        
+                <strong>Individual Developer Productivity</strong> <br>
+                1. How much time do you, as a developer, spend on coding new features vs. debugging and writing tests?<br>
+                2. Would you say that you are able to fully focus on value-added tasks, or are you bogged down with routine coding and bug-fixing?<br>
+                3. Have you ever missed a deadline because of unforeseen coding complexities or bugs?<br>
+                4. How often do you need to refactor your code?<br>
+                  
+                <strong>Code Generation and Best Practices</strong><br>
+                5. Would you be interested in an AI-driven tool that writes bug-free code for you?<br>
+                6. How valuable would it be for you to auto-generate test cases for new and existing code?<br>
+                7. Do you think adhering to industry-standard best practices could improve your code quality?<br>
+                8. How often do you consult documentation or community forums for best practices?<br>
+                
+                <strong>Debugging and Refactoring</strong><br>
+                9. What tools do you currently use for debugging and refactoring?<br>
+                10. How quickly can you identify and fix bugs in your existing codebase?<br>
+                11. Would automating the debugging process be beneficial for you?<br>
+                
+                <strong>Adoption and Integration</strong><br>
+                12. How open are you to adopting new development technologies?<br>
+                13. Do you face any challenges in integrating new tools into your existing workflow?<br>
+                
+                <strong>Cost and Time Savings</strong><br>
+                14. Would you consider a tool that could make you 10x more productive a good return on investment?<br>
+                15. How quickly would you like to see productivity improvements after implementing a new tool?<br>
+                
+                <strong>Personalized Experience</strong><br>
+                16. Would you like a tool that learns from your coding style and preferences for a more personalized experience?<br>
+                <br>
+                These questions are designed to help potential customers realize the productivity gains they could achieve by using AITeam. 
+                Feel free to adjust them to align more closely with your product's unique features and benefits.</p>
         </div>
     </div>
 </body>

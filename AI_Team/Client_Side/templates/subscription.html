@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}EFEXZIUM =$={% endblock %}</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <!-- Stripe API connect to procces pay -->
+        <script src="https://js.stripe.com/v3/"></script>
+
+        <link rel="stylesheet" href="{% static 'css/style_subscription.css' %}">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="logo">EFEXZIUM =$=</div>
+            <br>
+            <div id="cardCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for plan in combined_data %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="card cont-card">
+                            <div class="card-header glass-header">
+                                <h2>{{ plan.name }}</h2>
+                            </div>
+                            <div class="card-body glass-body">
+                                <h5 class="card-title">Benefits:</h5>
+                                <p class="card-text">{{ plan.description }}</p>
+                                <div class="pay-buttons buttons-group">
+                                    <!-- PayPal -->
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="selected_plan" value="{{ forloop.counter }}"> <!-- Así puedes identificar el plan seleccionado -->
+                                        <button type="submit" class="btn button-to-pay" name="payment_method" value="paypal">Paypal</button>
+                                    </form>
+                                    <!-- Stripe -->
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="selected_plan" value="{{ forloop.counter }}">
+                                        <input type="hidden" name="payment_method" value="stripe">
+                                        <button type="button" class="btn button-to-pay" data-toggle="modal" data-target="#stripeModal" 
+                                                data-plan-name="{{ plan.name }}" data-plan-amount="{{ plan.amount }}">
+                                            Stripe
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}               
+                </div>
+                <!-- Controles de "Anterior" y "Siguiente" -->
+                <a class="carousel-control-prev" href="#cardCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#cardCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Siguiente</span>
+                </a>
+            </div>
+            <br>
+            <!-- <a href="{% url 'ai-team' %}" title="return to Ai-team Chat"><h2>back to AI Team</h2> -->
+        </div>
+       <!-- Modal de Stripe -->
+        <div class="modal fade" id="stripeModal" tabindex="-1" role="dialog" aria-labelledby="stripeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="stripeModalLabel">Pago con Stripe</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Información del usuario -->
+                        <div class="mb-3">
+                            <label><strong>Email:</strong></label>
+                            <span>{{ user.email }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label><strong>Nombre de usuario:</strong></label>
+                            <span>{{ user.username }}</span>
+                        </div>
+                        <!-- Información del plan -->
+                        <div class="mb-3">
+                            <label><strong>Plan seleccionado:</strong></label>
+                            <span> <strong id="modalPlanName"> Plan Name </strong></span>
+                        </div>
+                        <div class="mb-3">
+                            <label><strong>Monto a pagar:</strong></label>
+                            <span> <strong id="modalPlanAmount">$10.00</strong></span>
+                            <!-- Suponiendo que el plan tiene una propiedad 'price' y esta está en centavos -->
+                        </div>
+                        
+                        <!-- Formulario de Stripe -->
+                        <form action="" method="post" id="stripeForm">
+                            {% csrf_token %}
+                            <div id="card-element"></div>                    
+                            <br>
+                            <div id="card-errors" role="alert" class="text-danger"></div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Proceder al pago</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var stripe = Stripe('{{STRIPE_PUBLIC_KEY}}');
+                
+                var cardElement = document.getElementById('card-element');
+                if(cardElement) {
+                    var elements = stripe.elements();
+                    var card = elements.create('card');
+                    card.mount('#card-element');
+            
+                    card.addEventListener('change', function(event) {
+                        var displayError = document.getElementById('card-errors');
+                        if (event.error) {
+                            displayError.textContent = event.error.message;
+                        } else {
+                            displayError.textContent = '';
+                        }
+                    });
+            
+                    var form = document.getElementById('stripeForm');
+                    form.addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        stripe.createToken(card).then(function(result) {
+                            if (result.error) {
+                                var errorElement = document.getElementById('card-errors');
+                                errorElement.textContent = result.error.message;
+                            } else {
+                                stripeTokenHandler(result.token);
+                            }
+                        });
+                    });
+            
+                    function stripeTokenHandler(token) {
+                        var form = document.getElementById('stripeForm');
+                        var hiddenInput = document.createElement('input');
+                        hiddenInput.setAttribute('type', 'hidden');
+                        hiddenInput.setAttribute('name', 'stripeToken');
+                        hiddenInput.setAttribute('value', token.id);
+                        form.appendChild(hiddenInput);
+                        form.submit();
+                    }
+                }
+            });
+            
+            $('#stripeModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); 
+                var planName = button.data('plan-name');
+                var planAmount = parseFloat(button.data('plan-amount'));
+                        
+                var modal = $(this);
+                modal.find('#modalPlanName').text(planName);
+                modal.find('#modalPlanAmount').text('$' + planAmount.toFixed(2));
+            });                               
+        </script>
+    </body>
+</html>

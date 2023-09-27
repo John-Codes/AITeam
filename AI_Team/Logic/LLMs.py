@@ -55,8 +55,7 @@ def CallPalm2(projectDescription):
             max_output_tokens= 4024,
             stop_sequences= [],
             safety_settings= [{"category":"HARM_CATEGORY_DEROGATORY","threshold":1},{"category":"HARM_CATEGORY_TOXICITY","threshold":1},{"category":"HARM_CATEGORY_VIOLENCE","threshold":2},{"category":"HARM_CATEGORY_SEXUAL","threshold":2},{"category":"HARM_CATEGORY_MEDICAL","threshold":2},{"category":"HARM_CATEGORY_DANGEROUS","threshold":2}],
-            prompt = prompt
-            
+            prompt = prompt            
     )
 
     except Exception as e:
@@ -92,6 +91,20 @@ def Check_Cuestion(prompt):
             break
     if affirmative:
         email_send(prompt)
+
+def CallPalm(cuestion,context, examples):
+    try:
+        palm.configure(api_key=os.getenv("Palm2APIKey"))
+    except Exception as e:
+        print('something was wrong when trying to connect to the api', e)
+
+    response = palm.chat(
+        context=context,
+        examples=examples,
+        messages=cuestion,
+        temperature=0.7)
+
+    return response.last
         
 
 if __name__ == "__main__":
