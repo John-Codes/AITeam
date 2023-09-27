@@ -1,0 +1,10 @@
+{% extends "payment/base_pay.html" %}
+{% block title %}Successful Payment{% endblock %}
+{% block header %}Payment Successful!{% endblock %}
+{% block form_content %}
+    <h3>Thank you for your purchase!</h3>
+    <p>You will soon receive an email with the details of your purchase.</p>
+{% endblock %}
+{% block additional_content %}
+    <a href="{% url 'ai-team' %}" title="return to Ai-team Chat" class="button-to-pay">Return to Home</a>
+{% endblock %}

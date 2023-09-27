@@ -85,17 +85,7 @@ function handleKeyDown(event) {
         event.preventDefault();  // Prevents the Enter action from triggering a page reload.
     }
 }
-
-function checkAndAutocomplete() {
-    const message = document.getElementById("userMessage");
-    const value = message.value;
-
-    // Si el primer carácter es "@" y no contiene "@myemail" al principio
-    if (value.charAt(0) === "@" && !value.startsWith("@myemail")) {
-        message.value = "@myemail: (replace these parenteses with your email)" + value.slice(1); // Eliminamos el "@" inicial para evitar duplicados
-    }
-}
-
+//handle default messages
 document.addEventListener("DOMContentLoaded", function() {
     var templateLinks = document.querySelectorAll("[data-template]");
 

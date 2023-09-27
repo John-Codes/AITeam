@@ -146,6 +146,19 @@ body {
     text-decoration: none;
 }
 
+h2.reset-styles {
+    margin: 0;        /* Anula márgenes */
+    padding: 0;       /* Anula rellenos */
+    font-size: 1em;   /* Hace que el tamaño de la letra sea el mismo que el del texto circundante */
+    font-weight: normal;  /* Hace que el texto no esté en negrita */
+    color: inherit;   /* Hace que el color del texto sea el mismo que el de su contenedor */
+    text-transform: none; /* Anula cualquier transformación de texto */
+    background: none; /* Asegura que no haya fondo */
+    border: none;     /* Asegura que no haya bordes */
+    text-decoration: none; /* Asegura que no haya decoraciones de texto */
+    /*... y cualquier otra propiedad que quieras anular */
+}
+
 .menu-items a:hover {
     font-weight: 400;
 }
@@ -403,6 +416,11 @@ body {
     border-radius: 50%; /* Hace que la imagen/div sea redondo */
     border: 2px solid #000; /* Agrega un borde sólido de 2px de color negro (puedes cambiar el color según prefieras) */
 }
+.visible-content{
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
 
 /*.img_thirdbio {
     width: 50px;
@@ -412,4 +430,4 @@ body {
     background-position: center; /* Centra la imagen en el div */
     border-radius: 50%; /* Hace que la imagen/div sea redondo */
     border: 2px solid #000; /* Agrega un borde sólido de 2px de color negro (puedes cambiar el color según prefieras) */
-}*/
+} */
