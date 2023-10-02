@@ -12,18 +12,26 @@ body {
     margin: 0; 
 }
 
-.chat-footer {
+.chat-footer,
+.modal-footer {
     z-index: 2;
     background: linear-gradient(135deg, rgba(28,28,28,0.3), rgba(14,14,14,0.3));
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.37);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.modal-footer {
+    z-index: 1060;
+}
+
 .chat-header {
     width: 100%;
     background: transparent;
 }
-.chat-title {  
+
+.chat-title,
+.modal-title {  
     font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;  
     font-weight: 400;
     font-style: normal;
@@ -39,6 +47,10 @@ body {
     color: transparent;
     text-shadow: none;
     
+}
+
+.modal-title {
+    font-size: 20px;
 }
 
 .nav-container {
@@ -176,33 +188,37 @@ h2.reset-styles {
 .chat-body {
     margin-bottom: 50px;
     overflow-y: auto; 
-    height: calc(100vh - 200px); /* 40px es aproximadamente la altura del encabezado y 50px la del footer, ajústalo según tus necesidades */
+    height: calc(100vh - 200px);
 }
-.chat-body::-webkit-scrollbar {
+.chat-body::-webkit-scrollbar{
     width: 8px; /* Ancho del scrollbar */
 }
 
-.chat-body::-webkit-scrollbar-thumb {
+.chat-body::-webkit-scrollbar-thumb{
     background-color: rgba(255, 255, 255, 0.3); /* Color del thumb (barra) del scrollbar */
     border-radius: 10px; /* Borde redondeado del thumb */
 }
 
-.chat-body::-webkit-scrollbar-thumb:hover {
+.chat-body::-webkit-scrollbar-thumb:hover{
     background-color: rgba(255, 255, 255, 0.5); /* Color del thumb al pasar el mouse */
 }
 
 /* Estilo para el scrollbar en navegadores que soportan scrollbar-width (Firefox) */
-.chat-body {
+.chat-body{
     scrollbar-width: thin; /* Ancho del scrollbar */
 }
 
-.chat-body::-webkit-scrollbar-thumb {
+.chat-body::-webkit-scrollbar-thumb{
     background-color: rgba(255, 255, 255, 0.3); /* Color del thumb (barra) del scrollbar */
     border-radius: 10px; /* Borde redondeado del thumb */
 }
 
-.chat-body::-webkit-scrollbar-thumb:hover {
+.chat-body::-webkit-scrollbar-thumb:hover{
     background-color: rgba(255, 255, 255, 0.5); /* Color del thumb al pasar el mouse */
+}
+
+.modal-body {
+    height: min-content;
 }
 
 .message-left.glass, .message-right.glass {
@@ -226,7 +242,8 @@ h2.reset-styles {
     background: transparent;
     border: none;
 }
-.message-content { 
+.message-content,
+table { 
     /*color: #1c1c1c;*/
     color: #ffffff;
     font-family: 'Open Sans', sans-serif;
@@ -284,12 +301,17 @@ h2.reset-styles {
     left: 0;
 }
 
-.footer-content {
+.footer-content,
+.footer-content-modal {
     max-width: 70%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;  /* Espacio en la parte superior */
     padding-bottom: 5px;  /* Este espacio será el que separará el input del borde inferior */
+}
+
+.footer-content-modal {
+    width: 70%;
 }
 
 .loading-dots-container {
@@ -394,6 +416,30 @@ h2.reset-styles {
     background-color: black; /* Fondo negro */
 }
 
+.dynamic-modal .modal-dialog {
+    min-height: 30%; /* Establece el tamaño mínimo */
+    max-height: 60%; /* Establece el tamaño máximo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+}
+
+.dynamic-modal .modal-content {
+    overflow: hidden;
+}
+
+.dynamic-modal .modal-body {
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: url('../img/blue_space.jpg') no-repeat center center;
+    background-size: cover; /* Asegurará que la imagen cubra todo el modal */
+    /* Puedes añadir otros estilos, como un ligero fondo oscuro para mejorar la legibilidad del texto sobre la imagen: */
+    
+}
+
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 480px) {
     .form_input, .btn-send {
@@ -422,12 +468,37 @@ h2.reset-styles {
     opacity: 0;
 }
 
+/* Estilo para los enlaces dentro del modal */
+#modalChatIA .modal-content a {
+    color: white; /* Cambia el color del texto del enlace a blanco */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    transition: 0.3s; /* Añade una transición suave para el efecto hover */
+}
+
+#modalChatIA .modal-content a:hover {
+    text-decoration: underline; /* Añade un subrayado cuando se pasa el cursor por encima para indicar interactividad */
+}
+
+.white-link {
+    color: white;
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    background-color: transparent;
+    border-bottom: 2px solid white; /* Agrega una línea inferior para hacerlo más reconocible como un enlace */
+    padding-bottom: 2px; /* Un poco de espacio debajo de la línea */
+    transition: color 0.3s ease; /* Efecto de transición al cambiar el color */
+}
+
+/* Cambia el color al pasar el mouse sobre el enlace para una mejor interactividad */
+.white-link:hover {
+    color: #ddd;
+}
+
 /*.img_thirdbio {
     width: 50px;
     height: 50px;
     background-image: var(--developer);
-    background-size: cover; /* Asegura que la imagen cubra todo el espacio del div */
-    background-position: center; /* Centra la imagen en el div */
-    border-radius: 50%; /* Hace que la imagen/div sea redondo */
-    border: 2px solid #000; /* Agrega un borde sólido de 2px de color negro (puedes cambiar el color según prefieras) */
-} */
+    background-size: cover; 
+    background-position: center; 
+    border-radius: 50%; 
+    border: 2px solid #000;
+} */ 

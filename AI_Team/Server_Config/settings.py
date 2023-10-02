@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+from django.urls import reverse_lazy
 from pathlib import Path
 import os
 
@@ -150,9 +150,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Model User for Auth
 #AUTH_USER_MODEL = 'Server_Side.CustomUser'
-LOGIN_REDIRECT_URL = 'ai-team'
+LOGIN_REDIRECT_URL = reverse_lazy('ai-team', kwargs={'context': 'main'})
 
 
 # Stripe Configuration
 STRIPE_SECRET_KEY = "sk_test_51NunAvBtMBfDp2mDW6qk5QAdRq5Fssr2RaVbuiH7osXcAbrZ9YOh81eC0G3FjpnGeTol64k2xjE8tDrcaXWwwWqJ00bPCaZtJC"
 STRIPE_PUBLIC_KEY = "pk_test_51NunAvBtMBfDp2mDpkraejpSgqrsB7jttrMZxREbGY3oeLtc6KYFhfDTAZjMhriFDaFkTsojldLcVvWrJqzsIKjr00I6nNFylB"
+
+AUTH_USER_MODEL = 'Server_Side.Client'

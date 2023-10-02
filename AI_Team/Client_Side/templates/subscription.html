@@ -72,14 +72,13 @@
                 </a>
             </div>
             <br>
-            <!-- <a href="{% url 'ai-team' %}" title="return to Ai-team Chat"><h2>back to AI Team</h2> -->
         </div>
        <!-- Modal de Stripe -->
         <div class="modal fade" id="stripeModal" tabindex="-1" role="dialog" aria-labelledby="stripeModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="stripeModalLabel">Pago con Stripe</h4>
+                        <h4 class="modal-title" id="stripeModalLabel">Pay with Stripe</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -91,16 +90,16 @@
                             <span>{{ user.email }}</span>
                         </div>
                         <div class="mb-3">
-                            <label><strong>Nombre de usuario:</strong></label>
+                            <label><strong>User name:</strong></label>
                             <span>{{ user.username }}</span>
                         </div>
                         <!-- Información del plan -->
                         <div class="mb-3">
-                            <label><strong>Plan seleccionado:</strong></label>
+                            <label><strong>Selected Plan:</strong></label>
                             <span> <strong id="modalPlanName"> Plan Name </strong></span>
                         </div>
                         <div class="mb-3">
-                            <label><strong>Monto a pagar:</strong></label>
+                            <label><strong>Price:</strong></label>
                             <span> <strong id="modalPlanAmount">$10.00</strong></span>
                             <!-- Suponiendo que el plan tiene una propiedad 'price' y esta está en centavos -->
                         </div>
@@ -112,7 +111,7 @@
                             <br>
                             <div id="card-errors" role="alert" class="text-danger"></div>
                             <br>
-                            <button type="submit" class="btn btn-primary">Proceder al pago</button>
+                            <button type="submit" class="btn btn-primary">PAY</button>
                         </form>
                     </div>
                 </div>

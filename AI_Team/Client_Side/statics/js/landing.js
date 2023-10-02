@@ -26,56 +26,56 @@ function sendMessage() {
         toggleDotsAnimation(true); // Activar animaciones
         const csrfToken = getCookie('csrftoken');
         //console.log("Enviando solicitud 'user_message'...");
+        let urlEndpoint = `/ai-team/chat/${currentContext}/`;
 
-        fetch("/ai-team/", {
-            method: "POST",
-            body: new URLSearchParams({ "message": message, "phase": "user_message" }),
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "X-CSRFToken": csrfToken
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const chatBox = document.getElementById("chatBox");
-            chatBox.insertAdjacentHTML('beforeend', data.user_message_div);
-            document.getElementById("userMessage").value = "";
-            //console.log("Enviando solicitud 'ai_response'...");
-            chatBox.scrollTop = chatBox.scrollHeight;
-            // Now make a request for the AI's response here, inside the .then()
-            return fetch("/ai-team/", {
+            fetch(urlEndpoint, {
                 method: "POST",
-                body: new URLSearchParams({ "message": message, "phase": "ai_response" }),
+                body: new URLSearchParams({ "message": message, "phase": "user_message" }),
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     "X-CSRFToken": csrfToken
                 }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const chatBox = document.getElementById("chatBox");
+                chatBox.insertAdjacentHTML('beforeend', data.user_message_div);
+                document.getElementById("userMessage").value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+                let urlEndpoint = `/ai-team/chat/${currentContext}/`;
+        
+                return fetch(urlEndpoint, {
+                    method: "POST",
+                    body: new URLSearchParams({ "message": message, "phase": "ai_response" }),
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "X-CSRFToken": csrfToken
+                    }
+                });
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const chatBox = document.getElementById("chatBox");
+                chatBox.insertAdjacentHTML('beforeend', data.ia_message_div);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                toggleDotsAnimation(false); // Desactivar animaciones
             });
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const chatBox = document.getElementById("chatBox");
-            chatBox.insertAdjacentHTML('beforeend', data.ia_message_div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        })
-        .finally(() => {
-            toggleDotsAnimation(false); // Desactivar animaciones
-        });
-    }
-}
+}}
 
 // Handle Enter key press to send the message.
 function handleKeyDown(event) {
@@ -85,6 +85,7 @@ function handleKeyDown(event) {
         event.preventDefault();  // Prevents the Enter action from triggering a page reload.
     }
 }
+
 //handle default messages
 document.addEventListener("DOMContentLoaded", function() {
     var templateLinks = document.querySelectorAll("[data-template]");
@@ -94,11 +95,12 @@ document.addEventListener("DOMContentLoaded", function() {
             e.preventDefault();
             var templateName = e.target.getAttribute("data-template");
 
-            toggleDotsAnimation(true); // Activar animaciones
+            toggleDotsAnimation(true);
             const csrfToken = getCookie('csrftoken');
-            //console.log("Enviando solicitud del template...");
 
-            fetch("/ai-team/", {
+            let urlEndpoint = `/ai-team/chat/${currentContext}/`;
+
+            fetch(urlEndpoint, {
                 method: "POST",
                 body: new URLSearchParams({ "template_name": templateName }),
                 headers: {
@@ -121,12 +123,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.error('Error:', error);
             })
             .finally(() => {
-                toggleDotsAnimation(false); // Desactivar animaciones
+                toggleDotsAnimation(false);
             });
         });
     });
 });
-
 
 
 // Initialize event listeners.

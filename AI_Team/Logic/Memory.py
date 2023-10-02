@@ -1,5 +1,6 @@
 from .VectorDB import VectorDB
-from .LLMs import CallPalm, CallPalm2
+from .LLMs import CallPalm
+from .context_messages import CONTEXT_MESSAGES
 from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
@@ -41,47 +42,50 @@ def consulta_IA_openai(pregunta):
 # Global variable for the VectorDB instance
 vector_db = None
 
-def initialize_vector_db():
+def initialize_vector_db(context):
     global vector_db
 
-    current_dir = Path(__file__).parent
-    ruta_absoluta = current_dir / "memory_text" / "memoryAI.txt"
+    # Utilizar la función context_palm para obtener el contenido del archivo txt 
+    # según el contexto proporcionado.
+    vector_db_instance = VectorDB()
+    contenido = vector_db_instance.context_palm(context)
 
-    # Data preparation:
-    with open(ruta_absoluta, 'r', encoding='utf-8') as f:
-        contenido = f.read()
-
-    # Instantiate the VectorDB class and process the content
-    store_name = "memoryAI_store"  # Define a name for the vector store
+    # Definir el nombre del vector store basado en el contexto
+    store_name = f"memory-AI-with-{context}-store"
+    
+    # Instanciar la clase VectorDB y procesar el contenido
     vector_db = VectorDB()
     vector_db.process_text(contenido, store_name)
 
-def Consulta_IA_PALM(prompt):
-
+def Consulta_IA_PALM(prompt, context):
     global vector_db
 
-    # If the vector_db is not initialized, initialize it
     if vector_db is None:
-        initialize_vector_db()
+        initialize_vector_db(context)
 
+    message_error ='An error has occurred, please reload the page to connect to AI Team'
+    
     # Retrieve the most similar text fragments using the VectorDB class.
-    contenido = vector_db.context_palm()
-    #docs = vector_db.query(prompt)
-    examples = [("Whats Ai_Team","AITeam is an artificial intelligence assistant for programmers and code developers.")]
-    conversation = vector_db.get_conversation()
+    try:
+        contenido = vector_db.context_palm(context)
+    except FileNotFoundError:
+        return message_error
+
+    conversation = vector_db.get_conversation(context)
+    
+    examples = CONTEXT_MESSAGES.get(context, [])
+    
     if conversation:
-        print('conversation',conversation)
         examples.extend(conversation)
-    # Generate a response using google.generativeai
+
     try:
         palm_response = CallPalm(prompt, contenido, examples)
-        print('palm response',palm_response)
+        print('this is response',palm_response)
     except Exception as e:
-        palm_response = 'an error has ocurred, please reload the page for connect to AI Team'
-        print('response of google palm dont work', e)
+        palm_response = message_error
+        print('response of google palm doesnt work', e)
 
-    if palm_response != 'an error has ocurred, please reload the page for connect to AI Team':
-        # Add the prompt and the IA response to the vector
+    if palm_response != message_error:
         vector_db.add_to_context(prompt, palm_response)
 
     return palm_response
