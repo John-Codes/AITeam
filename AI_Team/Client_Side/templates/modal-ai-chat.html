@@ -1,0 +1,73 @@
+
+    <!-- Modal Structure -->
+    <div class="modal fade dynamic-modal" id="modalChatIA" tabindex="-1" aria-labelledby="modalChatIALabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Consult ours plans to subscribe</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="metallic-text">
+                    <h2 class="reset-styles">An AI Team is writing</h2>
+                </div>
+                <!-- Modal Body with Chat -->
+                <div class="chat-body px-3 py-2 modal-body" id="chatBoxModal">
+                    <!-- Aquí irán los mensajes del chat con la segunda IA -->
+                    <div class="message-left glass">
+                        {% if user.is_subscribe %}
+                        <p class="message-content">
+                            your subscription informatios is this <br>
+                            you current plan: {{user.current_plan}} <br>
+                            Subscription Status: {{user.subscription_status}} <br>
+                            Pay with: {{user.method_pay}} <br>
+                            the plan expires: {{user.next_date_pay}} <br>
+                            Subscribed from Date {{user.date_subscription}}  <br>
+                            if you wanna upgrade your current subscription visit the next page: <a href="{% url 'subscription' %}" title="login to AI Team for more"><h2 class="reset-styles" >Subscription</h2></a>
+                        </p>            
+                        <button type="button" class="btn btn-danger">Cancelar Suscripción</button>
+                        {% else %}
+                        <p class="message-content">
+                            We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website. 
+                            These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us: <br>
+                            <strong>Basic</strong> <br>
+                            <strong>Premium</strong> <br>
+                            <strong>Ultimate</strong> <br>
+                            you can get any of this subscriptions en the next page: <a href="{% url 'subscription' %}" title="login to AI Team for more"><h2 class="reset-styles" >Subscription</h2></a>
+                            </p>
+                            <p class="message-content">if you wanna know about each plan, only send a message and Ai Team response you</p>
+                            {% endif %}
+                        <div class="mt-2">
+                            <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
+                            <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
+                            <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+
+                <!-- Modal Footer (Input area for chat) -->
+                <div class="modal-footer">
+                    <div class="footer-content-modal">
+                        <!-- Dots Animation -->
+                        <div class="loading-dots-container">
+                            <div class="loading-dots">
+                                <span class="dot dot-1"></span>
+                                <span class="dot dot-2"></span>
+                                <span class="dot dot-3"></span>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="formulary">
+                            {% csrf_token %}
+                            <input type="text" class="form_input" id="userMessageModal" placeholder="Send a message..." onkeydown="handleKeyDown(event, 'modal')">
+                            <button class="btn btn-send" onclick="sendMessage('modal')">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,10 +1,20 @@
-{% extends "payment/base_pay.html" %}
-{% block title %}Successful Payment{% endblock %}
-{% block header %}Payment Successful!{% endblock %}
-{% block form_content %}
-    <h3>Thank you for your purchase!</h3>
-    <p>You will soon receive an email with the details of your purchase.</p>
+{% extends "registration/base_auth.html" %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block header %}
+Payment Successful
 {% endblock %}
+
+{% block form_content %}
+<div class="card card-transparent-background">
+    <div class="card-body">
+        <h5 class="card-title">Payment Successful</h5>
+        <p class="card-text">Thank you for your payment. Your subscription plan has been activated.</p>
+        <a href="{% url {% url 'ai-team' context='suscription' %}" class="btn btn-primary">Go to AI Team</a>
+    </div>
+</div>
+{% endblock %}
+
 {% block additional_content %}
-    <a href="{% url 'ai-team' %}" title="return to Ai-team Chat" class="button-to-pay">Return to Home</a>
 {% endblock %}

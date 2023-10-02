@@ -3,8 +3,8 @@ import paypalrestsdk
 # Configuración de PayPal
 paypalrestsdk.configure({
   "mode": "sandbox",  # Puedes cambiar esto a "live" cuando vayas a producción
-  "client_id": "YOUR_CLIENT_ID",
-  "client_secret": "YOUR_CLIENT_SECRET"
+  "client_id": "AT0E7B7zOA8Se5phnmPOc0ktRyj4IwaC4rMi9z6I5roenJcGhMJBQnSWKAcGxYwivBf-43Uo-KwN6MOs",
+  "client_secret": "EL2ut_dNjkzX42cq2LFZEpLoA7Y0GtcZTG1QUO9zU0pgX_Qg70a7RGIoIBXOWuQudrL5e9c6j1Z_dUFm"
 })
 
 def create_paypal_payment(plan):

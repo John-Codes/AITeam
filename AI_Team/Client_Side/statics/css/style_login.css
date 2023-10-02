@@ -127,3 +127,13 @@ input[type="password"]:focus {
   margin-top: 5px;
   margin-bottom: 15px;
 }
+
+.card-transparent-background {
+  background: transparent;
+  border: none; /* Quita el borde del card si lo deseas */
+}
+
+.card-transparent-background .card-body {
+  background: transparent; /* Hace que el fondo del card-body sea transparente */
+  color: #fff; /* Cambia el color del texto si es necesario */
+}

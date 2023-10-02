@@ -2,14 +2,14 @@ import os
 import pickle
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS, vectara
+from langchain.vectorstores import FAISS
 import faiss
-import pathlib
-
+from pathlib import Path
+from .Data_Saver import DataSaver
 class VectorDB:
     def __init__(self):
         self.vector_store = None
-        self.conversation_buffer = []
+        self.conversations = []
 
     def split_text_into_chunks(self, text):
         # split text of type str into chunks, parts of the text of type str
@@ -60,18 +60,24 @@ class VectorDB:
             print('we get a issue:', e)
     
     def add_to_context(self, prompt, response):
-        # Adding the user prompt and the AI response to the conversation buffer as a tuple
-        self.conversation_buffer.append((prompt, response))
+        self.conversations.append((prompt, response))
 
-    def get_conversation(self):
-        # Return the entire conversation history as a list of tuples
-        return self.conversation_buffer
+    def get_conversation(self, context):
+
+        return self.conversations
     
-    def context_palm(self):
-        current_dir = Path(__file__).parent
-        ruta_absoluta = current_dir / "memory_text" / "memoryAI.txt"
+    def context_palm(self, context):
+        saver = DataSaver()
 
-        # Data preparation:
+        if context not in ["main", "suscription", "panel-admin"]:
+        # Usamos DataSaver para leer el archivo JSON
+            return saver.read_from_json(f"memory-AI-with-{context}", key="Context")
+        current_dir = Path(__file__).parent
+        ruta_absoluta = current_dir / "memory_text" / f"memory-AI-with-{context}.txt"
+        
+        if not ruta_absoluta.exists():
+            raise FileNotFoundError(f"No file found for context '{context}'")
+        
         with open(ruta_absoluta, 'r', encoding='utf-8') as f:
             contenido = f.read()
 
