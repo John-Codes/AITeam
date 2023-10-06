@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}EFEXZIUM =$={% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -20,11 +20,12 @@
 </head>
 <body>
     <div class="glass-effect">
-        <div class="logo">EFEXZIUM =$=</div>
+        <div class="logo">{% block logo %}{% endblock %}</div>
         <h2>{% block header %}{% endblock %}</h2>
         {% block form_content %}{% endblock %}
         
         {% block additional_content %}{% endblock %}
     </div>
+    {% block additional_styles %}{% endblock %}
 </body>
 </html>

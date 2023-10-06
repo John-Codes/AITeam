@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Client, CurrentPlan, SubscriptionStatus, PaymentMethod
+from .models import Client, Current_Plan, SubscriptionStatus, PaymentMethod
 
-# Administrador para CurrentPlan
-class CurrentPlanAdmin(admin.ModelAdmin):
+# Administrador para Current_Plan
+class Current_PlanAdmin(admin.ModelAdmin):
     list_display = ['current_plan']
     search_fields = ['current_plan']
 
@@ -49,7 +49,7 @@ class ClientAdmin(admin.ModelAdmin):
     change_password.short_description = 'Change Password'
 
 # Registrar modelos
-admin.site.register(CurrentPlan, CurrentPlanAdmin)
+admin.site.register(Current_Plan, Current_PlanAdmin)
 admin.site.register(SubscriptionStatus, SubscriptionStatusAdmin)
 admin.site.register(PaymentMethod, PaymentMethodAdmin)
 admin.site.register(Client, ClientAdmin)

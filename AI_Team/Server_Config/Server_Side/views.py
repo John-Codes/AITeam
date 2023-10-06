@@ -1,8 +1,9 @@
+from django.conf import settings
 import os
 from pathlib import Path
 from django.http import JsonResponse, HttpResponseRedirect # send json objects
 from django.contrib.auth.forms import UserCreationForm # handle defaults forms of django
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView 
 from django.views import View
 from django.contrib.sessions.models import Session
@@ -15,18 +16,23 @@ from AI_Team.Logic.Memory import *
 from AI_Team.Logic.response_utils import * # IA message render templates method
 from AI_Team.Logic.sender_mails import Contac_us_mail
 from AI_Team.Logic.Data_Saver import DataSaver
+from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from hashids import Hashids
 import time
+from django.contrib.auth.decorators import login_required
 # Stripe using stripe
 import stripe
-from .. import settings
-
 # PayPal
-from django.urls import reverse
-from AI_Team.Logic.Payments import create_paypal_payment, create_stripe_payment
-
+from paypal.standard.forms import PayPalPaymentsForm
+from paypal.standard.ipn.models import PayPalIPN
+import uuid
+from django.conf import settings
+from AI_Team.Logic.Payments import plans_data
+from datetime import datetime, timedelta
+from .models import Current_Plan, PaymentMethod, SubscriptionStatus
 stripe.api_key = settings.STRIPE_SECRET_KEY
 hashids = Hashids(salt = 'ia is the future salt', min_length=8)
+#STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
 
 # ai-team chat handle events and requests
 
@@ -44,7 +50,7 @@ class ChatUIView(View):
             return response
 
         # Check if it's a user-specific context and not one of the predefined contexts
-        if self.context_value not in ["main", "suscription", "panel-admin"]:
+        if self.context_value not in ["main", "subscription", "panel-admin"]:
             saver = DataSaver()
             data_dict = saver.json_to_dict(self.context_value)
             # If the data_dict exists, render the customized template
@@ -63,7 +69,7 @@ class ChatUIView(View):
                 context = {
                     'my_site_IA': url,
                     'context_value': self.context_value,
-                    'valid_contexts': {"main", "panel-admin", "suscription"},
+                    'valid_contexts': {"main", "panel-admin", "subscription"},
                     'sites_exists': self.check_my_own_site_exists(self.context_value)
                 }
                 return render(request, 'ai-team.html', context) 
@@ -76,8 +82,17 @@ class ChatUIView(View):
         template_name = request.POST.get('template_name', None)
         user_message = request.POST.get('message')
         phase = request.POST.get('phase')
-        #data validation and handle events of page
+        action = request.POST.get('action')
+
+        if action == 'cancel_subscription':
+            response_data = {}
+            print('boton activado')
+            request.session['cancel-subscription'] = True
+            response_data['template_message_div'] = render_html('chat_messages/cancel.html', '')
+            return JsonResponse(response_data)
+
         if template_name:
+            print('template name:', template_name)
             return self.handle_template_messages(request, template_name)
         
         if phase == 'user_message':
@@ -100,6 +115,8 @@ class ChatUIView(View):
         elif template_name == 'create-page':
             request.session['create-web-page'] = True
             response_data['template_message_div'] = render_html('chat_messages/confirm-data-to create-page.html', '')
+            
+            
         time.sleep(4)
         return JsonResponse(response_data)
 
@@ -111,9 +128,16 @@ class ChatUIView(View):
     def handle_ai_response(self, request, user_message):
         response_data = {}
         
-        # AI consultation logic
-        print('this is the context',self.context_value)
-        ai_response = Consulta_IA_PALM(user_message, self.context_value)
+        if request.session.get('cancel-subscription', False):
+            if str(user_message).lower() == 'yes':
+                ai_response = cancel_subscription(request.user)
+            else:
+                ai_response = None
+            request.session['send_us_email'] = False
+            del request.session['send_us_email']
+        else:
+            # AI consultation logic
+            ai_response = Consulta_IA_PALM(user_message, self.context_value)
 
         if request.session.get('send_us_email', False):
             # Handle email sending logic
@@ -148,7 +172,7 @@ class ChatUIView(View):
     
     def validate_context(self, request):
         """Valida el contexto y redirige si es necesario."""
-        valid_contexts = ["main", "suscription", "panel-admin"]
+        valid_contexts = ["main", "subscription", "panel-admin"]
         
         # Si el usuario no está autenticado y trata de acceder a un contexto que no sea "main",
         # o si el contexto no es válido, redirige al usuario a "main"
@@ -171,7 +195,7 @@ class ChatUIView(View):
         return None
 
     
-    def check_my_own_site_exists(context):
+    def check_my_own_site_exists(self, context):
         current_dir = Path(__file__).parent
         file_path = current_dir / "memory_text" / f"memory-AI-with-{context}.json"
         return os.path.exists(file_path)
@@ -227,55 +251,19 @@ def custom_logout(request):
         
 class Subscription(View):
     template_name = "subscription.html"
-    def get(self, request):
-        # Definición de los planes directamente en el código
-        plans = create_stripe_payment()
+    
+    def get(self, request, *args, **kwargs):
+        """
+        Render the subscription page with all plan details.
+        """
+        
         context = {
+            "plans": plans_data,  # Cambiado a "plans" para que sea más claro en el template
+            "user": request.user,
             'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY,
-            'combined_data': plans,
-            }
-        return render(request, self.template_name, context)
-
-    def post(self, request):
-        selected_plan = request.POST.get('selected_plan')
-        payment_method = request.POST.get('payment_method')
-        plans = {
-            'plan_1': 1000,  # $10.00 (Stripe usa centavos)
-            'plan_2': 2000,  # $20.00
-            'plan_3': 4000,  # $40.00
         }
 
-        if payment_method == 'stripe':
-            token = request.POST.get('stripeToken')
-            try:
-                charge = stripe.Charge.create(
-                    amount=plans.get(selected_plan, 0),  
-                    currency="usd",
-                    description=f"Stripe Payment for {selected_plan}",
-                    source=token
-                    )
-                return redirect('payment_success')  # Redirige a la vista de pago exitoso
-            except Exception as e:
-                # Handle exceptions 
-                messages.error(request, "Hubo un error con tu pago. Inténtalo de nuevo.")
-                return redirect('payment_failed')   # Redirige a la vista de pago fallido
-
-        elif payment_method == 'paypal':
-            plan_data = plans.get(selected_plan)
-            if not plan_data:
-                messages.error(request, "Plan no válido.")
-                return redirect('payment/payment_failed')
-
-            approval_url = create_paypal_payment(plan_data)
-            if approval_url:
-                return redirect(approval_url)
-            else:
-                messages.error(request, "Error al procesar el pago con PayPal.")
-                return redirect('payment/payment_failed')
-
-        # Si no se cumple ninguna de las condiciones anteriores, redirige al usuario a una página de error o a la página principal
-        messages.error(request, "Hubo un error con tu solicitud. Inténtalo de nuevo.")
-        return redirect('payment/payment_failed')
+        return render(request, self.template_name, context)
 
 
 def payment_success(request):
@@ -283,3 +271,69 @@ def payment_success(request):
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html')
+
+def SubscriptionCheckout(request, plan_id):
+    # Asegúrate de que plan_id es un índice válido en plans_data
+    plan = plans_data[plan_id]
+
+    host = request.get_host()
+    invoice_id = uuid.uuid4()
+    # Creamos el diccionario para la suscripción
+    paypal_dict = {
+        "cmd": "_xclick-subscriptions",
+        "business": settings.PAYPAL_RECEIVER_EMAIL,
+        "a3": plan['amount'] / 100,     # Precio mensual. Convertimos de centavos a dólares
+        "p3": 1,                        # Duración de cada unidad (en este caso, meses)
+        "t3": "M",                      # Unidad de duración ("M" para Mes)
+        "src": "1",                     # Hacer pagos recurrentes
+        "sra": "1",                     # Reintentar pago en caso de error
+        "no_note": "1",                 # Quitar notas adicionales
+        "item_name": plan['name'],
+        "invoice": str(invoice_id),
+        "notify_url": f"http://{host}{reverse('paypal-ipn')}",
+        "return": f"http://{host}{reverse('payment_success', kwargs={'plan_id': plan_id})}",
+        "cancel_return": f"http://{host}{reverse('payment_failed', kwargs={'plan_id': plan_id})}",
+    }
+
+    paypal_form = PayPalPaymentsForm(initial=paypal_dict, button_type="subscribe")
+
+    context = {
+        'plan': plan,
+        'paypal': paypal_form
+    }
+    request.session['invoice'] = str(invoice_id)
+    return render(request, 'payment/subscription_checkout.html', context)
+
+def PaymentSuccessful(request, plan_id):
+    plan = plans_data[plan_id]
+    plan['amount'] = plan['amount'] / 100
+    user = request.user 
+    invoice = request.session.get('invoice')
+    print('invoice id uuid', invoice)
+
+    # Intenta encontrar el objeto PayPalIPN usando el invoice (uuid)
+    try:
+        ipn_obj = PayPalIPN.objects.filter(invoice=invoice, payment_status="Completed").first()
+        paypal_subscription_id = ipn_obj.subscr_id if ipn_obj else None
+    except PayPalIPN.DoesNotExist:
+        paypal_subscription_id = None
+
+    # Actualizar datos del modelo del usuario
+    user.is_subscribe = True
+    print('paypal subscription id',paypal_subscription_id)
+    user.order_id = paypal_subscription_id
+    print('add the id to the user',user.order_id)
+    user.last_transaction_status = "Success"
+    user.current_plan = Current_Plan.objects.get(current_plan=plan['name'])  
+    user.subscription_status = SubscriptionStatus.objects.get(subscription_status="Active")
+    user.method_pay = PaymentMethod.objects.get(method_pay="Paypal")
+    user.next_date_pay = datetime.now() + timedelta(days=30)  # Asume un plan mensual
+    user.date_subscription = datetime.now()
+    user.save()
+
+    return render(request, 'payment/payment_success.html', {'plan': plan})
+
+
+def PaymentFailed(request, plan_id):
+    plan = plans_data[plan_id]
+    return render(request, 'payment/payment_failed.html', {'plan': plan})

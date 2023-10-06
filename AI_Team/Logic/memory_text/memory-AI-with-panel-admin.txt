@@ -17,9 +17,9 @@ Here's a sample dictionary you might create:
 website = {
     "title": "Sample Web Page Title",
     "header": "Welcome to the Sample Web Page",
-    "description": "A sample AI-generated web page.",  # nuevo campo
-    "keywords": "sample, AI-generated, web page, AI Team",  # nuevo campo
-    "default_message": "Hello, how can I assist you today?",  # nuevo campo
+    "description": "A sample AI-generated web page.",  # new field
+    "keywords": "sample, AI-generated, web page, AI Team",  # new field
+    "default_message": "Hello, how can I assist you today?",  # new field
     "list_items": [
         {
             "text": "Home",

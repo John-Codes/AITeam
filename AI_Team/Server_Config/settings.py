@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     'Server_Config.Server_Side', # path where we found it the Server config of our app
     "django_check_seo",
+    'paypal.standard.ipn',
     'cms',
     'menus',
     'treebeard',
@@ -152,9 +153,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 #AUTH_USER_MODEL = 'Server_Side.CustomUser'
 LOGIN_REDIRECT_URL = reverse_lazy('ai-team', kwargs={'context': 'main'})
 
+#Paypal Configuration
+PAYPAL_RECEIVER_EMAIL = 'sb-m6xzg27588130@business.example.com' # where cash is paid into
+#PAYPAL_BUY_BUTTON_IMAGE = 'https://res.cloudinary.com/the-proton-guy/image/upload/v1685882223/paypal-PhotoRoom_v9pay7.png'
+PCI = os.getenv('PCI')
+PCS = os.getenv('PCS')
+PAYPAL_TEST = True
 
 # Stripe Configuration
-STRIPE_SECRET_KEY = "sk_test_51NunAvBtMBfDp2mDW6qk5QAdRq5Fssr2RaVbuiH7osXcAbrZ9YOh81eC0G3FjpnGeTol64k2xjE8tDrcaXWwwWqJ00bPCaZtJC"
-STRIPE_PUBLIC_KEY = "pk_test_51NunAvBtMBfDp2mDpkraejpSgqrsB7jttrMZxREbGY3oeLtc6KYFhfDTAZjMhriFDaFkTsojldLcVvWrJqzsIKjr00I6nNFylB"
+STRIPE_SECRET_KEY = "sk_test_51IoDMBCJRk9RYTua3odVBYUrbIJoLxUD7i14lhDAfj11oHrBaFU57DFboN76hqS6Gbsbz5OnOOd7Ey0Z3zc8zSwA00JXlvL1sq"
+STRIPE_PUBLIC_KEY = "pk_test_51IoDMBCJRk9RYTualhwP2KRwI1TivJcJEcRMVQ95XaCjCp00hVVDjkSapy6NJg7trBSn5iK4dBWwVIfuNDOS97iO00LCTnGwX9"
 
 AUTH_USER_MODEL = 'Server_Side.Client'
