@@ -8,7 +8,14 @@
     <meta name="keywords" content=",EFEXZIUM, AI Team, AI, Team, Chat, Artificial Intelligence, EFEXZIUM =$=">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if context_value == "main" %}
     <title>AI Team Chat - Artificial Intelligence Services by Ai-team</title>
+    {% elif context_value == 'panel-admin'%}
+    <title>AI Team Page Builder - Artificial Intelligence Services by Ai-team</title>
+    {% elif context_value == "subscription" %}
+    <title>AI Team Subscriptions - Artificial Intelligence Services by Ai-team</title>
+    {% endif %}
     
     <link rel="canonical" href="{% url 'ai-team' context='main' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,26 +43,28 @@
                      <!-- Añade esta línea para el menú -->
                     <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
                         <ul>
-                            <li><a href="{% url 'ai-team' context='main' %}" title="Main page of AI Team Chat"><h2 class="reset-styles" >Home</h2></a></li>
+                            <li cy-data="home-link" ><a href="{% url 'ai-team' context='main' %}" title="Main page of AI Team Chat"><h2 class="reset-styles" >Home</h2></a></li>
 
                             {% if user.is_authenticated %}
                                 <li cy-data="logout-link"><a href="{% url 'logout' %}" title="logout"><h2 class="reset-styles" >Logout</h2></a></li>
                                 <li cy-data="panel-link"><a href="{% url 'ai-team' context='panel-admin' %}" id="panel-admin-link" title="Your Panel Admin to create a site-web"><h2 class="reset-styles" >Admin Panel</h2></a></li>
                                 <!--El siguiente li -->
-                                <li><a href="{% url 'ai-team' context='suscription' %}" title="Main page of AI Team Chat"><h2 class="reset-styles" >Suscription</h2></a></li>
+                                <li><a href="{% url 'ai-team' context='subscription' %}" title="See our subscriptions plans"><h2 class="reset-styles" >subscription</h2></a></li>
                             {% else %}
-                                <li><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >Login</h2></a></li>
+                                <li cy-data="login-link"><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >Login</h2></a></li>
                             {% endif %}
-                            {% if context_value == "main" %}
+                            
+                            {% if context_value == "main"  and not user.is_authenticated or user.is_authenticated  %}
                             <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">FAQs</a></h2></li>
                             <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">Contact Us</a></h2></li>
                             <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">About US</a></h2></li>
-                            {% elif context_value == 'panel-admin' %}
-                            <li cy-data="create-page-link"><h2 class="reset-styles"><a data-template="create-page" title="Confirm data to create web page">Create your own page?</a></h2></li>
+
+                            {% elif context_value == 'panel-admin'%}
+                            <li cy-data="create-page-link"><h2 class="reset-styles"><a data-template="create-page" title="Confirm data to create web page">Load your page</a></h2></li>
                             {% endif %}
                             {% if context_value in valid_contexts %}
                                 {% if site_exists %}
-                                <li><a href="{{ my_site_IA }}">My Site</a></li>
+                                <li cy-data="my-site-link"><a href="{{ my_site_IA }}">My Site</a></li>
                                 {% endif %}
                             {% endif %}
                         </ul>
@@ -71,24 +80,26 @@
                     <h2 class="reset-styles">An AI Team is writing</h2>
                 </div>
                 <div class="chat-body px-3 py-2" id="chatBox">
-                    {% if context_value == "suscription" %}
+                    {% if context_value == "subscription" %}
                         {% if user.is_subscribe %}
                             <!-- Aiteam give info to user about our plans -->
                             <div class="message-left glass">
                                 <p class="message-content">
-                                    your subscription informatios is this <br>
+                                    Information about your subscription: <br>
                                     you current plan: {{user.current_plan}} <br>
                                     Subscription Status: {{user.subscription_status}} <br>
                                     Pay with: {{user.method_pay}} <br>
                                     the plan expires: {{user.next_date_pay}} <br>
                                     Subscribed from Date {{user.date_subscription}}  <br>
-                                    if you wanna upgrade your current subscription visit the next page: <a href="{% url 'subscription' %}" title="login to AI Team for more"><h2 class="reset-styles" >Subscription</h2></a>
+                                    if you wanna upgrade your current subscription visit our <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link" >Subscription</strong></a> page
                                 </p>            
                                 <div class="mt-2">
-                                    <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                                    <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                                    <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
-                                    <button type="button" class="btn btn-danger">Cancelar Suscripción</button>
+                                    <form id="cancel-subscription-form" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="cancel_subscription">
+                                        <button type="submit" class="btn btn-danger">Cancel Subscription</button>
+                                    </form>
+                                                                                                                           
                                 </div>
                             </div>
                         {% else %}
@@ -98,6 +109,7 @@
                                     These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us: <br>
                                     <strong>Entry Plan</strong> <br>
                                     <strong>Premium Plan</strong> <br>
+                                    <strong>Enterprise Plan</strong> <br>
                                     you can get any of this in the  <a href="{% url 'subscription' %}" title="login to AI Team for more"><strong class="white-link" >Subscription</strong></a> page
                                 </p>
                                 <p class="message-content">if you wanna know about each plan, only send a message and Ai Team response you</p>
@@ -131,7 +143,7 @@
                         </div>
                     {% else %}
                         <!--Here will stay the messages with Ai-team-->
-                    {% endif %} <!-- Cierre del if context_value == "suscription" -->
+                    {% endif %} <!-- Cierre del if context_value == "subscription" -->
                 </div>
             </div>
             

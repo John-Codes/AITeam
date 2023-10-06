@@ -69,7 +69,7 @@ class VectorDB:
     def context_palm(self, context):
         saver = DataSaver()
 
-        if context not in ["main", "suscription", "panel-admin"]:
+        if context not in ["main", "subscription", "panel-admin"]:
         # Usamos DataSaver para leer el archivo JSON
             return saver.read_from_json(f"memory-AI-with-{context}", key="Context")
         current_dir = Path(__file__).parent

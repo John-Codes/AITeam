@@ -7,6 +7,9 @@ body {
   justify-content: center;
   height: 100vh;
   margin: 20px 0;
+  background-repeat: no-repeat;  /* Evita que la imagen se repita */
+  background-size: cover;  /* La imagen cubre todo el área del body */
+  background-position: center center;  /* Centra la imagen en el body */
 }
 
 .glass-effect {
@@ -136,4 +139,47 @@ input[type="password"]:focus {
 .card-transparent-background .card-body {
   background: transparent; /* Hace que el fondo del card-body sea transparente */
   color: #fff; /* Cambia el color del texto si es necesario */
+}
+
+/* Dispositivos móviles pequeños */
+@media (max-width: 576px) {
+  .glass-effect {
+    width: 90%; /* Ajustar para ocupar casi todo el ancho en pantallas pequeñas */
+  }
+}
+
+/* Dispositivos móviles */
+@media (max-width: 768px) {
+  .glass-effect {
+    width: 85%; /* Un poco más de margen que en dispositivos más pequeños */
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .glass-effect {
+    width: 70%; /* Dando más espacio en tablets */
+  }
+}
+
+/* Pantallas grandes */
+@media (min-width: 992px) {
+  .glass-effect {
+    width: 50%; /* En pantallas grandes, no queremos que sea demasiado ancho */
+  }
+}
+
+/* Continúa con el resto de tus estilos y aplica media queries donde lo veas necesario */
+
+/* Por ejemplo, para ajustar el tamaño del texto según el dispositivo: */
+@media (max-width: 576px) {
+  h2, label, p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  h2, label, p {
+    font-size: 15px;
+  }
 }

@@ -1,0 +1,60 @@
+{% extends "registration/base_auth.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block header %}
+Checkout for Subscription: {{plan.name}}
+{% endblock %}
+
+{% block form_content %}
+<div class="card card-transparent-background">
+    <div class="card-body">
+        <div class="product-container">
+            <div class="products">
+                <!-- Agregando imagen si tienes alguna para mostrar de la suscripción, si no, puedes comentar o eliminar esta línea -->
+                <!-- <img class="img" src="{{plan.image}}" alt="{{plan.name}}"> -->
+                <h5 class="card-title">{{plan.name}}</h5>
+                <p class="card-text">Price: {{plan.price}}</p>
+                <ul class="features-list">
+                    <li><strong>Features:</strong></li>
+                    {% for feature in plan.features %}
+                    <li>{{ feature }}</li>
+                    {% endfor %}
+                </ul>
+                <ul class="target-list">
+                    <li><strong>Target Market:</strong></li>
+                    {% for target_market in plan.target_market %}
+                    <li>{{ target_market }}</li>
+                    {% endfor %}
+                </ul>
+                {{paypal.render}}
+            </div>  
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_content %}
+{% endblock %}
+
+{% block additional_styles %}
+<style>
+    .product-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    .img {
+        width: 60%;
+        border-radius: 50px;
+    }
+    .features-list, .target-list {
+        padding-left: 0;  /* Eliminar padding para quitar espacio antes de los ítems */
+        list-style-type: none;  /* Esto quitará los puntos de los ítems */
+        text-align: left;  /* Alinear texto a la izquierda */
+    }
+    .features-list li:first-child, .target-list li:first-child {
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

@@ -27,7 +27,8 @@ A/B Testing for conversation flows
 Target Market:
 
 Medium enterprises
-E-commerce platforms
+E-commerce platformsp
+
 Request a Quote - Enterprise Plan
 Features:
 Tailor-made solutions
