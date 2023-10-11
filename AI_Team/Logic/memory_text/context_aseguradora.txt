@@ -1,0 +1,2927 @@
+
+10  
+1. Entidad Reportante  
+La Compañía de Seguros de Vida Aurora S.A., es una entidad privada constituida mediante escritura 
+pública 2022 del 01 de junio de 1967, otorgada en la notaría séptima de Bogotá D.C. Su duración se 
+extiende hasta 2066. Su domicilio principal es en Bogotá D. C., en la carrera 7 74 21 piso 3. Sus 
+acciones no cotizan en la Bolsa de Valores, se encuentra vigilada por la Superintendencia Financiera de 
+Colombia y al finalizar el año 20 21 contaba con 43 empleados. 
+El 5 de junio de 2011 falleció el doctor Eudoro Carvajal Ibáñez quien era el accioni sta mayoritario y 
+representante legal de la Compañía de Seguros de Vida Aurora S.A.  
+El proceso de sucesión intestada se llevó a cabo en la notaría  29 del círculo de Bogotá.  
+Sin embargo, mediante sentencia del 08 de agosto de 2017 proferida por el Juzgado Veintinueve (29) de 
+Familia de Bogotá D.C, que confirma sentencia del 08 de agosto de 2017 y adicionada mediante 
+providencia del 13 de diciembre del mismo año se ordena la inscripción de la sentencia sobre las 
+acciones del causante, manteniendo vigente el litigio de Petición de Herencia.  
+El objeto social es la celebración de contratos de seguros de personas pudiendo ejecutar válidamente los 
+actos y contratos tendientes a cump lir la realización de su objeto social, en concordancia con las 
+disposiciones legales y las normas de la Superintendencia Financiera de Colombia. 
+Ramos autorizados: Accidentes personales, Vida Grupo y Vida Individual mediante r esolución 5148 de 
+1991; Riesgos Laborales, mediante r esolución 1142 de 1995; y  Enfermedades de Alto Costo, mediante 
+resolución 0941 de 2002.  
+La evolución previsible de la aseguradora se ha desarrollado en el marco de un plan estratégico el cual 
+prevé que, a mediano y largo plazo, se realizarán cambios significativos en la Sociedad, que le permitirán 
+mejorar las estrategias de mercadeo y ventas, autocontrol, servicio al cliente y regulación, completando 
+la etapa de mejoramiento que tiene como meta posicionar a la Compañía de Seguros de Vida Aurora 
+S.A. en el mercado asegurador. 
+2. Bases de P resentación de  los Estados Financieros 
+11
+Para los efectos de la aplicación de la NIIF 4, contenida en el marco técnico normativo de información 
+financiera para los preparadores que conforman el Grupo 1, en lo concerniente al valor de los ajustes 
+que se pu edan presentar como consecuencia de la prueba de la adecuación de los pasivos a que hace 
+referencia el párrafo 15 de esa norma, se continuarán aplicando los períodos de transición establecidos 
+en el Decreto 2973 de 2013; en los ajustes graduales de las reservas constituidas antes del 1 de octubre 
+de 2010 para el cálculo de las pensiones del Sistema General de Pensiones, del Sistema General de 
+Riesgos Laborales y los demás productos de seguros que utilicen las tablas de mortalidad de rentistas 
+en su cálculo,  establecidas por la Superintendencia Financiera de Colombia. 
+La Compañía de Seguros de Vida Aurora S.A. ha aplicado en los Estados Financieros individuales las 
+excepciones a las Normas Internacionales de Información Financiera, en cumplimiento de los Dec retos 
+1851 de 2013, 2267 de 2014, y el capítulo 6 del Decreto 2496 de 2015, así:  
+ El tratamiento de Instrumentos financieros en cuanto a la clasificación, valoración y contabilización 
+de las inversiones, de acuerdo con lo requerido en el Capítulo I 1 de la Circular Básica Contable y 
+Financiera de la Superintendencia Financiera de Colombia (SFC), en lugar de la aplicación de la NIC 
+39 instrumentos Financieros: Reconocimiento y Medición, o NIIF 9 Instrumentos Financieros.  
+ En lo concerniente a la no realizaci ón del ajuste que se pueda presentar como consecuencia de la 
+prueba de la adecuación de los pasivos a que hace referencia el párrafo 15 de la NIIF 4, para cuyo 
+propósito se continuarán aplicando los períodos de transición establecidos en el Decreto 2973 de  
+2013. 
+Adicionalmente, la Compañía aplica los siguientes lineamientos de acuerdo con leyes y otras normas 
+vigentes en Colombia: 
+ La aplicación del Capítulo III de la Circular Básica Contable y Financiera referente al tratamiento de 
+los bienes recibidos en dación de pago según lo descrito en el Numeral 1.6 de la Circular externa 
+036 de 2014. 
+ La Circular Externa 036 de 2014 emitida por la Superintendencia Financiera de Colombia, imparte 
+instrucciones acerca de la forma de contabilizar los ajustes que se generen en la aplicación por 
+primera vez de las NIIF, según el Catálogo Único de Información Financiera (CUIF).  
+ El Art.10 de la Ley 1739 de 2014 modificó el Estatuto Tributario, incorporando el impuesto a la 
+Riqueza y permite su contabilización contra res ervas patrimoniales sin afectar el resultado del 
+ejercicio. Bajo NIIF de acuerdo con la NIC 37 Provisiones, Pasivos Contingentes y Activos 
+Contingentes, dicho impuesto debe ser registrado como un gasto por la porción correspondiente a 
+cada año al igual que su correspondiente pasivo. 
+12  
+Las políticas contables adoptadas en la preparación de los estados financieros son consistentes con las 
+utilizadas en la preparación de los Estados Financieros anuales  al 31 de diciembre de 2021. La 
+Compañía no ha adoptado anticipadamente ninguna norma, interpretación o enmienda que a la fecha 
+haya sido emitida pero no se encuentre vigente. 
+3. Bases de Preparación
+Los Estados Financieros y las notas se expresan en miles de pesos, y su grado de redondeo es a cero 
+decimales, excepto para el cálculo de la utilidad neta por acción y el cálculo de dividendos decretados 
+por acción los cuales se presentan en pesos colombianos y su grado de redondeo es a dos dec imales.  
+El número de acciones es presentado sin ningún nivel de redondeo y por su cantidad exacta.
+La preparación de los estados financieros de  la compañía requiere que la administración realice juicios, 
+estimaciones y suposiciones que afectan los montos informados de ingresos, gastos, activos y pasivos, y 
+las revelaciones adjuntas, y la revelación de pasivos contingentes. La incertidumbre sobre estos 
+supuestos y estimacione s podría dar lugar a resultados que requieran un ajuste material al valor en libros 
+de los activos o pasivos afectados en períodos futuros.  
+En el proceso de aplicación de las políticas contables  de la compañía, la administración ha realizado 
+varios juicio s. Aquellos que la administración ha evaluado que tienen el efecto más significativo en los 
+montos reconocidos en los estados financieros. 
+4. Resumen de las Políticas Contables Significativas  
+A continuación, se describe el resumen de las principales políticas contables aplicadas por la Compañía 
+y aprobadas por el Comité de Auditoría  y Junta Directiva: 
+La Compañía de Seguros de Vida Aurora S.A., evalúa los siguientes criterios en la clasificación de sus 
+contratos de seguros: 
+Un contrato de seguro se presenta cuando la Compañía acepta un riesgo de seguros significativo del 
+asegurado, acordando compensar al mismo, si ocurre un evento futuro incierto que afecta 
+desfavorablemente al tenedor de la póliza o asegurado. En la Compañía de Seguros de Vida Aurora 
+S.A., se presenta un riesgo de seguros significativo si y solo si, el evento que se asegura podría hacerle 
+pagar a la Compañía prestaciones adicionales representativas en cualquier escenario.
+13
+Durante la emisión de pólizas podrán presentarse negocios en los cuales se presenta paralelamente un 
+riesgo de seguros (por el contrato de seguro) y un riesgo financiero (por un contrato de inversión). En un 
+contrato de inversión se asume un riesgo financiero el cual representa un posible cambio futuro en 
+alguna o todas las siguientes variables, una tasa de interés, un precio de instrumento financiero, un  tipo 
+de cambio, un índice de precios, de interés y/o crediticio.  
+ 
+Se podrán presentar en el contrato de inversión un componente de depósito o un componente de 
+participación discrecional. Un componente de depósito otorga la posibilidad de ahorro dentro de un 
+contrato de seguros el cual podría ser separado de acuerdo a las condiciones propias del producto y las 
+políticas establecidas por la Compañía de Seguros de Vida Aurora S.A.  
+ 
+Un componente de participación discrecional es un derecho contractua l a recibir como suplemento de las 
+prestaciones garantizadas, otras adicionales que representen una porción significativa y que están 
+contractualmente basadas en el rendimiento de un contrato o contratos específicos, rentabilidades de 
+inversiones, resultad os de la Compañía u otras pactadas.  
+ 
+ 
+ 
+Los ramos que explota actualmente la Compañía y sobre los cuales cubre un riesgo de seguro 
+significativo son: 
+ 
+ Alto Costo 
+ Riesgos Laborales 
+ Vida Individual 
+ Vida Grupo 
+ Accidentes Personales 
+ 
+ 
+ 
+La Compañía de Seguros de Vida Aurora S.A., clasifica los depósitos a la vista, como parte de su 
+efectivo y equivalentes de efectivo.  Los equivalentes al efectivo se man tienen más que para propósitos 
+de inversión o similares, para cumplir los compromisos de pago a corto plazo.  
+ 
+Para que una inversión financi era pueda ser calificada como equivalente al efectivo, debe poder ser 
+fácilmente convertible en una cantidad determinada de efectivo y estar sujeta a un riesgo insignificante 
+de cambios en su valor. 
+ 
+La Compañía revela en sus estados financieros cualquier valor significativo de sus saldos de efectivo y 
+equivalentes al efectivo que no estén disponibles. Estos valores serán presentados en una línea 
+separada en el balance bajo el concepto de efectivo restringido. 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+14  
+ 
+ 
+ 
+La Compañía de Seguros de Vida Aurora S.A., aplica como política contable para la clasificación, 
+contabilización y medición de las Inversiones, el Capítulo I 1 de la Circular básica contable y financiera, 
+dado que corresp onde a una excepción a los estados financieros individuales preparados bajo NIIF, que 
+fue reglamentada inicialmente por el Decreto 2267 de 2014 e incorpora en el Decreto Único 
+Reglamentario 2420 de 2015. 
+ 
+La valoración de las inversiones tiene como objetivo fundamental el registro contable y la revelación a 
+valor razonable de los instrumentos financieros, este valor sería el recibido por vender un activo en una 
+transacción de independencia mutua, entre participantes debidamente informados y teniendo en cuenta 
+las condiciones de mercado vigentes en la fecha de medición.  
+ 
+Los precios, las tasas de referencia y márgenes a utilizar para las diferentes categorías de valores son 
+publicados diariamente por Precia (p roveedor de Información para la valorizació n de Inversiones de la 
+Bolsa de valores de Colombia, debidamente autorizado por la Superintendencia Financiera de 
+Colombia ), con esta misma periodicidad se realiza la valoración de inversiones y su registro contable.  
+ 
+ 
+ 
+Las inversiones serán clasificadas de acuerdo con el modelo de negocio definido por la Compañía. Para 
+estos efectos, el modelo de negocio corresponde a la decisión estratégica adoptada por la Junta 
+Directiva, sobre la forma y actividades a través de las cuales desarrollará su ob jeto social.  Las 
+inversiones podrán ser clasificadas en: inversiones negociables, inversiones para mantener hasta el 
+vencimiento e inversiones disponibles para la venta. 
+ 
+a) Inversiones negociables: Corresponden a todo valor o título y, en general, cualquier tipo de inversión 
+que ha sido adquirida con el propósito principal de obtener utilidades por las fluctuaciones a corto 
+plazo del precio. 
+ 
+b) Inversiones para mantener hasta el vencimiento: Corresponden a los valores o títulos y, en general, 
+cualquier tipo de inversión respecto de la cual el inversionista tiene el propósito y la capacidad legal, 
+contractual, financiera y operativa de mantenerlas hasta el vencimiento de su plazo de maduración o 
+redención. El propósito de mantener la inversión corresponde a la intención positiva e inequívoca de 
+no enajenar el título o valor.  
+ 
+c) Inversiones disponibles para la venta: Corresponden a valores o títulos y, en general, cualquier tipo 
+de inversión, que no se clasifiquen como inversiones negociables o como  inversiones para mantener 
+hasta el vencimiento. 
+ 
+ 
+ 
+La Compañía utiliza para la valoración de sus inversiones la información suministrada por el proveedor 
+de precios Precia y la periodicidad de la valoración y del registro contable de las inversiones se efectúa 
+diariamente a excepción de aquellas que el Capítulo I 1 de la Circular Básica Contable y Financiera o en 
+otras disposiciones se indique una frecuencia diferente.   
+ 
+ 
+ 
+ 
+ 
+ 
+15  
+ 
+ 
+ 
+Valores de deuda negociables o disponibles para la venta: 
+ 
+Las inversiones representadas en valores o títulos de deuda se valoran con base en el precio 
+determin ado por Precia utilizando la siguiente fórmula:  
+ 
+VR=VN*PS 
+ 
+Donde: 
+ 
+  
+  
+  
+ 
+Para los casos excepcionales en que no exista, para el día de valoración, valor razonable determinado 
+de acuerdo con el literal a. de este numeral, se deberá efectuar la valoración en forma exponencial a 
+partir de la Tasa Interna de Retorno. 
+ 
+ 
+ 
+Valores de Deuda para Mantener hasta el Vencimiento 
+ 
+Los valores clasificados como inversiones para mantener hasta el vencimiento se valoran en forma 
+exponencial a partir de la Tasa Interna de Retorno calculada en el momento de la compra, sobre la base 
+de un año, 365 días.  
+ 
+Valores Participativos 
+ 
+Las inversiones en títulos y/o valores participativos se deberán valorar, teniendo en cuenta las siguientes 
+instrucciones: 
+ 
+Valores participativos inscritos en el Registro Nacional de Valores y Emisores (RNVE): 
+ 
+Las inversiones en valores participativos inscritos en el RNVE y listados en bolsas de Valores en 
+Colombia, distintos de las inversiones en subsidiarias, asociadas y negocios conjuntos, se valoran de 
+acuerdo con el precio determinado por Precia, utilizando la siguiente fórmula:  
+ 
+VR=Q*P 
+ 
+Donde: 
+ 
+  
+  
+  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+16  
+ 
+Valores Participativos (continuación)  
+ 
+Valores participativos que cotizan únicamente en bolsas de valores del exterior:  
+ 
+Estas inversiones, se deberán valorar por el siguiente procedimiento:  
+ 
+a) De acuerdo con el precio determinado por los proveedores de precios de valoración autor izados por 
+la Superintendencia Financiera de Colombia, utilizando la siguiente formula: 
+ 
+ 
+ 
+Donde: 
+ 
+VR: Valor Razonable. 
+Q: Cantidad de valores participativos. 
+P: Precio determinado por el proveedor de precios de valoración.  
+ 
+En caso de que el precio determinado por el proveedor de precios se encuentre en una denominación 
+diferente a pesos colombianos, deberá convertirse a moneda legal, empleando para el efecto el  
+procedimiento establecido en los títulos o valores denominados o emitidos en moned a extranjera, en 
+unidades de valor real UVR u otras unidades. 
+ 
+b) Cuando el proveedor de precios designado como oficial para el segmento correspondiente no 
+suministre precios o insumos para la valoración de estas inversiones, se deberá utilizar el precio de 
+cierre disponible en la bolsa donde se cotice el día de valoración o, en su defecto, el precio de cierre 
+más reciente reportado por esta, durante los últimos cinco (5) días bursátiles, incluido el día de la 
+valoración. De no existir precio de cierre durante dicho periodo, se deberán valorar por el promedio 
+simple de los precios de cierre reportados durante los últimos treinta (30) días bursátiles, incluido el 
+día de la valoración.  
+ 
+En casos que los valores se negocien en más de  una bolsa de valores del exterior, se deberá utilizar el 
+(los) precio(s) de cierre del mercado de origen. 
+ 
+Por mercado de origen se entiende lo siguiente: 
+ 
+ Aquel en el cual se realizó la oferta pública de los valores . 
+ 
+ En caso de que los valores hayan sid o ofrecidos públicamente y en forma simultánea en varios 
+mercados, se entenderá por mercado de origen aquel en el cual el emisor tenga su domicilio 
+principal. 
+ 
+ Si el domicilio principal del emisor no se encuentra en ninguno de tales mercados, el mercado de 
+origen será aquel en el cual se transo el mayor volumen de los valores respectivos el día anterior al 
+día inicial de valoración.  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+17  
+ 
+Valores Participativos (continuación)  
+ 
+ Este será el mercado de origen para efectos de valoración de todos los valores de la misma especie 
+que en adelante adquiera la entidad. No obstante, bajo esta premisa el 31 de marzo y el 03 de 
+septiembre de cada año se deberá revisar cuál es el mercado de origen del re spectivo valor, 
+atendiendo el criterio de mayor volumen. Dichas revisiones deberán estar sustentadas y a 
+disposición permanente de la Superintendencia Financiera de Colombia, y deberán informarse a 
+esta, en un plazo no mayor a diez (10) días calendario después de realizadas, siempre que la 
+respectiva revisión implique un cambio en el mercado de origen utilizado para la valoración.  
+ 
+El precio del valor se debe convertir a moneda legal, empleando para el efecto el procedimiento 
+establecido en los títulos valo res denominados o emitidos en moneda extranjera, en unidades de valor 
+real UVR u otras unidades. 
+ 
+En los casos que no se hayan presentado cotizaciones durante los últimos treinta (30) días bursátiles 
+deberá valorarse por el último precio de cierre registrado en la bolsa correspondiente. 
+ 
+Parágrafo. Las bolsas a que hace referencia el presente numeral deberán ser aquellas que sean 
+miembros de la Federación Mundial de Bolsas de Valores (WFE por sus siglas en idioma ingles).  En 
+caso contrario, los títulos o valores deberán ser valorados de acuerdo con lo establecido en el siguiente 
+párrafo. 
+ 
+ 
+ 
+Los valores participativos listados en sistemas de cotiza ción de valores extranjeros autorizados en 
+Colombia por medio de sociedades comisionistas de bolsa de valores o mediante acuerdos o convenios 
+de integración de bolsas de valores, distintos a los referidos en el ítem de Inversiones en subsidiarias . 
+ 
+Cuando los valores participativos del exterior listados en los sistemas mencionados sean adquiridos en 
+un mercado distinto a estos, se deberán valorar de conformidad con la instrucción establecida en el ítem 
+de valores participativos que cotizan únicamente  en bolsas de valores del exterior. 
+ 
+ 
+ 
+Las inversiones distintas de las inversiones en subsidiarias, asociadas y negocios conjuntos se valoran 
+utilizando la siguiente fórmula:  
+ 
+VR=Q*P 
+ 
+Donde: 
+ 
+VR: Valor Razonable. 
+Q: Cantidad de valores participativos. 
+P: Precio determinado por el proveedor de precios de valoración  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+18  
+ 
+Valores Participativos no Inscritos en Bolsa de Valores (continuación)  
+ 
+Cuando el proveedor de precios designado como oficial para el segmento correspondiente no cuente con 
+una metodología de valoración para estas inversiones, se deberá aumentar o disminuir el costo de 
+adquisición en el porcentaje de participación que correspo nda al inversionista sobre las variaciones 
+subsecuentes del patrimonio del respectivo emisor. 
+ 
+ 
+ 
+Las inversiones se registran inicialmente por su costo de adquisición y se valoran diariamente  a valor 
+razonable, a TIR o variación patrimonial, según corresponda, de acuerdo a lo establecido en el Capítulo I 
+1 de la Circular Básica Contable y Financiera.  
+ 
+La contabilización de los cambios entre el costo de adquisición y el valor razonable de las inversiones se 
+realizará a partir de la fecha de su compra, individualmente, por cada título o valor, de conformidad con 
+las siguientes disposiciones: 
+ 
+ 
+ 
+a) Inversiones para Mantener hasta el Vencimiento:  La contabilización se realiza en las cuentas de 
+valor de la inversión, afectando los resultados del período.  
+ 
+b) Inversiones Disponibles para la Venta : La contabilización de estas inversiones se realiza en las 
+  
+ 
+La Contabilización en los títulos de deuda, sobre las diferencias que se originen entre el valor presente 
+del día de valoración y el inmediatamente anterior se registra como un mayor valor de la inversión con 
+abono a las cuentas de resultados. La diferencia que exista entre el valor razonable y el valor presente, 
+se registran como Ganancias o Pérdidas No Realizadas (ORI).  
+ 
+Cuando las inversiones disponibles para la venta sean enajenadas, las ganancias o pérdidas no 
+realizadas registradas en el ORI, se reconocerán como ingresos o egresos en la fecha de su disposición.  
+ 
+Para los títulos participativos, el efecto de la valoración de la participación que le corresponde al 
+inversionista, con excepción de las inversiones en subsidiarias, asociadas y negocios conjuntos, se 
+contabiliza en la respectiva cuenta de Gananc ias o Pérdidas No Realizadas (ORI), con cargo o abono a 
+la inversión.  
+ 
+Reclasificación de las Inversiones  
+ 
+Las inversiones pueden reclasificarse de conformidad con las siguientes disposiciones.  
+ 
+ 
+ 
+ 
+ 
+ 
+19  
+ 
+Reclasificación de las Inversiones (continuación)  
+ 
+Hay lugar a reclasificar una inversión de la categoría de inversiones para mantener hasta el vencimiento 
+a la categoría de inversiones negociables cuando ocurra alguna de las siguientes circunstancias: 
+ 
+a) Deterioro significativo en las condiciones del emisor, de su matriz, de sus subordinadas o de sus 
+vinculadas. 
+ 
+b) Cambios en la regulación que impidan el mantenimiento de la inversión.  
+ 
+c) Procesos de la fusión que conlleven la reclasificación o la realización de la inversión, con el propósito 
+de mantener la posición previa de riesgo de tasas de interés o de ajustarse a la política de riesgo 
+crediticio previamente establecida por la entidad resultante. 
+ 
+d) Otros acontecimientos no p revistos en los literales anteriores, previa autorización de 
+Superintendencia Financiera de Colombia. 
+ 
+Hay lugar a reclasificar una inversión de la categoría de inversiones disponibles para la venta a 
+cualquiera de las otras dos categorías previstas, cuand o: 
+ 
+a) Se redefina la composición de las actividades significativas del negocio, derivada de circunstancias 
+tales como, variaciones en el ciclo económico o del nicho de mercado en el cual está actuando la 
+entidad vigilada o en su apetito de riesgo. 
+ 
+b) Se materi alicen los supuestos de ajuste en la gestión de las inversiones que el modelo de negocio 
+haya definido previamente. 
+ 
+c) El inversionista pierda su calidad de matriz o controlante, y dicha circunstancia implique igualmente 
+la decisión de enajenar la inversión en el corto plazo a partir de esa fecha, o 
+ 
+d) Se presente alguna de las circunstancias previstas para reclasificación de inversiones mantenidas 
+hasta el vencimiento. 
+ 
+Cuando la Compañía realice reclasificación de inversiones con base en lo dispuesto en los l iterales a y b 
+para las inversiones disponibles para la venta, informará este hecho por escrito a la Superintendencia 
+Financiera de Colombia, dentro de los diez (10) días hábiles siguientes a la fecha de la reclasificación.  
+ 
+Deterioro o Pérdidas por Calificación de Riesgo Crediticio  
+ 
+El precio de los títulos de deuda de las inversiones negociables, disponibles para la venta y mantenidos 
+hasta el vencimiento, así como también los títulos participativos que se valoran a variación patrimonial se 
+ajustan en cada fecha de valoración con fundamento en:  
+ 
+a) La calificación del emisor y/o del título de que se trate cuando quiera que ésta exista.  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+20  
+ 
+Deterioro o Pérdidas por Calificación de Riesgo Crediticio (continuación)  
+ 
+b) La evidencia objetiva de que se ha incurrido o se podría incurrir en una pérdida por deterioro del 
+valor en estos activos. 
+ 
+c) El importe de la pérdida por deterioro se reconoce siempre en el resultado del período, con 
+independencia de que la respectiva inversión tenga registrado algún monto en Otros Resultados 
+Integrales ORI. 
+ 
+ 
+ 
+Los títulos y/o valores que cuenten con una o varias calificaciones otorgadas por calificadora s externas 
+reconocidas por la SFC, o los títulos y/o valores de deuda emitidos por entidades que se encuentren 
+calificadas por éstas, no pueden estar contabilizados por un monto que exceda los siguientes 
+porcentajes de su valor nominal neto de las amortiza ciones efectuadas hasta la fecha de valoración:  
+ 
+ 
+  
+  
+  
+ 
+    
+    
+    
+    
+    
+ 
+ 
+ 
+La Compañía se sujeta a lo siguiente para determinar las provisiones:  
+ 
+Categoría A Inversión con riesgo normal: Corresponde a emisiones que se encuentran cumpliendo con 
+los términos pactados en el valor y cuentan con una adecuada capacidad de pago de capital e intereses, 
+así como aquellas inversiones de emisores que, de acuerdo con sus estados financieros y demás 
+información disponible, reflejan una adecuada situación financiera. Para los títulos y/o valores que se 
+encuentren en esta categoría no procede el registro de provisiones.  
+ 
+Categoría B Inversión con riesgo aceptable superior a l normal: Corresponde a emisiones que presentan 
+factores de incertidumbre que podrían afectar la capacidad de seguir cumpliendo adecuadamente con el 
+servicio de la deuda. Así mismo, comprende aquellas inversiones de emisores que, de acuerdo con sus 
+estados financieros y demás información disponible, presentan debilidades que pueden afectar su 
+situación financiera. Tratándose de títulos y/o valores de deuda, el valor por el cual se encuentran 
+contabilizados no puede ser superior al ochenta por ciento (80%) de su valor nominal neto de las 
+amortizaciones efectuadas hasta la fecha de valoración. En el caso de títulos y/o valores participativos, el 
+valor neto de provisiones por riesgo crediticio (valor en libros) por el cual se encuentran contabilizados no 
+puede ser superior al ochenta por ciento (80%) del valor de la inversión por el método de variación 
+patrimonial en la fecha de la valoración.  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+21  
+ 
+ 
+ 
+Categoría C Inversión con riesgo apreciable: Corresponde a emisiones que presentan alta o media 
+probabilidad de incumplimiento en el pago oportuno de capital e intereses.  
+ 
+De igual forma, comprende aquellas inversiones de emisores que de acuerdo con sus estados 
+financieros y demás información disponible, presentan deficiencias en su situación financiera que 
+comprometen la recuperación de la inversión. Tratándose de títulos y/o valores de deuda, el valor por el 
+cual se encuentran contabilizados no puede ser superior al sesenta por ciento (60%) de su valor nominal 
+neto de las amortizaciones efectuadas hasta la fecha de valoración.  
+ 
+En el caso de títulos y/o valores participativos, el valor neto de provisiones por riesgo creditici o (valor en 
+libros menos provisión) por el cual se encuentran contabilizados no puede ser superior al sesenta por 
+ciento (60%) del valor de la inversión por el método de variación patrimonial en la fecha de la valoración.  
+ 
+Categoría D Inversión con riesg o significativo: Corresponde a aquellas emisiones que presentan 
+incumplimiento en los términos pactados en el título, así como las inversiones en emisores que de 
+acuerdo con sus estados financieros y demás información disponible presentan deficiencias acen tuadas 
+en su situación financiera, de suerte que la probabilidad de recuperar la inversión es alta.  
+ 
+Tratándose de títulos y/o valores de deuda, el valor por el cual se encuentran contabilizados no puede 
+ser superior al cuarenta por ciento (40%) de su valor nominal neto de las amortizaciones efectuadas 
+hasta la fecha de valoración. En el caso de títulos y/o valores participativos, el valor neto de provisiones 
+por riesgo crediticio (valor en libros menos provisión) por el cual se encuentran contabilizado s no puede 
+ser superior al cuarenta por ciento (40%) del valor de la inversión por el método de variación patrimonial 
+en la fecha de la valoración.  
+ 
+Categoría E Inversión incobrable: Corresponde a aquellas inversiones de emisores que de acuerdo con 
+sus estados financieros y demás información disponible se estima que es incobrable.  
+ 
+El valor de estas inversiones debe estar totalmente provisionado. Cuando una entidad vigilada califique 
+en esta categoría cualquiera de las inversiones, debe llevar a la misma categoría todas sus inversiones 
+del mismo emisor, salvo que demuestre a la SFC la existencia de razones valederas para su calificación 
+en una categoría distinta.  
+ 
+ 
+ 
+Se definen como operaciones con derivados aquellas operaciones financieras que pueden ejercerse 
+para comprar o vender activos en un futuro, como divisas o títulos valores, o futuros financieros sobre 
+tasa de cambio, tasas de interés o índices bursátiles.  
+ 
+cuyo movimiento de precio determina el valor de un derivado. 
+ 
+Un derivado es aquel instrumento que cumple con: 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+22  
+ 
+ 
+ 
+Su valor responde a cambios en una variable, la cual puede estar relacionada con: 
+ 
+ Los cambios en una tasa de interés explicita  
+ El precio de un instrumento financiero 
+ Una materia prima cotizada 
+ Una tasa de cambio 
+ Una calificación o índice de carácter crediticio  
+ Un subyacente 
+ 
+No requiere una inversión inicial o es menor a la que sería requerida en otros contratos con 
+sensibilidades similares ante cambios en factores de mercado. 
+ 
+Su liquidación se produce en una fecha futura. 
+ 
+La Compañía en su reconocimiento inicial, mide los derivados a valor razonable.  
+ 
+La contabilización de los derivados en la fecha de negociación implica el reconocimiento del derecho y la 
+obligación en el momento en que se pacta. De igual manera, es necesario reconocer las diferencias en el 
+valor razonable entre la fecha de negociación y la fecha en que se liquida dicho contrato, directamente 
+en el resultado del período en el que se origina.  
+ 
+La Compañía en su reconocimiento  posterior, mide los derivados a valor razonable. En este caso las 
+ganancias o pérdidas deberán ser contabilizadas en el estado de resultados del período en el cual tenga 
+lugar. 
+ 
+ 
+ 
+Las cuentas por cobrar de actividad aseguradora son activos financieros no derivados, con pagos fijos o 
+determinables que no cotizan en un mercado activo. 
+ 
+Para las cuentas por cobrar de actividad aseguradora, el deterioro de valor es evaluado a la fecha del 
+periodo que se informa. Compañía de Seguros de Vida Aurora S.A. evalúa primero si existe evidencia 
+objetiva individual de deterioro de valor para activos financieros o colectivamente para los activos 
+financieros que no sean individualmente significativos. 
+ 
+Cuando se real iza la evaluación colectiva de deterioro, las cuentas por cobrar se agrupan por 
+características de riesgo de crédito similares, que permitan identificar la capacidad de pago del deudor, 
+de acuerdo con los términos contractuales de negociación de la cuenta por cobrar. 
+ 
+Las pérdidas por deterioro de las cuentas por cobrar de actividad aseguradora se registran como menor 
+valor de la cuenta por cobrar, afectando los resultados del periodo. 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+23  
+ 
+Si en periodos posteriores, el valor de la pérdida por deterioro disminuye y la disminución puede ser 
+objetivamente relacionada con el evento que originó el reconocimiento del deterioro, la pérdida por 
+deterioro reconocida previamente será revertida, garantizando  que el valor en libros del activo financiero 
+exceda el costo amortizado que habría sido determinado si no se hubiese contabilizado la pérdida por 
+deterioro del valor en la fecha de reversión.  
+ 
+El monto de la reversión se reconocerá en el resultado del periodo. 
+ 
+A continuación,  se presenta un resumen de las probabilidades de pérdidas estimadas por la 
+administración basado en el análisis cuantitativo y cualitativo . 
+ 
+Bajo dicho modelo la compañía ha establecido los siguientes porcentajes de d eterioro: 
+ 
+ 
+ 
+ 
+ 
+La Compañía contabiliza en el activo las contingencias a cargo del reasegurador derivadas de los 
+contratos suscritos de reaseguro proporcional en caso de todas las reservas técnicas, y de reaseguro no 
+proporcional, este último sólo aplicado a la reserva de siniestros avisados y ocurridos no avisados, de 
+acuerdo con lo establecido en el Decreto 2973 de 2013. 
+ 
+Los activos por reaseguro se dan de baja cuando los derechos contractuales se extinguen o expiran o 
+cuando el contrato se transfiere a un tercero. 
+ 
+La Compañía no compensará los activos por contratos de reaseguro con los pasivos por seguro 
+conexos. 
+ 
+Los activos por reaseguros son revisados por deterioro al cierre del ejercicio cuando un indicador de 
+deterioro surge durante el año.  
+ 
+Un activo por reaseguro se encuentra deteriorado si existe evidencia objetiva, a consecuencia de un 
+suceso que haya ocurrido después del reconocimiento inicial del activo por reaseguro, en el que la 
+Compañía, no recibirá todos los importes que se le adeudan en función de los términos del contrato, y 
+este evento tiene un efecto que se puede medir con fiabilidad sobre los importes que la Compañía vaya 
+a recibir de la compañía reaseguradora.  
+ 
+Si se ha deteriorado u n activo por contrato de reaseguro cedido, la Compañía reducirá su importe en 
+libros, y reconocerá en los resultados del periodo una pérdida por deterioro.  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+24  
+ 
+Las propiedades de inversión se miden inicialmente al costo. Con posterioridad al reconocimiento inicial, 
+las propiedades de inversión se miden por su valor razonable, el cual refleja las condiciones del mercado 
+a la fecha de cierre del período sobre el que se informa.  
+ 
+Las ganancias y pérdidas que surgen de los cam bios en los valores razonables de las propiedades de 
+inversión se incluyen  dentro del estado de resultados como Otros Resultados Integrales ORI, registrados 
+dentro del rubro del patrimonio en el período en el que ocurren. Los valores razonables son evaluad os 
+cada tres años por un valuador externo independiente reconocido.  
+ 
+Las propiedades de inversión se dan de baja, ya sea en el momento de su venta o cuando la propiedad 
+de inversión se retira del uso en forma permanente, y no se espera recuperar beneficio económico 
+alguno de su venta. La diferencia entre el ingreso neto procedente de la venta y el importe en libros del 
+activo se reconoce en el estado de resultados en el período en el que el activo es dado de baja.  
+ 
+Se realizan transferencias a, o desde las propiedades de inversión, solamente cuando exista un cambio 
+en su uso. 
+ 
+Para el caso de una transferencia desde una propiedad de inversión hacia una propiedad, planta y 
+equipo, el costo tomado en cuenta para su contabilización posterior es el valor razonab le a la fecha del 
+cambio de uso. Si una propiedad planta y equipo se convierte en una propiedad de inversión, se 
+contabilizará por su valor razonable.  
+ 
+ 
+ 
+La propiedad y equipo se mide inicialmente al costo. Posterior a dicho reconocimiento, se miden al costo, 
+neto de las depreciaciones acumuladas y de las pérdidas acumuladas por deterioro del valor, si las 
+hubiera. 
+ 
+El costo incluye el precio de adquisición, los costos directamente relacionados a la ubicación del activo 
+en el lugar y las condiciones necesarias para que opere en la forma prevista por la Compañía.  
+ 
+Todos los demás costos de reparación y mantenimiento se reconocen en el estado del resultado integral 
+a medida que se incurren, excepto cuando incrementan la vida útil , o la capacidad y eficiencia productiva 
+de los elementos de propiedad y equipo, caso en el cual podrían capitalizarse.  
+ 
+Los terrenos y los edificios se miden por su valor razonable menos las depreciaciones acumuladas sobre 
+los edificios y las pérdidas por  deterioro del valor reconocidas después de la fecha de la revaluación. Las 
+revaluaciones se efectúan con la frecuencia suficiente para asegurar que el valor razonable de un activo 
+revaluado no difiera significativamente de su importe en libros a la fecha de cierre del período sobre el 
+que se informa. 
+ 
+Todo incremento por revaluación se reconoce en el otro resultado integral y se acumula en el patrimonio 
+en como una revaluación de activos.  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+25  
+ 
+La Compañía ha determinado un valor residual nulo, depreciación de la propiedad y equipo se calcula en 
+forma lineal a lo largo de las vidas útiles estimadas de los activos, de la siguiente manera:  
+ 
+  
+  
+  
+  
+  
+  
+ 
+Un componente de propiedad y equipo o cualquier parte significativa del mismo reconocida inicialmente, 
+se da de baja al momento de su venta o cuando no se espera obtener beneficios económicos futuros por 
+su uso o venta. Cualquier ganancia o pérdida resultante al momento de dar de baja el activo (calculada 
+como la diferencia entre el ingreso neto procedente de la venta y el importe en libros del activo) se 
+incluye en el estado de resultados cuando se da de baja el activo. 
+ 
+Los valores residuales, las vidas útiles y los métodos y tasas de depreciación de los activos se revisan a 
+cada fecha de cierre de ejercicio y se ajustan prospectivamente, de corresponder. 
+ 
+ 
+ 
+Son activos que la compañía tiene intención de vender  de forma inmediata y cuya venta sea altamente 
+probable, dentro del año siguiente al año de la clasificación, La venta del activo debe negociarse a un 
+precio razonable, en relación con su valor razonable actual. El valor en libros de los activos mantenidos 
+para la venta se recuperará por su venta y no por uso continuado, por tanto, no podrán clasificarse 
+activos como "mantenidos para la venta" aquellos activos que vayan a ser abandonados. 
+ 
+Medición inicial Las propiedades mantenidas para la venta de La Compañía de Seguros de Vida Aurora 
+S.A., se medirán inicialmente al menor de su importe en libros o su valor razonable menos los costos de 
+venta. La entidad no depreciará (o amortizará) el activo no corriente mientras esté clasificado como 
+mantenido para la venta, o mientras forme parte de un grupo de activos. Cuando se espere que la venta 
+se produzca más allá del periodo de un año, la entidad medirá los costos de venta por su valor actual. 
+Cualquier incremento en el valor actual de esos costos de venta, que surja por el transcurso del tiempo,  
+ 
+Reconocimiento y reversión de las pérdidas por deterioro La Compañía de Seguros de Vida Aurora S.A 
+reconocerá una pérdida por deterioro debido a las red ucciones iniciales o posteriores del valor del activo, 
+hasta el valor razonable menos los costos de venta. La entidad reconocerá una ganancia por cualquier 
+incremento posterior derivado de la medición del valor razonable menos los costos de venta de un act ivo, 
+aunque sin superar la pérdida por deterioro acumulada que haya sido reconocida  se presentará en el 
+estado de resultados como un costo financiero 
+ 
+Baja en cuentas La Compañía de Seguros de Vida Aurora S.A., dará de baja en cuentas (será eliminada 
+del estado de situación financiera) una propiedad mantenida para la venta teniendo en cuenta: La 
+pérdida o ganancia no reconocida previamente a la fecha de la venta de un activo no corriente (o grupo 
+de activos para su disposición), se reconocerá  en la fecha en el que se produzca su baja en cuentas. Los 
+requerimientos que se refieren a la baja en cuentas están establecidos en: (a) los párrafos 67 a 72 de la 
+NIC 16 (revisada en 2003) para las propiedades, planta y equipo, y (b) Los párrafos 112 a 1 17 de la NIC 
+38 Activos Intangibles (revisada en 2004) para este tipo de activos   
+ 
+ 
+ 
+ 
+ 
+ 
+26  
+ 
+Revelaciones La Compañía deberá revelar información que permita a los usuarios de los estados 
+financieros evaluar los efectos financieros de los activos no corrientes mantenidos para la venta. Se 
+deberá presentar de forma separada del resto de los activos en el estado de situación financiera y que 
+los resultados de las operaciones de activos no corrientes mantenidos para la venta se presenten por 
+separado en el estado del resultado integral. 
+ 
+4.9.  Activos de Uso 
+ 
+La Compañía clasifica como arrendamientos todos los contratos que implican la transferencia 
+sustancialmente de los riesgos y las ventajas inherentes a la propiedad de un activo; sobre los bienes 
+tomados en arriendo en atención a lo definido en la NIIF 16 se han registrado los derechos sobre los 
+bienes inmuebles respecto al reconocimiento, medición, presentación e información a revel ar de los 
+arrendamientos. 
+ 
+En la adopción de  la NIIF 16, la cual introdujo un modelo contable único en el balance para los 
+arrendatarios, como resultado, la C ompañía, en su calidad de arrendatario, ha reconocido activos con 
+derecho de uso que representan sus derechos para usar los activos subyacentes y pasivos de 
+arrendamiento que representan su obligación de hacer pagos de arrendamiento. La contabilidad del 
+arrendador sigue siendo similar a las políticas contables anteriores.  
+ 
+Definición de Co ntrato 
+ 
+Anteriormente, la compañía determinaba al inicio del contrato si un acuerdo era o contenía un 
+arrendamiento según el CINIIF 4 que determina si un acuerdo contiene un arrendamiento. La compañía 
+ahora evalúa si un contrato es o contiene un arrendamiento basado en la nueva definición de un 
+arrendamiento bajo la NIIF 16, si el contrato transmite el derecho de controlar el uso de un activo 
+identificado por un período de tiempo a cambio de consideración.  
+ 
+La Compañía aplicó la NIIF 16 sólo a los contratos que previamente se identificaron como 
+arrendamientos, los contratos que no se identificaron como arrendamientos según la NIC 17 y la CINIIF 4 
+no se reevaluaron. 
+ 
+Por lo tanto, la definición de un arrendamiento según la NIIF 16 se ha aplicado sólo  a los contratos 
+celebrados o modificados a partir del 01 de enero de 2019. 
+ 
+Al inicio o en la reevaluación de un contrato que contiene un componente de arrendamiento, la 
+Compañía asigna la contraprestación en el contrato a cada componente de arrendamiento  y no 
+arrendamiento sobre la base de sus precios independientes relativos. Sin embargo, para los 
+arrendamientos de propiedades en las que es un arrendatario, la C ompañía ha optado por no separar los 
+componentes sin arrendamiento y, en su lugar, contabiliza rá los componentes del arrendamiento y los 
+componentes del no arrendamiento como un s ólo componente del arrendamiento. 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+27  
+ 
+Bienes Tomados en Arrendamiento Derechos de Uso  
+ 
+Los arrendamientos de corto plazo o aquellos que impliquen el uso de un activo de bajo monto o de corto 
+plazo, serán excluidos del modelo de contabilización definido por la NIIF 16, y serán registrados de forma 
+lineal directamente en el gasto. 
+ 
+Son arrendamientos de corto plazo aquellos en los cuales se estima el uso de un activo en calidad de 
+arrendamiento por plazo menor de 12 meses, incluyendo renovaciones razonablemente ciertas. 
+ 
+Son arrendamientos de bajo valor, aquellos que impliquen el uso de activos cuyo monto de compra como 
+si fuese nuevo, sea igual o menor a 438 UVT o USD $5,000 americanos (aproximadamente 
+$20,000, 000), la evaluación de las exenciones del arrendamiento se realiza por contrato, y para cada 
+activo relacionado. 
+ 
+Los contratos de arrendamiento se clasifican e incluyen en el estado de situación financiera como 
+propiedades y equipo de uso propio, y se contabilizan inicialmente en el activo y en el pasivo, 
+simultáneamente por un valor igual al valor razonable recibido del bien recibido en arrendamiento, o por 
+el valor presente de los pagos mínimos del arrendatario.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Una entidad deberá aplicar las modificaciones des de la entrada en vigencia del Decreto 1432 de 2020, 
+permitiéndose su aplicación voluntaria de manera integral y anticipada para estados financieros que 
+cubran periodos iniciados a partir del 1° de enero de 2020  
+ 
+ 
+ 
+Compañía de Seguros de Vida Aurora S.A. reconoce un activo como intangible sí:  
+ 
+ Es separable, es decir, se puede separar del resto de la Compañía para su venta, traspaso, 
+intercambio o alquiler, ya sea individual o juntamente con un contrato, activo o pasivo con los que 
+guarde relación, o  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+28  
+ 
+ Surge de derechos contractuales o legales, sin que sea necesario que estos derechos sean 
+trasferibles o separables de la entidad. 
+ 
+Los activos intangibles adquiridos que tiene la Compañía se miden inicialmente al costo de adquisición.  
+ 
+En la medición posterior se reconoce al modelo del costo, el cual comprende costo menos la 
+amortización acumulada y el importe acumulado de las pérdidas por deterioro de valor.  
+ 
+Compañía de Seguros de Vida Aurora SA, ha determinado que la vida útil de sus activos intangibles será 
+de 1 a 5 años.  Así mismo tendrá un valor residual de cero. 
+ 
+El período y el método de amortización para un activo intangible con una vida útil definida se revisan al 
+menos al cierre de cada período sobre el que se informa. Los cambios en la vida útil esperada o el 
+patrón esperado de consumo del activo se contabilizan al modificarse el período o el método de 
+amortización, según corresponda, y se tratan prospectivamente como cambios en las estimaciones 
+contables. El gasto por amortización de los activos intangibles con vidas útiles definidas se reconoce en 
+el estado d e resultados integrales en la categoría de gastos que resulte más coherente con la función de 
+dichos activos intangibles. 
+ 
+Las ganancias o pérdidas que surjan de dar de baja un activo intangible se miden como la diferencia 
+entre el ingreso neto procedente de la venta y el importe en libros del activo, y se reconocen en el estado 
+de resultados integrales cuando se da de baja el activo respectivo. 
+ 
+ 
+ 
+A cada fecha de cierre del período sobre el que se informa, la Compañía evalúa si existe algún indicio de 
+que un componente individual o grupo de propiedades, planta y equipo y/o de activos intangibles con 
+vidas útiles definidas pudiera estar deteriorado en su valor.  
+ 
+Si existe tal indicio, y la prueba anual de deterioro del valor para un activo es entonces requerida, la 
+Compañía estima el importe recuperable de ese acti vo. El importe recuperable de un activo es el mayor 
+importe entre el valor razonable menos los costos de venta de ese activo, y su valor en uso. 
+ 
+Ese importe recuperable se determina para un activo individual, salvo que ese activo individual no 
+genere flujos de efectivo que sean sustancialmente independientes de los de otros activos o grupos de 
+activos, en cuyo caso se toman los flujos de efectivo del grupo de activos que conforman la unidad 
+generadora de efectivo a la cual pertenecen. 
+ 
+ 
+ 
+Cuando el importe en libros de un activo individual o de una unidad generadora de efectivo excede su 
+importe recuperable, el activo individual, o en su caso la unidad generadora de efectivo se considera 
+deteriorado y su valor se reduce a su importe recuperable. 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+29  
+ 
+ 
+ 
+Al evaluar el valor en uso de un activo individual o de una unidad generadora de efectivo, los flujos de 
+efectivo estimados se descuentan a su valor presente mediante una tasa de descuento antes de 
+impuestos que refleja las evaluaciones corrientes del mercado sobre el valor temporal del dinero y los 
+riesgos específ icos de ese activo individual, o en su caso, de la unidad generadora de efectivo. 
+ 
+Para la determinación del valor razonable menos los costos de venta se toman en cuenta las 
+transacciones recientes del mercado, si las hubiera. Si no pueden identificarse este tipo de 
+transacciones, se utiliza un modelo de valoración que resulte apropiado.  
+ 
+Estos cálculos se verifican contra múltiplos de valoración, valores de cotización de activos similares en 
+mercados activos y otros indicadores disponibles del valor razonable. 
+ 
+Las pérdidas por deterioro del valor correspondientes a las operaciones continuadas se reconocen en el 
+estado de resultados integrales en aquellas categorías de gastos del estado de resultados que se 
+correspondan con la función del activo deter iorado (generalmente en el costo de ventas u otros gastos 
+operativos), salvo para las propiedades revaluadas previamente, donde la revalorización se registró en el 
+otro resultado integral. En este caso, el deterioro del valor también se reconoce en el otro  resultado 
+integral hasta el importe de cualquier revaluación previa reconocida.  
+ 
+Así mismo, para esta clase de activos a cada fecha de cierre del período sobre el que se informa, se 
+efectúa una evaluación sobre si existe algún indicio de que las pérdidas por deterioro del valor 
+reconocidas previamente ya no existen o han disminuido. Si existiese tal indicio, la Compañía efectúa 
+una estimación del importe recuperable del activo individual o de la unidad generadora de efectivo, 
+según corresponda.  
+ 
+ 
+ 
+ 
+ 
+Los costos de adquisición diferidos corresponden a aquellos costos que la Compañía de Seguros de 
+Vida Aurora S.A., incurre en la venta, suscripción e iniciación de un nuevo contrato de seguro.  
+ 
+Con posterioridad al reconocimiento inicial, únicamente los costos de adquisición diferidos del ramo de 
+vida individual se amortizan durante la vida útil esper ada de los contratos de seguro, cuando son 
+mayores a 3 meses. 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+30  
+ 
+Esta política describe el tratamiento contable de las reservas técnicas bajo la Norma Internacional de 
+Información Financiera NIIF 4 Contratos de Seguros y el Decreto  2973 de 2013. 
+ 
+Reserva de Siniestros Avisados 
+ 
+La reserva de siniestros avisados, corresponde al monto de recursos que debe destinar la entidad 
+aseguradora para atender los pagos de los siniestros ocurridos una vez estos hayan sido avisados, así 
+como los gastos asociados a éstos, a la fecha de cálculo de esta reserva.  
+ 
+Esta reserva es de aplicación obligatoria para todos los ramos y se constituirá por siniestro y para cada 
+cobertura, en la fecha en que la Compañía de Seguros de vida Aurora S.A. tenga c onocimiento, por 
+cualquier medio, de la ocurrencia del siniestro y corresponderá a la mejor estimación técnica del costo 
+del mismo. En la Compañía, aplica para los Ramos de Vida, Riesgos Laborales y Alto costo.  
+ 
+Reserva de Siniestros Ocurridos no Avisados 
+ 
+La reserva de siniestros ocurridos no avisados, representa una estimación del monto de recursos que 
+debe destinar la entidad aseguradora para atender los futuros pagos de siniestros que ya han ocurrido, a 
+la fecha de cálculo de esta reserva, pero que todavía no han sido avisados a la entidad aseguradora o 
+para los cuales no se cuenta con suficiente información.  
+ 
+Esta reserva se aplica para todos los ramos y amparos del contrato de seguro, con excepción de: Vida 
+individual, Pensiones ley 100, Pensiones con conmutación pensional, Pensiones voluntarias, Seguro 
+educativo, Rentas voluntarias y Riesgos laborales. 
+ 
+ 
+ 
+ 
+ 
+Reserva Matemática  
+ 
+La Reserva Matemática es aquella que se constituye para atender el pago de las obligaciones asumidas 
+en los seguros de vida individual y en los amparos cuya prima se ha calculado en forma nivelada o 
+seguros cuyo beneficio se paga en forma de renta. 
+ 
+La reserva matemática se constituirá para los seguros de vida individual y para los a mparos cuya prima 
+se calcule en forma nivelada o seguros cuyo beneficio se pague en forma de renta. La Superintendencia 
+Financiera determinará la obligación o no de constituir esta reserva para otros ramos de seguros.  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+31  
+ 
+Reserva de Insuficiencia de Activos 
+ 
+La Reserva de Insuficiencia de Activos es aquella que se constituye para compensar la insuficiencia que 
+puede surgir al cubrir los flujos de pasivos esperados que conforman la reserva matemática con los flujos 
+de activos de la entidad aseguradora. 
+ 
+Según Decreto 2267 de 2014, para la preparación de los estados financieros individuales y separados, 
+se aplicará el marco técnico normativo dispuesto en el Anexo del Decreto 2784 de 2012, y sus 
+modificatorios, las reservas de desviación de siniestralidad y la reserva de insuficiencia de activos en la 
+NIIF 4 contenida en dicho anexo. 
+ 
+Riesgo en Curso 
+ 
+Es aquella que se constituye para el cumplimiento de las obligaciones futuras derivadas de los 
+compromisos asumid os en las pólizas vigentes a la fecha de cálculo.  La Reserva de Riesgo en Curso, 
+está compuesta por la Reserva de Prima No Devengada y la Reserva por Insuficiencia de Prima.  
+ 
+Reserva Prima No Devengada 
+ 
+La reserva de prima no devengada representa la porción de las primas emitidas de las pólizas vigentes y 
+de las primas emitidas de las pólizas con inicio de vigencia futura, descontado los gastos de expedición, 
+correspondiente al tiempo no corrido del riesgo. 
+ 
+Esta reserva se aplica para e l ramo y amparos de alto costo. Según el Decreto 2973 de 2013 no se 
+aplica para los ramos de: Vida individual, pensiones ley 100, pensiones con conmutación pensional, 
+pensiones voluntarias, seguro educativo, Rentas voluntarias y Riesgos laborales. 
+ 
+La reserva por insuficiencia de primas complementará la reserva de prima no devengada, en la medida 
+en que la prima no resulte suficiente para cubrir el riesgo en curso y los gastos no causados. 
+ 
+Reservas Insuficiencia De Primas 
+ 
+La reserva por insuficiencia de p rimas, complementará la reserva de prima no devengada, en la medida 
+en que la prima no resulte suficiente para cubrir el riesgo en curso y los gastos no causados. La reserva 
+de insuficiencia de primas forma parte de la Reserva de Riesgos en Curso, ésta últ ima es aquella que se 
+constituye para el cumplimiento de las obligaciones futuras derivadas de los compromisos asumidos en 
+las pólizas vigentes a la fecha de cálculo. La reserva de insuficiencia de primas complementará la 
+reserva de prima no devengada,++ en la medida en que la prima no resulte suficiente para cubrir el 
+riesgo en curso y los gastos no causados. Esta reserva se aplica para todos los ramos y amparos del 
+contrato de seguro, con excepción de: Vida individual, pensiones ley 100, pensiones con conmutación 
+pensional, pensiones voluntarias, seguro educativo, rentas voluntarias y Riesgos laborales.  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+32 4.13.  Reservas Técnicas (continuación)  
+ 
+Depósito de Reserva a Reaseguradores del Exterior  
+ 
+Los depósitos para primas cedidas en reaseguro al exterior, son equivalentes al 20% de las primas 
+cedidas, a excepción de los depósitos retenidos del ramo de Vida Individual también sujeto a Reserva 
+Matemática.  
+ 
+Reserva Desviación de Siniestralidad  
+ 
+El Decreto 2973 de 2013, como Régimen de Reserva Técnica establece que la reserva de desviación de 
+siniestralidad para riesgos laborales es reconocida, acumulativa y se incrementará trimestralmente en un 
+monto equivalente al 4% de las cotizaciones devengadas del periodo en la porción retenida del riesgo El 
+decreto también menciona que no será necesario que el monto acumulado de la reserva supere el 25% 
+de las cotizaciones registradas durante los últimos doce (12) meses.  
+ 
+Reservas Especiales 
+ 
+Este cálculo se efectúa de conformidad con lo establecido en la Circular 091 de 1998, en la que se 
+establece que las entidades autorizadas para operar el ramo de riesgos laborales deben constituir el 2% 
+de las cotizaciones mensuales a partir de enero de 1999, de acuerdo con lo establecido en el Decreto 
+1295 de 1994. 
+ 
+4.14.  Prueba de Adecuación de Pasivos  
+ 
+Para la prueba de adecuación de pasivos, la Compañía aplica el parágrafo 2 del artículo 1 del Decreto 
+2267 de 2014, acogiéndose al cumplimiento anticipado de los plazos previstos en el régimen de 
+transición establecidos en el Decreto 2973 de 2013. 
+ 
+En junio de 2014, la Junta Directiva aprobó registrar el impacto derivado de la constitución del monto de 
+la reserva para siniestros incurridos no avisados directamente contra el patrimonio de la Compañía en el 
+Estado de Situación Financiera de Apertura, junto con el resto de los impactos derivados del cálculo de 
+las demás reservas. Por lo anterior, para la Compañía el impacto derivado de la constitución de las 
+reservas de Siniestros Ocurridos y No Avisados no requiere un plan de ajuste a largo plazo. 
+ 
+La Compañía evaluará, al final del periodo sobre el que se informa, la adecuación de los pasivos por 
+seguros que haya reconocido. Si la evaluación mostrase que el importe en libros de sus reservas 
+técnicas no es adecuado (menos los costos de adquisición diferidos y los activos intangibles conexos), el 
+importe total de la deficiencia se reconocerá en resultados.  
+ 
+ 
+ 
+Según la política comercial aprobada por la Junta Directiva del 26 de abril del año 2016, las comisiones a 
+pagar son las autorizadas por la Compañía y se establecen en el anexo al contrato mercantil de 
+intermediación de seguros.  Las comisiones estarán basadas según parámetros establecidos por la 
+presidencia de la siguiente manera: en el momento que se firme el contrato ya sea con el agente, 
+agencia o sociedad corredora se confirmara el porcentaje de comisión según sea el ramo para 
+comercializar.  Cabe resaltar que estas comisiones pueden ser negociadas con el intermediario, una vez 
+acordadas se envía un correo electrónico al intermediario en el que se le formaliza la comisión pactada.   
+ 
+ 
+ 
+ 
+ 
+ 
+33  
+ 
+Para los Intermediarios que comercialicen el producto de ARL, la Compañía tiene asignada una comisión 
+aproximada del 5%, el cual teniendo en cuenta los lineamientos del artículo 2.31.3.1.15 del Decreto 2555 
+de 2010, modificado por el artículo 1° del Decreto 2953 de 2010, que determina que son de libre 
+inversión de las entidades aseguradoras, su patrimonio y demás fondos que no correspondan a las 
+reservas técnicas, así como lo consagra el inciso 2 del parágrafo 5 del artículo 11 de la Ley 1562 de 
+2012 y lo informado en el literal primero, tercero y cuarto de la circular externa 03 de febrero de 2014 
+expedida por la Superin tendencia Financiera de Colombia, el giro de las comisiones se hará de una 
+cuenta con recursos propios de la Compañía, cuya fuente corresponde especialmente al recaudo de 
+primas de otros conceptos diferente de ARL, a la rentabilidad del portafolio, arrendamientos entre otros. 
+ 
+ 
+ 
+Los beneficios a empleados se clasifican en cuatro categorías, corto plazo, otros a largo plazo, post
+empleo y por terminación de contrato.  
+ 
+ Corto Plazo : Son beneficios cuyo pago es liquidado en el término de los doce meses siguientes al 
+cierre del período, en el que los empleados hayan prestado los servicios.  
+ Largo Plazo:  Son beneficios a los empleados cuyo pago, no es liquidado en el término de los doce 
+meses siguientes al cierre del periodo, en el que los empleados hayan prestado los servicios. 
+ Por Terminación : Son los beneficios a los empleados proporcionados por la terminación del periodo 
+de empleo, como consecuencia de la decisión de la entidad de resolver el contrato del emplead o 
+antes de la fecha normal de retiro, o la decisión del empleado de aceptar una oferta de beneficios a 
+cambio de la terminación de un contrato de empleo.  
+ Post Empleo : Son acuerdos, formales o informales, en los que la entidad se compromete a entregar 
+beneficios a uno o más empleados tras la terminación de su periodo de laboral.  
+ 
+La Compañía de Seguros de Vida Aurora S.A, prorrogó hasta el 30 de Noviembre de 2022 el plan de 
+beneficios a largo y a corto plazo aprobado en Diciembre de 2015 mediante Circular Normativa 039, para 
+los empleados con contrato de trabajo que han superado el periodo de prueba. 
+ 
+4.17.  Provisiones, Pasivos Contingentes y Activos Contingentes 
+ 
+Las provisiones se reconocen cuando existe una obligación presente (legal o implícita) como resultado 
+de un suceso pasado; es probable que la Compañía tenga que desprenderse de recursos que incorporan 
+beneficios económicos para cancelar la obligación y pueda hacerse una estimación fiable del importe de 
+esta. Adicionalmente en las provisiones existe incertidumbre acerca de la cuantía y del vencimiento de 
+las mismas.  El gasto correspondiente a cualquier provisión se presenta en el estado de resultados 
+integrales en la línea que mejor refleje la naturaleza de la provisión, neto de to do reembolso relacionado, 
+en la medida en que éste sea virtualmente cierto.  
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+34 4.18.  Pasivos Contingentes 
+ 
+Un pasivo contingente es una obligación posible, surgida a raíz de sucesos pasados y cuya existencia ha 
+de ser confirmada solo por la ocurrencia, o en su caso la no ocurrencia, de uno o más sucesos futuros 
+inciertos que no están enteramente bajo el control de la Compañía; o una obligación presente, surgida a 
+raíz de sucesos pasados, que no se ha reconocido contablemente porque no es probable que para 
+satisfacerla se vaya a requerir una salida de recu rsos que incorporen beneficios económicos, o el 
+importe de Ia obligación no pueda ser medido con Ia suficiente fiabilidad.  
+ 
+Pasivo contingente no es reconocido en el estado de situación financiera, únicamente se revela cuando 
+la posibilidad de una salida de recursos para liquidarlo es eventual. 
+ 
+4.19.  Activos Contingentes 
+ 
+Un activo contingente es un activo de naturaleza posible, surgido a raíz de sucesos pasados, cuya 
+existencia ha de ser confirmada sólo por Ia ocurrencia, o en su caso por Ia no ocurrencia, de uno o más 
+eventos inciertos en el futuro, que no están enteramente bajo el control de Ia Compañía.  Un activo 
+contingente no es reconocido en los estados financieros, sino que es informado en notas, pero sólo en el 
+caso en que sea probable la entrada de beneficios económicos.  
+ 
+4.20.  Impuestos 
+ 
+Impuesto Sobre la Renta Corriente 
+ 
+Los activos y pasivos corrientes por el impuesto sobre la renta del período se miden por los valores que 
+se espera recuperar o pagar a la autoridad fiscal. El gasto por impuesto sobre la renta se reconoce en el 
+impuesto corriente de acuerdo con la depuración efectuada entre la renta fiscal y la utilidad o perdida 
+contable afectada por la tarifa del impuesto sobre la renta del año corriente y conforme con lo esta blecido 
+en las Normas Tributarias Colombianas. Las tasas y las normativas fiscales utilizadas para computar 
+dichos valores son aquellas aprobadas al final del período sobre el que se informa.  
+ 
+Impuesto Sobre la Renta Diferido 
+ 
+El impuesto diferido sobre la renta se reconoce utilizando el método del pasivo calculado sobre las 
+diferencias temporarias entre las bases fiscales de los activos y pasivos y sus valores en libros. El 
+impuesto diferido pasivo se reconoce generalmente para todas las diferencias temporarias imponibles y 
+el impuesto diferido activo se reconoce para todas las diferencias temporarias deducibles y por la 
+compensación futura de créditos y pérdidas fiscales no utilizadas en la medida en que sea probable la 
+disponibilidad de ganancias impositivas futuras contra las cuales se puedan imputar. Los impuestos 
+diferidos no se descuentan. 
+ 
+Los activos y pasivos por impuestos diferidos no se reconocen si la diferencia temporaria surge del 
+reconocimiento inicial de un activo o un pasivo en una transacción que no constituya una combinación de 
+negocios y que, al momento de la transacción no afectó ni la ganancia contable ni la ganancia o pérdida 
+fiscal; y para el caso del pasivo por impuesto diferido cuando surja del reconocimiento inicial del cré dito 
+mercantil. 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+35 4.20.  Impuestos (continuación)  
+ 
+Impuesto Sobre la Renta Diferido (continuación)  
+ 
+El valor en libros de los activos por impuesto diferido se revisa en cada fecha de presentación y se 
+reducen en la medida en que ya no sea probable que exista suficiente ganancia impositiva para utilizar la 
+totalidad o una parte del activo por impuesto diferido. Los activos por impuesto diferido no reconocidos 
+se reevalúan en cada fecha de presentación y se reconocen en la medida en que sea probable que l as 
+ganancias impositivas futuras permitan su recuperación.  
+ 
+Los activos y pasivos por impuesto diferido se miden a las tasas fiscales que se espera sean de 
+aplicación en el periodo en que el activo se realice o el pasivo se cancele, con base en las tasas y  
+normas fiscales aprobadas a la fecha de presentación de los estados financieros individuales, o cuyo 
+procedimiento de aprobación se encuentre próximo a completarse para tal fecha. La Compañía utilizó las 
+siguientes tasas impositivas: para activos o pasivos diferidos liquidados a corto plazo, 31%; para activos 
+o pasivos diferidos liquidados a largo plazo 30%; y para aquellos que sean liquidados como una 
+ganancia ocasional el 10%. 
+ 
+ 
+ 
+El impuesto diferido se reconoce en el resultado del periodo, excepto el relacionado con partidas 
+reconocidas fuera del resultado, en este caso se presentará en el otro resultado integral o directamente 
+en el patrimonio. 
+ 
+ 
+ 
+ 
+ 
+ Si una entidad considera tratamientos fiscales inciertos por separado 
+ Los supuestos que hace una entidad sobre el examen de los tratamientos fiscales por parte de las 
+autoridades fiscales 
+ Cómo determina una entidad la ganancia fiscal (pérdida fiscal), las bases fiscales, las pérdidas 
+fiscales no utilizadas, los créditos fiscales no utilizados y las tasas fiscales  
+ Cómo una entidad considera cambios en hechos y circunstancias  
+ 
+ 
+ 
+ 
+ 
+Los ingresos y gastos se reconocen mediante el cumplimiento de las normas de realización, asociación y 
+asignación, de tal manera que se logre el cómputo correcto del resultado neto del período. Los ingresos, 
+costos y gastos se registran en resultados por el sistema de causación.   La Compañía reconoce sus 
+ingresos y gastos correspondientes a la actividad aseguradora, aplicando la continuidad de prácticas 
+existentes permitida, por la NIIF 4 Contratos de Seguros.   
+ 
+ 
+ 
+ 
+ 
+ 
+36 4.22.  Primas Emitidas 
+ 
+El ingreso por primas emitidas se reconoce en el momento en que se expiden las pólizas respectivas . 
+ 
+La Resolución 1800 de 1996 de la Superintendencia Financiera establece que en el rubro de primas se 
+registra el 100% de las emitidas en el ejercicio cuando no haya vencido el plazo establecido en el Código 
+de Comercio. En la situación contraria, el mencionado Código, ordena que se muestre la parte  
+ 
+correspondiente a la prima devengada hasta dicho término y los gastos causados con ocasión de la 
+expedición del contrato.  
+ 
+ 
+ 
+Los ingresos de las actividades ordinarias diferentes de la actividad aseguradora se reconocen en la 
+medida que sea probable que los beneficios económicos fluyan a la Compañía y que los ingresos se 
+puedan medir de manera fiable, independientemente del momento en el que el pago sea realizado por el 
+cliente. Los ingr esos se miden por el valor razonable de la contraprestación recibida o por recibir, 
+teniendo en cuenta las condiciones de pago definidas contractualmente con el cliente y sin incluir 
+impuestos ni aranceles. 
+ 
+Los ingresos de actividades ordinarias procedentes de la venta de bienes se reconocen cuando los 
+riesgos significativos y las ventajas inherentes a la propiedad se hayan sustancialmente transferido al 
+comprador, lo cual ocurre, por lo general, al momento de la entrega de los bienes. 
+ 
+4.24.  Arrendamientos Operativos 
+ 
+Los ingresos procedentes de los arrendamientos operativos sobre propiedades de inversión se 
+contabilizan en forma lineal a lo largo del plazo de arrendamiento, y se los clasifica como ingresos de 
+actividades ordinarias dado su naturaleza operativa. 
+ 
+4.25.  Intereses 
+ 
+Para los instrumentos financieros medidos al costo amortizado los intereses ganados o perdidos se 
+registran utilizando el método de la tasa de interés efectiva que es la tasa de interés que descuenta en 
+forma exacta los flujos futuros de pagos y cobros en efectivo a lo largo de la vida esperada del 
+instrumento financiero, o un período de menor duración, según corresponda, respecto del valor neto en 
+libros del activo o pasivo financiero. Los intereses ganados se incluyen en los ingresos financieros en el 
+estado de resultado integral en la sección resultado del periodo.  
+ 
+4.26.  Dividendos 
+ 
+Los ingresos por dividendos se reconocen cuando se materializa el derecho de la Compañía a cobrar 
+esos dividendos. 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+37  
+ 
+Una medición a valor razonable supondrá que el activo o pasivo se intercambia en una transacción 
+ordenada entre participantes del mercado para vender el activo o transferir el pasivo en la fecha de la 
+medición en condiciones de mercado presentes. 
+ 
+4.28.  Aplicación a Activos no Financieros  
+ 
+Una medición a valor razonable de un activo no financiero tendrá en cuenta la capacidad de Compañía 
+de Seguros de Vida Aurora S.A., para generar beneficios económicos mediante la utilización del activo 
+en su máximo y mejor uso o mediante la venta de éste a otro participante de mercado que utilizaría el 
+activo en su máximo y mejor uso.  
+ 
+4.29.  Técnicas de Valoración  
+ 
+La Compañía de Seguros de Vida Aurora S.A., utilizará las técnicas  de valoración que sean apropiadas a 
+las circunstancias y sobre las cuales existan datos suficientes disponibles para medir el valor razonable, 
+maximizando el uso de datos de entrada observables relevantes y minimizando el uso de datos de 
+entrada no observ ables.  Las técnicas de valoración empleadas por la aseguradora son las siguientes: 
+Enfoque de mercado, enfoque del costo y enfoque del ingreso. 
+ 
+Jerarquías del Valor Razonable  
+ 
+ Variables de nivel 1: Son precios cotizados (sin ajustar) en mercados activos, para activos o pasivos 
+idénticos a los que la Compañía puede acceder en la fecha de la medición. Un precio cotizado en un 
+mercado activo proporciona la evidencia más fiable del valor razonable y se utilizará sin ajuste para 
+medir el valor razonabl e siempre que estén disponibles.  
+ 
+ Variables de nivel 2: Son distintas de los precios cotizados incluidos en el Nivel 1 que son 
+observables para los activos o pasivos, directa  o indirectamente. 
+ 
+ Variables de nivel 3: Son variables no observables para el activo o pasivo. Sin embargo, las variables 
+no observables reflejarán los supuestos que los participantes de mercado utilizarán al fijar el precio 
+del activo o pasivo, incluyendo supuestos sobre el riesgo. 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+38  
+ 
+Jerarquías del Valor Razonable (continuación)  
+ 
+Instrumento 
+Financiero Vr en libros Nivel 1 Nivel 2 Nivel 3 Vr razonable 
+          
+Al 31 de diciembre 
+de 2022      
+Efectivo  $ 2,028,864  $ 2,028,864        $ 2,028,864 
+Total Inversiones: 19,296,013 1,963,825 16,002,136 111,912 18,077,873 
+Inversiones 
+negociables 9,252,883 1,963,825 7,181,982 107,076 9,252,883 
+Títulos de tesorería  
+TES  1,963,825    
+Títulos participativos    7,181,982   
+Títulos participativos     107,076  
+Inversiones 
+disponibles para la 
+venta 4,836   4,836 4,836 
+Títulos participativos    4,836  
+Inversiones 
+mantenidas hasta el 
+vencimiento 10,038,294  8,820,154  8,820,154 
+Títulos de tesorería  
+TES   3,903,530    
+Títulos emitidos por 
+instituciones 
+financieras  3,604,445    
+Bonos   1,312,179    
+Cuentas por cobrar 
+actividad 
+aseguradora  10,882,081   10,882,081   10,882,081  
+Propiedades de 
+inversión  8,643,221  8,643,221  8,643,221 
+Cuentas por pagar 
+por actividad 
+aseguradora  474,645  474,645  474,645 
+Otras cuentas pagar  2,075,816   2,075,816   2,075,816  
+Total  $ 43,400,640  $ 3,992,689  $ 38,077,899  $ 111,912  $ 42,182,500 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+39  
+ 
+Jerarquías del Valor Razonable (continuación)  
+ 
+.Instrumento 
+Financiero Vr en libros Nivel 1 Nivel 2 Nivel 3 Vr razonable 
+          
+Al 31 de diciembre 
+de 2021      
+Efectivo  $ 4,295,787  $ 4,295,787        $ 4,295,787 
+Total Inversiones: 23,573,514 4,148,536 19,072,983 112,606 23,334,125 
+Inversiones 
+negociables 11,898,441 4,148,536 7,642,646 107,259 11,898,441 
+Títulos de tesorería  
+TES  2,365,050    
+Títulos participativos   1,015,073    
+Títulos participativos   768,413 7,642,646 107,259 8,518,318 
+Inversiones 
+disponibles para la 
+venta 5,347   5,347 5,347 
+Títulos participativos     5,347  
+Inversiones 
+mantenidas hasta el 
+vencimiento 11,669,726  11,430,337  11,430,337 
+Títulos de tesorería  
+TES   4,852,488   
+Títulos emitidos por 
+instituciones 
+financieras  5,123,943    
+Bonos   1,453,906   
+Cuentas por cobrar 
+actividad 
+aseguradora  1,456,682  1,456,682  1,456,682 
+Propiedades de 
+inversión  8,374,695  8,374,695  8,374,695 
+Cuentas por pagar 
+por actividad 
+aseguradora  339,898  339,898  339,898 
+Otras cuentas pagar  478,255  478,255  478,255 
+Total  $ 38,518,831  $ 8,444,323  $ 29,722,513  $ 112,606  $ 38,279,442 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+40  
+ 
+Una parte relacionada es una persona o empresa que está relacionada con la Compañía de Seguros de 
+Vida Aurora S.A. 
+ 
+Adicionalmente una persona, o un familiar cercano a esa persona, está relacionada con la Compañía de 
+Seguros de Vida Aurora S.A., si esa persona: 
+ 
+ Ejerce control o control conjunto sobre la Compañía  
+ Ejerce influencia significativa sobre la Compañía  
+ Es un miembro del personal clave de la gerencia de la Compañía o de una controladora de la 
+Compañía.  
+ 
+Una empresa está relacionada con Compañía de Seguros de Vida Aurora S.A., si le son aplicables 
+cualquiera de las condiciones siguientes: 
+ 
+ La empresa y Compañía de Seguros de Vida Aurora S.A., son miembros del mismo grupo.  
+ 
+ Compañía de Seguros de  Vida Aurora S.A., es una asociada o un negocio conjunto de la otra 
+empresa. 
+Ambas empresas son negocios conjuntos de la misma tercera parte. 
+ Compañía de Seguros de Vida Aurora S.A., está controlada o controlada conjuntamente por una 
+persona identificada. 
+ La Compañía no tiene transacciones con partes relacionadas.  
+ 
+Materialidad (o importancia relativa): Las omisiones o inexactitudes de partidas son materiales o tendrán 
+importancia relativa si pueden, individualmente o en su conjunto, influir en las decision es económicas 
+tomadas por los usuarios con base en los estados financieros. 
+ 
+Materialidad o importancia relativa y agrupación de datos: Cada clase de partidas similares, que posea la 
+suficiente importancia relativa, deberá ser presentada por separado en lo s estados financieros. 
+ 
+Un conjunto completo de estados financieros comprende: 
+ 
+ Un estado de situación financiera al final del período;  
+ Un estado del resultado y otro resultado integral del periodo; 
+ Un estado de cambios en el patrimonio durante el ejercicio; 
+ Un estado de flujos de efectivo por el ejercicio; 
+ Notas, que comprende un resumen de las políticas contables y otra información explicativa.  
+ 
+4.31.  Hipótesis  de Negocio en Marcha  
+ 
+Al elaborar los estados financieros, la gerencia evalúa la capacidad que tiene la entidad para continuar 
+en funcionamiento. Los estados financieros se elaboran bajo la hipótesis de negocio en marcha, a menos  
+que la gerencia pretenda liquidar la entidad o cesar en su actividad, o bien no exista otra alternativa más  
+realista que proceder de una de estas formas. 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+41  
+ 
+Base contable de acumulación (o devengo): Salvo en lo relacionado con la información sobre flujos de 
+efectivo, la entidad elabora sus estados financiero s utilizando la base contable de acumulación (o 
+devengo).  Cuando se emplea la base contable de acumulación (o devengo), las partidas se reconocerán 
+como activos, pasivos, patrimonio neto, ingresos y gastos (los elementos de los estados financieros). 
+ 
+Compensación: No se compensarán activos con pasivos, ni ingresos con gastos, salvo cuando la 
+compensación sea requerida o esté permitida.  
+ 
+Frecuencia de los reportes: La Compañía de Seguros de Vida Aurora S.A., presentará un conjunto 
+completo de estados fi nancieros (incluyendo información comparativa) por lo menos una vez al año.  
+ 
+Información comparativa: A menos que una Política o Interpretación permitan o requiera otra cosa, la 
+información comparativa, respecto del periodo anterior, se presentará para toda clase de información 
+cuantitativa incluida en los estados financieros. La información comparativa deberá incluirse también en 
+la información de tipo descriptivo y narrativo, siempre que ello sea relevante para la adecuada 
+comprensión de los estados finan cieros del periodo corriente. 
+ 
+ 
+ 
+Cambios en las Políticas  
+ 
+La Compañía de Seguros de Vida Aurora S.A., cambiará una política contable sólo si tal cambio: Se 
+requiere por una NIIF; o lleva a que los estados financieros suministren información más fiable y 
+relevante sobre los efectos de las transacciones, otros eventos o condiciones que afecten a la situación 
+financiera, el rendimiento financiero o los flujos de efectivo. 
+ 
+ 
+ 
+4.33.  Cambios en las Estimaciones Contables 
+ 
+El uso de estimaciones contables es una parte esencial de la preparación de los estados financieros, lo 
+que implica la utilización de suposiciones basadas en la mejor información disponible. Algunas de las 
+estimaciones más comunes son: Las cuentas por cobrar de dudosa recuperación; la vida útil o las pautas 
+de consumo esperadas de los beneficios económicos futuros incorporados en los activos depreciables.  
+El efecto de un cambio en una estimación contable se incluye en el estado de r esultados integrales del 
+periodo en el que se produce el cambio, y en los periodos futuros que afecte. 
+ 
+ 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+42  
+ 
+ 
+ 
+ 
+ 
+ 
+Las transacciones en moneda extranjera se registran inicialmente a las tasas de cambio de la moneda 
+funcional vigentes a la fecha de la transacción. Posteriormente, los activos y pasivos monetarios en 
+moneda extranjera se convierten a la tasa de cambio de la moneda funcional, vigente a la fecha de cierre 
+del periodo, las partidas no monetarias que se miden a su valor razonable se convierten utilizando las 
+tasas de cambio a la fecha en la que se determina su valor razonable y las partidas no monetarias que 
+se miden a costo histórico se convierten utilizando las tasas de cambio vigentes a la fecha de las 
+transacciones originales.  Todas las diferencias de cambio se reconocen en el estado del resultado 
+integral en la sección estado de resultado  integral. 
+ 
+ 
+ 
+Los hechos ocurridos despué s del periodo sobre el que informa son todos aquellos eventos, ya sean 
+favorables o desfavorables, que se han producido entre el final del periodo sobre el que informa (31 de 
+diciembre) y la fecha de autorización de los estados financieros para su publicación por parte de la 
+Asamblea General. 
+ 
+Pueden identificarse dos tipos de eventos: aquellos que proporcionan evidencia de las condiciones que 
+existían al final del periodo sobre el que informa (hechos ocurridos después del periodo sobre el que se 
+informa que implican ajuste); y aquéllos que indican condiciones que surgieron después del periodo 
+sobre el que se informa (hechos ocurridos después del periodo sobre el que se informa que no implican 
+ajuste). 
+ 
+5. Juicios, Estimaciones y Supuestos Contables Significativos 
+ 
+La preparación de los estados financieros de acuerdo con las NIIF requiere la elaboración y 
+consideración, por parte de la Administración de juicios, estimaciones y supuestos contables 
+significativos que impactan en los saldos informados de activos y pasivos, ingresos y gastos, así como 
+en la determinación y revelación de los activos y pasivos contingentes a la fecha de cierre del período 
+sobre el que se informa. 
+ 
+La Compañía ha basado sus estimaciones y supuestos contables significativos con siderando los 
+parámetros disponibles al momento de la preparación de los estados financieros individuales. Sin 
+embargo, las circunstancias y los supuestos actuales sobre los acontecimientos futuros podrían variar 
+debido a cambios en el mercado o a circunst ancias que surjan más allá del control la Compañía. Esos 
+cambios se reflejarán en los supuestos en el momento en que ellos ocurran.    
+ 
+ 
+ 
+ 
+ 
+ 
+43 5. Juicios, Estimaciones y Supuestos Contables Significativos (continuación)  
+ 
+En este sentido, las incertidumbres asociadas con las estimaciones y supuestos adoptados podrían dar 
+lugar en el futuro a resultados finales que podrían diferir de dichas estimaciones y requerir de ajustes a 
+los saldos informados. Las estimaciones y los supuestos significativo s realizados por Compañía de 
+Seguros de Vida Aurora S.A., se describen a continuación:  
+ 
+ 
+ 
+Al elaborar los estados financieros, la gerencia evalúa la capacidad que tiene la entidad para continuar 
+en funcionamiento. Los estados financi eros se elaboran bajo la hipótesis de negocio en marcha.  
+ 
+5.2.  Clasificación de Inversiones  
+ 
+La gerencia aplica juicios en evaluar si en los estados financieros las inversiones en títulos de deuda y 
+patrimoniales pueden ser categorizados como negociables, disponibles para la venta y en el caso de los 
+títulos de deuda hasta su vencimiento teniendo en cuenta en particular su modelo de negocio para 
+gestionar los activos financieros y si cumplen las condiciones para que dichos activos financieros puedan 
+ser incluidos en cada categoría.  
+ 
+5.3. Deterioro de Activos Financieros 
+ 
+La Compañía regularmente revisa su portafolio de activos financieros para evaluar su deterioro; en la 
+determinación de si un deterioro debe ser registrado con cargo a los resultados del año la gerencia hace 
+juicios en cuanto a determinar si hay un dato observable que indica una disminución en el flujo de caja 
+estimado del portafolio de activos financieros. Esta evidencia puede incluir datos indicando que ha 
+habido un cambio adverso en el comportamiento de los deudores y constituye las provisiones de acuerdo 
+con los parámetros establecidos por la Superintendencia Financiera.  
+ 
+5.4. Valor Razonable de Instrumentos Financieros 
+ 
+Información sobre los valores razonables de instrum entos financieros y derivativos que fueron valuados 
+usando asunciones que no son basadas en datos observables del mercado. 
+ 
+5.5. Impuesto Sobre la Renta Diferido 
+ 
+La Compañía evalúa la realización en el tiempo del impuesto sobre la renta diferido activo. El impuesto 
+diferido activo representa impuestos sobre la renta recuperables a través de futuras deducciones de 
+utilidades gravables y son registrados en el estado de situación financiera. Los impuestos diferidos 
+activos son recuperables en la exte nsión que la realización de los beneficios tributarios relativos es 
+probable. 
+ 
+5.6. Contratos de Seguros 
+ 
+La estimación de los pasivos finales que surgen de los reclamos hechos por los clientes de la Compañía 
+bajo contratos de seguros es el estimado contable más crítico. Hay varias fuentes de incertidumbre que 
+necesitan ser consideradas en el estimado del pasivo que la Compañía pagará finalmente por tales 
+reclamos. De acuerdo con las normas de la Superintendencia Financiera de Colombia dichos pasivos 
+están divididos en pasivos por siniestros avisado por liquidar y de siniestros incurridos, pero no 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+44 5.6. Contratos de Seguros (continuación)  
+ 
+Como carácter general las estimaciones e hipótesis utilizadas son revisadas de forma periódica y están 
+basadas en la experiencia histórica y en otros factores que hayan podido considerarse más razonables 
+en cada momento. Si como consecuencia de estas revisiones se produjese un camb io de estimación en 
+un período determinado, su efecto se aplicará en ese período en forma prospectiva.  
+ 
+La principal hipótesis está basada en el comportamiento y desarrollo de los siniestros, utilizando la 
+frecuencia y costos de los mismos de los últimos e jercicios. Asimismo, se tienen en cuenta en las 
+estimaciones hipótesis sobre los tipos de interés, retrasos en el pago de siniestros y cualquier otro factor 
+externo que pudiera afectar tales estimaciones. Las hipótesis están basadas en la mejor estimación 
+posible en el momento de la emisión de los contratos. No obstante, en el caso de que se pusiera de 
+manifiesto una insuficiencia demostrada, se constituirían las provisiones necesarias para cubrirla.  
+ 
+5.7. Siniestros Avisados por Liquidar 
+ 
+Corresponde al monto de recursos que debe destinar la Compañía para atender los pagos de los 
+siniestros ocurridos una vez estos han sido avisados, así como los gastos asociados a estos, a la fecha 
+de cálculo de este pasivo.  
+ 
+Para la constitución del pasivo, la Compañía tiene en cuenta la magnitud del siniestro, el valor asegurado 
+y la modalidad del amparo, las condiciones de la póliza que lo deriva, los valores sugeridos por los 
+ajustadores, coaseguradores o reaseguradores. También se evalúa y sopesa el riesgo subjetivo, técnico, 
+reputacional, financiero, etc.  El pasivo para gastos legales es determinado por el valor de los honorarios 
+del abogado a cargo de la defensa de la Compañía, en caso de ser necesario, y del costo de aspectos 
+que incidan en el desarrollo del proceso como honorarios de peritos, desplazamientos, etc. 
+ 
+En el proceso de constitución de reservas, dependiendo de la complejidad, se puede obtener el concepto 
+de una firma externa experta que efectúe un análisis y valoración de los perjuicios p roducto del 
+incumplimiento, evento que requiere el reconocimiento de los honorarios para la liquidación de los 
+impuestos a que haya lugar. 
+ 
+5.8.  Siniestros No Avisados IBNR 
+ 
+Para la estimación de esta reserva, se utiliza el método de Chain Ladder, un método validado 
+técnicamente con suficiente desarrollo tanto teórico como práctico para esta estimación. La estimación 
+se realiza sobre la base de siniestros pagados, netos de recobro y salvamentos, y expresados en pesos 
+corrientes a la fecha de cálculo.  
+ 
+6. Normas Internacionales Emitidas Aún no Vigentes en Colombia 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+45  
+ 
+ 
+ 
+ 
+ 
+ Una adaptación específica para contratos con características de participación directa (enfoque de 
+tarifa variable) 
+ Un enfoque simplificado (el enfoque de prima de asignación) principalme nte para contratos de corta 
+duración  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ El significado del derecho a diferir la liquidación de un pasivo  
+ Que el derecho a diferir la liquidación del pasivo debe otorgarse al cierre del ejercicio  
+ Que la clasificación no se ve afectada por la probabilidad de que la entidad ejerza su derecho a 
+diferir la liquidación del pasivo  
+ Que únicamente si algún derivado implícito en un pasivo convertible representa en sí un instrumento 
+de capital, los términos del pasivo no afectarían su clasificación  
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+46  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+47  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+48  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Se modifica la  
+ 
+entidad revelará información sobre sus políticas contables significativas material o con importancia 
+relativa. 
+ Se aclara cuando una política contable se considera material o con importancia relativa.  
+ 
+ 
+aplicado una entidad los requerimientos de las NIIF a sus propias circunstancias, proporciona 
+información específica sobre la entidad que es más útil a los usuarios de los estados financieros que 
+la información estandarizada o la información que solo duplica o resume los requerimientos  de las 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+49  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+7. Efectivo y Equivalente de Efectivo 
+ 
+La composición del efectivo y equivalentes de efectivo al 31 de diciembre de 20 22 y 2021 es la siguiente: 
+    
+   
+       
+   
+   
+       
+ 
+Los saldos en bancos devengan interés a tasas variables sobre la base del dinero depositado. Los 
+Bancos nacionales están calificados AAA. Los Bancos del exterior son Banco occidente de Panamá, 
+calificado AA+ y Credicorp Capital LLC (Antes ULTRALAT) no tiene calificación. El efectivo se encuentra 
+libre de restricciones o gravámenes.  la compañía al cierre de diciembre 2022 solo tiene partidas de 
+conciliación bancarias del banco occidente las cuales no superan los 6 meses de antigüedad su gran 
+mayoría son del ultimo trimestre 2022  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+50 8. Instrumentos Financieros 
+ 
+El detalle de las inversiones que posee la Compañía a l 31 de diciembre de 2022 y 2021 es el siguiente: 
+    
+   
+       
+   
+   
+   
+   
+   
+   
+       
+ 
+(a) Inversiones a Valor Razonable con Cambios en Resultados: 
+    
+   
+       
+   
+   
+   
+       
+ 
+(b) Inversiones a Costo Amortizado 
+    
+   
+       
+   
+   
+       
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+51 8. Instrumentos Financieros (continuación)  
+ 
+(c) Inversiones a Valor Razonable con Cambios en el ORI  Instrumentos de Patrimonio 
+    
+   
+  $ 4,836  $ 5,347 
+  $ 4,836  $ 5,347 
+ 
+ 
+    
+   
+Títulos de tesorería  TES  $ 1,178,295  $  
+  $ 1,178,295  $  
+ 
+ 
+    
+   
+Títulos de tesorería  TES  $ 4,177,037  $  
+  $ 4,177,037  $  
+ 
+ 
+    
+   
+Derechos Fiduciarios  $ 107,076  $  
+ 107,076  
+Subtotal Inversiones (a)+(b)+(c)+(d)+(e)+(f) 19,296,013  23,573,514 
+(g) Deterioro en inversiones RI (1,333) (1,333) 
+Total Inversiones   $ 19,294,680  $  23,572,181 
+ 
+ 
+  2022 2021 
+Inversiones a Valor Razonable con Cambios en Resultados en 
+Títulos Participativos    
+Acciones Fabricato  $ 210,805  $ 247,332 
+Acciones Davivienda 661,440 763,200 
+Acciones ETB 14,040 24,700 
+Acciones Grupo Aval 147,060 184,266 
+Acciones Mineros 18,500 36,350 
+Acciones Sura 66,000 
+111,250 Acciones Corficolombiana 205,500 
+Acciones Bancolombia 258,461 288,860 
+Acciones Argos 90,155 160,000 
+Fondos abiertos 3,855,195 3,459,749 
+Cemex latam holding S. A 16,500 8,580 
+Fondos cerrados 1,638,326 3,234,031 
+  $ 7,181,982  $ 8,518,318 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+52 8. Instrumentos Financieros (continuación)  
+    
+Inversiones a Costo Amortizado    
+Bonos  $ 1,316,725  $ 1,453,906 
+Títulos de tesorería  TES 932,641 5,091,877 
+Títulos emitidos por instituciones financieras  3,611,891 5,123,943 
+  $ 5,861,257  $ 11,669,726 
+    
+Inversiones a Costo Amortizado    
+Bonos  $ 1,316,725  $  1,453,906 
+Títulos de tesorería  TES 932,641 5,091,877 
+Títulos emitidos por instituciones financieras  3,611,891 5,123,943 
+  $ 5,861,257  $  11,669,726 
+    
+Inversiones a Valor Razonable con Cambios en ORI en    
+Títulos Participativos    
+La Alborada S.A.  $ 4,836  $ 5,347 
+ 
+ 
+    
+   
+Títulos de tesorería  TES  $ 1,178,295  $  
+  $ 1,178,295  $  
+ 
+ 
+    
+   
+Títulos de tesorería  TES  $ 4,177,037  $  
+  $ 4,177,037  $  
+ 
+ 
+    
+   
+Alianza Fiduciaria  $ 107,076  $  
+  $ 107,076  $  
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+53 8. Instrumentos Financieros (continuación)  
+ 
+ 
+    
+   
+Subtotal Inversiones   $ 19,296,013  $ 23,573,514 
+Deterioro  (1,333) (1,333) 
+  $ 19,294,680  $ 23,572,181 
+ 
+Movimiento del deterioro de los activos financieros 
+    
+   
+       
+   
+       
+ 
+(a) Recuperación correspondiente al deterioro constituido sobre los títulos Bono Enka y Fondo de Inversión 
+Colectiva Invertir Alternativo por $762 (miles) y $79.006 (miles), respectivamente. 
+ 
+Inversiones en Operaciones en Derivados 
+ 
+La siguiente tabla expresa el valor de l derecho y obligación de las operaciones de contado sobre divisas 
+    
+   
+       
+   
+       
+ 
+La siguiente tabla expresa el valor del derecho y obligación de las operaciones de contado sobre títulos  
+    
+   
+       
+   
+       
+ 
+ 
+ 
+De acuerdo con lo dispuesto en los Decretos 2555 y 2953 de 2010, en cuanto al cubrimiento de las 
+reservas técnicas, en donde se dispone que el 100% de las reservas técnicas retenidas de las entidades 
+aseguradoras y sociedades de ca pitalización deberán estar respaldadas en los porcentajes y tipos de 
+títulos permitidos según decretos mencionados.    
+ 
+ 
+ 
+ 
+ 
+ 
+54 8.  Instrumentos Financieros (continuación)  
+ 
+Inversiones en Operaciones en Derivados (continuación)  
+ 
+Las inversiones están documentadas por títulos  de renta fija, renta variable, derivados (Operaciones de 
+contado títulos TES y TRM) , los cuales no tienen embargos o litigios. 
+ 
+Información Cualitativa  
+ 
+La Compañía orienta su gestión en las diferentes operaciones de tesorería, hacia la estructuración de un 
+portafolio de inversiones que cumpla con los postulados de seguridad, rentabilidad y liquidez. 
+ 
+Las inversiones a valor razonable con cambios en resultado en títulos de deuda al 31 de diciembre de 
+2022 están compues tas por: 
+  Valor de mercado  % participación  Calificación      
+Gobierno Nacional  $ 785,530 100% Nación 
+  $ 785,530 100%  
+ 
+Las inversiones a valor razonable con cambios en resultado en títulos de deuda al 31 de diciembre de 
+2021 están compuestas por: 
+  Valor de mercado  % participación  Calificación      
+      
+    
+      
+ 
+Las inversiones a costo amortizado con cambios en resultado en títulos de deuda al 31 de diciembre de 
+2022 están compuestas por:  
+  Valor de mercado  % participación  Calificación      
+Gobierno Nacional  $ 932,641 16% Nación 
+Banco BBVA 1,015,658 17% AAA 
+Banco Davivienda 929,703 16% AAA 
+Banco de Occidente 588,429 10% AAA 
+Banco ITAU 486,874 8% AAA 
+Bancolombia 1,520,931 26% AAA 
+Credifamilia 387,021 7% AA 
+  $ 5,861,257 100%  
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+55  
+ 
+Información Cualitativa (continuación)  
+ 
+El resumen de las inversiones a costo amortizado a través de resultados en títulos de deuda a 31 de 
+diciembre de 2021: 
+  Valor de mercado  % participación  Calificación      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+      
+ 
+Composición por vencimiento de las inversiones a valor razonable a través de resultados en títulos de 
+deuda a 31 de diciembre de 2022: 
+  Valor de mercado  % participación  
+Vencimiento de Inversiones   
+Entre Tres meses y un año   $   
+Entre un año y dos años    
+Entre dos años y cinco años  785,530 100% 
+  $ 785,530 100% 
+ 
+Composición por vencimiento de las inversiones a valor razonable a través de resultados en títulos de 
+deuda a 31 de diciembre de 2021: 
+  Valor de mercado  % participación  
+   
+     
+   
+   
+     
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+56  
+ 
+Información Cualitativa (continuación)  
+ 
+Composición por vencimiento de las inversiones a Costo Amortizado en títulos de deuda a 31 de 
+diciembre de 2022: 
+  Valor de mercado  % participación  
+Vencimiento de Inversiones   
+Hasta Tres meses  $ 1,516,931 25,88%  
+Entre Tres meses y un año  2,436,234 41,57%  
+Entre dos años y cinco años  588,429 10,04%  
+Entre cinco y 10 años  1,319,663 22,52%  
+  $ 5,861,257 100,00%  
+ 
+Composición por vencimiento de las inversiones a Costo Amortizado en títulos de deuda a 31 de 
+diciembre de 2021: 
+  Valor de mercado  % participación  
+   
+ 
+     
+   
+   
+     
+ 
+ 
+  2022 2021 
+      
+Entre cinco y 10 años  $ 1,178,295  $  
+  $ 1,178,295  $  
+ 
+ 
+  2022 2021    
+Entre cinco y 10 años   $ 4,177,037  $  
+  $ 4,177,037  $  
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+57  
+ 
+Información a Valor Razonable  
+  Diciembre 31 de 2022 Diciembre 31 de 2021  Valor en Valor 
+razonable Valor Valor 
+razonable  libros en libros      
+Activos financieros a costo 
+amortizado  $ 5,861,257  $ 5,702,154  $ 11,669,726  $ 11,430,337 
+Activos financieros a valor 
+razonable con cambios en ORI 4,836 4,836 5,347 5,347 
+Subtotal 5,866,093 5,706,990 11,675,073 11,435,684 
+Activos financieros a costo 
+amortizado con cambios en 
+resultados entregadas en garantía 
+de operaciones con instrumentos 
+derivados  Instrumentos 
+representativos de deuda 4,177,037 3,118,000   
+Total  $ 10,043,130  $ 8,824,990  $ 11,675,073  $ 11,435,684 
+ 
+El valor razonable informado para los activos financieros arriba indicados representa el importe al que se 
+podría canjear el instrumento en una transacción corriente entre partes de común acuerdo y no en una 
+transacción forzada o de liquidación . 
+ 
+Las inversiones están documentadas por títulos de renta fija, renta variable, derivados (Operaciones de 
+contado títulos TES y TRM) , los cuales no tienen embargos o litigios.  
+ 
+9. Cuentas por Cobrar Actividad Aseguradora 
+ 
+El siguientes es el detalle de las cuentas por cobrar actividad aseguradora a 31 de diciembre de 2022 y 
+2021: 
+ 
+   
+   
+       
+   
+   
+   
+   
+       
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+58 9. Cuentas por Cobrar Actividad Aseguradora (continuación)  
+ 
+(a) El siguiente es el detalle de primas por recaudar por cada uno de los ramos de seguros: 
+ 
+   
+   
+       
+   
+   
+       
+ 
+(b) El siguiente es el detalle del deterioro de primas por recaudar: 
+ 
+   
+   
+       
+   
+   
+   
+   
+       
+ 
+ 
+ 
+   
+   
+       
+   
+   
+ 
+   
+ 
+       
+   
+ 
+ 
+ 
+ 
+ 
+ 
+59 9. Cuentas por Cobrar Actividad Aseguradora (continuación)  
+ 
+ 
+ 
+ 
+ 
+      
+          
+           
+                               
+           
+           
+           
+                               
+ 
+      
+          
+           
+                               
+           
+           
+           
+                               
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+60 10. Otras cuentas por cobrar 
+ 
+El siguientes es el detalle de las otras cuentas por cobrar a 31 de diciembre de 2022 y 2021: 
+ 
+   
+   
+       
+   
+       
+ 
+(a) Pertenece a la venta de lotes por $1.565.000. que será pagada según contrato de promesa de compraventa en 
+junio 15 de 2023 y venta de inmuebles por $8.000.000., en donde quedo un saldo por cobrar de $6.840.569 que 
+será pagado el 30 de junio de 2023 según otro si de contrato de compraventa, el restante corresponde a otras 
+cuentas por cobrar.  
+ 
+11. Reservas Técnicas Parte Reaseguradores 
+ 
+El siguiente es el activo por reaseguro que posee la compañía a 31 de diciembre de 20 22 y 2021: 
+ 
+   
+   
+       
+   
+       
+ 
+(a) El siguiente es el detalle por reasegurador de la reserva de siniestros de riesgos en curso: 
+ 
+   
+   
+       
+   
+   
+   
+       
+ 
+(b) El siguiente es el detalle por reasegurador de la reserva de siniestros avisados: 
+ 
+   
+   
+       
+   
+   
+   
+       
+ 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+61 12. Propiedades y Equipo 
+Los activos de la Compañía se encuentran debidamente asegurados con pólizas de todo 
+riesgo tramitada ante la compañía Chubb la cual vence el 15 de abril de 2023 . No existen restricciones 
+de titularidad, ni embargos, ni respaldos de préstamos sobre las propiedades y equipo.  Todos los activos 
+se encuentran libres de gravámenes hipotecas y pignora ciones. 
+ 
+Las revaluaciones y deterioros se realizan según avalúo comercial efectuado bajo los lineamientos 
+establecidos en la NIIF13. 
+(a) El siguiente es el saldo de la cuenta de activos por derechos de uso registrados bajo los lineamientos de la NIIF 
+16 Arrendamientos: 
+62 12. Propiedades y Equipo (continuación)  
+ 
+La Compañía a fin de implementar la NIIF 16 desarrolló las siguientes actividades previas al proceso, las 
+cuales correspondieron a: 
+ 
+ Elaboración de Inventario de contratos de arrendamiento: Se determinaron los contratos suscritos y 
+vigentes cuyo objeto fuera arrendamiento tanto de bienes inmuebles, muebles y otros. Se creó 
+bitácora de los mismos.  
+ Revisión contratos que pudiesen tener inmerso un componente de arrendamiento: Se realizó una 
+revisión de contratos de tecnología y de servicios los cual pudieran contener transferencia de activos, 
+que se catalogaran como arrendamiento. 
+ Elaboración de la política contable de arrendamientos: la Compañía elaboró la política contable en la 
+cual determin ó los lineamientos y directrices para el cumplimiento de la NIIF 16. Entre las cuales se 
+encuentran los arrendamientos de coro plazo y los arrendamientos de poco valor. 
+ 
+La Compañía  efectuó el siguiente procedimiento para la implementación de la NIIF 16:  
+ 
+a) Elaboró un a Política Financiera que genera los lineamientos a seguir para los contratos de 
+arrendamientos estableciendo lo siguiente: 
+ 
+ La Compañía  no registra por este método conforme al párrafo 6 de la NIIF 16 de arrendamientos, los 
+que considere arrendamientos de bajo valor para lo cual se estableció este concepto en la suma de 
+US$5.000. 
+ La Compañía  a efectos del reconocimiento, medición y control, fijó los procedimientos contables  
+requeridos para dar cumplimiento estricto a la NIIF 16 especialmente en lo concerniente a sus 
+párrafos 23,26 y 51.  
+ 
+b) Efectuó análisis de la bitácora  de arrendamientos en la cual se validó el canon mensual, plazo del 
+contrato, tiempo de permanencia y todos aquellos aspectos que faciliten la identificación del contrato.  
+ 
+Se determinaron los arrendamientos que conforme a la política contable, se establec en para la 
+Compañía  en la categoría de bajo valor o a corto plazo, para los cuales no se les aplicará  los 
+procedimientos de reconocimiento, medición y control.  
+c) Los contratos que en razón a su característica cumplen con las condiciones para entrar bajo el 
+alcance de la NIIF 16, se evaluaron en forma independiente y determinaron los valores de activos y 
+pasivo por derecho de uso , adicionalmente, se evaluó la utilización de la tasa interna de 
+endeudamiento para el cálculo del valor presente de las obligaciones, concluyendo, que la misma no 
+es material, por cuanto el capital expuesto no es significativo. El siguiente es el detalle del registro de 
+las transacciones originadas en la aplicación de la NIIF 16  al 31 de diciembre de 2022 y 2021: 
+63 12. Propiedades y Equipo (continuación)  
+ 
+31 de Diciembre de 2022 
+31 de Diciembre de 2021 
+13. Propiedades de I nversión  
+64 14. Activos Mantenidos para la Venta 
+(a) Para el año 2022 la compañía mediante  el contrato de compraventa suscrito con el señor Álvaro Enrique Porras 
+Cortés realizo  un proceso de venta por los lotes ubicados en el municipio de Ricaurte, por valor de $1,565,000 
+en este documento se establece acuerdo de pago el cual quedo estipulado que será pagado e l 15 de junio 
+2023, esta transacción generó  una utilidad en venta de activos por valor de $14, el cual fue registro en el estado 
+de resultado de la compañía  
+ 
+(b) En el mes de febrero del 2022, la compañía compró  el predio ubicado en cra 7n 74B 21 por un valor de 
+$3,850,000, este proceso de compra se realizó mediante una escritura pública N 329. En el mes de octubre 
+mediante una promesa de compraventa suscrito con señor Didier Rincón Suarez se realizó la venta por un valor 
+de $8,000,000. Mediante un o trosí al contrato se estipuló  un acuerdo de pago el cual es el 30 de junio del 2023, 
+esta transacción generó  una utilidad en venta de activos por valor de $4,150,000, el cual fue registro en el 
+estado de resultado de la compañía  
+ 
+En el mes de diciembre 2022, por medio de contrato de promesa de compraventa suscrito con la empresa 
+NABUCO SAS, la compañía adquirió las oficinas del piso 7º ubicado en la carrera 7 # 74 21 por un valor de 
+compra de $ 3,320,700, para el cote de diciembre la compañía ha pagado un 80% del total del inmueble, el 
+restante es pagadero en el primer semestre del 2023, motivo por el cual no s e ha realizado el trámite de 
+escrituración . 
+ 
+15. Activos Intangibles 
+ 
+65 15. Activos Intangibles (continuación)  
+ 
+Las amortizaciones de los activos intangibles se reconocen como gasto en el estado de resultados 
+integrales en la línea Gastos de Administración.  No existen restricciones de uso sobre los activos 
+intangibles reconocidos , la compañía en el año 2022 adquirió  ERP WOG el cual hace que la variación 
+de un año sea significativa  
+ 
+El siguiente es el detalle de los impuestos corrientes de la aseguradora al 31 de diciembre de 202 y 
+2020: 
+17. Otros Activos no Financieros 
+18. Cuentas por Pagar Actividad Aseguradora 
+ 
+(a) El siguiente es el detalle de las cuentas por pagar a los reaseguradores del exterior: 
+ 
+66 19. Otras Cuentas por Pagar 
+ 
+(a) El siguiente es el detalle de las cuentas por pagar, agrupado en el concepto de diversas:  
+(b) El monto de comisiones y honorarios corresponde principalmente a los servicios prestados revisoría  fiscal año 
+2022. 
+ 
+(c) Monto correspondiente a dividendos decretados a disposición de los accionistas para ser reclamados.  
+ 
+20. Pasivos por Impuesto Corriente y Otros Impuestos 
+Lo registrado en el rubro de impuesto de renta por pagar obedece al cálculo de la provisión de renta el 
+cual bajo NIIF se registra como un pasivo real. 
+ 
+ 
+ IVA por pagar: bimestral 
+ Impuesto de renta: anual   
+67 20. Pasivos por Impuesto Corriente y Otros Impuestos (continuación)  
+ 
+ Retención en la fuente: mensual 
+ Impuesto de industria y comercio: bimestral 
+ Autorretención de renta : mensual 
+ 
+21. Pasivo por Impuesto Diferido 
+ 
+68 22. Reservas T écnicas 
+ 
+A continuación, se detallan los pasivos por reservas técnicas que posee la compañía a 31 de diciembre 
+de 2022 y 2021: 
+El siguiente es el detalle de las reservas técnicas y el activo por reaseguro correspondiente al 31 de 
+diciembre de 2022 y 2021: 
+ 
+69 22. Reservas Técnicas (continuación)  
+ 
+Prueba de Adecuación de Pasivos  
+ 
+La NIIF 4 Contratos de Seguros establece para la prueba de adecuación de pasivos se comparará el 
+valor del pasivo registrado por la aseguradora Vs. el siguiente cálculo:  
+ 
+Importe en libros de sus pasivos por contratos de seguro. 
+ 
+() Costos de adquisición diferidos  
+() Activos intangibles conexos 
+ 
+Los importes por deficiencia resultante de la prueba de adecuación de pasivos se reconocerán en 
+resultados. 
+ 
+No obstante, lo anterior para la prueba de adecuación de pasivos, la Compañía adopta lo establecido en 
+el parágrafo 2 del artículo 1 del Decreto 2267 de 2014 emitido por el Ministerio de Hacienda y Crédito 
+Público, acogiéndose al cumplimiento anticipado de los plazos previstos en el régimen de transición 
+establecidos en el Decreto 2973 de 2013. 
+ 
+Es decir que la Compañía adopta la metodología de CHAIN LADDER como prueba de adecuación de 
+pasivos para el IBNR. Esta metodología se basa en el promedio de los coeficientes dentro del periodo en 
+estudio y es utilizado de acuerdo con el Decreto 2973 del 2013 (métodos de triangulación).  
+ 
+Para la reserva de riesgo en curso la compañía determina como prueba de adecuación los lineamientos 
+según lo establecido en la Circular Externa 035 de 2016 de la S uperintendencia Financiera de Colombia. 
+ 
+Riesgo de liquidez derivado de contratos de seguros 
+ 
+En lo que respecta al riesgo de liquidez, la política de la Compañía se basa en mantener un portafolio de 
+inversiones suficientes para cubrir cualquier eventualidad derivada de sus obligaciones por contratos de 
+seguros. 
+ 
+23. Beneficios a Empleados 
+ 
+El siguiente es el saldo de los beneficios a los empleados que la Compañía ha registrado en los estados 
+financieros individuales al 31 de diciembre de 2022 y 2021: 
+ 
+70 23. Beneficios a Empleados (continuación)  
+ 
+(a) A continuación, se explica la metodología empleada por el actuario para calcular la reserva para bonificaciones 
+por antigüedad quinquenales para los empleados afiliados al sindicato de la Compañía : 
+Años de servicio Porcentaje del 
+salario 
+  
+5 50% 
+10 100% 
+15 150% 
+20 200% 
+25 250% 
+30 300% 
+ 
+ 
+ 
+Personal Elegible 
+ 
+La valoración actuarial a 31 Dic2022, está basada en la información de los participantes reportados por 
+Compañía de Seguros de Vida Aurora S.A. en días pasados a la entrega de este informe.  
+71 23. Beneficios a Empleados ( continuación ) 
+ 
+Personal Elegible (continuación)  
+ 
+El personal que se incluye en la valoración  actuarial a 31 Dic2021 es el siguiente: 
+ 
+ 
+Edad del Personal a 31 Dic2021 
+ 
+La mayor parte del personal beneficiario es masculino. 
+ 
+ 
+ 
+Salario Promedio en Salarios Mínimos  a 31Dic2021 
+ 
+72 23. Beneficios a Empleados ( continuación ) 
+ 
+Métodos Actuariales  
+ 
+La estimación del valor del pasivo, así como el costo de servicio del periodo corriente, se realizó 
+ 
+método consiste en cuantificar los beneficios de cada participante en el plan a medida que tiene derecho 
+sobre ellos, teniendo en cuenta los incrementos futuros de salario y las provisiones del plan para la 
+asignación de beneficios. De esta manera el beneficio to tal esperado estimado para cada participante al 
+momento de su pago, es dividido en unidades, cada una asociada con un año de servicio, tanto pasado 
+como futuro. 
+ 
+La valoración se realiza individualmente para cada participante del plan. Mediante la aplicación de las 
+hipótesis actuariales, se estima el monto del beneficio proyectado que depende de la fecha esperada de 
+pago, el tiempo de servicios del participante en el plan y el salario o valor monetario futuro. 
+ 
+El beneficio atribuido por los servicios prestados en un periodo, es la diferencia entre la obli gación de la 
+valoración al final de periodo menos la obligación al inicio del periodo, excluidos los efectos de interés o 
+descuento y de las hipótesis actuariales. Esto quiere decir que a 31 Dic2022, la ob ligación por 
+beneficios definidos del Plan se calcula aplicando la porción existente ente el ser  vicio a la fecha de 
+medición y el servicio total que espera alcanzar cada participante a la fecha de pago, al beneficio total 
+esperado estimado a la fecha de pago. 
+ 
+La obligación por beneficios definidos total de Compañía de Seguros de Vida Aurora S.A. por Plan de 
+Quinquenios es la suma de la obligación de cada participante del mismo a 31 Dic2022 y el costo de 
+servicio del periodo corriente del plan se calcula como la suma de los costos individuales del periodo 
+corriente. 
+ 
+Hipótesis de Cálculo  
+ 
+La proyección de eventos financieros requiere establecer hipótesis o supuestos de cálculo, se trata de 
+utilizar supuestos razonables, no sesgados, para estimar los fenómenos demográficos, económicos  y 
+financieros del pago futuro del beneficio de Plan de Quinquenios. Las hipótesis actuariales utilizadas a 
+31Dic2022 son utilizadas para estimar el valor presente de las obligaciones futuras a 31 Dic2022 y 
+para calcular el costo por beneficios definidos del siguiente año.  
+ 
+Las Hipótesis que se utilizan para la valoración actuarial que se documenta en este informe, son las 
+siguientes (las tasas se muestran en porcentaje): 
+ 
+Parámetro  2022  2021 
+ 
+Tasa de Descuento 13,00 8,25 
+Incremento de Salario de primer año 12,12 5,25 
+Incremento de Salario de largo plazo 5,00 3,00 
+Inflación de primer año 13,12 5,25 
+Inflación de largo plazo 3,00 3,00 
+ 
+Los supuestos que se utilizan en la valoración actuarial son los siguientes: 
+ 
+ de octubre de 2022 
+del Banco de la República .   
+ 
+73  
+ 
+Hipótesis de Cálculo (continuación ) 
+ 
+Tasa de Descuento: está basada en las tasas ponderadas de los bonos gubernamentales TES de 
+Marzo de 2031 Diciembre de 2022 los cuales tienen una duración 
+modificada cercana a la duración del plan, según información obtenida de fuentes públicas . 
+ 
+ 
+1555/2010 de la Superintendencia Financiera de Colombia. 
+ 
+ 
+contamos con suficiente experiencia de personal, se utiliza la tabla sin ajustar 
+ 
+Revelaciones 
+ 
+Las revelaciones del plan para el año actual, se muestra a continuación.  
+74  
+ 
+Hipótesis de Cálculo (continuación ) 
+ 
+   
+Costo de Servicio   
+Dado que se trata de un beneficio de largo plazo (no de un beneficio de postempleo o de retiro), no hay 
+ORI (Otros Resultados Integrales). 
+ 
+Conciliación de Pasivo y (Activo) Neto  
+Las transferencias incluyen efectos de combinación, adquisición o escisión de negocios  
+Conciliación de Pasivo y (Activo)  
+ 
+75  
+ 
+Conciliación de Pasivo y (Activo)  (continuación)  
+ 
+Pagos Esperados Para los próximos 10 años, el valor esperado de pagos para cada uno de los primeros 
+5 año y agrupados del 6 al 10, es el siguiente:  
+Sensibilidades En el eje vertical se muestra la variación a la tasa de descuento en 50 puntos básicos, en 
+el eje horizontal se muestran los resultados a una variación de la tasa de inflación en 50 puntos básicos. 
+Así mismo, se muestra la duración del plan (en años):  
+ 
+ 
+ 
+Costos Año 2023  
+ 
+Los componentes del costo para el año siguiente son las siguientes:  
+  
+Costo de Servicio  
+Costo de Interés  Neto  
+Interés del  Pasivo  
+76  
+ 
+Costos Año 2023  (continuación)  
+ 
+Respecto de las valoraciones actuariales que se documentan en este informe, tenemos los siguientes 
+comentarios: han sido elaboradas siguiendo los estándares profesionales de práctica internacional 
+propuestos por la Asociación Actuarial Internacional (AAI, www.actuaries.org). en particular para este 
+norma NIC  
+ 
+Los datos que utilizamos para hacer las valoraciones que se documentan en este informe son 12 
+apropiad os y completos para hacer este estudio. Utilizamos metodologías vigentes para hacer las 
+estimaciones que se presentan, algunas de las cuales están establecidas en la regulación local. Los 
+supuestos o hipótesis  de cálculo que utilizamos son consistentes con prácticas de nuestra profesión.  
+(a) El detalle de demandas laborales corresponde a provisiones calculadas en un 91% del señor URREA 
+ACEVEDO ENRIQUE por valor de $248,618, y con un 9% de la señora AVILA GUZMAN ADRIANA por valor de 
+$25,000. 
+El siguiente es el detalle de los otros pasivos no financieros que posee la Compañía al 31 de diciembre 
+de 2022 y 2021:  
+Mediante resolución de la super financiera de Colombia número 0320 de l 08 de marzo de 2023 Por medio de la cual 
+se autoriza una colocación de acciones ordinarias  de $1.037.128 , la compañía realizo el aumento de capital en el 
+mes de abril con unas acciones de 2.530.015 y para el mes de mayo de 7.841.261 para un total de 10.371.276 
+acciones  
+ 
+77  
+ 
+(a) El siguiente es el detalle de otros:  
+(b) Devolución de prima correspondiente a las primas no devengadas para el periodo 22 112022 a 01 012023 
+de las Pólizas de E.A.C , ,258, reintegro de $282´920 ,656.  (vigencia 
+inicial de las pólizas 01 012022 a 01 012023). 
+El capital autorizado de la Compañía al 31 de diciembre de 202 2 y 2021 es de 200,000,000 acciones 
+comunes de valor nominal en pesos colombianos de $100 cada una para un total de $20,000,000,000 de 
+las cuales se encontraban suscritas y pagadas 189,628,724, para un valor total del $18,962,872,400. 
+ 
+De estas 189.628.724 acciones, 3.119.712 con corte a 31 de diciembre de 2022 estaban pendientes por 
+ser registradas ante cámara y comercio  teniendo en cuenta lo establecido en el parágrafo 2 del artículo 
+primero de la Resolución 01876 del 2018, a partir de la fecha de suscripción por parte del tercero, 
+contamos con un mes, para informar a la Superintendencia Financiera de Colombia el número de 
+acciones suscritas, los pagos efectuados sobre el total del capital en la colocación de acciones 
+autorizada mediante la resolución anteriormente mencionada.  
+78  
+(a) El siguiente es el detalle de primas emitidas de seguros de personas por ramo: 
+ 
+(b)  El aumento en la producción de ARL se debe a la incorporación de pólizas durante finales del año 2021, las 
+cuales trajeron  consigo una considerable cantidad de afiliados. Un ejemplo es la póliza 990 Construacabados, la 
+cual tiene una emisión promedio mens ual de 79 millones de pesos para aproximadamente 1200 a 1300 
+cotizantes al mes. De estos, al menos el 60% se encuentran en riesgos 4 y 5, mientras que el 40% restante 
+corresponde a riesgos 1, 2 y 3. Esta póliza representa el 51% de la producción con un val or de 951 millones. 
+Seguida de esta, se encuentra la póliza 989 As Servicios Integrales, la cual tiene una emisión mensual promedio 
+de 34 millones de pesos. Esta póliza cuenta con alrededor de 4000 cotizantes mensuales que se encuentran en 
+riesgos de 1 a 3 , lo que representa el 22% de la emisión del año 2022 con un valor de 407 millones. Además , se 
+emitieron otras 14 pólizas a finales del año 2021 y principios del año 2022, las cuales sumaron una producción 
+adicional de 419 millones. Estas pólizas incluyen la póliza 1000 certificaban con un valor de 192 millones, la 
+póliza 985 Transportadora de Cali con un valor de 119 millones, la póliza 992 Admicol con un valor de 64 
+millones, la póliza 993 Odont Jomar con un valor de 13 millones, la póliza 1002 Palmeras de Alamosa con un 
+valor de 7 millones, la póliza 1001 Martínez Pérez Rodolfo con un valor de 6 millones, la póliza 998 Consultoría 
+y Asesorías Temporales con un valor de 4 millones, la póliza 999 Inversiones CJA con un valor de 3 millones, la 
+póliza 986 Grupo Preving con un valor de 2 millones, la póliza 994 Energía y alumbrado de Colombia con un 
+valor de 1 millón, la póliza 995 Alumbrado Público de Barrancas con un valor de 1 millón, la póliza 998 
+Alumbrado Público de El Molino con un valor de 1 millón, la póliza 996 Alumbrado Públic o de Fonseca con un 
+valor de 1 millón, y la póliza 997 Alumbrado Público de Distracción con un valor de 870 mil pesos. Estas pólizas 
+cuentan con varios cotizantes y presentan variaciones en los niveles de riesgo, sumando así un 23% adicional a 
+la producció n total. 
+79  
+ 
+(c) El siguiente es el detalle cancelaciones y/o anulaciones por ramo: 
+(a) El siguiente es el detalle por ramo de la l iberación de reservas para siniestros avisados : 
+80  
+ 
+(b) El siguiente es el detalle por ramo de la liberación de reservas  de riesgo en curso: 
+ 
+(c) El siguiente es el detalle por ramo de la liberación de reservas para siniestros no avisados:  
+30. Valoración y Producto de Inversiones 
+(a) De acuerdo con el capítulo I de la circular básica financiera y contable,  la diferencia que se presente entre el 
+valor de mercado de un día y el del día inmediatamente anterior se registra como una utilidad o pérdida en 
+valoración dependiendo si el mencionado valor de mercado aumenta o disminuye, por tanto, el producto de las 
+Inversiones a valor razonable en instrumentos de deuda es igual a la utilidad en valoración por $ 7,820,264 
+menos la pérdida en valoración por $7,928,719  (Nota 40). 
+ 
+(b) El resultado neto de las operaciones en derivados para el año 2022 fue de ($1,871,730), que corresponde a la 
+valoración y registro contable en la cuenta de utilidad por $6,320,700 (Nota 28) menos la pérd ida $8,192,463 
+(Nota 39) 
+ 
+(c) De acuerdo con el capítulo I de la circular básica financiera y contable,  la diferencia que se presente entre el 
+valor de mercado de un día y el del día inmediatamente anterior se registra como una utilidad o  pérdida en 
+valoración  dependiendo si el mencionado valor de mercado aumenta o disminuye, por tanto, el producto de las 
+Inversiones a valor razonable en instrumentos de deuda es igual a la utilidad en valoración por $1,457,707 
+menos la pérdida en valoración por $1,662,695  (Nota 41). 
+81 31. Reaseguros 
+32. Utilidad en Venta de Inversiones 
+a) Utilidad generada en la venta del TES Gobierno Nacional 2030 
+ 
+b) Utilidad generada en la venta de acciones de los siguientes emisores: 
+ 
+Renta Variable 
+33. Otros Productos de Inversión  
+34. Otros Ingresos Financieros 
+82 35. Otros Ingresos no Operacionales 
+(a) El siguiente es el detalle de otros ingresos de la operación agrupado en el concepto diversos:  
+36.Utilidad en Venta de Activos Mantenidos para la Venta 
+83  
+Las constituciones se explican por los incrementos en las diferentes reservas. Para la reserva de riesgos 
+en curso, la variación tiene que ver con la emisión de primas de un año al otro. Las reservas de 
+siniestros avisados encuentran su diferenciación por las ocurrencias y pagos de siniestros de año a año. 
+En el caso de la reserva matemática, la variación resulta de las actualizaciones en la población, como 
+también la actualización del cálculo actuarial. La reserva de siniestros ocurridos no avisados tiene 
+variación por los cambios normales en la emisión y comportamiento de siniestros de un año a otro. La 
+desviación de siniestralidad y la reserva especial de riesgos laborales varían en términos de la prima 
+emitida. En conclusión, estas cuentas siempre varían de año a año, pues es el comportamient o normal 
+de la actividad aseguradora, ya que la única manera en que estas cuentas permanezcan iguales es que 
+la compañía no emita nuevas pólizas, no reciba o no pague nuevos siniestros.  
+ 
+(a) El resultado neto de las operaciones en derivados para el año 2022 fue de ($1,871,730), que corresponde a la 
+valoración y registro contable en la cuenta de utilidad por $6 ,320,700 (Nota 28) menos la pérdida $8 ,192,463.  
+84  
+ 
+(a) De acuerdo con el capítulo I de la circular básica financiera y contable,  la diferencia que se presente entre el 
+valor de mercado de un día y el del día inmediatamente anterior se registra como una utilidad o  pérdida en 
+valoración dependiendo si el mencionado valor de mercado aumenta o disminuye, por tanto, el producto de las 
+Inversiones a valor razonable en instrume ntos de deuda es igual a la utilidad en valoración por $ 7,820,264 
+(Nota 30 ) menos la pérdida en valoración por $ 7,928,719. 
+ 
+(b) De acuerdo con el capítulo I de la circular básica financiera y contable,  la diferencia que se presente entre el 
+valor de mercado de un día y el del día inmediatamente anterior se registra como una utilidad o  pérdida en 
+valoración dependiendo si el mencion ado valor de mercado aumenta o disminuye, por tanto, el producto de las 
+Inversiones a valor razonable en instrumentos de deuda es igual a la utilidad en valoración por $ 1,457,707 
+(Nota 30 ) menos la pérdida en valoración por $ 1,662,695. 
+(a) El incremento se debe a que para el 2022 las pólizas han incrementado su emisión, por ejemplo, COOSALUD 
+cuyo intermediario es ASESORES EN SEGUROS FINANZAS Y COMERCIO FINCOMERCIAL con un 
+incremento del 17%. También ingresaron nuevos intermediarios en el ramo de Vida Grupo y Accidentes 
+Personales, que al total de la cuenta componen el %1.18 que, para el año anterior, obtenían una participación 
+inferior. 
+(b) ARL incrementa sus comisiones en un 89% con relación a la emisión que también ha ido incrementando. El 
+intermediario más representativo para el 2022 fue Lisbeth Clemencia Quintero Rengifo con comisiones del 75% 
+del total de la cuenta. 
+85  
+86  
+87   
+(a) A continuación,  relacionamos el detalle agrupado en el rubro de otros beneficios a empleados:   
+88  
+89  
+ 
+48.Otros Costos No Financieros  
+ 
+(1)  
+ 
+(2)  
+ 
+(3) 
+90  
+ 
+1. El cambio de tasa de las partidas clasificadas como ganancia ocasional que pasa de ser del 10% al 15%. 
+91  
+(1)  
+ 
+(2)  
+ 
+1. Parte del aumento del impuesto diferido pasivo se debe al aumento de la tasa en un 5%. 
+ 
+2. Se realiza el cambio de base en la partida de inversiones renta fija valoradas a valor razonable. 
+ 
+3. Se ajusta al saldo inicial en la partida de activos diferidos. 
+ 
+92  
+1) Se reduce el valor de terrenos por la venta de unos lotes ubicados en Ricaurte. 
+93  
+1 
+ 
+1 Artículo 117°. TÉRMINO DE FIRMEZA. El término de firmeza de los artículos 147 y 714 del Estatuto Tributario de 
+la declaración del impuesto sobre la renta y complementarios de los contribuyentes que determinen o compensen 
+pérdidas fiscales, o que estén sujetos al Régimen de Precios de Transferencia, será de cinco (5) años.   
+94   
+95   
+96 
+50. Contingencias  
+97 50. Contingencias (continuación)  
+98 
+99  
+ Marco de Apetito de Riesgos 
+ Sistema de Administración de Riesgos (SAR ) 
+ Sistema de Administración de Riesgos de Mercados (SARM)  
+ 
+100  
+ VAR 
+ Producto 
+ Trader 
+ Contraparte 
+ Emisor 
+ Fondos de Inversión Colectiva  
+ Legales (Inversiones que respaldan la reserva) 
+ Derivados (Producto, trader, pérdida)  
+ 
+ Sistema de Administración de Riesgo Operativo (SARO)  
+ Sistema de Administración de Riesgo de Liquidez (SARL)  
+ Sistema de Administración de Riesgo de Crédito (SARC)  
+101  
+ Actualización y seguimiento de los riesgos, causas y controles  
+ La actualización de los perfiles de riesgo.  
+ Establecer el apetito de riesgo 
+ 
+ Fortalecimiento del Plan de Continuidad del Negocio, Plan de Crisis y Plan de Emergencias, así 
+como también la realización de pruebas.  
+ Capacitación.  
+ Monitoreo a los diferentes instrumentos financieros de la Compañía, y su comportamiento ante los 
+cambios en el comportamiento de los diferentes factores de riesgo. 
+ Monitoreo de Valor en Riesgo (VeR) 
+102  
+103  
+104  
+105  
+106  
+107  
+De acuerdo con lo establecido en el numeral 2.5.3 del capítulo 2 de la Circular Básica, contable y 
+financiera, la compañía debe gestionar el riesgo de crédito sobre  las operaciones correspondientes a 
+cartera de créditos, cuentas por cobrar correspondientes  a remuneración de intermediación y créditos a 
+empleados y agentes. Sin embargo, con corte al 31 de diciembre de 2022 no existían saldos contables 
+registrados en las anteriores cuentas, por tanto, no existe la posibilidad que la compañía incurr a en 
+pérdidas como consecuencia del incumplimiento de las obligaciones de un deudor. 
+ 
+Sin perjuicio de lo anterior, la compañía evalúa el riesgo de crédito del efectivo a partir de las 
+calificaciones emitidas por agencias reconocidas , tal como se revela en la nota 7. En relación con las 
+cuentas por cobrar, el indicador de rotación de cartera mantiene un resultado menor a 30 días . Es decir, 
+que éstas se convierten muy rápidamente en efectivo, por lo que el grado de exposición a este riesgo es 
+bajo. 
+108  
+109  
+110  
+La compañía ha cumplido y mantiene estricto seguimiento a los requerimientos de capital mínimo 
+requerido por ramo, patrimonio técnico y patrimonio adecuado de acuerdo con la normatividad aplicable 
+a la industria aseguradora. 
+El siguiente es el detalle de los índices de solvencia de la compañía al 31 de diciembre de 202 2 y 2021, 
+respectivamente: 
+Compromisos 
+No se han presentado eventos posteriores significativos al 31 de diciembre de 2022 diferentes al descrito 
+a continuación  que puedan afectar la estructura financiera y la continuidad del negocio en marcha de la 
+Compañía.
+111 
+Los estados financieros correspondientes al ejercicio finalizado el 31 de diciembre de 2022 fueron 
+presentados ante la Junta Directiva celebrada el 28 de febrero de 2023, según consta en acta 582 para 
+ser presentados ante la Asamblea General de Accionistas el 31 de marzo de 2023. 
+ 
+Sin embargo, dados los ajustes sugeridos por la revisoría  fiscal, el 16 de mayo del 2023, mediante Junta 
+Extraordinaria que consta en el Acta No. 585, estos fueron nuevamente revisados con sus respectivos 
+ajustes y aprobados para ser presentados en la Asamblea General de Accionistas dada su segunda 
+convocatoria el 17 de mayo de 2023, lo anterior, siempre y cuando la Superintendencia Financiera 
+emitiera la aprobación  de dichos estados financieros al cierre de ejercicio del año 2022. 
+ 
+Una vez instalada la Asamblea General de Accionistas dada su segunda convocatoria el 17 de mayo de 
+2023, el representante legal de la Compañía  indica que los estados financieros aún no se encuentran 
+autorizados por la Superintendencia Financiera de Colombia.  
+ 
+Así las cosas, los asambleístas  por unanimidad deciden suspender la asamblea para ser reanudada el 
+viernes 19 de mayo, a la expectativa de recibir la aprobación  de los estados financieros correspondientes 
+al ejercicio finalizado del 31 de diciembre de 2022, sin embargo, la retransmisión  de dichos estados 
+financieros solamente fue autorizada por la Superintendencia hasta el día 18 de mayo del 2023.  
+ 
+Reanudada la asamblea, el día19 de mayo, se indica la imposibilidad de someter a consideración  los 
+estados financieros de cierre de ejercicio del año 2022, toda vez que no han sido aprobados dichos 
+estados por el referido ente de control. Así las cosas, de manera unánime,  los asambleístas  toman la 
+decisión de someter a consideración  dichos estados financieros solamente hasta que se emita la 
+aprobación  de los mismos por parte de la Superintendencia. 
+112 Los suscritos Representante Legal y Contador Público bajo cuya responsabilidad se prepararon los 
+estados financieros, certificamos que: 
+ 
+Para la emisión del estado de situación financiera al 31 de diciembre de 2022 y del estado de resultados 
+del ejercicio, estado de cambios en el patrimonio y estado de flujos de efectivo por el año terminado en 
+esa fecha, que conforme al reglamento se ponen a disposición del accionista y de terceros, se han 
+verificado previamente las afirmaciones contenidas en ellos y las cifras tomadas fielmente de los libros. 

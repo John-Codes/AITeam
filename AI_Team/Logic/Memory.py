@@ -1,20 +1,17 @@
-from .VectorDB import VectorDB
-from .LLMs import CallPalm
-from .context_messages import CONTEXT_MESSAGES
-from langchain.llms import OpenAI
-from langchain.chains.question_answering import load_qa_chain
-from langchain.callbacks import get_openai_callback
-import google.generativeai as palm
+from VectorDB import VectorDB
+from LLMs import *
+from context_messages import CONTEXT_MESSAGES
 from pathlib import Path
 import os
 # Query:
-def consulta_IA_openai(pregunta):
+def consulta_IA_openai(pregunta, context):
+    #this work with django
     # Absolute path to the .txt file
-    current_dir = Path(__file__).parent
-    ruta_absoluta = current_dir / "memory_text" / "memoryAI.txt"
+    #current_dir = Path(__file__).parent
+    #ruta_absoluta = current_dir / "memory_text" / str(context)
 
     # Data preparation:
-    with open(ruta_absoluta, 'r', encoding='utf-8') as f:
+    with open(context, 'r', encoding='utf-8') as f:
         contenido = f.read()
 
     # Instantiate the VectorDB class and process the content
@@ -29,14 +26,9 @@ def consulta_IA_openai(pregunta):
     if not docs:
         return "Lo siento, no tengo información al respecto."
 
-    # Set up the OpenAI model and get a response based on the retrieved documents and the question.
-    llm = OpenAI()
-    chain = load_qa_chain(llm=llm, chain_type="stuff")
-    with get_openai_callback() as cb:
-        response = chain.run(input_documents=docs, question=pregunta)
-        # You can also print the callback if needed
-        #print(cb)
-    
+    # Call a gpt with openai, if this dont work, the function call the CallChatGPT function LLMs
+    response = CallChatGPT_Langchain(pregunta, docs, context)
+
     return response
 
 # Global variable for the VectorDB instance
@@ -89,3 +81,4 @@ def Consulta_IA_PALM(prompt, context):
         vector_db.add_to_context(prompt, palm_response)
 
     return palm_response
+
