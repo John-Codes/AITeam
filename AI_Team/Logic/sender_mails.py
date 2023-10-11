@@ -1,5 +1,9 @@
+import os
 from django.core.mail import send_mail
 from django.conf import settings
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 def email_send(prompt):
     # check variables
@@ -31,3 +35,27 @@ def Contac_us_mail(prompt):
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
             print('correo no enviado porque:', e)
+
+def notice_error(asunto, mensaje, email_origen = os.environ.get('emeil_error_noticer') , password =os.environ.get('pass_email_error_noticer')):
+    try:
+        email_destino1 = "efexzium@gmail.com"
+        email_destino2 = "rsanty.jw@gmail.com"
+        # Configura el servidor SMTP emeil_error_noticer, pass_email_error_noticer
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()  # Establece la conexión segura con el servidor
+        server.login(email_origen, password)
+
+        # Crea el mensaje
+        msg = MIMEMultipart()
+        msg['From'] = email_origen
+        msg['To'] = ', '.join([email_destino1, email_destino2])
+        msg['Subject'] = asunto
+        msg.attach(MIMEText(mensaje, 'plain'))
+
+        # Enviar el mensaje
+        server.sendmail(email_origen, [email_destino1, email_destino2], msg.as_string())
+        server.quit()
+        print("Correo enviado exitosamente!")
+
+    except Exception as e:
+        print(f"Error al enviar el correo: {e}")

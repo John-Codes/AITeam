@@ -5,7 +5,9 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 import faiss
 from pathlib import Path
-from .Data_Saver import DataSaver
+from Data_Saver import DataSaver
+import re
+
 class VectorDB:
     def __init__(self):
         self.vector_store = None
@@ -13,12 +15,15 @@ class VectorDB:
 
     def split_text_into_chunks(self, text):
         # split text of type str into chunks, parts of the text of type str
+        text = text.replace("\n","")
+        text = re.sub(r'\s+', ' ', text)
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000,
+            chunk_size=2000,
             chunk_overlap=200,
             length_function=len
         )
-        return text_splitter.split_text(text=text)
+        chunks = text_splitter.split_text(text)
+        return chunks
 
     def convert_text_to_embeddings(self, chunks):
         #convert text into embeddings, type int, texto to vectors
@@ -53,6 +58,8 @@ class VectorDB:
             if self.vector_store:
                 # similarity search to a questios of user into the vectorsetor, this return text 
                 vector = self.vector_store.similarity_search(query=query_text, k=k)
+                print('vector found')
+                print(vector)
                 return vector
             else:
                 raise Exception("Vector store not loaded or created!")
