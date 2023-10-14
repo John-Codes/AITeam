@@ -1,39 +1,88 @@
 import os
 import openai
 import google.generativeai as palm
-from sender_mails import email_send
+from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
-import requests
-import json
-from sender_mails import *
-
-def main():
-    #result = CallChatGPT("Make python helloworld program")
-    #result = CallPalm2("Make python helloworld program")
-    Call("Make python helloworld program", "Palm2")
+from langchain.output_parsers import PydanticOutputParser
+from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
+# quitar el punto para usar Gradio.py
+from .sender_mails import *
+from .json_page import ContentPage
 
 
-def Call(projectDescription, LLMName):
-    if LLMName == "ChatGPT":
-        return CallChatGPT(projectDescription)
-    elif LLMName == "Palm2":
-        return CallPalm2(projectDescription)
+def generate_json(user_info):
+    #openai.api_base = "https://openrouter.ai/api/v1"
+    #openai.api_key =os.getenv("Open_Router_API_KEY")
+    print('prompt to generate json')
+    print(user_info)
+    # Instantiate the parser with the new model.
+    parser = PydanticOutputParser(pydantic_object=ContentPage)
 
+    # Update the prompt to match the new query and desired format.
+    prompt = ChatPromptTemplate(
+        messages=[
+            HumanMessagePromptTemplate.from_template(
+                "answer the users question as best as possible.\n{format_instructions}\n{question}\n\nUser Information:\n{user_info}"
+            )
+        ],
+        input_variables=["question", "user_info"],
+        partial_variables={
+            "format_instructions": parser.get_format_instructions(),
+        },
+    )
+
+    # Generate the input using the updated prompt.
+    user_query = (
+        "Generate a detailed Custom page content of a user info"
+        "the content include the meta tags keywords, description, the tag title of the page, and the header is h1 tag of the page."
+        "Each tag includes a text that the user can read and a URL to which he will be redirected when clicking."
+    )
+    _input = prompt.format_prompt(question=user_query, user_info= user_info)
+    print('calling the open_router')
+    chat_model = ChatOpenAI(
+        model="openai/gpt-4-32k",
+        openai_api_key=os.getenv("Open_Router_API_KEY"),
+        openai_api_base= "https://openrouter.ai/api/v1",
+        headers={
+            "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
+        },
+        max_tokens=3000
+    )
+    print('we call openrouter')
+    # Run the Chain and capture the output
+    output = chat_model(_input.to_messages())
+    try:
+        parsed = parser.parse(output.content)
+        #print(output.content)
+        #print(parsed)
+        print('json return')
+        return 'website = {' + str(parsed) + '}', output.content
+    except Exception as  e:
+        json_succes = str(e)
+        print('an error has ocurred',json_succes)
+        return json_succes
+    
+    
 
 def CallChatGPT(projectDescription):
     try:
-        response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-            messages = [
+        response = ChatOpenAI(
+        model="openai/gpt-4-32k",
+        openai_api_key=os.getenv("Open_Router_API_KEY"),
+        openai_api_base= "https://openrouter.ai/api/v1",
+        headers={
+            "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
+        },
+        max_tokens=3000,
+        temperature=0.6,
+        messages = [
         {
         "role": "user",
         "content": f"{projectDescription}",
         }
         ],
-        temperature=0.6,
-        max_tokens=3000,
         )
       # Extract the GPT response string
         gpt_response_string = response['choices'][0]['message']['content']
@@ -43,7 +92,17 @@ def CallChatGPT(projectDescription):
 
 def CallChatGPT_Langchain(pregunta,docs, context):
     try:
-        llm = ChatOpenAI(max_tokens=2048,temperature=1.0,model_name="gpt-3.5-turbo")
+        llm =  ChatOpenAI(
+        model="openai/gpt-4-32k",
+        openai_api_key=os.getenv("Open_Router_API_KEY"),
+        openai_api_base= "https://openrouter.ai/api/v1",
+        headers={
+            "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
+        },
+        max_tokens=3000,
+        temperature=1,
+        )
+        
         chain = load_qa_chain(llm=llm,chain_type="stuff")
         with get_openai_callback() as cb:
             response = chain.run(input_documents=docs, question=pregunta)
@@ -91,6 +150,7 @@ def CallPalm2(projectDescription):
     return response.result
 
 def Check_Cuestion(prompt):
+    print('acces to the Check cuestion function')
     #print("Función CallPalm2 invocada con:", projectDescription)
     try:
         palm.configure(api_key=os.getenv("Palm2APIKey"))
@@ -130,8 +190,3 @@ def CallPalm(cuestion,context, examples):
         temperature=0.5)
 
     return response.last
-        
-
-if __name__ == "__main__":
-    main()
-

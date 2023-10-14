@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 class DataSaver:
@@ -34,3 +35,24 @@ class DataSaver:
     def json_to_dict(self, filename):
         # Convierte un archivo JSON a un diccionario de Python
         return self.read_from_json(filename)
+    
+    def format_str_to_dict(self, json_str):
+        # Primero, extraemos el contenido entre las llaves
+        match = re.search(r'{.*}', json_str, re.DOTALL)
+        if not match:
+            raise ValueError("No valid JSON found in the provided string.")
+        clean_json_str = match.group(0)
+
+        # Luego, convertimos el string limpio a un diccionario
+        try:
+            data_dict = json.loads(clean_json_str)
+            print('json generated')
+            return data_dict
+        except Exception as e:
+            print('not json generated')
+            print(e)
+
+    def file_exists(self, filename):
+        """Check if a specific file exists."""
+        file_path = self.base_path / f"{filename}.json"
+        return file_path.exists()

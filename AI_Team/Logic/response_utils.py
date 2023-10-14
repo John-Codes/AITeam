@@ -22,7 +22,7 @@ def format_response(response):
 
     # Reemplazar cada coincidencia con las etiquetas HTML de negrita
     for match in matches:
-        response = response.replace(f'**{match}**', f'<strong>{match}</strong>')
+        response = response.replace(f'**{match}**', f'<strong>{match}</strong><br>')
 
     # Si la respuesta contiene un formato de tabla
     if '|' in response:
@@ -59,22 +59,3 @@ def format_response(response):
     response = response.replace('*', '<br>')
 
     return mark_safe(response)
-
-def extract_ai_dictionary(ai_response, context):
-    # Intentamos encontrar una estructura que se parezca a un diccionario JSON
-    pattern = r'\{.*?\}'
-    matches = re.findall(pattern, ai_response, re.DOTALL)
-    
-    for match in matches:
-        try:
-            # Intentamos cargar el fragmento como JSON
-            data = json.loads(match)
-            # Verificamos si tiene la estructura esperada
-            if all(key in data["website"] for key in ["title", "header", "list_items", "Context", "description", "keywords", "default_message"]):
-                # Si es así, lo guardamos
-                saver = DataSaver()
-                saver.save_to_json(data, f"memory-AI-with-{context}")
-                return "you site was created successfully see in the link ok last message"
-        except json.JSONDecodeError:
-            pass
-    return "Valid dictionary not found in AI response"

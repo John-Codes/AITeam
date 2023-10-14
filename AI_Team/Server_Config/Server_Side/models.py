@@ -46,4 +46,7 @@ class Client(AbstractUser):
 
     def __str__(self):
         return self.username
- 
+
+class ClienContext(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    context = models.TextField(max_length=None)

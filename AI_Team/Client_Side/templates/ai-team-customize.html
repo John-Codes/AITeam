@@ -36,8 +36,9 @@
                      <!-- Añade esta línea para el menú -->
                     <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
                         <ul>
+                            <li cy-data="home-link" ><a href="{% url 'ai-team' context='main' %}" title="Main page of AI Team Chat"><h2 class="reset-styles" >AI - Team</h2></a></li>
                             {% for item in website_data.list_items %}
-                                <li><a href="{{ item.link }}" title="{{ item.text }}"><h2 class="reset-styles">{{ item.text }}</h2></a></li>
+                                <li><a href="{{ item.url }}" title="{{ item.text }}"><h2 class="reset-styles">{{ item.text }}</h2></a></li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -52,7 +53,7 @@
                     <h2 class="reset-styles">An AI Team is writing</h2>
                 </div>
                 <div class="chat-body px-3 py-2" id="chatBox">
-                    {% if {{ website_data.default_message }} %}
+                    {% if website_data.default_message %}
                         <div class="message-left glass">
                             <p class="message-content">
                                 {{ website_data.default_message }}

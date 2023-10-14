@@ -1,8 +1,9 @@
-from VectorDB import VectorDB
-from LLMs import *
-from context_messages import CONTEXT_MESSAGES
-from pathlib import Path
 import os
+from pathlib import Path
+# quitar el punto para usar Gradio.py
+from .VectorDB import VectorDB
+from .LLMs import *
+from .context_messages import CONTEXT_MESSAGES
 # Query:
 def consulta_IA_openai(pregunta, context):
     #this work with django
@@ -33,52 +34,44 @@ def consulta_IA_openai(pregunta, context):
 
 # Global variable for the VectorDB instance
 vector_db = None
-
-def initialize_vector_db(context):
-    global vector_db
-
-    # Utilizar la función context_palm para obtener el contenido del archivo txt 
-    # según el contexto proporcionado.
-    vector_db_instance = VectorDB()
-    contenido = vector_db_instance.context_palm(context)
-
-    # Definir el nombre del vector store basado en el contexto
-    store_name = f"memory-AI-with-{context}-store"
-    
-    # Instanciar la clase VectorDB y procesar el contenido
-    vector_db = VectorDB()
-    vector_db.process_text(contenido, store_name)
-
+last_context = None
 def Consulta_IA_PALM(prompt, context):
-    global vector_db
+    global vector_db, last_context
+    
+    # Restart the Vector Store class if switch chats (context)
+    if context != last_context:
+        vector_db = VectorDB()
+        last_context = context
 
     if vector_db is None:
-        initialize_vector_db(context)
-
+        vector_db = VectorDB()
+    
     message_error ='An error has occurred, please reload the page to connect to AI Team'
     
     # Retrieve the most similar text fragments using the VectorDB class.
     try:
+        store_name = f"memoryAI_store-{context}"
         contenido = vector_db.context_palm(context)
+        if contenido:
+            vector_db.process_text(contenido, store_name)
+            docs_palm = vector_db.get_context_palm(prompt)
     except FileNotFoundError:
         return message_error
 
     conversation = vector_db.get_conversation(context)
     
     examples = CONTEXT_MESSAGES.get(context, [])
-    
     if conversation:
-        examples.extend(conversation)
+        # only the last 20 messages will be passed to the AI because it has a limit of 20000 bytes that cannot be exceeded
+        examples.extend(conversation[-10:])
 
     try:
-        palm_response = CallPalm(prompt, contenido, examples)
-        print('this is response',palm_response)
+        palm_response = CallPalm(prompt, docs_palm, examples)
     except Exception as e:
         palm_response = message_error
         print('response of google palm doesnt work', e)
 
     if palm_response != message_error:
         vector_db.add_to_context(prompt, palm_response)
-
+    
     return palm_response
-

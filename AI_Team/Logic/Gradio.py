@@ -1,9 +1,6 @@
 import os 
-import openai 
 import gradio as gr
-import PyPDF2
 from Memory import consulta_IA_openai
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 context_input = 'memory_text/context_aseguradora.txt'

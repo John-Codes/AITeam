@@ -19,7 +19,17 @@ function getCookie(name) {
 function sendMessage() {
     //console.log("Función sendMessage invocada");
     const message = document.getElementById("userMessage").value.trim();  // Obtiene el mensaje y elimina espacios en blanco
-
+    let formData = new FormData();
+    formData.append("message", message);
+    formData.append("phase", "user_message");
+    // Comprobamos si el input de archivos existe
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) {
+        const files = fileInput.files;
+        for (let i = 0; i < files.length; i++) {
+            formData.append("uploaded_files", files[i]);
+        }
+    }
     // Luego, verifica si el mensaje es idéntico al anterior.
     if (message.trim() !== "") {
 
@@ -30,9 +40,8 @@ function sendMessage() {
 
             fetch(urlEndpoint, {
                 method: "POST",
-                body: new URLSearchParams({ "message": message, "phase": "user_message" }),
+                body: formData,
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
                     "X-CSRFToken": csrfToken
                 }
             })
