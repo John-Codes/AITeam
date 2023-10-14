@@ -48,20 +48,20 @@
                             {% if user.is_authenticated %}
                                 <li cy-data="logout-link"><a href="{% url 'logout' %}" title="logout"><h2 class="reset-styles" >Logout</h2></a></li>
                                 <li cy-data="panel-link"><a href="{% url 'ai-team' context='panel-admin' %}" id="panel-admin-link" title="Your Panel Admin to create a site-web"><h2 class="reset-styles" >Admin Panel</h2></a></li>
-                                <!--El siguiente li -->
                                 <li><a href="{% url 'ai-team' context='subscription' %}" title="See our subscriptions plans"><h2 class="reset-styles" >subscription</h2></a></li>
                             {% else %}
                                 <li cy-data="login-link"><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >Login</h2></a></li>
+                                <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">FAQs</a></h2></li>
+                                <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">Contact Us</a></h2></li>
+                                <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">About US</a></h2></li>
                             {% endif %}
                             
-                            {% if context_value == "main"  and not user.is_authenticated or user.is_authenticated  %}
+                            {% if context_value == "main" %}
                             <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">FAQs</a></h2></li>
                             <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">Contact Us</a></h2></li>
                             <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">About US</a></h2></li>
-
-                            {% elif context_value == 'panel-admin'%}
-                            <li cy-data="create-page-link"><h2 class="reset-styles"><a data-template="create-page" title="Confirm data to create web page">Load your page</a></h2></li>
                             {% endif %}
+
                             {% if context_value in valid_contexts %}
                                 {% if site_exists %}
                                 <li cy-data="my-site-link"><a href="{{ my_site_IA }}">My Site</a></li>
@@ -131,8 +131,8 @@
                             <strong>4 Page Description</strong>: A brief description of your page. This will appear as a meta description for search engines and will give users a quick overview of the page's content. For instance: "A sample AI-generated web page." <br>
                             <strong>5 Page Keywords</strong>: Specify keywords related to your page. This will help in search engine optimization. For instance: "sample, AI-generated, web page, AI Team". <br>
                             <strong>6 Default Chat Message</strong>: A default greeting message that visitors will see when they access your AI chat. Something like: "Hello, how can I assist you today?" <br>
-                            <strong>7 Context Information</strong>: Help us understand the context for AI Team. This information will customize AI Team's responses on your page, ensuring they align with your vision and offer a unique user experience. <br>
-                            <strong>8 Once all is set</strong>: AI Team will provide you with a link to your newly crafted page. You can view, test, and share it as you wish! <br>
+                            <strong>7 Context Information</strong>: Submit a pdf o txt file with Information, questions ans answers that you want to AI-Team respond to your clients. This information will customize AI Team's responses on your page, ensuring they align with your vision and offer a unique user experience. <br>
+                            <strong>8 Once all is set</strong>: In the folding panel you can see the link to your site when it is generated. You can view, test, and share it as you wish! <br>
                             We're excited to help you personalize your AI-powered chat experience!</p>
                            
                             <div class="mt-2">
@@ -163,6 +163,12 @@
                         {% csrf_token %}
                         <input type="text" class="form_input" id="userMessage" placeholder="Send a message..." onkeydown="handleKeyDown(event, '{{context_value}}')">
                         <button class="btn btn-send" onclick="sendMessage( '{{context_value}}' )">Send</button>
+                        {% if context_value == 'panel-admin' %}
+                            <!-- Input escondido para subir archivos -->
+                            
+                            <input type="file" style="display: none;" id="fileInput" name="uploaded_files" multiple accept=".pdf,.txt">
+                            <label for="fileInput" class="btn btn-send">Upload Files</label>
+                        {% endif %}
                     </div>
                 </div>
             </div>

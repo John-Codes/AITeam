@@ -1,0 +1,37 @@
+{
+    "title": "Django Programming Chat",
+    "header": "Welcome to Django Central!",
+    "description": "A personalized chat site tailored towards programming with Django. Here you'll find useful resources and links to deepen your knowledge and skills.",
+    "keywords": [
+        "Django",
+        "Programming",
+        "Chat",
+        "Models",
+        "Views",
+        "Forms",
+        "Deployment"
+    ],
+    "default_message": "Hello! Welcome to Django Central. Feel free to explore the resources and engage in enriching programming discussions.",
+    "list_items": [
+        {
+            "text": "Django Official Documentation",
+            "url": "https://docs.djangoproject.com/en/stable/"
+        },
+        {
+            "text": "Django Models",
+            "url": "https://docs.djangoproject.com/en/stable/topics/db/models/"
+        },
+        {
+            "text": "Django Views",
+            "url": "https://docs.djangoproject.com/en/stable/topics/http/views/"
+        },
+        {
+            "text": "Django Forms",
+            "url": "https://docs.djangoproject.com/en/stable/topics/forms/"
+        },
+        {
+            "text": "Django Deployment",
+            "url": "https://docs.djangoproject.com/en/stable/howto/deployment/"
+        }
+    ]
+}
