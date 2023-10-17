@@ -13,10 +13,6 @@ from .json_page import ContentPage
 
 
 def generate_json(user_info):
-    #openai.api_base = "https://openrouter.ai/api/v1"
-    #openai.api_key =os.getenv("Open_Router_API_KEY")
-    print('prompt to generate json')
-    print(user_info)
     # Instantiate the parser with the new model.
     parser = PydanticOutputParser(pydantic_object=ContentPage)
 
@@ -40,7 +36,6 @@ def generate_json(user_info):
         "Each tag includes a text that the user can read and a URL to which he will be redirected when clicking."
     )
     _input = prompt.format_prompt(question=user_query, user_info= user_info)
-    print('calling the open_router')
     chat_model = ChatOpenAI(
         model="openai/gpt-4-32k",
         openai_api_key=os.getenv("Open_Router_API_KEY"),
@@ -50,18 +45,13 @@ def generate_json(user_info):
         },
         max_tokens=3000
     )
-    print('we call openrouter')
     # Run the Chain and capture the output
     output = chat_model(_input.to_messages())
     try:
         parsed = parser.parse(output.content)
-        #print(output.content)
-        #print(parsed)
-        print('json return')
         return 'website = {' + str(parsed) + '}', output.content
     except Exception as  e:
         json_succes = str(e)
-        print('an error has ocurred',json_succes)
         return json_succes
     
     
@@ -128,7 +118,6 @@ def CallPalm2(projectDescription):
     
     prompt = f"""{projectDescription}"""
 
-    print('the prompt what IA is accessing:', prompt)
     try:
         response =palm.generate_text(
             model= 'models/text-bison-001',
@@ -145,23 +134,19 @@ def CallPalm2(projectDescription):
     except Exception as e:
         response = str(e)
         print('error when generating text by the AI', e)
-        print(response)
 
     return response.result
 
 def Check_Cuestion(prompt):
-    print('acces to the Check cuestion function')
     #print("Función CallPalm2 invocada con:", projectDescription)
     try:
         palm.configure(api_key=os.getenv("Palm2APIKey"))
-        #print('conectamos con check email')
     except Exception as e:
         print('something was wrong when trying to connect to the api', e)
 
     cuestion = f'Keep in mind the grammar of the following text and answer me if it is a question or not:{prompt}'
     response = palm.chat(context="Respond only with yes or no", messages=cuestion, temperature=0)
     response_lower = str(response.last).lower()
-    print('yes or not:',response_lower)
 
     affirmative_expressions = ['is a question','yes' ]
     negative_expressions = ['not,' 'no', 'statement']

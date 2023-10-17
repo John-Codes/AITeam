@@ -32,19 +32,27 @@ def consulta_IA_openai(pregunta, context):
 
     return response
 
-# Global variable for the VectorDB instance
 vector_db = None
-last_context = None
+
+class ContextManager:
+    def __init__(self):
+        self.last_context = None
+
+context_manager = ContextManager()
+
 def Consulta_IA_PALM(prompt, context):
-    global vector_db, last_context
+    global vector_db
     
+    last_context = context_manager.last_context
+
+    if vector_db is None:
+        vector_db = VectorDB()    
+
     # Restart the Vector Store class if switch chats (context)
     if context != last_context:
         vector_db = VectorDB()
-        last_context = context
+        context_manager.last_context = context
 
-    if vector_db is None:
-        vector_db = VectorDB()
     
     message_error ='An error has occurred, please reload the page to connect to AI Team'
     
@@ -58,18 +66,17 @@ def Consulta_IA_PALM(prompt, context):
     except FileNotFoundError:
         return message_error
 
-    conversation = vector_db.get_conversation(context)
+    conversation = vector_db.get_conversation()
     
     examples = CONTEXT_MESSAGES.get(context, [])
     if conversation:
         # only the last 20 messages will be passed to the AI because it has a limit of 20000 bytes that cannot be exceeded
-        examples.extend(conversation[-10:])
+        examples.extend(conversation[-7:])
 
     try:
         palm_response = CallPalm(prompt, docs_palm, examples)
     except Exception as e:
         palm_response = message_error
-        print('response of google palm doesnt work', e)
 
     if palm_response != message_error:
         vector_db.add_to_context(prompt, palm_response)

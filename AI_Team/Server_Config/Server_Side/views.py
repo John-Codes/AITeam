@@ -100,25 +100,22 @@ class ChatUIView(View):
 
         # You can process the uploaded_files here if needed
         if uploaded_files:
-            print('cargamos archivos')
             self.process_uploaded_files(request, uploaded_files)
         if action == 'cancel_subscription':
             response_data = {}
-            print('boton activado')
             request.session['cancel-subscription'] = True
             response_data['template_message_div'] = render_html('chat_messages/cancel.html', '')
             return JsonResponse(response_data)
 
         if template_name:
-            print('template name:', template_name)
             return self.handle_template_messages(request, template_name)
 
         if phase == 'user_message':
-            print('user message')
+            
             return self.handle_user_message(request, user_message)
 
         if phase == 'ai_response':
-            print('ia message to return')
+            
             return self.handle_ai_response(request, user_message)
 
         return JsonResponse({"error": "Invalid request"})
@@ -158,28 +155,27 @@ class ChatUIView(View):
             del request.session['send_us_email']
         else:
             context_ia = self.context_value
-            print('el contexto actual es', context_ia)
+            
             if context_ia not in ["main", "subscription", "panel-admin"]:
                 decode = context_ia.split('Uptc?to=')[-1].rstrip('$')
-                print('cadena para decodificar:', decode)
+                
                 # Ahora intenta decodificar
                 decode = hashids.decode(decode)
                 context_ia = str(decode[0])
-                print('el contexto decodificado es', context_ia[0])
             if context_ia == 'panel-admin':
                 
-                # Obteniendo 'last_one_messages' de la sesión. Si no existe, se devuelve None como valor predeterminado.
                 json_to_IA, json_to_IA= generate_json(user_message)
                 self.create_page(request, json_to_IA)
                 
                 user_message = str(user_message) + 'here is the data you give me, also explain me' + str(json_to_IA)
-                print('answer to ai')
+                
                 ai_response =  Consulta_IA_PALM(user_message, context_ia)
-                print('consultamos a la IA y obtenemos respuesta')
+                Check_Cuestion(user_message)
                 
             # AI consultation logic
             else:
                 ai_response = Consulta_IA_PALM(user_message, context_ia)
+                Check_Cuestion(user_message)
 
         if request.session.get('send_us_email', False):
             # Handle email sending logic
@@ -188,7 +184,6 @@ class ChatUIView(View):
             del request.session['send_us_email']
 
         elif ai_response:
-            print('llegamos a renderizar y retornar el html con la respuesta de la IA')
             response_data['ia_message_div'] = render_html('chat_messages/ia_message.html', ai_response, format=True)
 
         else:
@@ -229,10 +224,10 @@ class ChatUIView(View):
         charger = Charge_Context()
         for file in uploaded_files:
             try:
-                print('cargamos texto')
+                
                 text = charger.extract_text(file)
                 if text:
-                    print('procedemos a guardar el texto')
+                    
                     charger.save_context(request.user.id, text)
             except ValueError as e:
                 # Handle errors, such as unsupported file types

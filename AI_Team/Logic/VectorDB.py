@@ -33,27 +33,24 @@ class VectorDB:
         return FAISS.from_texts(chunks, embedding=embeddings)
 
     def save_vector_store(self, store_name, vector_store):
-        with open(f"{store_name}.pkl", "wb") as f:
+        vectorstore_dir = Path(__file__).parent / "vectorstore"
+        vectorstore_dir.mkdir(parents=True, exist_ok=True)
+        with open(vectorstore_dir / f"{store_name}.pkl", "wb") as f:
             pickle.dump(vector_store, f)
 
     def load_vector_store(self, store_name):
-        #save the text into memory of pc in pkl format
-        if os.path.exists(f"{store_name}.pkl"):
-            with open(f"{store_name}.pkl", "rb") as f:
+        vectorstore_dir = Path(__file__).parent / "vectorstore"
+        if (vectorstore_dir / f"{store_name}.pkl").exists():
+            with open(vectorstore_dir / f"{store_name}.pkl", "rb") as f:
                 self.vector_store = pickle.load(f)
         else:
-            raise FileNotFoundError(f"File {store_name}.pkl not found!")
+            raise FileNotFoundError(f"File {store_name}.pkl not found in the 'vectorstore' directory!")
 
     def process_text(self, text, store_name):
         # split a large thext into smalls texts
         chunks = self.split_text_into_chunks(text)
-        # if vector store was saved, loaded to the file
-        if os.path.exists(f"{store_name}.pkl"):
-            self.load_vector_store(store_name)
-        # else save the vectorstore convert the text into vectors and seve in the memory
-        else:
-            self.vector_store = self.convert_text_to_embeddings(chunks)
-            self.save_vector_store(store_name, self.vector_store)
+        self.vector_store = self.convert_text_to_embeddings(chunks)
+        self.save_vector_store(store_name, self.vector_store)
 
     def query(self, query_text, k=3):
         try:
@@ -69,22 +66,17 @@ class VectorDB:
     def add_to_context(self, prompt, response):
         self.conversations.append((prompt, response))
 
-    def get_conversation(self, context):
+    def get_conversation(self):
 
         return self.conversations
     
     def context_palm(self, context):
-        print('empezamos a cargar el contenido')
-        if context not in ["main", "subscription", "panel-admin"]:
-            print('context not in valid contexts')
-            try:
-                # Intenta obtener el contexto del cliente por su ID
-                client_context = ClienContext.objects.get(client__id=context)
-                print('we found the context')
-                return client_context.context
-            except Exception as e:
-                print(' we dont found vector becouse')
-                print(e)
+        try:
+            # Intenta obtener el contexto del cliente por su ID
+            client_context = ClienContext.objects.get(client__id=context)
+            return client_context.context
+        except Exception as e:
+            print(e)
 
         current_dir = Path(__file__).parent
         ruta_absoluta = current_dir / "memory_text" / f"memory-AI-with-{context}.txt"
@@ -105,7 +97,5 @@ class VectorDB:
         
         # Combina todas las coincidencias encontradas en una sola cadena de texto
         cleaned_text = ' '.join(matches)
-        print('cleaned_text')
-        print(cleaned_text)
         return cleaned_text
         
