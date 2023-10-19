@@ -56,7 +56,7 @@
                                 <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">About US</a></h2></li>
                             {% endif %}
                             
-                            {% if context_value == "main" %}
+                            {% if context_value == "main" and user.is_authenticated%}
                             <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">FAQs</a></h2></li>
                             <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">Contact Us</a></h2></li>
                             <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">About US</a></h2></li>

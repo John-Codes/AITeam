@@ -8,7 +8,9 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
+sys.path.append('AI_Team/Server_Config') 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Server_Config.settings")
 
 from django.core.wsgi import get_wsgi_application
