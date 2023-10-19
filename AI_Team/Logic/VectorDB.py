@@ -71,23 +71,24 @@ class VectorDB:
         return self.conversations
     
     def context_palm(self, context):
-        try:
-            # Intenta obtener el contexto del cliente por su ID
-            client_context = ClienContext.objects.get(client__id=context)
-            return client_context.context
-        except Exception as e:
-            print(e)
+        if context not in ["main", "subscription", "panel-admin"]:
+            try:
+                # Intenta obtener el contexto del cliente por su ID
+                    client_context = ClienContext.objects.get(client__id=context)
+                    return client_context.context
+            except Exception as e:
+                print(e)
+        else:
+            current_dir = Path(__file__).parent
+            ruta_absoluta = current_dir / "memory_text" / f"memory-AI-with-{context}.txt"
 
-        current_dir = Path(__file__).parent
-        ruta_absoluta = current_dir / "memory_text" / f"memory-AI-with-{context}.txt"
+            if not ruta_absoluta.exists():
+                raise FileNotFoundError(f"No file found for context '{context}'")
 
-        if not ruta_absoluta.exists():
-            raise FileNotFoundError(f"No file found for context '{context}'")
+            with open(ruta_absoluta, 'r', encoding='utf-8') as f:
+                contenido = f.read()
 
-        with open(ruta_absoluta, 'r', encoding='utf-8') as f:
-            contenido = f.read()
-
-        return contenido
+            return contenido
     def get_context_palm(self, prompt):
         consulta =self.query(prompt)
         consulta_str = str(consulta)
