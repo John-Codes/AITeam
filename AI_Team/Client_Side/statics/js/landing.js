@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Initialize event listeners.
-document.getElementById("userMessage").addEventListener("input", checkAndAutocomplete);
+//document.getElementById("userMessage").addEventListener("input", checkAndAutocomplete);
 
 document.addEventListener("DOMContentLoaded", function() {
 
