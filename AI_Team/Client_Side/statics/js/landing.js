@@ -142,40 +142,42 @@ document.addEventListener("DOMContentLoaded", function() {
     const cancelSubscriptionForm = document.getElementById('cancel-subscription-form');
     const chatBox = document.getElementById("chatBox");
     
-    cancelSubscriptionForm.addEventListener('submit', function(e) {
-        e.preventDefault();  // Evita la recarga de la página
-        
-        toggleDotsAnimation(true);
-        const csrfToken = getCookie('csrftoken');
+    if (cancelSubscriptionForm) {
+        cancelSubscriptionForm.addEventListener('submit', function(e) {
+            e.preventDefault();  // Evita la recarga de la página
 
-        let urlEndpoint = `/ai-team/chat/${currentContext}/`;
+            toggleDotsAnimation(true);
+            const csrfToken = getCookie('csrftoken');
 
-        // Envía los datos del formulario al servidor
-        fetch(urlEndpoint, {
-            method: "POST",
-            body: new URLSearchParams(new FormData(cancelSubscriptionForm)),
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "X-CSRFToken": csrfToken
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            chatBox.insertAdjacentHTML('beforeend', data.template_message_div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        })
-        .finally(() => {
-            toggleDotsAnimation(false);
+            let urlEndpoint = `/ai-team/chat/${currentContext}/`;
+
+            // Envía los datos del formulario al servidor
+            fetch(urlEndpoint, {
+                method: "POST",
+                body: new URLSearchParams(new FormData(cancelSubscriptionForm)),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": csrfToken
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                chatBox.insertAdjacentHTML('beforeend', data.template_message_div);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                toggleDotsAnimation(false);
+            });
         });
-    });
+    }
 });
 
 // Initialize event listeners.

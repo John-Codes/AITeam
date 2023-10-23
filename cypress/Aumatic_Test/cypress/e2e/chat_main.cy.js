@@ -1,6 +1,6 @@
 describe("ChatUI Page Tests", () => {
   beforeEach(() => {
-    cy.visit("http://127.0.0.1:8000/ai-team/");
+    cy.visit("/chat/main/");
   });
 
   it("Should send a message when Enter key is pressed", () => {
