@@ -1,13 +1,13 @@
 describe("Signup Page Tests", () => {
   beforeEach(() => {
     // Antes de cada prueba, visita la página de registro
-    cy.visit("http://127.0.0.1:8000/aiteam/signup/");
+    cy.visit("/signup/");
   });
 
   it("Should successfully register a new account", () => {
     // Ingresa los datos de registro de prueba
-    cy.get("#id_email").type("example@gmail.com");
-    cy.get("#id_username").type("cliente21");
+    cy.get("#id_email").type("ejemplo@user.com");
+    cy.get("#id_username").type("cliente");
     cy.get("#id_password1").type("mypassis684securiyrtfdf");
     cy.get("#id_password2").type("mypassis684securiyrtfdf");
 
@@ -27,5 +27,4 @@ describe("Signup Page Tests", () => {
     cy.url().should("include", "/aiteam/login/");
   });
 
-  // Agrega más pruebas si es necesario...
 });

@@ -1,13 +1,13 @@
 describe("Password Reset Page Tests", () => {
   beforeEach(() => {
     // Antes de cada prueba, visita la página de restablecimiento de contraseña
-    cy.visit("http://127.0.0.1:8000/aiteam/password_reset/");
+    cy.visit("/password-reset/");
   });
 
   it("Should successfully reset password", () => {
     // Ingresa los datos de restablecimiento de contraseña de prueba
-    cy.get("#username").type("cliente21");
-    cy.get("#email").type("example@gmail.com");
+    cy.get("#username").type("cliente");
+    cy.get("#email").type("ejemplo@user.com");
     cy.get("#newpassword").type("minuevacontraseñasegura");
     cy.get("#confirmpassword").type("minuevacontraseñasegura");
 
@@ -29,7 +29,7 @@ describe("Password Reset Page Tests", () => {
     cy.contains("Log in").click();
 
     // Verifica que la página redirija a la página de inicio de sesión
-    cy.url().should("include", "/aiteam/login/");
+    cy.url().should("eq", "https://aiteam-app-vpvo8.ondigitalocean.app/ai-team/login/");
   });
 
   // Agrega más pruebas si es necesario...

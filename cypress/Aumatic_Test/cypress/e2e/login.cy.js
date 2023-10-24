@@ -1,7 +1,7 @@
 describe("Login Page Tests", () => {
   beforeEach(() => {
     // Antes de cada prueba, visita la página de inicio de sesión
-    cy.visit("http://127.0.0.1:8000/aiteam/login/");
+    cy.visit("/login/");
   });
 
   it("Should successfully log in when 'Enter' button is clicked", () => {
@@ -14,7 +14,7 @@ describe("Login Page Tests", () => {
 
     // Verifica que se haya iniciado sesión correctamente
     // Puedes utilizar aserciones para verificar que se muestra el contenido de la página a la que rediriges después del inicio de sesión
-    cy.contains("efexzium =$="); // Cambia el texto según tu página de destino después del inicio de sesión
+    cy.contains("efexzium =$=");
   });
 
   it("Should navigate to the registration page when 'Create account' link is clicked", () => {
@@ -33,5 +33,4 @@ describe("Login Page Tests", () => {
     cy.url().should("include", "/aiteam/password_reset/");
   });
 
-  // Agrega más pruebas si es necesario...
 });
