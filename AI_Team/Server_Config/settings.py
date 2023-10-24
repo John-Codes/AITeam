@@ -97,7 +97,7 @@ WSGI_APPLICATION = "AI_Team.Server_Config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "Server_Config/db.sqlite3",
+        "NAME": BASE_DIR / "Server_Config/AITeam.sqlite3",
     }
 }
 
