@@ -7,7 +7,7 @@ describe("ChatUI Page Tests", () => {
     const message = "Whats AI Team";
     cy.get("#userMessage").type(`${message}{enter}`);
     cy.get(".message-right .message-content").last().should("contain", message);
-    cy.wait(3000);
+    cy.wait(9000);
     cy.get(".chat-body").last();
   });
 
@@ -16,7 +16,7 @@ describe("ChatUI Page Tests", () => {
     cy.get("#userMessage").type(message);
     cy.get(".btn-send").click();
     cy.get(".message-right .message-content").last().should("contain", message);
-    cy.wait(3000);
+    cy.wait(9000);
     cy.get(".message-left").last();
   });
 
@@ -50,7 +50,7 @@ describe("ChatUI Page Tests", () => {
     cy.get("label[for='hamburgerToggle']").click();
     cy.get(".menu-items").should("be.visible");
     cy.contains("a", "Home").click();
-    cy.url().should("eq", "http://127.0.0.1:8000/ai-team/");
+    cy.url().should("eq", "https://aiteam-app-vpvo8.ondigitalocean.app/ai-team/chat/main/");
   });
 
   it("Should navigate to 'Login' when 'Login' is clicked in the menu", () => {
@@ -58,7 +58,7 @@ describe("ChatUI Page Tests", () => {
     cy.get("label[for='hamburgerToggle']").click();
     cy.get(".menu-items").should("be.visible");
     cy.contains("a", "Login").click();
-    cy.url().should("eq", "http://127.0.0.1:8000/ai-team/login/");
+    cy.url().should("eq", "https://aiteam-app-vpvo8.ondigitalocean.app/ai-team/login/");
   });
 
   it("Should navigate to 'FAQs' when 'FAQs' is clicked in the menu", () => {
@@ -77,12 +77,12 @@ describe("ChatUI Page Tests", () => {
     cy.get("[cy-data='contact-link'] a").click();
     cy.wait(6000);
     cy.get(".message-left").last().should("contain", "To contact us");
-    cy.get("#userMessage").type("cypresstest.com");
+    cy.get("#userMessage").type("cypresstest.@gmail.com");
     cy.get(".btn-send").click();
-    cy.get(".message-right .message-content").last().should("contain", "cypresstest.com");
-    cy.wait(3000)
+    cy.get(".message-right .message-content").last().should("contain", "cypresstest.@gmail.com");
+    cy.wait(10000)
     cy.get("#userMessage").type("How can AiTeam help me be more productive?{enter}");
-    cy.wait(3000)
+    cy.wait(10000)
     cy.get(".message-left").last().should("contain", "AiTeam");
   });
 
@@ -97,9 +97,9 @@ describe("ChatUI Page Tests", () => {
     cy.get("#userMessage").type(message);
     cy.get(".btn-send").click();
     cy.get(".message-right").last().should("contain", message);
-    cy.wait(3000)
+    cy.wait(10000)
     cy.get("#userMessage").type("How can AiTeam help me be more productive?{enter}");
-    cy.wait(3000)
+    cy.wait(10000)
     cy.get(".message-left").last().should("contain", "AiTeam");
   });
 

@@ -76,6 +76,7 @@ def Consulta_IA_PALM(prompt, context):
     try:
         palm_response = CallPalm(prompt, docs_palm, examples)
     except Exception as e:
+        print(e)
         palm_response = message_error
 
     if palm_response != message_error:
