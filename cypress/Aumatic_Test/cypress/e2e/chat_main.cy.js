@@ -1,4 +1,4 @@
-describe("ChatUI Page Tests", () => {
+describe("Chat main Page Tests", () => {
   beforeEach(() => {
     cy.visit("/chat/main/");
   });
