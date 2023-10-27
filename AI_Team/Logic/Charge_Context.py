@@ -1,5 +1,6 @@
 from Server_Config.Server_Side.models import Client, ClienContext
 from langchain.document_loaders import PyPDFLoader
+from .Data_Saver import DataSaver
 import tempfile
 import os
 class Charge_Context:
@@ -46,4 +47,34 @@ class Charge_Context:
             user_context = ClienContext(client=client, context=text)
             user_context.save()
             print('Nuevo contexto guardado para el cliente:', user_id)
+    def save_image_product(self, user_id, image):
+        print('guardamos imagen')
+        get_products = DataSaver()
+        extract_products = get_products.read_from_json(f'memory-AI-with-{user_id}', ['products'])
+        print('extraemos productos')
+        products = dict(extract_products)
+        name_file =str(image).split('.')[0]
+        # revisa con un for que la imagen sea la misma que el nombre del producto, en este caso debe solo comprobar la llave name del diccionario
+        for product in products['products']:
+            print(f"Comparando: {product['name']} con {name_file}")
 
+            if product['name'] == name_file:
+                
+                # Get the base directory of the project
+                BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                media_folder = os.path.join(BASE_DIR, "Client_Side", "media_products")
+                image_name = f"{user_id}-{product['name']}.png"
+                image_path = os.path.join(media_folder, image_name)
+                # If an image with the same name already exists, overwrite it
+                # If not, save the new image directly
+                try:
+                    if os.path.exists(image_path):
+                        os.remove(image_path)
+                    # Save the image in the media folder using chunks
+                    with open(os.path.join(media_folder, image_name), 'wb+') as destination:
+                        for chunk in image.chunks():
+                            destination.write(chunk)
+                except Exception as e:
+                    print('Error al guardar la imagen:', e)
+                print('Imagen guardada para el cliente:', user_id)
+                

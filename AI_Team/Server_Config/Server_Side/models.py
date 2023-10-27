@@ -52,6 +52,7 @@ class Client(AbstractUser):
     method_pay = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE, default=get_default_payment_method)
     next_date_pay = models.DateField(null=True, blank=True)
     date_subscription = models.DateField(null=True, blank=True) 
+    total_tokens = models.PositiveIntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
         return self.username

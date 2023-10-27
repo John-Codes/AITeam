@@ -77,6 +77,11 @@ function sendMessage() {
                 const chatBox = document.getElementById("chatBox");
                 chatBox.insertAdjacentHTML('beforeend', data.ia_message_div);
                 chatBox.scrollTop = chatBox.scrollHeight;
+                // Verifica si total_cost está presente en la respuesta y actúa en consecuencia
+                if (data.total_cost !== undefined) {
+                    const totalCostDisplay = document.getElementById("totalCostDisplay");
+                    totalCostDisplay.textContent = "Costo Total: $" + data.total_cost;
+                }
             })
             .catch(error => {
                 console.error('Error:', error);

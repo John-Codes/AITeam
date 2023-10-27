@@ -6,10 +6,11 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 import faiss
 from pathlib import Path
+from hashids import Hashids
 # quitar el punto para usar Gradio.py
 from .Data_Saver import DataSaver
 import re
-
+hashids = Hashids(salt = os.getenv("salt"), min_length=8)
 class VectorDB:
     def __init__(self):
         self.vector_store = None
@@ -71,11 +72,21 @@ class VectorDB:
         return self.conversations
     
     def context_palm(self, context):
+        extract_products = []
         if context not in ["main", "subscription", "panel-admin"]:
             try:
+                get_products = DataSaver()
+                extract_products = get_products.read_from_json(f'memory-AI-with-{context}', ['products'])
+                output_dict = {}
+                for product in extract_products['products']:
+                    product_name = product['name']
+                    output_dict[product_name] = product
+                extract_products = output_dict
+                decode = hashids.decode(context)
+                id_context = int(decode[0])
                 # Intenta obtener el contexto del cliente por su ID
-                    client_context = ClienContext.objects.get(client__id=context)
-                    return client_context.context
+                client_context = ClienContext.objects.get(client__id=id_context)
+                return client_context.context, extract_products
             except Exception as e:
                 print(e)
         else:
@@ -87,8 +98,7 @@ class VectorDB:
 
             with open(ruta_absoluta, 'r', encoding='utf-8') as f:
                 contenido = f.read()
-
-            return contenido
+            return contenido, extract_products
     def get_context_palm(self, prompt):
         consulta =self.query(prompt)
         consulta_str = str(consulta)

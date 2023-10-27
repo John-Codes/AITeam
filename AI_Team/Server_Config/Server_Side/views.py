@@ -32,7 +32,7 @@ from AI_Team.Logic.Payments import plans_data
 from datetime import datetime, timedelta
 from .models import Current_Plan, PaymentMethod, SubscriptionStatus
 stripe.api_key = settings.STRIPE_SECRET_KEY
-hashids = Hashids(salt = 'ia is the future salt', min_length=8)
+hashids = Hashids(salt = os.getenv("salt"), min_length=8)
 #STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
 
 # ai-team chat handle events and requests
@@ -151,32 +151,47 @@ class ChatUIView(View):
                 ai_response = cancel_subscription(request.user)
             else:
                 ai_response = None
-            request.session['send_us_email'] = False
-            del request.session['send_us_email']
+            request.session['cancel-subscription'] = False
+            del request.session['cancel-subscription']
         else:
             context_ia = self.context_value
             
             if context_ia not in ["main", "subscription", "panel-admin"]:
-                decode = context_ia.split('Uptc?to=')[-1].rstrip('$')
-                
-                # Ahora intenta decodificar
-                decode = hashids.decode(decode)
-                context_ia = str(decode[0])
-            if context_ia == 'panel-admin':
-                
-                json_to_IA, json_to_IA= generate_json(user_message)
-                self.create_page(request, json_to_IA)
-                
-                user_message = str(user_message) + 'here is the data you give me, also explain me' + str(json_to_IA)
-                
-                ai_response =  Consulta_IA_PALM(user_message, context_ia)
+                context_ia = context_ia.split('Uptc?to=')[-1].rstrip('$')
+            else: 
                 Check_Cuestion(user_message)
+            if context_ia == 'panel-admin':
+                # alistamos el prompt para generar el json
+                reading =DataSaver()
+                json_read =reading.read_from_json(f'memory-AI-with-{hashids.encode(request.user.id)}')
                 
+                if json_read:
+                    prompt = f'this is my dict: {json_read}. now change the dictionary to the next requirements {user_message}'
+                else:
+                    prompt = user_message
+                json_to_IA, tokens_prompt= generate_json(prompt)
+                # Precio por token
+                TOKEN_PRICE = 0.006
+
+                # Calcula el costo de la nueva solicitud
+                current_cost = tokens_prompt * TOKEN_PRICE
+
+                # Suma el costo al total acumulado
+                total_cost = request.user.total_tokens + current_cost
+
+                # Actualiza el campo total_tokens y guarda los cambios
+                request.user.total_tokens = total_cost
+                request.user.save()
+                self.create_page(request, json_to_IA)
+                # alistamos el prompt para la IA que responde al usuario
+                user_message = str(user_message) + 'here is the data you give me, Explain it to me using natural language that isnt hard to understand' + str(json_to_IA)
+                # consultamos a la IA, obtenemos la respuesta y la guardamos en el diccionario a enviar
+                ai_response, product_consult =  Consulta_IA_PALM(user_message, context_ia)
+                response_data['total_cost'] = total_cost
             # AI consultation logic
             else:
-                ai_response = Consulta_IA_PALM(user_message, context_ia)
-                Check_Cuestion(user_message)
-
+                ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
+                
         if request.session.get('send_us_email', False):
             # Handle email sending logic
             self.send_email(user_message)
@@ -184,7 +199,10 @@ class ChatUIView(View):
             del request.session['send_us_email']
 
         elif ai_response:
-            response_data['ia_message_div'] = render_html('chat_messages/ia_message.html', ai_response, format=True)
+            rendered_product = ''
+            if product_consult:
+                rendered_product = render_html('chat_messages/message_info_product.html', product_consult)
+            response_data['ia_message_div'] = render_html('chat_messages/ia_message.html', ai_response, format=True) + rendered_product
 
         else:
             response_data['error'] = 'The API could not respond.'
@@ -224,11 +242,14 @@ class ChatUIView(View):
         charger = Charge_Context()
         for file in uploaded_files:
             try:
-                
-                text = charger.extract_text(file)
-                if text:
-                    
-                    charger.save_context(request.user.id, text)
+                if file.name.endswith('.png'):
+                    user = hashids.encode(request.user.id)
+                    print(user)
+                    charger.save_image_product(user, file)
+                else:
+                    text = charger.extract_text(file)
+                    if text:
+                        charger.save_context(request.user.id, text)
             except ValueError as e:
                 # Handle errors, such as unsupported file types
                 print(e)

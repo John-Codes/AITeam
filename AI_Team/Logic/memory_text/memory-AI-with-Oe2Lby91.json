@@ -1,0 +1,46 @@
+{
+    "title": "Social Media and your Business",
+    "header": "Social Media",
+    "description": "Welcome, here we will show you how to use social networks to boost your business. Social media is a powerful tool that can be used to reach a large audience and promote your business. By using social media effectively, you can connect with potential customers, build relationships, and increase sales.",
+    "keywords": [
+        "social networks",
+        "business",
+        "marketing",
+        "social media marketing",
+        "social media for business",
+        "tiktok"
+    ],
+    "default_message": "Welcome, here we will show you how to use social networks to boost your business. Social media is a powerful tool that can be used to reach a large audience and promote your business. By using social media effectively, you can connect with potential customers, build relationships, and increase sales.",
+    "list_items": [
+        {
+            "text": "YouTube",
+            "url": "https://www.youtube.com/"
+        },
+        {
+            "text": "Instagram",
+            "url": "https://www.instagram.com/"
+        },
+        {
+            "text": "Facebook",
+            "url": "https://www.facebook.com/"
+        },
+        {
+            "text": "TikTok",
+            "url": "https://www.tiktok.com/"
+        }
+    ],
+    "products": [
+        {
+            "name": "Personalized Assistance",
+            "description": "Personalized advice to build your business.",
+            "value": 20,
+            "url": "https://www.google.com/meet/"
+        },
+        {
+            "name": "Virtual Calendar",
+            "description": "A complete calendar of when and in what format to upload videos to make trends and stay active on the networks.",
+            "value": 60,
+            "url": "https://calendar.google.com/"
+        }
+    ]
+}
