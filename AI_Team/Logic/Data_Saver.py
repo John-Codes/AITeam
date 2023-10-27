@@ -16,21 +16,24 @@ class DataSaver:
         with file_path.open('w', encoding='utf-8') as file:
             json.dump(data_dict, file, ensure_ascii=False, indent=4)
 
-    def read_from_json(self, filename, key=None):
+    def read_from_json(self, filename, keys=False):
         # Lee datos de un archivo JSON. Si se proporciona una key, devuelve solo el valor de esa key.
 
         file_path = self.base_path / f"{filename}.json"
         
         if not file_path.exists():
-            raise FileNotFoundError(f"No JSON file found with the name '{filename}'")
+            return False
 
         with file_path.open('r', encoding='utf-8') as file:
             data = json.load(file)
-        
-        if key:
-            return data.get(key)
-
-        return data
+        if keys:
+            data_selected = {}
+            for key in keys:
+                value = data.get(key)
+                data_selected[key] = value
+            return data_selected
+        else:
+            return  data
 
     def json_to_dict(self, filename):
         # Convierte un archivo JSON a un diccionario de Python
@@ -40,11 +43,11 @@ class DataSaver:
         # Primero, extraemos el contenido entre las llaves
         match = re.search(r'{.*}', json_str, re.DOTALL)
         if not match:
-            raise ValueError("No valid JSON found in the provided string.")
-        clean_json_str = match.group(0)
+            print('no match a dict')
 
         # Luego, convertimos el string limpio a un diccionario
         try:
+            clean_json_str = match.group(0)
             data_dict = json.loads(clean_json_str)
             print('json generated')
             return data_dict

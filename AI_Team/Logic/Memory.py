@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 # quitar el punto para usar Gradio.py
 from .VectorDB import VectorDB
+from .Data_Saver import DataSaver
 from .LLMs import *
 from .context_messages import CONTEXT_MESSAGES
 # Query:
@@ -59,7 +60,7 @@ def Consulta_IA_PALM(prompt, context):
     # Retrieve the most similar text fragments using the VectorDB class.
     try:
         store_name = f"memoryAI_store-{context}"
-        contenido = vector_db.context_palm(context)
+        contenido, products= vector_db.context_palm(context)
         if contenido:
             vector_db.process_text(contenido, store_name)
             docs_palm = vector_db.get_context_palm(prompt)
@@ -70,10 +71,31 @@ def Consulta_IA_PALM(prompt, context):
     
     examples = CONTEXT_MESSAGES.get(context, [])
     if conversation:
-        # only the last 20 messages will be passed to the AI because it has a limit of 20000 bytes that cannot be exceeded
-        examples.extend(conversation[-7:])
-
+        # only the last 5 messages will be passed to the AI because it has a limit of 20000 bytes that cant be exceeded
+        examples.extend(conversation[-5:])
+    product_info = False
     try:
+        # product_info = False if the user dont ask for a product, or have the data of the product
+        # this execute if the prompt if from a user chat
+        if context not in ["main","subscription","panel-admin"]:
+            try:
+                # this has to return a dict {name: product}
+                ask_for_product = CallPalm2(prompt, products)
+                print('ask_for_product',ask_for_product)
+                # format the response
+                get_name = DataSaver()
+                get_name_product = get_name.format_str_to_dict(str(ask_for_product))
+                # get the name of the product to verirfy if this is a product of the user json
+                get_name_product= dict(get_name_product)
+                product_to_check = get_name_product.get('name', None)
+                product_info = products.get(product_to_check, False)
+                # add the img url of the product
+                if product_info:
+                    product_info['img'] = f"{context}-{product_to_check}"
+            except:
+                product_info = False
+            docs_palm = f"""You offer the following products, if the user asks about any you must give them a brief message of the information:
+            \n{str(products)}\n Here's the information you should base your answer on:\n{docs_palm}"""
         palm_response = CallPalm(prompt, docs_palm, examples)
     except Exception as e:
         print(e)
@@ -81,5 +103,4 @@ def Consulta_IA_PALM(prompt, context):
 
     if palm_response != message_error:
         vector_db.add_to_context(prompt, palm_response)
-    
-    return palm_response
+    return palm_response, product_info

@@ -140,7 +140,13 @@ input[type="password"]:focus {
   background: transparent; /* Hace que el fondo del card-body sea transparente */
   color: #fff; /* Cambia el color del texto si es necesario */
 }
-
+.total-cost{
+  color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
 /* Dispositivos móviles pequeños */
 @media (max-width: 576px) {
   .glass-effect {

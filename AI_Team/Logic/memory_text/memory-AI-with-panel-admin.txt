@@ -21,3 +21,5 @@ description: Gives a concise overview of the chat or web page's content.
 keywords: Are crucial words associated with the web page, assisting in search engine optimization.
 default message: Serves as the introductory message displayed when users visit the page.
 list items: Consists of navigation links and their respective URLs.
+products: It contains a list of dictionaries, each item in the list is a product, and each product has the following dictionary keys:
+ name, description, value, link to buy
