@@ -3,21 +3,18 @@ import random
 
 
 class MyUser(HttpUser):
-    print('init class')
     username_counter = 1
     wait_time = between(2, 5)
     contexts = ["main", "subscription", "panel-admin"]
 
     @task
     def on_start(self):
-        print('init')
         self.username = f"my_username_{self.username_counter}"
         self.username_counter += 1
         self.signup()
         self.reset_password()
         self.login()
         for i in self.contexts:
-            print(i)
             self.send_message_and_wait(str(i))
         self.client.get("ai-team/logout/")
     
@@ -49,6 +46,7 @@ class MyUser(HttpUser):
     
     
     def send_message_and_wait(self, context):
+        self.client.get(f"ai-team/chat/{context}/")
         messages = {
         'main':[
             "What are the key features of AITeam?","How can AITeam improve my productivity as a developer?","Can AITeam help me with debugging and writing tests?",
@@ -79,7 +77,7 @@ class MyUser(HttpUser):
         context_send = str(context)
         message = messages[context_send]
         phase = "user_message"
-        url_endpoint = f"/ai-team/chat/{context}/"  # Replace "currentContext" with the actual value
+        url_endpoint = f"ai-team/chat/{context}/"  # Replace "currentContext" with the actual value
         
         form_data = {
             "message": message,
@@ -89,6 +87,5 @@ class MyUser(HttpUser):
         response = self.client.post(url_endpoint, data=form_data, headers={"X-CSRFToken": csrf_token})
         
         if response.ok:
-            print('succes response')
             ai_response = response.json()
             # Wait for the response or perform any other necessary actions

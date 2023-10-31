@@ -320,12 +320,12 @@ class Subscription(View):
         return render(request, self.template_name, context)
 
 
-def payment_success(request):
+"""def payment_success(request):
     return render(request, 'payment/payment_success.html')
 
 def payment_failed(request):
     return render(request, 'payment/payment_failed.html')
-
+"""
 def SubscriptionCheckout(request, plan_id):
     # Asegúrate de que plan_id es un índice válido en plans_data
     plan = plans_data[plan_id]
@@ -355,15 +355,18 @@ def SubscriptionCheckout(request, plan_id):
         'plan': plan,
         'paypal': paypal_form
     }
+    print(f"Creating a subscription checkout for invoice {invoice_id}")
     request.session['invoice'] = str(invoice_id)
     return render(request, 'payment/subscription_checkout.html', context)
 
 def PaymentSuccessful(request, plan_id):
+    print('payment successful')
     plan = plans_data[plan_id]
     plan['amount'] = plan['amount'] / 100
     user = request.user 
     invoice = request.session.get('invoice')
     print('invoice id uuid', invoice)
+    print('Attempting to retrieve IPN object for invoice id uuid:', invoice)
 
     # Intenta encontrar el objeto PayPalIPN usando el invoice (uuid)
     try:

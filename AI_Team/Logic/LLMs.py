@@ -1,5 +1,6 @@
 import os
 import openai
+import json
 import google.generativeai as palm
 from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI, ChatGooglePalm
@@ -12,8 +13,41 @@ from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from .sender_mails import *
 from .json_page import ContentPage, Product
 import tiktoken
-
+import runpod
 # agrega a la función  esta función la clase Count_Tokens y usala para contar los tokens generados
+
+def calling_runpod(context, last_messsages, prompt_user):
+    try:
+        runpod_api = os.getenv("RUNPOD_API_KEY")
+        runpod_endpoint = os.getenv("RUNPOD_ENDPOINT")
+        print('llamando a runpod')
+        runpod.api_key = str(runpod_api) # reemplaza esto con tu API key
+        print('apykey configurado')
+        endpoint = runpod.Endpoint(runpod_endpoint)
+        print('endopoint configurado')
+        prompt = f""""Please keep the following information in mind when responding to me, this is the context you should keep in mind: \n{str(context)}\n
+        Here are the last messages that I have received from you:\n{str(last_messsages)}\n
+        Finally, This is the user's prompt, take into account the context and the latest messages to respond clearly and concisely:\n{str(prompt_user)}
+        """
+    except Exception as e:
+        print('something was wrong when trying to connect to the api', e)
+    
+    try:
+        print('enviando request')
+        print(prompt)        
+        prompt_json = {"prompt": prompt}
+        json_str = json.dumps(prompt_json)
+        print(json_str)
+        run_request = endpoint.run_sync(json_str)
+        print('request enviado')
+        if run_request:
+            print('la respuesta de la API de Runpod es:', run_request)
+        else:
+            print("La respuesta de la API de Runpod está vacía.")
+    except Exception as e:
+        print(e.response.text) # print full error response
+        raise
+"""  """
 
 def generate_json(user_info):
     google_api_key = os.getenv("Palm2APIKey")
