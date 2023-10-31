@@ -93,6 +93,9 @@ class ChatUIView(View):
             if invoice:
                 ipn_obj = PayPalIPN.objects.filter(invoice=invoice, payment_status="Completed").first()
                 request.user.order_id = ipn_obj.subscr_id
+                request.user.save()
+                all_registers = PayPalIPN.objects.all()
+                print(f"Found {len(all_registers)} PayPalIPN objects")
                 del request.session['invoice']
             return render(request, 'ai-team.html', context)
 
@@ -381,6 +384,8 @@ def PaymentSuccessful(request, plan_id):
     # Intenta encontrar el objeto PayPalIPN usando el invoice (uuid)
     try:
         ipn_obj = PayPalIPN.objects.filter(invoice=invoice, payment_status="Completed").first()
+        all_registers = PayPalIPN.objects.all()
+        print(f"Found {len(all_registers)} PayPalIPN objects")
         if ipn_obj:
             print(f"Found PayPalIPN object with invoice {invoice} and payment_status 'Completed'")
             print(f"Payment date: {ipn_obj.payment_date}, Payment status: {ipn_obj.payment_status}")

@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Client, Current_Plan, SubscriptionStatus, PaymentMethod
-from paypal.standard.ipn.models import PayPalIPN 
 
 # Administrador para Current_Plan
 class Current_PlanAdmin(admin.ModelAdmin):
@@ -61,4 +60,3 @@ admin.site.register(Current_Plan, Current_PlanAdmin)
 admin.site.register(SubscriptionStatus, SubscriptionStatusAdmin)
 admin.site.register(PaymentMethod, PaymentMethodAdmin)
 admin.site.register(Client, ClientAdmin)
-admin.site.register(PayPalIPN, PayPalIPNAdmin)
