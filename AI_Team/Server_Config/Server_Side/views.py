@@ -87,7 +87,13 @@ class ChatUIView(View):
                 context = {
                     'context_value': self.context_value,
                     'valid_contexts': valid_contexts
+                
                 }
+            invoice =request.session.get('invoice', False)
+            if invoice:
+                ipn_obj = PayPalIPN.objects.filter(invoice=invoice, payment_status="Completed").first()
+                request.user.order_id = ipn_obj.subscr_id
+                del request.session['invoice']
             return render(request, 'ai-team.html', context)
 
 
@@ -364,6 +370,7 @@ def SubscriptionCheckout(request, plan_id):
 
 def PaymentSuccessful(request, plan_id):
     print(f"PaymentSuccessful function called with plan_id {plan_id}")
+    print('payment successful')
     plan = plans_data[plan_id]
     plan['amount'] = plan['amount'] / 100
     user = request.user 
@@ -371,45 +378,34 @@ def PaymentSuccessful(request, plan_id):
     print('invoice id uuid', invoice)
     print('Attempting to retrieve IPN object for invoice id uuid:', invoice)
 
-    # Definimos un tiempo de espera y una cantidad máxima de reintentos
-    max_retries = 5
-    retries = 0
-    wait_time_seconds = 10
-    ipn_obj = None
-
     # Intenta encontrar el objeto PayPalIPN usando el invoice (uuid)
-    while retries < max_retries and not ipn_obj:
-        try:
-            ipn_obj = PayPalIPN.objects.filter(invoice=invoice, payment_status="Completed").first()
-            if ipn_obj:
-                print(f"Found PayPalIPN object with invoice {invoice} and payment_status 'Completed'")
-                print(f"Payment date: {ipn_obj.payment_date}, Payment status: {ipn_obj.payment_status}")
-            else:
-                print(f"No PayPalIPN object found with invoice {invoice} and payment_status 'Completed'")
-                retries += 1
-                time.sleep(wait_time_seconds)
-        except PayPalIPN.DoesNotExist:
-            print(f"PayPalIPN object does not exist for invoice {invoice}")
-            retries += 1
-            time.sleep(wait_time_seconds)
-
-    paypal_subscription_id = ipn_obj.subscr_id if ipn_obj else None
+    try:
+        ipn_obj = PayPalIPN.objects.filter(invoice=invoice, payment_status="Completed").first()
+        if ipn_obj:
+            print(f"Found PayPalIPN object with invoice {invoice} and payment_status 'Completed'")
+            print(f"Payment date: {ipn_obj.payment_date}, Payment status: {ipn_obj.payment_status}")
+        else:
+            print(f"No PayPalIPN object found with invoice {invoice} and payment_status 'Completed'")
+        paypal_subscription_id = ipn_obj.subscr_id if ipn_obj else None
+    except PayPalIPN.DoesNotExist:
+        print(f"PayPalIPN object does not exist for invoice {invoice}")
+        paypal_subscription_id = None
 
     # Actualizar datos del modelo del usuario
-    if paypal_subscription_id:
-        print(user)
-        user.is_subscribe = True
-        print('paypal subscription id', paypal_subscription_id)
-        user.order_id = paypal_subscription_id
-        print('add the id to the user', user.order_id)
-        user.last_transaction_status = "Success"
-        user.current_plan = Current_Plan.objects.get(current_plan=plan['name'])  
-        user.subscription_status = SubscriptionStatus.objects.get(subscription_status="Active")
-        user.method_pay = PaymentMethod.objects.get(method_pay="Paypal")
-        user.next_date_pay = datetime.now() + timedelta(days=30)  # Asume un plan mensual
-        user.date_subscription = datetime.now()
-        user.save()
-        return render(request, 'payment/payment_success.html', {'plan': plan})
+    print(user)
+    user.is_subscribe = True
+    print('paypal subscription id',paypal_subscription_id)
+    user.order_id = paypal_subscription_id
+    print('add the id to the user',user.order_id)
+    user.last_transaction_status = "Success"
+    user.current_plan = Current_Plan.objects.get(current_plan=plan['name'])  
+    user.subscription_status = SubscriptionStatus.objects.get(subscription_status="Active")
+    user.method_pay = PaymentMethod.objects.get(method_pay="Paypal")
+    user.next_date_pay = datetime.now() + timedelta(days=30)  # Asume un plan mensual
+    user.date_subscription = datetime.now()
+    user.save()
+
+    return render(request, 'payment/payment_success.html', {'plan': plan})
 
 
 def PaymentFailed(request, plan_id):
