@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Client, Current_Plan, SubscriptionStatus, PaymentMethod
+from paypal.standard.ipn.models import PayPalIPN 
 
 # Administrador para Current_Plan
 class Current_PlanAdmin(admin.ModelAdmin):
@@ -48,8 +49,16 @@ class ClientAdmin(admin.ModelAdmin):
         return format_html('<a href="../password/{}/change/">Change Password</a>', obj.id)
     change_password.short_description = 'Change Password'
 
+class PayPalIPNAdmin(admin.ModelAdmin):
+    list_display = ['invoice', 'payment_status', 'payment_date', 'txn_id']  # Puedes añadir otros campos que desees mostrar
+    search_fields = ['invoice', 'txn_id']  # Puedes añadir otros campos para la búsqueda
+    list_filter = ['payment_status']  # Puedes añadir otros campos para filtrar
+    ordering = ['-payment_date']  # Por ejemplo, ordenar por fecha de pago de forma descendente
+
+
 # Registrar modelos
 admin.site.register(Current_Plan, Current_PlanAdmin)
 admin.site.register(SubscriptionStatus, SubscriptionStatusAdmin)
 admin.site.register(PaymentMethod, PaymentMethodAdmin)
 admin.site.register(Client, ClientAdmin)
+admin.site.register(PayPalIPN, PayPalIPNAdmin)
