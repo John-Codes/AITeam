@@ -327,6 +327,7 @@ def payment_failed(request):
     return render(request, 'payment/payment_failed.html')
 """
 def SubscriptionCheckout(request, plan_id):
+    print(f"SubscriptionCheckout function called with plan_id {plan_id}")
     # Asegúrate de que plan_id es un índice válido en plans_data
     plan = plans_data[plan_id]
 
@@ -360,6 +361,7 @@ def SubscriptionCheckout(request, plan_id):
     return render(request, 'payment/subscription_checkout.html', context)
 
 def PaymentSuccessful(request, plan_id):
+    print(f"PaymentSuccessful function called with plan_id {plan_id}")
     print('payment successful')
     plan = plans_data[plan_id]
     plan['amount'] = plan['amount'] / 100
@@ -371,11 +373,18 @@ def PaymentSuccessful(request, plan_id):
     # Intenta encontrar el objeto PayPalIPN usando el invoice (uuid)
     try:
         ipn_obj = PayPalIPN.objects.filter(invoice=invoice, payment_status="Completed").first()
+        if ipn_obj:
+            print(f"Found PayPalIPN object with invoice {invoice} and payment_status 'Completed'")
+            print(f"Payment date: {ipn_obj.payment_date}, Payment status: {ipn_obj.payment_status}")
+        else:
+            print(f"No PayPalIPN object found with invoice {invoice} and payment_status 'Completed'")
         paypal_subscription_id = ipn_obj.subscr_id if ipn_obj else None
     except PayPalIPN.DoesNotExist:
+        print(f"PayPalIPN object does not exist for invoice {invoice}")
         paypal_subscription_id = None
 
     # Actualizar datos del modelo del usuario
+    print(user)
     user.is_subscribe = True
     print('paypal subscription id',paypal_subscription_id)
     user.order_id = paypal_subscription_id
@@ -392,5 +401,6 @@ def PaymentSuccessful(request, plan_id):
 
 
 def PaymentFailed(request, plan_id):
+    print(f"PaymentFailed function called with plan_id {plan_id}")
     plan = plans_data[plan_id]
     return render(request, 'payment/payment_failed.html', {'plan': plan})
