@@ -97,6 +97,7 @@ class ChatUIView(View):
                 ipn_obj = PayPalIPN.objects.filter(invoice=invoice).first()
                 if ipn_obj:
                     request.user.order_id = ipn_obj.subscr_id
+                    print(f"Found the order_id object with invoice {request.user.order_id} and payment_status 'Completed'")
                     request.user.save()
                 else:
                     print(f"No PayPalIPN object found with invoice {invoice} and payment_status 'Completed'")
