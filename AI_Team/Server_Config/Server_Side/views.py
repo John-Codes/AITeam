@@ -90,12 +90,16 @@ class ChatUIView(View):
                 
                 }
             invoice =request.session.get('invoice', False)
+            print(invoice)
+            all_registers = PayPalIPN.objects.all()
+            print(f"Found {len(all_registers)} PayPalIPN objects")
             if invoice:
-                ipn_obj = PayPalIPN.objects.filter(invoice=invoice, payment_status="Completed").first()
-                request.user.order_id = ipn_obj.subscr_id
-                request.user.save()
-                all_registers = PayPalIPN.objects.all()
-                print(f"Found {len(all_registers)} PayPalIPN objects")
+                ipn_obj = PayPalIPN.objects.filter(invoice=invoice).first()
+                if ipn_obj:
+                    request.user.order_id = ipn_obj.subscr_id
+                    request.user.save()
+                else:
+                    print(f"No PayPalIPN object found with invoice {invoice} and payment_status 'Completed'")
                 del request.session['invoice']
             return render(request, 'ai-team.html', context)
 
@@ -391,10 +395,10 @@ def PaymentSuccessful(request, plan_id):
             print(f"Payment date: {ipn_obj.payment_date}, Payment status: {ipn_obj.payment_status}")
         else:
             print(f"No PayPalIPN object found with invoice {invoice} and payment_status 'Completed'")
-        paypal_subscription_id = ipn_obj.subscr_id if ipn_obj else None
+        paypal_subscription_id = ipn_obj.subscr_id if ipn_obj else 0
     except PayPalIPN.DoesNotExist:
         print(f"PayPalIPN object does not exist for invoice {invoice}")
-        paypal_subscription_id = None
+        paypal_subscription_id = 0
 
     # Actualizar datos del modelo del usuario
     print(user)
