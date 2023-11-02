@@ -8,8 +8,8 @@ from django.conf import settings
 
 paypalrestsdk.configure({
     "mode": "sandbox",  # Puedes cambiar esto a "live" cuando vayas a producción
-    "client_id": 'AQMIrYAiPvK-xGhOlI3k05qwaekR81F85JIor0S0iMMgyMvXwDbB1lGwAHIfYw5abnmQDJIAr70m-QKC',
-    "client_secret": 'ENzXZs1hIYTolXArxx4q0lLMsb4rg4S9DmlwEJbyepMpVR-uRhiHwiJphoYt1pO_wMuMXBdK-9zd8xoo'
+    "client_id": settings.PCI,
+    "client_secret": settings.PCS
 })
 
 def cancel_subscription(user):
