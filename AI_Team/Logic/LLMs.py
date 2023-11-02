@@ -14,40 +14,36 @@ from .sender_mails import *
 from .json_page import ContentPage, Product
 import tiktoken
 import runpod
+import requests
 # agrega a la función  esta función la clase Count_Tokens y usala para contar los tokens generados
 
 def calling_runpod(context, last_messsages, prompt_user):
-    try:
-        runpod_api = os.getenv("RUNPOD_API_KEY")
-        runpod_endpoint = os.getenv("RUNPOD_ENDPOINT")
-        print('llamando a runpod')
-        runpod.api_key = str(runpod_api) # reemplaza esto con tu API key
-        print('apykey configurado')
-        endpoint = runpod.Endpoint(runpod_endpoint)
-        print('endopoint configurado')
-        prompt = f""""Please keep the following information in mind when responding to me, this is the context you should keep in mind: \n{str(context)}\n
-        Here are the last messages that I have received from you:\n{str(last_messsages)}\n
-        Finally, This is the user's prompt, take into account the context and the latest messages to respond clearly and concisely:\n{str(prompt_user)}
-        """
-    except Exception as e:
-        print('something was wrong when trying to connect to the api', e)
     
-    try:
-        print('enviando request')
-        print(prompt)        
-        prompt_json = {"prompt": prompt}
-        json_str = json.dumps(prompt_json)
-        print(json_str)
-        run_request = endpoint.run_sync(json_str)
-        print('request enviado')
-        if run_request:
-            print('la respuesta de la API de Runpod es:', run_request)
-        else:
-            print("La respuesta de la API de Runpod está vacía.")
-    except Exception as e:
-        print(e.response.text) # print full error response
-        raise
-"""  """
+    runpod_api = os.getenv("RUNPOD_API_KEY")
+    runpod_endpoint = os.getenv("RUNPOD_ENDPOINT")
+
+    url = f"https://{runpod_endpoint}-8080.proxy.runpod.net/generate"
+    
+    headers = {
+        "Content-Type": "application/json",
+    }
+    
+    payload = {
+        "inputs": json.dumps({
+            "input": prompt_user,
+            "parameters": {
+                "max_new_tokens": 20
+            }
+        })
+    }
+    
+    response = requests.post(url, headers=headers, json=payload)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return f"Failed to get response: {response.status_code}, {response.text}"
+
 
 def generate_json(user_info):
     google_api_key = os.getenv("Palm2APIKey")
