@@ -216,6 +216,7 @@ class ChatUIView(View):
 
         elif ai_response:
             rendered_product = ''
+            print(product_consult)
             if product_consult:
                 rendered_product = render_html('chat_messages/message_info_product.html', product_consult)
             response_data['ia_message_div'] = render_html('chat_messages/ia_message.html', ai_response, format=True) + rendered_product
