@@ -96,9 +96,11 @@ class ChatUIView(View):
             if invoice:
                 ipn_obj = PayPalIPN.objects.filter(invoice=invoice).first()
                 if ipn_obj:
+                    print(f"Found PayPalIPN object with invoice {ipn_obj} and payment_status 'Completed'")
                     request.user.order_id = ipn_obj.subscr_id
                     print(f"Found the order_id object with invoice {request.user.order_id} and payment_status 'Completed'")
                     request.user.save()
+                    print(request.user.order_id)
                 else:
                     print(f"No PayPalIPN object found with invoice {invoice} and payment_status 'Completed'")
                 del request.session['invoice']
@@ -161,7 +163,7 @@ class ChatUIView(View):
 
     def handle_ai_response(self, request, user_message):
         response_data = {}
-        
+        product_consult = False
         if request.session.get('cancel-subscription', False):
             if str(user_message).lower() == 'yes':
                 ai_response = cancel_subscription(request.user)

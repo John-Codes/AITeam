@@ -41,6 +41,12 @@
             "description": "A complete calendar of when and in what format to upload videos to make trends and stay active on the networks.",
             "value": 60,
             "url": "https://calendar.google.com/"
+        },
+        {
+            "name": "mi_own_chat",
+            "description": "This service provides the user with their own business chat, complete with all the necessary information.",
+            "value": 120,
+            "url": "https://web.whatsapp.com/"
         }
     ]
 }

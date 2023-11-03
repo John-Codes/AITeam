@@ -98,6 +98,7 @@ def Consulta_IA_PALM(prompt, context):
             \n{str(products)}\n Here's the information you should base your answer on:\n{docs_palm}"""
         palm_response = CallPalm(prompt, docs_palm, examples)
         runpod = calling_runpod(docs_palm, examples, prompt)
+        print('runpod',runpod)
     except Exception as e:
         print(e)
         palm_response = message_error
