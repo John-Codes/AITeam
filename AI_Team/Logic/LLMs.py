@@ -31,8 +31,10 @@ def calling_runpod(context, last_messsages, prompt_user):
     payload = {
         "inputs": json.dumps({
             "input": prompt_user,
+            "context": context,
+            "last_messsages": last_messsages,
             "parameters": {
-                "max_new_tokens": 20
+                "max_new_tokens": 1000,
             }
         })
     }
@@ -40,12 +42,15 @@ def calling_runpod(context, last_messsages, prompt_user):
     response = requests.post(url, headers=headers, json=payload)
     
     if response.status_code == 200:
+        print("Success!")
         return response.json()
     else:
         return f"Failed to get response: {response.status_code}, {response.text}"
 
 
 def generate_json(user_info):
+    print("generate_json")
+    print(user_info)
     google_api_key = os.getenv("Palm2APIKey")
     user_info = str(user_info)
     encoding = tiktoken.encoding_for_model("gpt-4")
@@ -75,8 +80,8 @@ def generate_json(user_info):
         "Remember that you only give me the text, no HTML tags, you dont generate code, only generate a json file"
     )
     _input = prompt.format_prompt(question=user_query, user_info= user_info)
-    chat_model = ChatGooglePalm(google_api_key=google_api_key, temperature=0.5, top_k=40, top_p = 0.95, max_output_tokens= 4024)
-    """ChatOpenAI(
+    #ChatGooglePalm(google_api_key=google_api_key, temperature=0.5, top_k=40, top_p = 0.95, max_output_tokens= 4024)
+    chat_model = ChatOpenAI(
         model="openai/gpt-4-32k",
         openai_api_key=os.getenv("Open_Router_API_KEY"),
         openai_api_base= "https://openrouter.ai/api/v1",
@@ -84,7 +89,7 @@ def generate_json(user_info):
             "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
         },
         max_tokens=3000
-    )"""
+    )
     # Run the Chain and capture the output
     output = chat_model(_input.to_messages())
     token_response = len(encoding.encode(output.content))
@@ -111,7 +116,7 @@ def CallChatGPT(projectDescription):
         headers={
             "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
         },
-        max_tokens=3000 ,
+        max_tokens=3000,
         temperature=0.6,
         messages = [
         {

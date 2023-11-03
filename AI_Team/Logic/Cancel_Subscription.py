@@ -5,16 +5,20 @@ from paypalrestsdk import BillingAgreement
 from Server_Config.Server_Side.models import SubscriptionStatus
 from django.conf import settings
 
-
 paypalrestsdk.configure({
     "mode": "sandbox",  # Puedes cambiar esto a "live" cuando vayas a producción
     "client_id": settings.PCI,
     "client_secret": settings.PCS
-})
+    })
 
 def cancel_subscription(user):
+    print("Cancelling subscription for user:", user.id)
+    paypalrestsdk.configure({
+    "mode": "sandbox",  # Puedes cambiar esto a "live" cuando vayas a producción
+    "client_id": settings.PCI,
+    "client_secret": settings.PCS
+    })
     print("Initiating cancel_subscription for user:", user.id)  # Assuming user has an id attribute
-    print(settings.PCI, settings.PCS)
     
     # Obtener el ID de la suscripción de PayPal
     paypal_subscription_id = user.order_id
