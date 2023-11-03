@@ -34,7 +34,7 @@ def calling_runpod(context, last_messsages, prompt_user):
             "context": context,
             "last_messsages": last_messsages,
             "parameters": {
-                "max_new_tokens": 1000,
+                "max_new_tokens": 500,
             }
         })
     }
