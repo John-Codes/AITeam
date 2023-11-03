@@ -20,8 +20,9 @@ class VectorDB:
         # split text of type str into chunks, parts of the text of type str
         text = text.replace("\n","")
         text = re.sub(r'\s+', ' ', text)
+        print(len(text))
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=2000,
+            chunk_size=1000,
             chunk_overlap=200,
             length_function=len
         )
