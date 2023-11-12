@@ -72,7 +72,6 @@ google-resumable-media==2.6.0
 googleapis-common-protos==1.60.0
 gradio==3.47.1
 gradio_client==0.6.0
-greenlet==2.0.2
 grpc-google-iam-v1==0.12.6
 grpcio==1.57.0
 grpcio-status==1.57.0
