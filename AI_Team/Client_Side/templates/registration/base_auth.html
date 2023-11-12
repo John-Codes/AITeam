@@ -28,4 +28,32 @@
     </div>
     {% block additional_styles %}{% endblock %}
 </body>
+<script>
+// base.html o un archivo JS incluido en base.html
+document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', (event) => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                const errorData = {
+                    url: window.location.href,
+                    errors: Array.from(form.querySelectorAll('.alert')).map(div => div.textContent.trim()),
+                    formData: new FormData(form)
+                };
+                fetch('{% url 'error_handler' %}', { // Sustituye con la ruta de tu servidor
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken') // Asegúrate de tener una función getCookie
+                    },
+                    body: JSON.stringify(errorData)
+                });
+            }
+        }, false);
+    });
+});
+</script>
+    
 </html>

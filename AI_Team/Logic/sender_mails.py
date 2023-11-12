@@ -59,3 +59,29 @@ def notice_error(asunto, mensaje, email_origen = os.environ.get('emeil_error_not
 
     except Exception as e:
         print(f"Error al enviar el correo: {e}")
+
+def notice_error_forms(data):
+    # check variables
+        subject = 'An error has ocurred in the login forms'
+        message = f""" Data of the server error:
+        {data}
+            """
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']
+        try:
+            send_mail(subject, message, from_email, recipient_list)
+        except Exception as e:
+            print('correo no enviado porque:', e)
+
+def image_seve_fail_email(data):
+    # check variables
+        subject = 'An error has ocurred When the user try to save any image'
+        message = f""" Info of the image which failed to save, error info is:
+        {data}
+        """
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']
+        try:
+            send_mail(subject, message, from_email, recipient_list)
+        except Exception as e:
+            print('correo no enviado porque:', e)

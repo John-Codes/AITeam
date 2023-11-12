@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 
 print("Inside Server_Config.urls")
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('', include('Server_Config.Server_Side.urls')), # here we import the urls of our app, the urls is inside Server_Side folder, django searches for the file urls.py
     path("admin/", admin.site.urls),
+    path('rosetta/', include('rosetta.urls')),
     path("django-check-seo/", include("django_check_seo.urls")),
-]
+)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

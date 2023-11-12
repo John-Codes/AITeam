@@ -9,11 +9,12 @@ urlpatterns = [
     path('ipn/', paypal_views.ipn, name='paypal-ipn'),
     path('ai-team/chat/<str:context>/', views.ChatUIView.as_view(), name='ai-team'),
     path('ai-team/signup/', views.SignupView.as_view(), name='signup'),
-    path('ai-team/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('ai-team/login/', views.CustomLoginView.as_view(template_name='registration/login.html'), name='login'),
     path('ai-team/logout/', views.custom_logout, name='logout'),
     path('ai-team/password-reset/', views.PasswordResetView.as_view(template_name='registration/password_reset.html'), name='password_reset'),
     path('checkout/<int:plan_id>/', views.SubscriptionCheckout, name='subscription-checkout'),
     path('payment-success/<int:plan_id>/', views.PaymentSuccessful, name='payment_success'),
     path('payment-failed/<int:plan_id>/', views.PaymentFailed, name='payment_failed'),
     path('ai-team/subs-page/', views.Subscription.as_view(), name='subscription'),
+    path('error-handler/', views.error_handler, name='error_handler'),
 ]

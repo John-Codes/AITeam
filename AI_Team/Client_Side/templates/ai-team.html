@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,13 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% if context_value == "main" %}
-    <title>AI Team Chat - Artificial Intelligence Services by Ai-team</title>
-    {% elif context_value == 'panel-admin'%}
-    <title>AI Team Page Builder - Artificial Intelligence Services by Ai-team</title>
-    {% elif context_value == "subscription" %}
-    <title>AI Team Subscriptions - Artificial Intelligence Services by Ai-team</title>
-    {% endif %}
+    <title> {{header}} {% trans " Artificial Intelligence Services by Ai-team" %}</title>
     
     <link rel="canonical" href="{% url 'ai-team' context='main' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,9 +18,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href={% static "css/style_chat.css" %} rel="stylesheet"> 
+    
 </head>
 
-<body>
+<body data-language-prefix="{{ LANGUAGE_CODE }}"></body>>
+    
     <div class="container-fluid h-100">
         <div class="row h-100 justify-content-center">
     
@@ -43,61 +40,70 @@
                      <!-- Añade esta línea para el menú -->
                     <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
                         <ul>
-                            <li cy-data="home-link" ><a href="{% url 'ai-team' context='main' %}" title="Main page of AI Team Chat"><h2 class="reset-styles" >Home</h2></a></li>
+                            <li cy-data="home-link" ><a href="{% url 'ai-team' context='main' %}" title="Main page of AI Team Chat"><h2 class="reset-styles" >{% trans "Home"%}</h2></a></li>
 
                             {% if user.is_authenticated %}
-                                <li cy-data="logout-link"><a href="{% url 'logout' %}" title="logout"><h2 class="reset-styles" >Logout</h2></a></li>
+                                <li cy-data="logout-link"><a href="{% url 'logout' %}" title="logout"><h2 class="reset-styles" >{% trans "Logout"%}</h2></a></li>
                                 <li cy-data="panel-link"><a href="{% url 'ai-team' context='panel-admin' %}" id="panel-admin-link" title="Your Panel Admin to create a site-web"><h2 class="reset-styles" >Admin Panel</h2></a></li>
-                                <li><a href="{% url 'ai-team' context='subscription' %}" title="See our subscriptions plans"><h2 class="reset-styles" >subscription</h2></a></li>
+                                <li><a href="{% url 'ai-team' context='subscription' %}" title="See our subscriptions plans"><h2 class="reset-styles" >{% trans "Subscriptions"%}</h2></a></li>
                             {% else %}
-                                <li cy-data="login-link"><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >Login</h2></a></li>
-                                <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">FAQs</a></h2></li>
-                                <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">Contact Us</a></h2></li>
-                                <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">About US</a></h2></li>
+                                <li cy-data="login-link"><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >{% trans "Login" %}</h2></a></li>
+                                <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">{% trans "FAQs"%}</a></h2></li>
+                                <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">{% trans "Contact Us"%}</a></h2></li>
+                                <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">{% trans "About Us"%}</a></h2></li>
                             {% endif %}
                             
                             {% if context_value == "main" and user.is_authenticated%}
-                            <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">FAQs</a></h2></li>
-                            <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">Contact Us</a></h2></li>
-                            <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">About US</a></h2></li>
+                            <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">{% trans "FAQs"%}</a></h2></li>
+                            <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">{% trans "Contact Us"%}</a></h2></li>
+                            <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">{% trans "About Us"%}</a></h2></li>
                             {% endif %}
 
                             {% if context_value in valid_contexts %}
                                 {% if site_exists %}
-                                <li cy-data="my-site-link"><a href="{{ my_site_IA }}">My Site</a></li>
+                                <li cy-data="my-site-link"><a href="{{ my_site_IA }}">{{my_site_title}}</a></li>
                                 {% endif %}
                             {% endif %}
                         </ul>
                     </div>
                 </div>
             
-                <h1 class="chat-title">EFEXZIUM =$=</h1>         
+                <h1 class="chat-title">{{title}} =$=</h1>         
             </div>
             <!-- Chat Content -->
             <div class="col-12 messages-container px-0">
                 <!-- Metallic Text -->
                 <div class="metallic-text">
-                    <h2 class="reset-styles">An AI Team is writing</h2>
+                    <h2 class="reset-styles">{% trans "An AI Team is writing"%}</h2>
                 </div>
                 <div class="chat-body px-3 py-2" id="chatBox">
-                    {% if context_value == "subscription" %}
+                    {% if context_value == "main" and user.is_authenticated %}
+                        <div class="message-left glass">
+                            <p class="message-content">
+                                {% trans "Welcome to AI Team"%} {{ user.username}} {% trans "Ask your questions about our services"%} <br>
+                            </p>            
+                            <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
+                            <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
+                            <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
+                        </div>
+                    {% elif context_value == "subscription" %}
                         {% if user.is_subscribe %}
                             <!-- Aiteam give info to user about our plans -->
                             <div class="message-left glass">
                                 <p class="message-content">
-                                    Information about your subscription: <br>
-                                    you current plan: {{user.current_plan}} <br>
-                                    Subscription Status: {{user.subscription_status}} <br>
-                                    Pay with: {{user.method_pay}} <br>
-                                    the plan expires: {{user.next_date_pay}} <br>
-                                    Subscribed from Date {{user.date_subscription}}  <br>
-                                    if you wanna upgrade your current subscription visit our <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link" >Subscription</strong></a> page
+                                    {% trans "Information about your subscription:"%} <br>
+                                    {% trans "you current plan:"%} {{user.current_plan}} <br>
+                                    {% trans "Subscription Status:"%} {{user.subscription_status}} <br>
+                                    {% trans "Pay with:"%} {{user.method_pay}} <br>
+                                    {% trans "the plan expires:"%} {{user.next_date_pay}} <br>
+                                    {% trans "Subscribed from Date:"%} {{user.date_subscription}}  <br>
+                                    {% trans "if you wanna upgrade your current subscription visit the"%} <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link" >{% trans "Subscription"%}</strong></a> {% trans "page"%}
                                 </p>            
                                 <div class="mt-2">
                                     <form id="cancel-subscription-form" method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="action" value="cancel_subscription">
-                                        <button type="submit" class="btn btn-danger">Cancel Subscription</button>
+                                        <button type="submit" class="btn btn-danger">{% trans "Cancel Subscription" %}</button>
                                     </form>
                                                                                                                            
                                 </div>
@@ -105,14 +111,14 @@
                         {% else %}
                             <div class="message-left glass">
                                 <p class="message-content">
-                                    We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website. 
-                                    These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us: <br>
-                                    <strong>Entry Plan</strong> <br>
-                                    <strong>Premium Plan</strong> <br>
-                                    <strong>Enterprise Plan</strong> <br>
-                                    you can get any of this in the  <a href="{% url 'subscription' %}" title="login to AI Team for more"><strong class="white-link" >Subscription</strong></a> page
+                                    {% trans "We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website.
+                                    These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us:" %} <br>
+                                    <strong>{% trans "Entry Plan" %}</strong> <br>
+                                    <strong>{% trans "Premium Plan" %}</strong> <br>
+                                    <strong>{% trans "Enterprise Plan" %}</strong> <br>
+                                    {% trans "you can get any of this subscriptions en the next page:" %}  <a href="{% url 'subscription' %}" title="login to AI Team for more"><strong class="white-link" >{% trans "Subscription" %}</strong></a> {% trans "page"%}
                                 </p>
-                                <p class="message-content">if you wanna know about each plan, only send a message and Ai Team response you</p>
+                                <p class="message-content">{% trans "if you wanna know about each plan, only send a message and AI Team response you" %}</p>
                                 <div class="mt-2">
                                     <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                                     <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
@@ -122,20 +128,18 @@
                         {% endif %}
                     {% elif context_value == "panel-admin" %}
                     <div class="message-left glass">
-                        <p class="message-content">In this chat, you'll be able to provide our AI with the essential information to craft your very own AI Chat 
-                            – a perfect tool to impress your clients, boss, or friends. Here's what we need from you: 
+                        <p class="message-content"> {% trans "In this chat, you'll be able to provide our AI with the essential information to craft your very own AI Chat Experience – a perfect tool to impress your clients, boss, or friends. Here's what we need from you: "%}
                             <br>
-                            <strong>1 Page Title</strong>: This represents the name that appears on the browser tab. For example in this page is: "AI Team Chat - Artificial Intelligence Services by Ai-team." <br>
-                            <strong>2 Page Header</strong>: This acts as the main title or heading on your page. For example in this page is: "EFEXZIUM =$=". <br>
-                            <strong>3 Navigation Links</strong>: Please provide the list of navigation items ("< li >" tags) and their respective redirect links. For example in this page is: "Home", "Logout", "Admin Panel", and "Subscription". Don't forget to specify both the name of each tag and the URL you'd like it to redirect to. <br>
-                            <strong>4 Default Chat Message</strong>: A default greeting message that visitors will see when they access your AI chat. Something like: "Hello, how can I assist you today?" <br>
-                            <strong>5 Products</strong>: Describe your products to the AI for each product by passing them the following details: name, description, value in USD, and a url that they can access them to <br>
-                            <strong>6 Images</strong>: You can upload the images of your products with the Upload button to relate an image to your product simply the name of the image must be the same as the name of your product, if you described a product with the name 'product' the name of the image must be product, otherwise the AI will not show the image of your product. Preferably in png format <br>
-                            <strong>7 Context Information</strong>: Submit a pdf o txt file with Information, questions ans answers that you want to AI-Team respond to your clients. This information will customize AI Team's responses on your page, ensuring they align with your vision and offer a unique user experience. <br>
-                            <strong>8 Once all is set</strong>: In the folding panel you can see the link to your site when it is generated. You'll need to reload the page. The AI will display your product information when the user asks about it and will answer according to the context you give them, remember to add the product information also in the context so that the AI takes it into account
-                            Then you can start the chat, test it, and share it as you wish! <br>
+                            <strong>{% trans "1 Page Title"%}</strong>{% trans ": This represents the name that appears on the browser tab. For example in this page is: AI Team Chat - Artificial Intelligence Services by Ai-team." %} <br>
+                            <strong>{% trans "2 Page Header"%}</strong>{% trans ": This acts as the main title or heading on your page. For example in this page is: EFEXZIUM =$=" %}<br>
+                            <strong>{% trans "3 Navigation Links"%}</strong>{% trans ": Please provide the list of navigation items (< li > tags) and their respective redirect links. For example in this page is: Home, Logout, Admin Panel, and Subscription. Don't forget to specify both the name of each tag and the URL you'd like it to redirect to. "%} <br>
+                            <strong>{% trans "4 Default Chat Message"%}</strong>{% trans ": A default greeting message that visitors will see when they access your AI chat. Something like: Hello, how can I assist you today? "%} <br>
+                            <strong>{% trans "5 Products"%}</strong>{% trans ": Describe your products to the AI for each product by passing them the following details: name, description, value in USD, and a url that they can access them to "%} <br>
+                            <strong>{% trans "6 Images"%}</strong> {% trans "You can upload the images of your products with the Upload button to relate an image to your product simply the name of the image must be the same as the name of your product, if you described a product with the name 'product' the name of the image must be product, otherwise the AI will not show the image of your product. Preferably in png format"%} <br>
+                            <strong>{% trans "7 Context Information"%}</strong> {% trans ": Submit a pdf o txt file with Information, questions ans answers that you want to AI-Team respond to your clients. This information will customize AI Team's responses on your page, ensuring they align with your vision and offer a unique user experience." %} <br>
+                            <strong>{% trans "Once all is set"%}</strong> {% trans ": In the folding panel you can see the link to your site when it is generated. You'll need to reload the page. The AI will display your product information when the user asks about it and will answer according to the context you give them, remember to add the product information also in the context so that the AI takes it into account then you can start the chat, test it, and share it as you wish!" %}<br>
                             
-                            We're excited to help you personalize your AI-powered chat experience!</p>
+                            {% trans "We're excited to help you personalize your AI-powered chat experience!" %}</p>
                            
                             <div class="mt-2">
                                 <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
@@ -166,12 +170,12 @@
                     <div class="formulary">
                         {% csrf_token %}
                         <input type="text" class="form_input" id="userMessage" placeholder="Send a message..." onkeydown="handleKeyDown(event, '{{context_value}}')">
-                        <button class="btn btn-send" onclick="sendMessage( '{{context_value}}' )">Send</button>
+                        <button class="btn btn-send" onclick="sendMessage( '{{context_value}}' )">{% trans "Send" %}</button>
                         {% if context_value == 'panel-admin' %}
                             <!-- Input escondido para subir archivos -->
                             
                             <input type="file" style="display: none;" id="fileInput" name="uploaded_files" multiple accept=".pdf,.txt, .png">
-                            <label for="fileInput" class="btn btn-send">Upload Files</label>
+                            <label for="fileInput" class="btn btn-send">{% trans "Upload" %}</label>
                         {% endif %}
                     </div>
                 </div>
@@ -190,5 +194,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         var currentContext = "{{ context_value }}";  // Aquí asumimos que has pasado context_value a tu template.
+    </script>
+    <script>
+        console.log({{ LANGUAGE_CODE }});
+        var LANGUAGE_CODE = '{{ LANGUAGE_CODE }}'; // Django inyecta el código de idioma actual aquí
     </script>
 </html>

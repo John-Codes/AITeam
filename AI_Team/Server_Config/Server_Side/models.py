@@ -60,3 +60,6 @@ class Client(AbstractUser):
 class ClienContext(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     context = models.TextField(max_length=None)
+
+    def __str__(self):
+        return self.context

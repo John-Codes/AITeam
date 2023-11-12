@@ -147,6 +147,15 @@ input[type="password"]:focus {
   margin-left: 5px;
   margin-right: 5px;
 }
+.close_error {
+  color: gray; /* Cambia el color a gris */
+  background-color: transparent; /* Mantiene el fondo transparente */
+  border: none; /* Elimina el borde */
+}
+
+.close_error:hover {
+  color: darkgray; /* Cambia el color al pasar el mouse por encima para un efecto de hover */
+}
 /* Dispositivos móviles pequeños */
 @media (max-width: 576px) {
   .glass-effect {

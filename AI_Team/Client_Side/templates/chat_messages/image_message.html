@@ -1,0 +1,22 @@
+{% load i18n %}
+<div class="message-left glass">
+    <p class="message-content">
+        {% trans "Status of the image: "%} {{ message.status }} <br>
+        {% if message.status == 'Name not matched'%}
+            {% trans "Remember that the name of the file has to be the same as the name of the product and it must be in png format, here is the your products names"%} <br>
+            {% for product in message.matched_products %}
+                {{ product }} <br>
+            {% endfor %}
+            {{message.image_name}}.png its not valid name <br>
+        {% endif %}
+        {% if message.name %}
+        <img src="/media/{{ message.name }}" alt="{{ message.name }}" width="100"> <br>
+        {% endif %}
+    </p>
+    <div class="mt-2">
+        <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
+        <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
+        <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
+    </div>
+</div>
+<div class="clearfix"></div>

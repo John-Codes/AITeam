@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os
 
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'cms',
     'menus',
     'treebeard',
+    'rosetta',
 ]
 
 SITE_ID = 1
@@ -64,11 +66,22 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    #"django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
+    'Server_Config.Server_Side.error_middleware.ErrorHandlingMiddleware',
 ]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR,  "locale"),
+    ]
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Español')),
+)
 
 ROOT_URLCONF = "Server_Config.urls"
 
@@ -110,8 +123,16 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 5,
+        }
+    }
+]        
+
+"""AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
@@ -124,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
-]
+]"""
 
 
 # Internationalization

@@ -14,50 +14,56 @@ function getCookie(name) {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
+function getLanguagePrefix() {
+    const path = window.location.pathname;
+    const languageCode = path.split('/')[1]; // Obtiene el segmento de idioma del path
+    return languageCode;
+}
 
 // Function to send the user's message and receive the response.
 function sendMessage() {
-    //console.log("Función sendMessage invocada");
+    console.log("Función sendMessage invocada");
     const message = document.getElementById("userMessage").value.trim();  // Obtiene el mensaje y elimina espacios en blanco
     let formData = new FormData();
-    formData.append("message", message);
     formData.append("phase", "user_message");
-    // Comprobamos si el input de archivos existe
+    if (message !== "") {
+        formData.append("message", message);
+    }
     const fileInput = document.getElementById("fileInput");
-    if (fileInput) {
+    let hasFiles = fileInput && fileInput.files.length > 0;
+    if (hasFiles) {
         const files = fileInput.files;
         for (let i = 0; i < files.length; i++) {
             formData.append("uploaded_files", files[i]);
         }
     }
-    // Luego, verifica si el mensaje es idéntico al anterior.
-    if (message.trim() !== "") {
-
+    if (message !== "" || hasFiles) {
         toggleDotsAnimation(true); // Activar animaciones
         const csrfToken = getCookie('csrftoken');
-        //console.log("Enviando solicitud 'user_message'...");
-        let urlEndpoint = `/ai-team/chat/${currentContext}/`;
-
-            fetch(urlEndpoint, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "X-CSRFToken": csrfToken
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const chatBox = document.getElementById("chatBox");
-                chatBox.insertAdjacentHTML('beforeend', data.user_message_div);
-                document.getElementById("userMessage").value = "";
-                chatBox.scrollTop = chatBox.scrollHeight;
-                let urlEndpoint = `/ai-team/chat/${currentContext}/`;
-        
+        const languagePrefix = getLanguagePrefix();
+        let urlEndpoint = `/${languagePrefix}/ai-team/chat/${currentContext}/`;
+        fetch(urlEndpoint, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRFToken": csrfToken
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const chatBox = document.getElementById("chatBox");
+            chatBox.insertAdjacentHTML('beforeend', data.user_message_div);
+            document.getElementById("userMessage").value = "";
+            fileInput.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+            // Solo realiza la solicitud a la IA si hay un mensaje
+            if (message !== "") {
+                let urlEndpoint = `/${languagePrefix}/ai-team/chat/${currentContext}/`;
                 return fetch(urlEndpoint, {
                     method: "POST",
                     body: new URLSearchParams({ "message": message, "phase": "ai_response" }),
@@ -66,30 +72,41 @@ function sendMessage() {
                         "X-CSRFToken": csrfToken
                     }
                 });
-            })
-            .then(response => {
+            } else {
+                // No hay mensaje para enviar a la IA, así que resuelve la promesa aquí
+                return Promise.resolve();
+            }
+        })
+        .then(response => {
+            if (response) {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
-            })
-            .then(data => {
+            } else {
+                // No hubo respuesta porque no se realizó la solicitud a la IA
+                return {};
+            }
+        })
+        .then(data => {
+            if (data.ia_message_div) {
                 const chatBox = document.getElementById("chatBox");
                 chatBox.insertAdjacentHTML('beforeend', data.ia_message_div);
                 chatBox.scrollTop = chatBox.scrollHeight;
-                // Verifica si total_cost está presente en la respuesta y actúa en consecuencia
-                if (data.total_cost !== undefined) {
-                    const totalCostDisplay = document.getElementById("totalCostDisplay");
-                    totalCostDisplay.textContent = "Costo Total: $" + data.total_cost;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                toggleDotsAnimation(false); // Desactivar animaciones
-            });
-}}
+            }
+            if (data.total_cost !== undefined) {
+                const totalCostDisplay = document.getElementById("totalCostDisplay");
+                totalCostDisplay.textContent = "Costo Total: $" + data.total_cost;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            toggleDotsAnimation(false); // Desactivar animaciones
+        });
+    }
+}
 
 // Handle Enter key press to send the message.
 function handleKeyDown(event) {
