@@ -1,52 +1,47 @@
 {
-    "title": "Social Media and your Business",
-    "header": "Social Media",
-    "description": "Welcome, here we will show you how to use social networks to boost your business. Social media is a powerful tool that can be used to reach a large audience and promote your business. By using social media effectively, you can connect with potential customers, build relationships, and increase sales.",
+    "title": "Social media is changing the business",
+    "header": "Social media in your business",
+    "description": "Join us as we discuss the impact of social media on business and how you can harness its power for your own success. We'll explore various platforms such as YouTube, Facebook, and Google, and how they can be used to boost your business.",
     "keywords": [
-        "social networks",
+        "social media",
         "business",
-        "marketing",
-        "social media marketing",
-        "social media for business",
-        "tiktok"
+        "YouTube",
+        "Facebook",
+        "Google"
     ],
-    "default_message": "Welcome, here we will show you how to use social networks to boost your business. Social media is a powerful tool that can be used to reach a large audience and promote your business. By using social media effectively, you can connect with potential customers, build relationships, and increase sales.",
+    "default_message": "welcome to our chat we will talk about how implement the social media in your business, so first tell us about your business",
     "list_items": [
         {
-            "text": "YouTube",
-            "url": "https://www.youtube.com/"
+            "text": "Learn about the impact of social media on business",
+            "url": "youtube.com"
         },
         {
-            "text": "Instagram",
-            "url": "https://www.instagram.com/"
+            "text": "Discover how to use social media for your business",
+            "url": "facebook.com"
         },
         {
-            "text": "Facebook",
-            "url": "https://www.facebook.com/"
-        },
-        {
-            "text": "TikTok",
-            "url": "https://www.tiktok.com/"
+            "text": "Explore various social media platforms and their benefits",
+            "url": "google.com"
         }
     ],
     "products": [
         {
-            "name": "Personalized Assistance",
-            "description": "Personalized advice to build your business.",
-            "value": 20,
-            "url": "https://www.google.com/meet/"
+            "name": "Social Media Strategy Guide",
+            "description": "A comprehensive guide to developing and implementing a social media strategy for your business.",
+            "value": "$29.99",
+            "url": "paypal.com"
         },
         {
-            "name": "Virtual Calendar",
-            "description": "A complete calendar of when and in what format to upload videos to make trends and stay active on the networks.",
-            "value": 60,
-            "url": "https://calendar.google.com/"
+            "name": "Social Media Consultation",
+            "description": "Get personalized advice and guidance on how to make social media work for your business.",
+            "value": "$49.99",
+            "url": "paypal.com"
         },
         {
-            "name": "mi_own_chat",
-            "description": "This service provides the user with their own business chat, complete with all the necessary information.",
-            "value": 120,
-            "url": "https://web.whatsapp.com/"
+            "name": "Social Media Management Service",
+            "description": "Let us take care of your social media presence, so you can focus on running your business.",
+            "value": "$99.99",
+            "url": "paypal.com"
         }
     ]
 }

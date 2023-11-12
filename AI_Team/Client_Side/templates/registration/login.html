@@ -7,33 +7,33 @@ Log In
 {% endblock %}
 
 {% block form_content %}
-<form method="post" action="{% url 'login' %}">
+    <!-- Bloque para mostrar mensajes -->
     {% if messages %}
         {% for message in messages %}
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <div class="alert flex-container alert_error" role="alert" style="background-color: #0A2342; color: white">
                 <strong>{{ message }}</strong>
-                
-                <button type="button" class="btn-close position-absolute top-0 end-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn btn-close close_error" style="background-color: transparent; color: gray; border: none;" data-bs-dismiss="alert" aria-label="Close">X</button>
             </div>
         {% endfor %}
     {% endif %}
-    {% csrf_token %}
-    <div class="input-group">
-        <label for="username">username</label> 
-        <input type="text"  name="username" id="id_username" required>
-    </div>
-    <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password"  name="password" id="id_password" required>
-    </div>
-    <button type="submit" class="btn-dark-submit">Enter</button>
-    
-</form>
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="id_username" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="id_password" required>
+        </div>
+        <button type="submit" class="btn-dark-submit">Enter</button>
+    </form>
 {% endblock %}
 
 {% block additional_content %}
-<p>Don't have an account?</p>
-<a href="{% url 'signup' %}" class="register-link">Create account</a>
-<p>Forgot your password?</p>
-<a href="{% url 'password_reset' %}" class="register-link">Reset password</a>
+    <p>Don't have an account?</p>
+    <a href="{% url 'signup' %}" class="register-link">Create account</a>
+    <p>Forgot your password?</p>
+    <a href="{% url 'password_reset' %}" class="register-link">Reset password</a>
 {% endblock %}
