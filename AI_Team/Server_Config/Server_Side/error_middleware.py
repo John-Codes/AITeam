@@ -1,6 +1,7 @@
 # middleware.py
 import datetime
 import json
+import traceback
 from django.http import JsonResponse
 from AI_Team.Logic.sender_mails import notice_error_forms# Asegúrate de importar correctamente tu función
 
@@ -15,25 +16,32 @@ class ErrorHandlingMiddleware:
     def process_exception(self, request, exception):
         # Captura la excepción y prepara los datos del error
         error_time = datetime.datetime.now()
-        error_data = {
-            "error": str(exception),
-            "url": request.path,
-            "method": request.method,
-            "time": error_time.strftime("%Y-%m-%d %H:%M:%S")
-        }
+        error_traceback = traceback.format_exc()  # Obtener la traza de la excepción
+
+        # Formatear los datos del error
+        error_message = (
+            f"Time: {error_time.strftime('%Y-%m-%d %H:%M:%S')}\n"
+            f"URL: {request.path}\n"
+            f"Method: {request.method}\n"
+            f"Error: {str(exception)}\n"
+            f"Traceback:\n{error_traceback}\n"
+        )
+
         # Intentar obtener el ID del usuario si está autenticado
         user = getattr(request, 'user', None)
-        if user:
-            error_data["user_id"] = user.username
+        if user and user.is_authenticated:
+            error_message += f"User INFO: {user.username} {user.email}\n"
+
+        # Datos del POST si el método es POST
         if request.method == 'POST':
-            try:
-                error_data["post_data"] = json.loads(request.body)
-            except json.JSONDecodeError:
-                error_data["post_data"] = request.POST
+            post_data = request.POST if request.POST else request.body
+            error_message += f"Post Data: {post_data}\n"
 
         # Enviar error por correo electrónico
-        notice_error_forms(error_data)
+        print(error_message)  # Opcional, para depuración
+        notice_error_forms(error_message)
+
 
         # Puedes decidir qué hacer a continuación: 
         # Mostrar una página de error o devolver una respuesta JSON
-        return JsonResponse({"error": "internal server error"}, status=500)
+        #return JsonResponse({"error": "internal server error", "traceback": error_traceback}, status=500)

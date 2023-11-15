@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     'Server_Config.Server_Side', # path where we found it the Server config of our app
     "django_check_seo",
-    'paypal.standard.ipn',
     'cms',
     'menus',
     'treebeard',

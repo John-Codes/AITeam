@@ -131,13 +131,13 @@ h5 {
 
 p, li {
   font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;
-  font-weight: 700;
+  font-weight: 400;
   font-style: normal;
   display: block;
   align-items: left;
   margin-bottom: 5px;
   color: #f4f4f4;
-  width: 100%;
+  width: 70%;
   margin-top: 10px;
 }
 
@@ -166,15 +166,18 @@ p, li {
 }
 
 .paypal-form, .stripe-form {
-  width: 100%;t-card
+  width: 100%;
 }
 
 .stripe-button {
   display: none;
 }
 
+.form-control {
+  margin-bottom: 10px;
+}
 h2, li, p {
-  font-size: calc(14px + 0.5vw);
+  font-size: 20px;
 }
 
 .logo {
@@ -182,7 +185,7 @@ h2, li, p {
 }
 
 @media (max-width: 768px) {
-  h2, li, p {
+  h2, p {
       font-size: calc(12px + 0.5vw);
   }
 
@@ -192,7 +195,7 @@ h2, li, p {
 }
 
 @media (max-width: 480px) {
-  h2, li, p {
+  h2, p {
       font-size: calc(10px + 0.5vw);
   }
 

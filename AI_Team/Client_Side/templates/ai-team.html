@@ -77,10 +77,15 @@
                     <h2 class="reset-styles">{% trans "An AI Team is writing"%}</h2>
                 </div>
                 <div class="chat-body px-3 py-2" id="chatBox">
-                    {% if context_value == "main" and user.is_authenticated %}
+                    {% if context_value == "main" %}
                         <div class="message-left glass">
                             <p class="message-content">
-                                {% trans "Welcome to AI Team"%} {{ user.username}} {% trans "Ask your questions about our services"%} <br>
+                                {% trans "Website creation service with AI: 24/7 customer service better than a human being with AI like gpt 4. Integration with database and systems of your website or app. Create an AI bot in 5 minutes that sends emails and processes payments and orders."%}<br>
+                                <br>
+                                {% if user.is_authenticated %}
+                                    {% trans "Welcome to AI Team"%} {{ user.username}} {% trans "Ask your questions about our services"%} <br>
+                                {% endif %}
+                                
                             </p>            
                             <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                             <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
@@ -92,9 +97,9 @@
                             <div class="message-left glass">
                                 <p class="message-content">
                                     {% trans "Information about your subscription:"%} <br>
-                                    {% trans "you current plan:"%} {{user.current_plan}} <br>
+                                    {% trans "you current plan:"%} {{user.subscription_detail.plan_name}} <br>
                                     {% trans "Subscription Status:"%} {{user.subscription_status}} <br>
-                                    {% trans "Pay with:"%} {{user.method_pay}} <br>
+                                    {% trans "Pay with:"%} Paypal <br>
                                     {% trans "the plan expires:"%} {{user.next_date_pay}} <br>
                                     {% trans "Subscribed from Date:"%} {{user.date_subscription}}  <br>
                                     {% trans "if you wanna upgrade your current subscription visit the"%} <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link" >{% trans "Subscription"%}</strong></a> {% trans "page"%}
@@ -111,8 +116,7 @@
                         {% else %}
                             <div class="message-left glass">
                                 <p class="message-content">
-                                    {% trans "We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website.
-                                    These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us:" %} <br>
+                                    {% trans "We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website. These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us:" %} <br>
                                     <strong>{% trans "Entry Plan" %}</strong> <br>
                                     <strong>{% trans "Premium Plan" %}</strong> <br>
                                     <strong>{% trans "Enterprise Plan" %}</strong> <br>
