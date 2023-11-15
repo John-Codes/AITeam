@@ -59,7 +59,12 @@ function sendMessage() {
             const chatBox = document.getElementById("chatBox");
             chatBox.insertAdjacentHTML('beforeend', data.user_message_div);
             document.getElementById("userMessage").value = "";
-            fileInput.value = "";
+            if (fileInput) {
+                fileInput.value = "";
+            }
+            chatBox.scrollTop = chatBox.scrollHeight;
+            toggleDotsAnimation(false); // Desactivar animaciones
+            
             chatBox.scrollTop = chatBox.scrollHeight;
             // Solo realiza la solicitud a la IA si hay un mensaje
             if (message !== "") {
@@ -128,8 +133,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
             toggleDotsAnimation(true);
             const csrfToken = getCookie('csrftoken');
+            const languagePrefix = getLanguagePrefix();
+            
 
-            let urlEndpoint = `/ai-team/chat/${currentContext}/`;
+            let urlEndpoint = `/${languagePrefix}/ai-team/chat/${currentContext}/`;
 
             fetch(urlEndpoint, {
                 method: "POST",
@@ -170,8 +177,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
             toggleDotsAnimation(true);
             const csrfToken = getCookie('csrftoken');
-
-            let urlEndpoint = `/ai-team/chat/${currentContext}/`;
+            const languagePrefix = getLanguagePrefix();
+            let urlEndpoint = `/${languagePrefix}/ai-team/chat/${currentContext}/`;
 
             // Envía los datos del formulario al servidor
             fetch(urlEndpoint, {

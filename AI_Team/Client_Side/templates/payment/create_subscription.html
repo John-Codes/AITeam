@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PayPal</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    body {
+        background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVulHk-0MQ1P06BtHUmic6zcDCEGYk4Ws8Aeav43nT4u4r-m5AJRU2X1ItqC6ZQTwTYMI&usqp=CAU');
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh
+    }
+    .adjust-card {
+        border-radius: 12px !important;
+        background: #d1eaff !important;
+    }
+    label {
+        font-size: 12px;
+    }
+    .form-control::placeholder {
+        font-size: 12px;
+    }
+    .form-control {
+        font-size: 12px !important;
+    }
+    button{
+        font-size: 12px !important;
+    }
+
+</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<body>
+<div class="container">
+    <h3 class="text-center mt-5 mb-4 text-white">PayPal Subscriptions Form</h3>
+    <div class="row">
+        <div class="col-md-6 offset-md-6">
+            <div class="card adjust-card p-4">
+                {% if messages %}
+                <div class="row">
+                    <div class="col-md-12">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                <form class="row" method="post" action="{% url 'create_subscription' %}">
+                     {% csrf_token %}
+                    <div class="form-group col-6">
+                        <label for="product_name">Product Name</label>
+                        <input type="text" placeholder="Enter product name" class="form-control" id="product_name" name="product_name">
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="plan_name">Plan Name</label>
+                        <input type="text" placeholder="Enter plan name" class="form-control" id="plan_name" name="plan_name">
+                    </div>
+
+
+                    <div class="form-group col-6">
+                        <label for="subscription_name">Subscription Name</label>
+                        <input type="text" placeholder="Enter subscription  name" class="form-control" id="subscription_name" name="subscription_name">
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="price">Price</label>
+                        <input type="number" placeholder="Enter subscription price for example 29.99" class="form-control" id="price" name="price" step="0.01">
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="date">Start Subscription Date</label>
+                        <input type="date" placeholder="Enter product name" class="form-control" id="date" name="date">
+                    </div>
+                    
+                    <div class="form-group col-6">
+                        <label for="features_list">Features List</label>
+                        <textarea id="features_list" name="features_list" class="form-control" placeholder="Enter features separated by commas"></textarea>
+                    </div>
+                    
+                    <div class="form-group col-6">
+                        <label for="market_place">Market Place</label>
+                        <textarea id="market_place" name="market_place" class="form-control" placeholder="Enter markets separated by commas"></textarea>
+                    </div>
+
+                    <div class="col-6 mt-2">
+                        <button type="submit" class="float-right btn mt-4 btn-primary">Submit</button>
+                    </div>
+                    <div class="alert alert-danger {% if not error_message %}d-none{% endif %}" role="alert">
+                      {{ error_message }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -18,7 +18,7 @@ body {
   align-items: center; 
   justify-content: center;
   height: auto;
-  width: 35%; /* Incremento de tamaño */
+  width: 80%; /* Incremento de tamaño */
   min-width: 310px;
   margin: 30px 0;
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
@@ -28,6 +28,9 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.37);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .logo {
@@ -47,8 +50,8 @@ h2 {
   font-weight: 700;
   font-style: normal;
   font-size: 15px; /* Aumento de tamaño del texto */
-  margin-bottom: 10px;
-  margin-top: 10px;
+  /*margin-bottom: 10px;
+  margin-top: 10px;*/
   color: #f4f4f4;
 }
 
@@ -79,8 +82,8 @@ p {
 input[type="email"], 
 input[type="text"],
 input[type="password"] {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  /*margin-bottom: 10px;
+  margin-top: 10px;*/
   width: 295px; /* Dejamos un espacio al borde */
   min-width: 250px;
   padding: 5px;
@@ -111,8 +114,8 @@ input[type="password"]:focus {
   display: block;
   font-size: 16px;
   padding: 7px 10px;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  /*margin-bottom: 10px;
+  margin-top: 10px;*/
 }
 
 .btn-dark-submit:hover {
@@ -123,12 +126,12 @@ input[type="password"]:focus {
 }
 
 .register-link {
-  margin-top: 10px;
+  /*margin-top: 10px;*/
   color: #3498db;
   font-size: 16px; /* Aumento de tamaño de letra */
   display: block; /* En una nueva línea */
   margin-top: 5px;
-  margin-bottom: 15px;
+  /*margin-bottom: 15px;*/
 }
 
 .card-transparent-background {
@@ -142,8 +145,8 @@ input[type="password"]:focus {
 }
 .total-cost{
   color: white;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  /*margin-top: 5px;
+  margin-bottom: 5px;*/
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -159,27 +162,31 @@ input[type="password"]:focus {
 /* Dispositivos móviles pequeños */
 @media (max-width: 576px) {
   .glass-effect {
-    width: 90%; /* Ajustar para ocupar casi todo el ancho en pantallas pequeñas */
+    height: 80%;
+    width: 60%; /* Ajustar para ocupar casi todo el ancho en pantallas pequeñas */
   }
 }
 
 /* Dispositivos móviles */
 @media (max-width: 768px) {
   .glass-effect {
-    width: 85%; /* Un poco más de margen que en dispositivos más pequeños */
+    height: 90%;
+    width: 60%; /* Un poco más de margen que en dispositivos más pequeños */
   }
 }
 
 /* Tablets */
 @media (max-width: 992px) {
   .glass-effect {
-    width: 70%; /* Dando más espacio en tablets */
+    height: 80%;
+    width: 60%; /* Dando más espacio en tablets */
   }
 }
 
 /* Pantallas grandes */
 @media (min-width: 992px) {
   .glass-effect {
+    height: 80%;
     width: 50%; /* En pantallas grandes, no queremos que sea demasiado ancho */
   }
 }

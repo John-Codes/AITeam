@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,43 +24,53 @@
         <br>
         <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
+                <div class="carousel-item ">
+                    <div class="card cont-card">
+                        <div class="card-header glass-header">
+                            <h2>Código Especial</h2>
+                        </div>
+                        <div class="card-body glass-body" id="planDetails">
+                            <form id="specialCodeForm">
+                                {% csrf_token %}
+                                <input type="text" name="special_code" placeholder="Ingresa tu código" class="form-control">
+                                <button type="submit" class="btn button-to-pay">Enviar Código</button>
+                            </form>
+                        
+                        </div>
+                    </div>
+                </div>
                 {% for plan in plans %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
                     <div class="card cont-card">
                         <div class="card-header glass-header">
-                            <h2>{{ plan.name }}</h2>
+                            <h2>{{ plan.name }}</h2> <!-- Nombre del plan -->
                         </div>
                         <div class="card-body glass-body">
-                            <h5 class="card-title">features:</h5>
-                            <ul class="features-list"> <!-- Alineación a la izquierda añadida -->
-                                {% for feature in plan.features %}
+                            <p><strong>Product Name:</strong> {{ plan.product_name }}</p>
+                            <p><strong>Plan Name:</strong> {{ plan.plan_name }}</p>
+                            <p><strong>Price:</strong> ${{ plan.price }} USD</p>
+                            <p><strong>Subscription Status:</strong> {{ plan.subscription_status }}</p>
+                            <!-- Features y Target Market comentados por ahora -->
+                            <h5 class="card-title">Features:</h5>
+                            <ul class="features-list">
+                                {% for feature in plan.features_list %}
                                 <li>{{ feature }}</li>
                                 {% endfor %}
                             </ul>
-                            {% if plan.target_market%}
-                            <h5 class="card-title">target_market:</h5>
-                            <ul class="features-list"> <!-- Alineación a la izquierda añadida -->
-                                {% for target_market in plan.target_market %}
+                            {% if plan.target_market %}
+                            <h5 class="card-title">Target Market:</h5>
+                            <ul class="features-list">
+                                {% for target_market in plan.market_place %}
                                 <li>{{ target_market }}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                             <div class="pay-buttons buttons-group">
                                 <!-- PayPal -->
-                                <form class="paypal-form" action="{% url 'subscription-checkout' plan.id %}" method="post">
+                                <form class="paypal-form" action="{% url 'subscription' %}" method="post">
                                     {% csrf_token %}
+                                    <input type="hidden" name="plan_id" value="{{ plan.plan_id }}">
                                     <button type="submit" class="btn button-to-pay">Pay with PayPal</button>
-                                </form>
-                                <!-- Stripe -->
-                                <!--
-                                <form class="stripe-form" action="" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="selected_plan" value="{{ forloop.counter }}">
-                                    <input type="hidden" name="payment_method" value="stripe">
-                                    <button type="button" class="btn button-to-pay stripe-button" data-bs-toggle="modal" data-bs-target="#stripeModal" 
-                                            data-plan-name="{{ plan.name }}" data-plan-amount="{{ plan.amount }}" data-stripe-id="{{ plan.stripe_plan_id }}">
-                                        Stripe
-                                    </button> -->
                                 </form>
                             </div>
                         </div>
@@ -67,6 +78,7 @@
                 </div>
                 {% endfor %}
             </div>
+            
             <!-- Controles de "Anterior" y "Siguiente" -->
             <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -84,6 +96,74 @@
     <script>
         $(document).ready(function() {
             $('#cardCarousel').carousel();
+        });
+        
+    </script>
+    <script>
+        function getLanguagePrefix() {
+            const path = window.location.pathname;
+            const languageCode = path.split('/')[1]; // Obtiene el segmento de idioma del path
+            return languageCode;
+        }
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+        document.getElementById('specialCodeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const csrfToken = getCookie('csrftoken');
+            var specialCode = this.special_code.value;
+            const languagePrefix = getLanguagePrefix();
+            let urlEndpoint = `/${languagePrefix}/ai-team/subs-page/`;
+            fetch(urlEndpoint, {
+                method: 'POST',
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'special_code=' + specialCode
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Código no encontrado');
+                }
+            })
+            .then(data => {
+                // Mostrar los detalles del plan en el div #planDetails
+                var planDetails = document.getElementById('planDetails');
+
+                var newContent =  '<p><strong>Product Name:</strong>' +data.product_name + '</p>' +
+                                        '<p><strong>Plan Name:</strong>' + data.plan_name + '</p>' +
+                                        '<p><strong>Price:</strong> $' +  data.price + 'USD </p>' +
+                                        '<br>' +
+                                        '<ul class="features-list">' +
+                                            '{% for feature in plan.features_list %}' +
+                                            '<li>{{ feature }}</li>' +
+                                            '{% endfor %}' +
+                                        '</ul>' +
+                                        '{% if plan.target_market %}' +
+                                        '<h5 class="card-title">Target Market:</h5>' +
+                                        '<ul class="features-list">' +
+                                            '{% for target_market in plan.market_place %}' +
+                                            '<li>{{ target_market }}</li>' +
+                                            '{% endfor %}' +
+                                        '</ul>' +
+                                        '{% endif %}' +
+                                        '<div class="pay-buttons buttons-group">'+                                    
+                                        '<<form class="paypal-form" action="{% url 'subscription' %}" method="post">' +
+                                        '{% csrf_token %}' +
+                                        '<input type="hidden" name="plan_id" value="' + data.plan_id + '">' +
+                                        '<button type="submit" class="btn button-to-pay">Pay with PayPal</button>' +
+                                        '</form>' +
+                                        '</div>';                                        ;
+                planDetails.innerHTML += newContent;
+            })
+            .catch(error => {
+                document.getElementById('planDetails').innerHTML = error.message;
+            });
         });
         
     </script>

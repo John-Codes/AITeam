@@ -33,3 +33,12 @@ class PasswordResetForm(forms.Form):
             raise forms.ValidationError("Passwords do not match.")
         
         return cleaned_data
+
+class SubscriptionForm(forms.Form):
+    plan_name = forms.CharField(max_length=100, required=True)
+    product_name = forms.CharField(max_length=100, required=True)
+    subscription_name = forms.CharField(max_length=100, required=True)
+    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), required=True)
+    price = forms.DecimalField(max_digits=10, decimal_places=2, required=True)
+    features_list = forms.CharField(widget=forms.Textarea, required=False)  # Campo de texto para características
+    market_place = forms.CharField(widget=forms.Textarea, required=False)  # Campo de texto para mercados
