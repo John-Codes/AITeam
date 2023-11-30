@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    'django.contrib.sitemaps',
     'Server_Config.Server_Side', # path where we found it the Server config of our app
     "django_check_seo",
     'cms',

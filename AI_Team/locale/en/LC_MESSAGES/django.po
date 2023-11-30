@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-25 00:42-0500\n"
+"POT-Creation-Date: 2023-11-30 16:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\Client_Side\templates\ai-team.html:13
 msgid " Artificial Intelligence Services by Ai-team"
 msgstr ""
 
 #: .\Client_Side\templates\ai-team.html:41
-#: .\Client_Side\templates\subscription.html:35
+#: .\Client_Side\templates\subscription.html:39
 msgid "Home"
 msgstr ""
 
@@ -31,12 +32,13 @@ msgid "Logout"
 msgstr ""
 
 #: .\Client_Side\templates\ai-team.html:46
+#: .\Client_Side\templates\subscription.html:13
 #: .\Server_Config\Server_Side\views.py:63
 msgid "Subscriptions"
 msgstr ""
 
 #: .\Client_Side\templates\ai-team.html:53
-#: .\Client_Side\templates\subscription.html:38
+#: .\Client_Side\templates\subscription.html:42
 msgid "Login"
 msgstr ""
 
@@ -60,11 +62,14 @@ msgid "An AI Team is writing"
 msgstr ""
 
 #: .\Client_Side\templates\ai-team.html:88
+msgid "Website creation service with"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:88
 msgid ""
-"Website creation service with AI: 24/7 customer service better than a human "
-"being with AI like gpt 4. Integration with database and systems of your "
-"website or app. Create an AI bot in 5 minutes that sends emails and "
-"processes payments and orders."
+"24/7 customer service better than a human being with AI like gpt 4. "
+"Integration with database and systems of your website or app. Create an AI "
+"bot in 5 minutes that sends emails and processes payments and orders."
 msgstr ""
 
 #: .\Client_Side\templates\ai-team.html:91
@@ -290,12 +295,6 @@ msgstr ""
 msgid "using your new password."
 msgstr ""
 
-#: .\Client_Side\templates\registration\password_reset_confirm.html:3
-#: .\Client_Side\templates\registration\password_reset_done.html:3
-#: .\Client_Side\templates\subscription.html:52
-msgid "EFEXZIUM =$="
-msgstr ""
-
 #: .\Client_Side\templates\registration\password_reset_confirm.html:5
 #: .\Client_Side\templates\registration\password_reset_confirm.html:12
 msgid "Set New Password"
@@ -309,96 +308,92 @@ msgstr ""
 msgid "An email has been sent with instructions to reset your password."
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:9
-msgid "Subscriptions by Ai-team"
-msgstr ""
-
-#: .\Client_Side\templates\subscription.html:39
+#: .\Client_Side\templates\subscription.html:43
 msgid "Singup"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:40
+#: .\Client_Side\templates\subscription.html:44
 msgid "Reset Password"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:43
-msgid "Create Subscription"
-msgstr ""
-
-#: .\Client_Side\templates\subscription.html:44
-msgid "Clients"
-msgstr ""
-
-#: .\Client_Side\templates\subscription.html:45
-msgid "Plans"
-msgstr ""
-
-#: .\Client_Side\templates\subscription.html:65
+#: .\Client_Side\templates\subscription.html:69
 msgid "Special Code"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:71
+#: .\Client_Side\templates\subscription.html:75
 msgid "Send Code"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:84
+#: .\Client_Side\templates\subscription.html:88
 msgid "Product Name"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:85
+#: .\Client_Side\templates\subscription.html:89
 msgid "Plan Name"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:86
+#: .\Client_Side\templates\subscription.html:90
 msgid "Price"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:87
+#: .\Client_Side\templates\subscription.html:91
 msgid "Subscription Status"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:89
+#: .\Client_Side\templates\subscription.html:93
 msgid "Features"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:96
+#: .\Client_Side\templates\subscription.html:100
 msgid "Target Market"
 msgstr ""
 
-#: .\Client_Side\templates\subscription.html:108
+#: .\Client_Side\templates\subscription.html:112
 msgid "Pay with PayPal"
 msgstr ""
 
-#: .\Logic\Charge_Context.py:56
+#: .\Logic\Charge_Context.py:59
 msgid "Total size including existing data exceeds the 100 MB limit"
 msgstr ""
 
-#: .\Logic\Charge_Context.py:80
+#: .\Logic\Charge_Context.py:72
 msgid "New context created successfully."
 msgstr ""
 
-#: .\Logic\Charge_Context.py:82
+#: .\Logic\Charge_Context.py:74
 msgid "context updated successfully."
 msgstr ""
 
-#: .\Logic\Charge_Context.py:92
+#: .\Logic\Charge_Context.py:86
 msgid " and site generated successfully."
 msgstr ""
 
-#: .\Logic\Charge_Context.py:94
+#: .\Logic\Charge_Context.py:88
 msgid "Login required"
 msgstr ""
 
-#: .\Logic\Charge_Context.py:96
+#: .\Logic\Charge_Context.py:90
 msgid "Error saving context, an email has send to support: {str(e)}"
 msgstr ""
 
-#: .\Logic\Charge_Context.py:139
+#: .\Logic\Charge_Context.py:133
 msgid "Saved Successfully"
 msgstr ""
 
-#: .\Server_Config\Server_Side\forms.py:29
+#: .\Server_Config\Server_Side\forms.py:30
 msgid "There are no registered users with this email."
+msgstr ""
+
+#: .\Server_Config\Server_Side\forms.py:36
+msgid "Email"
+msgstr ""
+
+#: .\Server_Config\Server_Side\forms.py:41
+msgid "Password"
+msgstr ""
+
+#: .\Server_Config\Server_Side\forms.py:53
+msgid "This account is inactive."
 msgstr ""
 
 #: .\Server_Config\Server_Side\views.py:63
@@ -422,16 +417,16 @@ msgid "AI Team Page Builder"
 msgstr ""
 
 #: .\Server_Config\Server_Side\views.py:251
-#: .\Server_Config\Server_Side\views.py:268
+#: .\Server_Config\Server_Side\views.py:270
 msgid ""
 "There was an error processing your form. Please check the details and try "
 "again."
 msgstr ""
 
-#: .\Server_Config\settings.py:81
+#: .\Server_Config\settings.py:82
 msgid "English"
 msgstr ""
 
-#: .\Server_Config\settings.py:82
+#: .\Server_Config\settings.py:83
 msgid "Español"
 msgstr ""
