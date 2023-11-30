@@ -23,8 +23,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // Toggle hamburger menu.
     const hamburgerToggle = document.querySelector("#hamburgerToggle");
     const menuItems = document.querySelector(".menu-items");
-
+    const hamburgerIcon = document.querySelector(".hamburger-lines i");
+    console.log('aquii esta')
     hamburgerToggle.addEventListener("change", function() {
-        menuItems.style.transform = this.checked ? 'translateX(0)' : 'translateX(-100%)';
+
+      hamburgerIcon.className = this.checked ? 'bi bi-x-lg' : 'bi bi-list';
+
+      menuItems.style.transform = this.checked ? 'translateX(0)' : 'translateX(-100%)';
     });
 });

@@ -1,0 +1,52 @@
+{
+    "title": "Social media is changing the business",
+    "header": "Social media in your business",
+    "description": "A discussion on the impact of social media on business, with links to relevant platforms and products.",
+    "keywords": [
+        "Social media",
+        "Business",
+        "YouTube",
+        "Facebook",
+        "PayPal",
+        "Google"
+    ],
+    "default_message": "Welcome to our chat! We will talk about how to implement social media in your business, so first, tell us about your business.",
+    "list_items": [
+        {
+            "text": "YouTube",
+            "url": "youtube.com"
+        },
+        {
+            "text": "Facebook",
+            "url": "facebook.com"
+        },
+        {
+            "text": "PayPal",
+            "url": "paypal.com"
+        },
+        {
+            "text": "Google",
+            "url": "google.com"
+        }
+    ],
+    "products": [
+        {
+            "name": "Product 1",
+            "description": "Description for Product 1",
+            "value": "Value for Product 1",
+            "url": "URL for Product 1"
+        },
+        {
+            "name": "Product 2",
+            "description": "Description for Product 2",
+            "value": "Value for Product 2",
+            "url": "URL for Product 2"
+        },
+        {
+            "name": "Product 3",
+            "description": "Description for Product 3",
+            "value": "Value for Product 3",
+            "url": "URL for Product 3"
+        }
+    ]
+}

@@ -1,6 +1,10 @@
+import os
 import json
 import re
 from pathlib import Path
+from hashids import Hashids
+
+hashids = Hashids(salt = os.getenv("salt"), min_length=8)
 
 class DataSaver:
 
@@ -59,3 +63,26 @@ class DataSaver:
         """Check if a specific file exists."""
         file_path = self.base_path / f"{filename}.json"
         return file_path.exists()
+    
+    def create_page(self, user_id, user_json_page):
+        user_name_page = hashids.encode(user_id)
+        data_dict = self.format_str_to_dict(user_json_page)
+        self.save_to_json(data_dict, f"memory-AI-with-{user_name_page}")
+
+    def check_site(self, user_id=None, check_context=None):
+        """Checks if the user has a personal site saved or if a given context is valid."""
+        if user_id:
+            # If user_id is provided, generate the filename using hashid
+            filename = f"memory-AI-with-{hashids.encode(user_id)}"
+            
+        elif check_context and check_context.startswith('Uptc%3Fto='):
+            # If check_context is provided, generate the filename using context
+            filename = f"memory-AI-with-{check_context.split('Uptc%3Fto=')[1].rstrip('$')}"
+        else:
+            return False
+
+        saver = DataSaver()
+        exists = saver.file_exists(filename)
+        
+        # Print whether the file exists or not
+        return exists

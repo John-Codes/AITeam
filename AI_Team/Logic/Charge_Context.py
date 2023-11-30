@@ -2,11 +2,18 @@ from Server_Config.Server_Side.models import Client, ClienContext
 from langchain.document_loaders import PyPDFLoader
 from .Data_Saver import DataSaver
 from .sender_mails import image_seve_fail_email
+from .response_utils import *
+from .Memory import Consulta_IA_JSON
 import tempfile
 import os
+from hashids import Hashids
 from django.utils.translation import gettext as _
+
+hashids = Hashids(salt = os.getenv("salt"), min_length=8)
+
 class Charge_Context:
     def extract_text(self, user, uploaded_file):
+        file_size = uploaded_file.size
         # Detectar el tipo de archivo basado en su extensión
         if uploaded_file.name.endswith('.txt'):
             contenido = uploaded_file.read().decode()
@@ -30,20 +37,27 @@ class Charge_Context:
             # Eliminar el archivo temporal
             os.remove(temp_file_path)
             print('PDF extracted')
-        context =self.save_context(user, contenido)
+        context =self.save_context(user, contenido, file_size)
         return context
     
-    def save_context(self, user_id, text):
+    def save_context(self, user_id, text, file_size):
         context_details = {
             'status': 'failed',
             'message': ''
         }
 
         try:
+
             client = Client.objects.get(pk=user_id)
             
             # Intenta obtener el contexto existente del cliente
             user_context, created = ClienContext.objects.get_or_create(client=client)
+            existing_context_size = len(user_context.context.encode('utf-8'))
+            # Comprobar si el tamaño total excede los 100 MB
+            total_size = existing_context_size + file_size
+            if total_size > 100 * 1024 * 1024:  # 100 MB en bytes
+                context_details['status'] = _('Total size including existing data exceeds the 100 MB limit')
+                return context_details
             if user_context.context != text and not user_context.context in text:
                 user_context.context += f"\n{text}"
             else:
@@ -53,31 +67,29 @@ class Charge_Context:
             
             # Actualiza el diccionario de detalles con el éxito
             context_details['status'] = 'saved'
-
-            # Verificación de palabras clave
-            keys = ['title', 'header', 'description', 'keywords', 'default message', 'list items', 'products', 'links', 'titulo', 'encabezado', 'enlaces', 'mensaje', 'productos', 'imagenes']
-            num_keys = 0
-            text_lower = text.lower()  # Convierte el texto a minúsculas
-
-            for key in keys:
-                if f"{key}" in text_lower:  # Busca la palabra clave como palabra completa
-                    print(key)
-                    num_keys += 1
-            
-            context_details['keywords'] = True if num_keys > 2 else False
-
+        
             if created:
                 context_details['status'] = _('New context created successfully.')
             else:
                 context_details['status'] = _('context updated successfully.')
                 # extract contiene el str de texto los primeros y ultimos 50 caracteres
-                context_details['extract'] = f"{user_context.context[:200]}...{user_context.context[-200:]}" if len(user_context.context) > 450 else user_context.context
+            context_details['extract'] = f"{user_context.context[:200]}...{user_context.context[-200:]}" if len(user_context.context) > 450 else user_context.context
+            
+            context_user = hashids.encode(user_id)
+            json_read, data_page = Consulta_IA_JSON(context_user)
+            context_details['keywords'] = data_page
+            if json_read:
+                print(json_read)
+                # Llamar a create_page de DataSaver
+                data_saver = DataSaver()
+                data_saver.create_page(user_id, json_read)
+                context_details['status'] += _(' and site generated successfully.')
         except Client.DoesNotExist:
             context_details['status'] = _('Login required')
         except Exception as e:
             context_details['status'] = _(f'Error saving context, an email has send to support: {str(e)}')
             image_seve_fail_email(context_details)
-        print(context_details)
+        context_details['type'] = 'text'
         return context_details
 
 
@@ -131,5 +143,43 @@ class Charge_Context:
                     }
                     image_seve_fail_email(image_details, user_id)
                 break  # Sale del bucle ya que la imagen ha sido guardada
-            #print(image_details)
+            image_details['type'] = 'image'
         return image_details
+    
+    def process_uploaded_files(self, request):
+        uploaded_files = request.FILES.getlist('uploaded_files')
+        if not uploaded_files:
+            return None
+
+        upload_details = []
+        for file in uploaded_files:
+            if file.name.endswith('.png'):
+                details = self.save_image_product(request.user.id, file)
+            else:
+                details = self.extract_text(request.user.id, file)
+            upload_details.append(details)
+        
+        return upload_details
+    
+    def handle_user_input(self, request, user_message, uploaded_files_details):
+        response_data = {}
+
+        # Procesar mensaje del usuario
+        if user_message:
+            response_data['user_message_div'] = render_html('chat_messages/user_message.html', message=user_message)
+        else:
+            response_data['user_message_div'] = ''
+
+        # Procesar archivos subidos
+        if uploaded_files_details:
+            for file_detail in uploaded_files_details:
+                if file_detail['type'] == 'image':
+                    image_html = render_html('chat_messages/image_message.html', file_detail)
+                    response_data['user_message_div'] += image_html
+                elif file_detail['type'] == 'text':
+                    if file_detail['keywords']:
+                        request.session['create-json-page'] = True
+                    text_html = render_html('chat_messages/text_message.html', file_detail)
+                    response_data['user_message_div'] += text_html
+
+        return response_data

@@ -3,7 +3,7 @@
 {% block title %}Log In to EFEXZIUM{% endblock %}
 {% block logo %} EFEXZIUM =$={% endblock %}
 {% block header %}
-Log In
+Log In =$=
 {% endblock %}
 
 {% block form_content %}
@@ -20,9 +20,10 @@ Log In
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="id_username" required>
+            <label for="username">Email</label>
+            <input type="email" name="username" id="id_username" required>
         </div>
+        
         <div class="input-group">
             <label for="password">Password</label>
             <input type="password" name="password" id="id_password" required>
@@ -32,8 +33,8 @@ Log In
 {% endblock %}
 
 {% block additional_content %}
-    <p>Don't have an account?</p>
-    <a href="{% url 'signup' %}" class="register-link">Create account</a>
+    <p>Don't have an account? </p>
+    <a href="{% url 'signup' %}" class="register-link">Create an account</a>
     <p>Forgot your password?</p>
-    <a href="{% url 'password_reset' %}" class="register-link">Reset password</a>
+    <a href="{% url 'password_reset' %}" class="register-link">Reset it</a>
 {% endblock %}

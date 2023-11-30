@@ -40,6 +40,16 @@ class VectorDB:
         with open(vectorstore_dir / f"{store_name}.pkl", "wb") as f:
             pickle.dump(vector_store, f)
 
+    def delete_vector_store(self, store_name):
+        vectorstore_dir = Path(__file__).parent / "vectorstore"
+        file_path = vectorstore_dir / f"{store_name}.pkl"
+
+        if file_path.exists():
+            os.remove(file_path)
+            print(f"El archivo {store_name}.pkl ha sido eliminado.")
+        else:
+            print(f"No se encontró el archivo {store_name}.pkl.")
+
     def load_vector_store(self, store_name):
         vectorstore_dir = Path(__file__).parent / "vectorstore"
         if (vectorstore_dir / f"{store_name}.pkl").exists():
@@ -76,6 +86,14 @@ class VectorDB:
         extract_products = []
         if context not in ["main", "subscription", "panel-admin"]:
             try:
+                decode = hashids.decode(context)
+                id_context = int(decode[0])
+                # Intenta obtener el contexto del cliente por su ID
+                client_context = ClienContext.objects.get(client__id=id_context)
+            except Exception as e:
+                print(e)
+
+            try:
                 get_products = DataSaver()
                 extract_products = get_products.read_from_json(f'memory-AI-with-{context}', ['products'])
                 output_dict = {}
@@ -83,13 +101,9 @@ class VectorDB:
                     product_name = product['name']
                     output_dict[product_name] = product
                 extract_products = output_dict
-                decode = hashids.decode(context)
-                id_context = int(decode[0])
-                # Intenta obtener el contexto del cliente por su ID
-                client_context = ClienContext.objects.get(client__id=id_context)
                 return client_context.context, extract_products
-            except Exception as e:
-                print(e)
+            except FileNotFoundError:
+                return client_context.context
         else:
             current_dir = Path(__file__).parent
             ruta_absoluta = current_dir / "memory_text" / f"memory-AI-with-{context}.txt"
@@ -108,6 +122,6 @@ class VectorDB:
         matches = re.findall(content_pattern, consulta_str)
         
         # Combina todas las coincidencias encontradas en una sola cadena de texto
-        cleaned_text = ' '.join(matches)
+        cleaned_text = '\n'.join(matches)
         return cleaned_text
         

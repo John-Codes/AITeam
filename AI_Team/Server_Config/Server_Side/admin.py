@@ -10,12 +10,12 @@ class SubscriptionDetailAdmin(admin.ModelAdmin):
 # Administrador para Client
 class ClientAdmin(admin.ModelAdmin):
     list_display = [
-        'username', 'email', 'is_subscribe', 'next_date_pay', 'date_subscription', 'total_tokens', 'change_password'
+        'email', 'is_subscribe', 'next_date_pay', 'date_subscription', 'total_tokens', 'change_password'
     ]
 
-    search_fields = ('username', 'email')
+    search_fields = ['email']
     list_filter = ('is_subscribe',)
-    ordering = ('username',)
+    ordering = ('email',)
 
     
     def change_password(self, obj):
@@ -24,7 +24,7 @@ class ClientAdmin(admin.ModelAdmin):
 
 class ClienContextAdmin(admin.ModelAdmin):
     list_display = ('client', 'context')
-    search_fields = ('client__username', 'context')
+    search_fields = ('client__email', 'context')
     list_filter = ('client',)
 
 

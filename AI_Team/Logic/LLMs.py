@@ -18,14 +18,53 @@ import requests
 # agrega a la función  esta función la clase Count_Tokens y usala para contar los tokens generados
 
 def calling_runpod(context, last_messsages, prompt_user):
-    
+    id_gpu = "ampere48"
+    api_key = os.getenv("RUNPOD_API_KEY")
+    url = f'https://api.runpod.io/graphql?{api_key}=pewpew'
+    headers = {'content-type': 'application/json'}
+    data = {
+        "query": f"""
+        mutation {{
+            saveEndpoint(input: {{
+                gpuIds: "{id_gpu}",
+                idleTimeout: 5,
+                locations: "US",
+                name: "Generated Endpoint -fb",
+                networkVolumeId: "",
+                scalerType: "QUEUE_DELAY",
+                scalerValue: 4,
+                templateId: "xkhgg72fuo",
+                workersMax: 3,
+                workersMin: 0
+            }}) {{
+                gpuIds
+                id
+                idleTimeout
+                locations
+                name
+                scalerType
+                scalerValue
+                templateId
+                workersMax
+                workersMin
+            }}
+        }}
+        """
+    }
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    print(response)
+    print(response.json())
+
+def calling_runpod2(context, last_messsages, prompt_user):
+    print("calling_runpod")
     runpod_api = os.getenv("RUNPOD_API_KEY")
     runpod_endpoint = os.getenv("RUNPOD_ENDPOINT")
-
+    print(runpod_endpoint)
     url = f"https://{runpod_endpoint}-8080.proxy.runpod.net/generate"
     
     headers = {
         "Content-Type": "application/json",
+        "Authorization": f"Bearer {runpod_api}"
     }
     
     payload = {
@@ -33,9 +72,6 @@ def calling_runpod(context, last_messsages, prompt_user):
             "input": prompt_user,
             "context": context,
             "last_messsages": last_messsages,
-            "parameters": {
-                "max_new_tokens": 500,
-            }
         })
     }
     
@@ -45,12 +81,23 @@ def calling_runpod(context, last_messsages, prompt_user):
         print("Success!")
         return response.json()
     else:
+        print("Failed!")
+        print(response)
+        runpod.api_key = runpod_api
+
+        # Crea un endpoint
+        endpoint = runpod.Endpoint(runpod_endpoint)
+
+        # Ejecuta el pod
+        run_request = endpoint.run({"input": "types of data in python"})
+        print(run_request)
+        # Imprime la respuesta del pod
+        print(run_request.result())
         return f"Failed to get response: {response.status_code}, {response.text}"
 
 
 def generate_json(user_info):
     print("generate_json")
-    print(user_info)
     google_api_key = os.getenv("Palm2APIKey")
     user_info = str(user_info)
     encoding = tiktoken.encoding_for_model("gpt-4")
@@ -214,7 +261,10 @@ def Check_Cuestion(prompt):
 
     cuestion = f'Keep in mind the grammar of the following text and answer me if it is a question or not:{prompt}'
     response = palm.chat(context="Respond only with yes or no", messages=cuestion, temperature=0)
-    response_lower = str(response.last).lower()
+    if prompt != '':
+        response_lower = str(response.last).lower()
+    else:
+        response_lower = 'not'
 
     affirmative_expressions = ['is a question','yes' ]
     negative_expressions = ['not,' 'no', 'statement']

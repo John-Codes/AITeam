@@ -22,13 +22,20 @@ function getLanguagePrefix() {
 
 // Function to send the user's message and receive the response.
 function sendMessage() {
-    console.log("Función sendMessage invocada");
-    const message = document.getElementById("userMessage").value.trim();  // Obtiene el mensaje y elimina espacios en blanco
+    const message = document.getElementById("userMessage").value.trim();
     let formData = new FormData();
-    formData.append("phase", "user_message");
+    
+    // Agregar el mensaje del usuario al FormData si está presente
     if (message !== "") {
         formData.append("message", message);
+        // Agregar el mensaje del usuario al chatBox directamente
+        const chatBox = document.getElementById("chatBox");
+        const userMessageDiv = `<div class="message-right glass float-end"><p class="message-content">${message}</p></div><div class="clearfix"></div>`;
+        chatBox.insertAdjacentHTML('beforeend', userMessageDiv);
+        document.getElementById("userMessage").value = "";
     }
+
+    // Agregar archivos al FormData si están presentes
     const fileInput = document.getElementById("fileInput");
     let hasFiles = fileInput && fileInput.files.length > 0;
     if (hasFiles) {
@@ -37,11 +44,15 @@ function sendMessage() {
             formData.append("uploaded_files", files[i]);
         }
     }
+
+    // Solo realiza la solicitud si hay un mensaje o archivos
     if (message !== "" || hasFiles) {
         toggleDotsAnimation(true); // Activar animaciones
         const csrfToken = getCookie('csrftoken');
         const languagePrefix = getLanguagePrefix();
-        let urlEndpoint = `/${languagePrefix}/ai-team/chat/${currentContext}/`;
+        let urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
+        formData.append("phase", "ai_response"); // Añadir phase para la solicitud
+
         fetch(urlEndpoint, {
             method: "POST",
             body: formData,
@@ -57,52 +68,13 @@ function sendMessage() {
         })
         .then(data => {
             const chatBox = document.getElementById("chatBox");
-            chatBox.insertAdjacentHTML('beforeend', data.user_message_div);
-            document.getElementById("userMessage").value = "";
+            if (data.combined_response) {
+                chatBox.insertAdjacentHTML('beforeend', data.combined_response);
+            }
             if (fileInput) {
-                fileInput.value = "";
+                fileInput.value = ""; // Limpiar el botón de archivos
             }
             chatBox.scrollTop = chatBox.scrollHeight;
-            toggleDotsAnimation(false); // Desactivar animaciones
-            
-            chatBox.scrollTop = chatBox.scrollHeight;
-            // Solo realiza la solicitud a la IA si hay un mensaje
-            if (message !== "") {
-                let urlEndpoint = `/${languagePrefix}/ai-team/chat/${currentContext}/`;
-                return fetch(urlEndpoint, {
-                    method: "POST",
-                    body: new URLSearchParams({ "message": message, "phase": "ai_response" }),
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                        "X-CSRFToken": csrfToken
-                    }
-                });
-            } else {
-                // No hay mensaje para enviar a la IA, así que resuelve la promesa aquí
-                return Promise.resolve();
-            }
-        })
-        .then(response => {
-            if (response) {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            } else {
-                // No hubo respuesta porque no se realizó la solicitud a la IA
-                return {};
-            }
-        })
-        .then(data => {
-            if (data.ia_message_div) {
-                const chatBox = document.getElementById("chatBox");
-                chatBox.insertAdjacentHTML('beforeend', data.ia_message_div);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
-            if (data.total_cost !== undefined) {
-                const totalCostDisplay = document.getElementById("totalCostDisplay");
-                totalCostDisplay.textContent = "Costo Total: $" + data.total_cost;
-            }
         })
         .catch(error => {
             console.error('Error:', error);
@@ -130,13 +102,13 @@ document.addEventListener("DOMContentLoaded", function() {
         link.addEventListener("click", function(e) {
             e.preventDefault();
             var templateName = e.target.getAttribute("data-template");
-
+            console.log(templateName);
             toggleDotsAnimation(true);
             const csrfToken = getCookie('csrftoken');
             const languagePrefix = getLanguagePrefix();
             
 
-            let urlEndpoint = `/${languagePrefix}/ai-team/chat/${currentContext}/`;
+            let urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
 
             fetch(urlEndpoint, {
                 method: "POST",
@@ -154,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(data => {
                 const chatBox = document.getElementById("chatBox");
-                chatBox.insertAdjacentHTML('beforeend', data.template_message_div);
+                chatBox.insertAdjacentHTML('beforeend', data.combined_response);
                 chatBox.scrollTop = chatBox.scrollHeight;
             })
             .catch(error => {
@@ -178,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
             toggleDotsAnimation(true);
             const csrfToken = getCookie('csrftoken');
             const languagePrefix = getLanguagePrefix();
-            let urlEndpoint = `/${languagePrefix}/ai-team/chat/${currentContext}/`;
+            let urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
 
             // Envía los datos del formulario al servidor
             fetch(urlEndpoint, {
@@ -196,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 return response.json();
             })
             .then(data => {
-                chatBox.insertAdjacentHTML('beforeend', data.template_message_div);
+                chatBox.insertAdjacentHTML('beforeend', data.combined_response);
                 chatBox.scrollTop = chatBox.scrollHeight;
             })
             .catch(error => {
@@ -217,8 +189,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // Toggle hamburger menu.
     const hamburgerToggle = document.querySelector("#hamburgerToggle");
     const menuItems = document.querySelector(".menu-items");
+    const hamburgerIcon = document.querySelector(".hamburger-lines i");
 
     hamburgerToggle.addEventListener("change", function() {
+
+      hamburgerIcon.className = this.checked ? 'bi bi-x-lg' : 'bi bi-list';
+
         menuItems.style.transform = this.checked ? 'translateX(0)' : 'translateX(-100%)';
     });
 });

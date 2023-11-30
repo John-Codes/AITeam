@@ -1,38 +1,58 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordResetForm
 from .models import Client as User
+from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True, help_text="Required.")
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("email", "password1", "password2")
 
-class PasswordResetForm(forms.Form):
-    username = forms.CharField(label='Username', max_length=150)
-    email = forms.EmailField(label='Email')
-    newpassword = forms.CharField(label='New Password', widget=forms.PasswordInput)
-    confirmpassword = forms.CharField(label='Confirm New Password', widget=forms.PasswordInput)
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.username = self.cleaned_data['email']  # Opcional: asigna el correo electrónico al nombre de usuario
+        if commit:
+            user.save()
+        return user
 
-    def clean(self):
-        cleaned_data = super().clean()
-        username = cleaned_data.get('username')
-        email = cleaned_data.get('email')
-        newpassword = cleaned_data.get('newpassword')
-        confirmpassword = cleaned_data.get('confirmpassword')
-
-        try:
-            user = User.objects.get(username=username, email=email)
-        except User.DoesNotExist:
-            print("DEBUG: User does not exist with given username and email.")
-            raise forms.ValidationError("Username and Email do not match an existing user.")
-
-        if newpassword != confirmpassword:
-            print("DEBUG: Passwords entered do not match.")
-            raise forms.ValidationError("Passwords do not match.")
+class CustomPasswordResetForm(PasswordResetForm):
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        UserModel = get_user_model()
         
-        return cleaned_data
+        # Verificar si existe un usuario con ese correo electrónico
+        if not UserModel.objects.filter(email=email).exists():
+            raise forms.ValidationError(_("There are no registered users with this email."))
+        
+        return email
+    
+class CustomLoginForm(AuthenticationForm):
+    username = forms.EmailField(
+        label=_("Email"),
+        max_length=255,
+        widget=forms.TextInput(attrs={'autofocus': True, 'type': 'email'})
+    )
+    password = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput
+    )
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        return username.lower()
+
+    def confirm_login_allowed(self, user):
+        if not user.is_active:
+            raise forms.ValidationError(
+                _("This account is inactive."),
+                code='inactive',
+            )
 
 class SubscriptionForm(forms.Form):
     plan_name = forms.CharField(max_length=100, required=True)
