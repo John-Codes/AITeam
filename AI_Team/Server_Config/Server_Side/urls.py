@@ -1,6 +1,12 @@
 from django.urls import path, re_path, include
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import StaticViewSitemap
+
+sitemaps = {
+    'mymodel': StaticViewSitemap,
+}
 #from paypal.standard.ipn import views as paypal_views
 from . import views
 #path('ipn/', paypal_views.ipn, name='paypal-ipn'),
@@ -21,4 +27,5 @@ urlpatterns = [
     path('subs-page/create/', views.create_subscription_view, name='create_subscription'),
     path('subs-page/list/<str:list_all>', views.subscription_list_view, name='list_subscriptions'),
     path('error-handler/', views.error_handler, name='error_handler'),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ]
