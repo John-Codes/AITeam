@@ -26,6 +26,7 @@ from hashids import Hashids
 import time
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordResetView
 # Stripe using stripe
 import stripe
 # PayPal
@@ -60,15 +61,15 @@ class ChatUIView(View):
         self.context_value = kwargs.get('context', None)
         valid_contexts = ["main", "subscription", "panel-admin"]
         titles = {"main": [_('EFEXZIUM'), _('AI Team Chat')], "subscription": [_('Subscriptions'), _('AI Team Subscriptions')], "panel-admin": [_('Create your own page'), _('AI Team Page Builder')]}
+        page_data = DataSaver()
         # Si el contexto es uno de los personalizados
         if self.context_value not in valid_contexts:
-            site_exists = self.check_my_own_site_exists(check_context=self.context_value)
+            site_exists = page_data.check_site(check_context=self.context_value)
             if not site_exists:
-                return redirect('/ai-team/chat/main')
-            # Extraer el valor real del contexto
-            extract = DataSaver()
+                return redirect('/chat/main')
+            # Extraer el valor real del context
             context_filename = "memory-AI-with-" + self.context_value.split('Uptc%3Fto=')[-1].rstrip('$')
-            data_dict = extract.json_to_dict(context_filename)
+            data_dict = page_data.json_to_dict(context_filename)
             if data_dict:
                 context = {
                     'website_data': data_dict,
@@ -79,16 +80,16 @@ class ChatUIView(View):
         # Si el contexto es uno de los predeterminados
         else:
             user_id = request.user.id
-            site_exists = self.check_my_own_site_exists(user_id)
+            site_exists = page_data.check_site(user_id)
 
             # Si el usuario está autenticado, obtenemos la URL del sitio del usuario.
             if request.user.is_authenticated:
                 hashed_id = hashids.encode(user_id)
                 user_page = f'Uptc%3Fto={hashed_id}$'
                 url = reverse('ai-team', kwargs={'context': user_page})
-                extract = DataSaver()
                 context_filename = "memory-AI-with-" + hashed_id
-                data_dict = extract.json_to_dict(context_filename)
+                data_dict = page_data.json_to_dict(context_filename)
+                
                 context = {
                     'title': titles[self.context_value][0],
                     'header': titles[self.context_value][1],
@@ -96,9 +97,10 @@ class ChatUIView(View):
                     'valid_contexts': valid_contexts,
                     'site_exists': site_exists
                 }
+                
                 if site_exists:
-                    context['my_site_IA']: url
-                    context['my_site_title']: data_dict['header']
+                    context['my_site_IA']= url
+                    context['my_site_title']= data_dict['header']
             else:
                 context = {
                     'title': titles[self.context_value][0],
@@ -112,89 +114,54 @@ class ChatUIView(View):
 
 
     def post(self, request, *args, **kwargs):
-        # request data preparing
+        # Preparación de datos de la solicitud
         self.context_value = kwargs.get('context', None)
         template_name = request.POST.get('template_name', None)
         user_message = request.POST.get('message')
         phase = request.POST.get('phase')
         action = request.POST.get('action')
-        uploaded_files = request.FILES.getlist('uploaded_files')  # Extracting uploaded files
-        upload_details = None
+        charger = Charge_Context()
 
-        # You can process the uploaded_files here if needed
-        if uploaded_files:
-            #print(f"Uploaded files: {uploaded_files}")
-            upload_details = self.process_uploaded_files(request, uploaded_files)
-            
+        response_html = ""
+
+        # Procesar archivos subidos, si los hay
+        upload_details = charger.process_uploaded_files(request)
+        if upload_details:
+            upload_response = charger.handle_user_input(request, user_message, upload_details)
+            response_html += upload_response.get('user_message_div', '')
+
         if action == 'cancel_subscription':
-            print('action')
-            response_data = {}
-            request.session['cancel-subscription'] = True
-            response_data['template_message_div'] = render_html('chat_messages/cancel.html', '')
-            return JsonResponse(response_data)
+            response_html += render_html('chat_messages/cancel.html', '')
 
+        # Manejar plantillas de mensajes
         if template_name:
-            return self.handle_template_messages(request, template_name)
+            template_response = self.handle_template_messages(request, template_name)
+            response_html += template_response.get('template_message_div', '')
 
-        if phase == 'user_message':
-            return self.handle_user_message(request, user_message, upload_details)
-
+        # Si hay una respuesta de la IA, procesarla
         if phase == 'ai_response':
-            
-            return self.handle_ai_response(request, user_message)
+            ai_response_data = self.handle_ai_response(request, user_message)
+            response_html += ai_response_data.get('ia_message_div', '')
 
-        return JsonResponse({"error": "Invalid request"})
+        if not response_html:
+            return JsonResponse({"error": "Invalid request"})
 
-
+        return JsonResponse({'combined_response': response_html})
+    
     def handle_template_messages(self, request, template_name):
         response_data = {}
-        if template_name == 'faqs_messages':
-            response_data['template_message_div'] = render_html('chat_messages/faqs_messages.html', '')
-        elif template_name == 'contact_us':
-            request.session['send_us_email'] = True
-            response_data['template_message_div'] = render_html('chat_messages/contact_us_message.html', '')
-        elif template_name == 'about_us':
-            response_data['template_message_div'] = render_html('chat_messages/about_us_message.html', '')
-        elif template_name == 'create-page':
-            request.session['create-web-page'] = True
-            response_data['template_message_div'] = render_html('chat_messages/confirm-data-to create-page.html', '')
-            
-            
-        time.sleep(3)
-        return JsonResponse(response_data)
-
-    def handle_user_message(self, request, user_message = '', uploaded_files=None):
-        response_data = {}
-        
-        # Inicializa la clave 'user_message_div' con el HTML del mensaje del usuario
-        if user_message:
-            response_data['user_message_div'] = render_html('chat_messages/user_message.html', message= user_message)
-        else:
-            response_data['user_message_div'] = ''
-
-        # Si hay archivos cargados, procesa cada uno y concatena el contenido al HTML del mensaje del usuario
-        if uploaded_files:
-            for file_detail in uploaded_files:
-                if file_detail['type'] == 'image':
-                    # Renderiza la imagen y concatena al HTML del mensaje del usuario
-                    image_html = render_html('chat_messages/image_message.html', file_detail)
-                    response_data['user_message_div'] += image_html
-                elif file_detail['type'] == 'text':
-                    if file_detail['keywords']:
-                        print('keywords found', file_detail['keywords'])
-                        request.session['create-json-page'] = True
-                    request.session['create-json-page'] = True
-                    # Renderiza el texto y concatena al HTML del mensaje del usuario
-                    text_html = render_html('chat_messages/text_message.html', file_detail)
-                    response_data['user_message_div'] += text_html
-        return JsonResponse(response_data)
+        print(template_name)
+        response_data['template_message_div'] = render_html(f'chat_messages/{template_name}.html', '')
+        if template_name == 'contact_us':
+            request.session['send_us_email'] = True            
+        time.sleep(2)
+        return response_data
 
     def handle_ai_response(self, request, user_message):
         response_data = {}
         product_consult = False
         
         if request.session.get('cancel-subscription', False):
-            print('cancel subscription')
             if str(user_message).lower() == 'yes':
 
                 ai_response = cancel_subscription(request)
@@ -209,40 +176,16 @@ class ChatUIView(View):
                 context_ia = context_ia.split('Uptc?to=')[-1].rstrip('$')
             else: 
                 Check_Cuestion(user_message)
+
             if context_ia == 'panel-admin':
                 reading = DataSaver()
                 # alistamos el prompt para generar el json
                 json_read =reading.read_from_json(f'memory-AI-with-{hashids.encode(request.user.id)}')
-
-                # verificamos que existe el json para pasarle el prompt a la IA 
-                #prompt = f'this is my dict: {json_read}. now change the dictionary to the next requirements {user_message}' if json_read else user_message
-
-                # comprobomos si el cliente ya tiene un contexto y si la variable de sesion create-json-page es True
-                generate = request.session.get('create-json-page', False)
-                if generate:
-                    try:
-                        client_id = request.user.id
-                        client_context = ClienContext.objects.get(client=client_id)
-                    except:
-                        
-                        client_context = False
-                    if client_context.context:
-                        
-                        request.session['create-json-page'] = False
-                        json_read, tokens_prompt= generate_json(client_context.context)
-                        self.create_page(request, json_read)
-                        
                 # alistamos el prompt para la IA que responde al usuario
-                user_message = str(user_message) + f'''here is the data you give me, 
-                please explain it to me using natural language and short as possible 
-                that isnt hard to understand''' + str(json_read)
-                # consultamos a la IA, obtenemos la respuesta y la guardamos en el diccionario a enviar
-                print('llamamos a la IA en panel admin')
-                ai_response, product_consult =  Consulta_IA_PALM(user_message, context_ia)
-                response_data['total_cost'] = 0
+                user_message = str(user_message) + f'''There is the data of my page in json remember this to respond:  ''' + str(json_read)
+                
             # AI consultation logic
-            else:
-                ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
+            ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
                 
         if request.session.get('send_us_email', False):
             # Handle email sending logic
@@ -257,95 +200,37 @@ class ChatUIView(View):
             response_data['ia_message_div'] = render_html('chat_messages/ia_message.html', ai_response, format=True) + rendered_product
 
         else:
-            response_data['error'] = 'The API could not respond.'
-        
-        return JsonResponse(response_data)
+            error_message = 'The API could not respond.'
+            response_data['ia_message_div'] = render_html('chat_messages/ia_message.html',error_message)
+        return response_data
       
 
     def send_email(self, user_message):
         if ('@' and '.') in user_message:
-            Contac_us_mail(user_message)
-
-    def create_page(self,requests, user_json_page):
-        user_name_page = hashids.encode(requests.user.id)
-        saver = DataSaver()
-        data_dict =saver.format_str_to_dict(user_json_page)
-        saver.save_to_json(data_dict, f"memory-AI-with-{user_name_page}")
-    
-    def check_my_own_site_exists(self, user_id=None, check_context=None):
-        """Checks if the user has a personal site saved or if a given context is valid."""
-        if user_id:
-            # If user_id is provided, generate the filename using hashid
-            filename = f"memory-AI-with-{hashids.encode(user_id)}"
-            
-        elif check_context and check_context.startswith('Uptc%3Fto='):
-            # If check_context is provided, generate the filename using context
-            filename = f"memory-AI-with-{check_context.split('Uptc%3Fto=')[1].rstrip('$')}"
-        else:
-            return False
-
-        saver = DataSaver()
-        exists = saver.file_exists(filename)
-        
-        # Print whether the file exists or not
-        return exists
-    
-    def process_uploaded_files(self, request, uploaded_files):
-        charger = Charge_Context()
-        upload_details = []  # Lista para almacenar detalles de los archivos procesados
-
-        for file in uploaded_files:
-            file_detail = {}  # Diccionario para almacenar los detalles de un archivo
-            try:
-                print('file', file)
-                print(file.name)
-                if file.name.endswith('.png'):
-                    user = hashids.encode(request.user.id)
-                    file_detail = charger.save_image_product(user, file)
-                    file_detail['type'] = 'image'                    
-                else:
-                    print('no es imagen')
-                    file_detail = charger.extract_text(request.user.id, file)
-                    file_detail['type'] = 'text'
-                
-                upload_details.append(file_detail)
-            except Exception as e:
-                file_detail['error_server'] = str(e)
-                image_seve_fail_email(file_detail, request.user)
-                print(f"Error processing file {file.name}: {e}")
-
-        return upload_details
+            Contac_us_mail(user_message)    
 
 # Class to handle the form of Reset Password
-class PasswordResetView(View):
+class PasswordResetView(PasswordResetView):
     template_name = 'registration/password_reset.html'
-    form_class = PasswordResetForm
+    form_class = CustomPasswordResetForm
+    success_url = reverse_lazy('password_reset_done')
+    email_template_name = 'registration/password_reset_email.html'
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+    def form_valid(self, form):
+        """
+        Si el formulario es válido, redirige a la URL de éxito.
+        """
+        messages.success(self.request, "Se han enviado instrucciones para restablecer tu contraseña a tu correo electrónico, si corresponde a una cuenta existente.")
+        return super().form_valid(form)
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            newpassword = form.cleaned_data['newpassword']
-            user = User.objects.get(username=username)
-            user.set_password(newpassword)
-            user.save()
-            messages.success(request, _('Password changed successfully.'))
-            return redirect('login')
-        else:
-            error_details = ''
-            for field, errors in form.errors.items():
-                for error in errors:
-                    error_message = f"Error in field '{field}': {error}"
-                    messages.error(request, error_message)
-                    error_details += error_message + '\n'
-
-            if error_details:
-                notice_error_forms(f"Password Reset Error: \n{error_details}")
-            return render(request, self.template_name, {'form': form})
+    def form_invalid(self, form):
+        """
+        Si el formulario no es válido, vuelve a renderizar la misma página con información del formulario.
+        """
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"Error en el campo '{field}': {error}")
+        return self.render_to_response(self.get_context_data(form=form))
 
 # Handle the form to create an cliente account 
 class SignupView(CreateView):
@@ -367,6 +252,8 @@ class SignupView(CreateView):
         return super().form_invalid(form)
 
 class CustomLoginView(LoginView):
+    form_class = CustomLoginForm
+    template_name = 'registration/login.html'
     def form_valid(self, form):
         return super().form_valid(form)
 
@@ -399,6 +286,7 @@ class Subscription(View):
         for plan in plans:
             plan.features_list = json.loads(plan.features_list)
             plan.market_place = json.loads(plan.market_place)
+            print(plan.market_place)
         context = {
             "plans": plans,  # Cambiado a "plans" para que sea más claro en el template
             "user": request.user,
@@ -463,11 +351,7 @@ class Subscription(View):
                         return redirect(approval_url)
                     else:
                         # N0  se pudo obtener la URL de aprobación
-                        return JsonResponse({"error": "No se pudo obtener la URL de aprobación"}, status=500)
-        
-
-
-
+                        return JsonResponse({"error": "No se pudo obtener la URL de aprobación"}, status=500)     
 
 def create_subscription_view(request):
     print("create_subscription_view")
@@ -581,10 +465,9 @@ def PaymentFailed(request, plan_id):
     return render(request, 'payment/payment_failed.html', {'plan': plan})
 
 def subscription_list_view(request, *args, **kwargs):
-    tablas = {'clients': User, 'plans': SubscriptionDetail}
+    tables = {'clients': User, 'plans': SubscriptionDetail}
     list_all = kwargs.get('list_all')
-    table = tablas.get(list_all)
-
+    table = tables.get(list_all)
     columns = []
     data_rows = []
     if request.method == 'POST' and 'cancel_subscription' in request.POST:
@@ -592,16 +475,28 @@ def subscription_list_view(request, *args, **kwargs):
         cancel_message = cancel_subscription(request, cancel_order_id)
 
     if table:
+        print(table)
         if list_all == 'clients':
-            columns = ['username','subscription_detail__plan_name', 'order_id', 'status_subscription', 'next_date_pay', 'date_subscription']
+            columns = ['email','subscription_detail__plan_name', 'order_id', 'status_subscription', 'next_date_pay', 'date_subscription']
             subscriptions = table.objects.all()
         elif list_all == 'plans':
             columns = ['plan_name', 'code', 'plan_id', 'price', 'name', 'features_list', 'market_place']
             subscriptions = table.objects.all()
-        
-        for subscription in subscriptions:
-            row = [getattr(subscription, col, '') for col in columns]
-            data_rows.append(row)
+            for subscription in subscriptions:
+                subscription.features_list = json.loads(subscription.features_list)
+                subscription.market_place = json.loads(subscription.market_place)
+                features_html = '<ul>' + ''.join([f'<li>{feature}</li>' for feature in subscription.features_list]) + '</ul>'
+                marketplace_html = '<ul>' + ''.join([f'<li>{feature}</li>' for feature in subscription.market_place]) + '</ul>'
+                row = [getattr(subscription, col, '') for col in columns]
+
+                # Store features_list and marketplace as lists directly
+                features_list_index = columns.index('features_list')
+                marketplace_index = columns.index('market_place')
+                row[features_list_index] = features_html
+                row[marketplace_index] = marketplace_html
+
+                data_rows.append(row)
+                print(data_rows)
 
     return render(request, 'payment/list_subscriptions.html', {'data_rows': data_rows, 'columns': columns, 'list_all': list_all})
 

@@ -1,7 +1,8 @@
+{% load i18n %}
 <div class="message-left glass">
     
-    <p class="message-content">Are you sure you want to cancel your subscription? Once cancelled, you will no longer have access to the plan features.
-        Please confirm your decision by send message <strong>'Yes'</strong> or <strong>'No'</strong></p> 
+    <p class="message-content">{% trans "Are you sure you want to cancel your subscription? Once cancelled, you will no longer have access to the plan features.
+        Please confirm your decision by send message" %} <strong>{% trans "Yes" %}</strong> {% trans "or" %} <strong>{% trans "No" %}</strong></p> 
 
     <div class="mt-2">
         <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>

@@ -30,7 +30,7 @@ class ErrorHandlingMiddleware:
         # Intentar obtener el ID del usuario si está autenticado
         user = getattr(request, 'user', None)
         if user and user.is_authenticated:
-            error_message += f"User INFO: {user.username} {user.email}\n"
+            error_message += f"User INFO: {user.email}\n"
 
         # Datos del POST si el método es POST
         if request.method == 'POST':

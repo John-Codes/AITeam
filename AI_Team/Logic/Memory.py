@@ -106,3 +106,44 @@ def Consulta_IA_PALM(prompt, context):
     if palm_response != message_error:
         vector_db.add_to_context(prompt, palm_response)
     return palm_response, product_info
+
+def Consulta_IA_JSON(context):
+    prompt = f"""I want to create a json that contains the essential information of a website, the keys of the json are 
+    title, header, description, keywords, default message, list items, products, links, text, texto, titulo, encabezado, enlaces, mensaje, productos, imagenes
+    the content of the json must include the meta tags keywords, description, the tag title of the page, and the header is h1 tag of the page.
+    in the navigation links Each tag includes a text that the user can read and a url to which he will be redirected when clicking.
+    Finally, it detects the products sent by the user, each product is an item of the list and each product has the following dictionary keys:  product name, description, value, link to buy"""
+    vector_db = VectorDB()    
+
+    message_error ='An error has occurred, please submit again the files'
+    
+    # Retrieve the most similar text fragments using the VectorDB class.
+    try:
+        store_name = f"memoryAI_store-{context}"
+        contenido, products= vector_db.context_palm(context)
+        if contenido:
+            vector_db.process_text(contenido, store_name)
+            docs_palm = vector_db.get_context_palm(prompt)
+            vector_db.delete_vector_store(store_name)
+    except FileNotFoundError:
+        return message_error
+    try:            
+        # Verificación de palabras clave
+        keys = ['title', 'header', 'description', 'keywords', 'default message', 'list items', 'products', 'links', 'text', 'texto', 'titulo', 'encabezado', 'enlaces', 'mensaje', 'productos', 'imagenes']
+        num_keys = 0
+        text_lower = docs_palm.lower()  # Convierte el texto a minúsculas
+
+        for key in keys:
+            if f"{key} " in text_lower:
+                print(key)
+                num_keys += 1
+        keys = True if num_keys > 3 else False
+        json_response = ""
+        if keys:
+            json_response, toeknizer = generate_json(docs_palm)
+        #runpod = calling_runpod(docs_palm, examples, prompt)
+    except Exception as e:
+        print(e)
+        json_response = message_error
+
+    return json_response, keys

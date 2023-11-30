@@ -6,16 +6,16 @@
 
 <head>
     <meta name="description" content="AI Team Chat: Gain insights and consult on our artificial intelligence services.">
-    <meta name="keywords" content=",EFEXZIUM, AI Team, AI, Team, Chat, Artificial Intelligence, EFEXZIUM =$=">
+    <meta name="keywords" content="EFEXZIUM, AI Team, AI, Team, Chat, Artificial Intelligence, Website creation, sitios web con IA, Create, clients, plans, Subscriptions, page">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="google-site-verification" content="gx3tJHQRVDGpImUUJXn_cWvSrcUnGjJTgW8H1dHzIRI" />
     <title> {{header}} {% trans " Artificial Intelligence Services by Ai-team" %}</title>
     
     <link rel="canonical" href="{% url 'ai-team' context='main' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS python manage.py runserver-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href={% static "css/style_chat.css" %} rel="stylesheet"> 
     
@@ -28,14 +28,12 @@
     
             <!-- Chat Header -->
             <div class="chat-header d-flex justify-content-between align-items-center px-3 py-2 glass">
-                <div class="nav-container">
+                <div class="nav-container nav-container d-flex align-items-center">
                     <!-- Asegúrate de que el checkbox tiene el id correcto -->
                     <input class="checkbox" type="checkbox" id="hamburgerToggle" />
                     <!-- Vincula el label (hamburger-lines) con el checkbox mediante el atributo "for" -->
                     <label class="hamburger-lines" for="hamburgerToggle">
-                        <span class="line line1"></span>
-                        <span class="line line2"></span>
-                        <span class="line line3"></span>
+                        <i class="bi bi-list"></i>
                     </label>
                      <!-- Añade esta línea para el menú -->
                     <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
@@ -46,17 +44,22 @@
                                 <li cy-data="logout-link"><a href="{% url 'logout' %}" title="logout"><h2 class="reset-styles" >{% trans "Logout"%}</h2></a></li>
                                 <li cy-data="panel-link"><a href="{% url 'ai-team' context='panel-admin' %}" id="panel-admin-link" title="Your Panel Admin to create a site-web"><h2 class="reset-styles" >Admin Panel</h2></a></li>
                                 <li><a href="{% url 'ai-team' context='subscription' %}" title="See our subscriptions plans"><h2 class="reset-styles" >{% trans "Subscriptions"%}</h2></a></li>
+                                {% if user.is_superuser %}
+                                <li><a href="{% url 'create_subscription' %}"  title="Crete Subscription"><h2 class="reset-styles">Create Subscription</h2></a></li>
+                                <li><a href="{% url 'list_subscriptions' list_all='clients'%}"  title="Clients"><h2 class="reset-styles">Clients</h2></a></li>
+                                <li><a href="{% url 'list_subscriptions' list_all='plans'%}"  title="Plans"><h2 class="reset-styles">Plans</h2></a></li>
+                                {% endif %}
                             {% else %}
                                 <li cy-data="login-link"><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >{% trans "Login" %}</h2></a></li>
-                                <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">{% trans "FAQs"%}</a></h2></li>
-                                <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">{% trans "Contact Us"%}</a></h2></li>
-                                <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">{% trans "About Us"%}</a></h2></li>
+                                <li cy-data="faq-link"><a title="frequently asked questions about AI Team"><h2 data-template="faqs_messages" class="reset-styles">{% trans "FAQs"%}</h2></a></li>
+                                <li cy-data="contact-link"><a  title="How to Contac us"><h2 data-template="contact_us" class="reset-styles">{% trans "Contact Us"%}</h2></a></li>
+                                <li cy-data="about-link"><a title="Who we are and our members"><h2 data-template="about_us" class="reset-styles">{% trans "About Us"%}</h2></a></li>
                             {% endif %}
                             
                             {% if context_value == "main" and user.is_authenticated%}
-                            <li cy-data="faq-link"><h2 class="reset-styles"><a data-template="faqs_messages" title="frequently asked questions about AI Team">{% trans "FAQs"%}</a></h2></li>
-                            <li cy-data="contact-link"><h2 class="reset-styles"><a data-template="contact_us" title="How to Contac us">{% trans "Contact Us"%}</a></h2></li>
-                            <li cy-data="about-link"><h2 class="reset-styles"><a data-template="about_us" title="Who we are and our members">{% trans "About Us"%}</a></h2></li>
+                            <li cy-data="faq-link"><a title="frequently asked questions about AI Team"><h2 data-template="faqs_messages" class="reset-styles">{% trans "FAQs"%}</h2></a></li>
+                            <li cy-data="contact-link"><a  title="How to Contac us"><h2 data-template="contact_us" class="reset-styles">{% trans "Contact Us"%}</h2></a></li>
+                            <li cy-data="about-link"><a title="Who we are and our members"><h2 data-template="about_us" class="reset-styles">{% trans "About Us"%}</h2></a></li>
                             {% endif %}
 
                             {% if context_value in valid_contexts %}
@@ -65,10 +68,12 @@
                                 {% endif %}
                             {% endif %}
                         </ul>
+                    
                     </div>
+                    <h1 class="chat-title">{{title}} =$=</h1>     
                 </div>
             
-                <h1 class="chat-title">{{title}} =$=</h1>         
+                  
             </div>
             <!-- Chat Content -->
             <div class="col-12 messages-container px-0">
@@ -80,13 +85,13 @@
                     {% if context_value == "main" %}
                         <div class="message-left glass">
                             <p class="message-content">
-                                {% trans "Website creation service with AI: 24/7 customer service better than a human being with AI like gpt 4. Integration with database and systems of your website or app. Create an AI bot in 5 minutes that sends emails and processes payments and orders."%}<br>
+                                {% trans "Website creation service with"%} AI: {% trans "24/7 customer service better than a human being with AI like gpt 4. Integration with database and systems of your website or app. Create an AI bot in 5 minutes that sends emails and processes payments and orders."%}<br>
                                 <br>
                                 {% if user.is_authenticated %}
-                                    {% trans "Welcome to AI Team"%} {{ user.username}} {% trans "Ask your questions about our services"%} <br>
+                                    {% trans "Welcome to AI Team"%} {{ user.email}} {% trans "Ask your questions about our services"%} <br>
                                 {% endif %}
                                 
-                            </p>            
+                            </p>           
                             <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                             <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
                             <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
@@ -132,25 +137,36 @@
                         {% endif %}
                     {% elif context_value == "panel-admin" %}
                     <div class="message-left glass">
-                        <p class="message-content"> {% trans "In this chat, you'll be able to provide our AI with the essential information to craft your very own AI Chat Experience – a perfect tool to impress your clients, boss, or friends. Here's what we need from you: "%}
-                            <br>
-                            <strong>{% trans "1 Page Title"%}</strong>{% trans ": This represents the name that appears on the browser tab. For example in this page is: AI Team Chat - Artificial Intelligence Services by Ai-team." %} <br>
-                            <strong>{% trans "2 Page Header"%}</strong>{% trans ": This acts as the main title or heading on your page. For example in this page is: EFEXZIUM =$=" %}<br>
-                            <strong>{% trans "3 Navigation Links"%}</strong>{% trans ": Please provide the list of navigation items (< li > tags) and their respective redirect links. For example in this page is: Home, Logout, Admin Panel, and Subscription. Don't forget to specify both the name of each tag and the URL you'd like it to redirect to. "%} <br>
-                            <strong>{% trans "4 Default Chat Message"%}</strong>{% trans ": A default greeting message that visitors will see when they access your AI chat. Something like: Hello, how can I assist you today? "%} <br>
-                            <strong>{% trans "5 Products"%}</strong>{% trans ": Describe your products to the AI for each product by passing them the following details: name, description, value in USD, and a url that they can access them to "%} <br>
-                            <strong>{% trans "6 Images"%}</strong> {% trans "You can upload the images of your products with the Upload button to relate an image to your product simply the name of the image must be the same as the name of your product, if you described a product with the name 'product' the name of the image must be product, otherwise the AI will not show the image of your product. Preferably in png format"%} <br>
-                            <strong>{% trans "7 Context Information"%}</strong> {% trans ": Submit a pdf o txt file with Information, questions ans answers that you want to AI-Team respond to your clients. This information will customize AI Team's responses on your page, ensuring they align with your vision and offer a unique user experience." %} <br>
-                            <strong>{% trans "Once all is set"%}</strong> {% trans ": In the folding panel you can see the link to your site when it is generated. You'll need to reload the page. The AI will display your product information when the user asks about it and will answer according to the context you give them, remember to add the product information also in the context so that the AI takes it into account then you can start the chat, test it, and share it as you wish!" %}<br>
+                        <p class="message-content">
+                            {% trans "Welcome to our AI Chat Page Creation tool! With this tool, you can craft a unique AI Chat Experience by providing information through uploaded files (PDF or TXT). Here's how to proceed:" %}<br><br>
                             
-                            {% trans "We're excited to help you personalize your AI-powered chat experience!" %}</p>
-                           
-                            <div class="mt-2">
-                                <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                                <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                                <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
-                            </div>
+                            <strong>{% trans "1 Upload Your Content:" %}</strong> 
+                            {% trans "Prepare a PDF or TXT file including the following details for your custom AI Chat Page:" %}<br>
+                            - {% trans "Page Title: The name shown on the browser tab." %}<br>
+                            - {% trans "Page Header: The main title or heading on your page." %}<br>
+                            - {% trans "Navigation Links: List of navigation items and their URLs." %}<br>
+                            - {% trans "Default Chat Message: A greeting message for visitors." %}<br>
+                            - {% trans "Products: Detailed descriptions of your products." %}<br>
+                            - {% trans "Context Information: Any additional information, questions, and answers you want the AI to use for personalized responses." %}<br><br>
+                            
+                            <strong>{% trans "2 Images:" %}</strong> 
+                            {% trans "For product images, upload each image with the name matching exactly with the product name described in your file." %}<br><br>
+                            
+                            <strong>{% trans "3 Consult and Monitor:" %}</strong> 
+                            {% trans "Use this chat to consult the details of your site and monitor the progress. Once your content is processed, a custom link to your AI Chat Page will be available." %}<br><br>
+                            
+                            {% trans "Remember, the AI will respond based on the context and information provided in your uploaded files, ensuring a tailored experience for your visitors. We're here to help you every step of the way!" %}<br><br>
+                    
+                            {% trans "Get started now by uploading your file and let's create an amazing AI Chat Experience together!" %}
+                        </p>
+                       
+                        <div class="mt-2">
+                            <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
+                            <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
+                            <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
                         </div>
+                    </div>
+                    
                     {% else %}
                         <!--Here will stay the messages with Ai-team-->
                     {% endif %} <!-- Cierre del if context_value == "subscription" -->
@@ -202,5 +218,29 @@
     <script>
         console.log({{ LANGUAGE_CODE }});
         var LANGUAGE_CODE = '{{ LANGUAGE_CODE }}'; // Django inyecta el código de idioma actual aquí
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Get the text content of the first h1
+            var h1Text = $("h1:first").text();
+
+            // Get the first two words from the h1 text
+            var h1Keywords = h1Text.split(' ').slice(0, 2).join(' ');
+
+            // Get the text content of the first p
+            var pText = $("p:first").text().trim(); // Trim leading and trailing spaces
+
+            // Get the first two words from the p text
+            var pKeywords = pText.split(/\s+/).slice(0, 2).join(' ');
+            console.log(h1Keywords + ' , '+ pKeywords)
+            // Concatenate the keywords from h1 and p
+            var existingKeywords = $("meta[name='keywords']").attr('content');
+
+            // Concatenate the new keywords with the existing content
+            var combinedKeywords = existingKeywords + ', ' + h1Keywords + ', ' + pKeywords;
+    
+            // Update the content attribute of the meta tag
+            $("meta[name='keywords']").attr('content', combinedKeywords);
+        });
     </script>
 </html>
