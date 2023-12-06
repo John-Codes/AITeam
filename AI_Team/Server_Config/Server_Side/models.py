@@ -94,3 +94,25 @@ class ClienContext(models.Model):
 
     def __str__(self):
         return self.context
+    
+class ChatInfo(models.Model):
+    title = models.CharField(max_length=200)
+    header = models.CharField(max_length=200)
+    description = models.TextField()
+    default_message = models.TextField()
+
+class Keyword(models.Model):
+    general_info = models.ForeignKey(ChatInfo, related_name='keywords', on_delete=models.CASCADE)
+    keyword = models.CharField(max_length=100)
+
+class ListItem(models.Model):
+    general_info = models.ForeignKey(ChatInfo, related_name='list_items', on_delete=models.CASCADE)
+    text = models.CharField(max_length=100)
+    url = models.URLField()
+
+class Product(models.Model):
+    general_info = models.ForeignKey(ChatInfo, related_name='products', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    value = models.CharField(max_length=100)
+    url = models.URLField()

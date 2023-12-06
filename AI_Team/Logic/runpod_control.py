@@ -8,7 +8,8 @@ api_key = os.getenv("RUNPOD_API_KEY")
 runpod.api_key = api_key
 api_url = "https://api.runpod.io/graphql"
 # Función para iniciar un pod
-def start_pod(id_gpu, nombre, template_id):
+def start_pod():
+    id_gpu = "ampere48"
     nombre = 'aiteam_endpoint'
     template_id = "xkhgg72fuo"
     try:
@@ -29,7 +30,8 @@ def start_pod(id_gpu, nombre, template_id):
         return None
 
 # Función para detener un pod
-def stop_pod(id_servidor):
+def stop_pod():
+    id_servidor = "aiteam_endpoint"
     try:
         query = f'mutation {{ deleteEndpoint(id: "{id_servidor}") }}'
         data = {'query': query}

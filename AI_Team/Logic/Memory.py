@@ -96,16 +96,16 @@ def Consulta_IA_PALM(prompt, context):
                 product_info = False
             docs_palm = f"""You offer the following products, if the user asks about any you must give them a brief message of the information:
             \n{str(products)}\n Here's the information you should base your answer on:\n{docs_palm}"""
-        palm_response = CallPalm(prompt, docs_palm, examples)
-        runpod = calling_runpod(docs_palm, examples, prompt)
-        print('runpod',runpod)
+        #ia_response = CallPalm(prompt, docs_palm, examples)
+        ia_response = runpod_calling(prompt, docs_palm, examples)
+        print('runpod',ia_response)
     except Exception as e:
         print(e)
-        palm_response = message_error
+        ia_response = message_error
 
-    if palm_response != message_error:
-        vector_db.add_to_context(prompt, palm_response)
-    return palm_response, product_info
+    if ia_response != message_error:
+        vector_db.add_to_context(prompt, ia_response)
+    return ia_response, product_info
 
 def Consulta_IA_JSON(context):
     prompt = f"""I want to create a json that contains the essential information of a website, the keys of the json are 
@@ -141,7 +141,6 @@ def Consulta_IA_JSON(context):
         json_response = ""
         if keys:
             json_response, toeknizer = generate_json(docs_palm)
-        #runpod = calling_runpod(docs_palm, examples, prompt)
     except Exception as e:
         print(e)
         json_response = message_error

@@ -13,87 +13,55 @@ from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from .sender_mails import *
 from .json_page import ContentPage, Product
 import tiktoken
-import runpod
-import requests
+from .endpoint_runpod import *
 # agrega a la función  esta función la clase Count_Tokens y usala para contar los tokens generados
 
-def calling_runpod(context, last_messsages, prompt_user):
-    id_gpu = "ampere48"
-    api_key = os.getenv("RUNPOD_API_KEY")
-    url = f'https://api.runpod.io/graphql?{api_key}=pewpew'
-    headers = {'content-type': 'application/json'}
-    data = {
-        "query": f"""
-        mutation {{
-            saveEndpoint(input: {{
-                gpuIds: "{id_gpu}",
-                idleTimeout: 5,
-                locations: "US",
-                name: "Generated Endpoint -fb",
-                networkVolumeId: "",
-                scalerType: "QUEUE_DELAY",
-                scalerValue: 4,
-                templateId: "xkhgg72fuo",
-                workersMax: 3,
-                workersMin: 0
-            }}) {{
-                gpuIds
-                id
-                idleTimeout
-                locations
-                name
-                scalerType
-                scalerValue
-                templateId
-                workersMax
-                workersMin
-            }}
-        }}
-        """
-    }
-    response = requests.post(url, headers=headers, data=json.dumps(data))
-    print(response)
-    print(response.json())
 
-def calling_runpod2(context, last_messsages, prompt_user):
-    print("calling_runpod")
-    runpod_api = os.getenv("RUNPOD_API_KEY")
-    runpod_endpoint = os.getenv("RUNPOD_ENDPOINT")
-    print(runpod_endpoint)
-    url = f"https://{runpod_endpoint}-8080.proxy.runpod.net/generate"
-    
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {runpod_api}"
-    }
-    
-    payload = {
-        "inputs": json.dumps({
-            "input": prompt_user,
-            "context": context,
-            "last_messsages": last_messsages,
-        })
-    }
-    
-    response = requests.post(url, headers=headers, json=payload)
-    
-    if response.status_code == 200:
-        print("Success!")
-        return response.json()
-    else:
-        print("Failed!")
-        print(response)
-        runpod.api_key = runpod_api
+def runpod_calling(prompt, context, last_messages):
+    # Paso 1: Crear un endpoint
+    format_prompt = (
+    f"AI, please read the following instructions carefully before responding:\n"
+    f"- Prompt: '{prompt}' - Use this as the main theme or question for your response.\n"
+    f"- Context: '{context}' - This provides background information and details relevant to the current conversation. Incorporate this into your understanding.\n"
+    f"- Last Messages: '{last_messages}' - These are the most recent exchanges in the conversation. Consider these to ensure continuity and relevance in your reply.\n"
+    f"Your response should be coherent, contextually appropriate, and directly address the prompt while integrating insights from the context and last messages."
+)
+    print('Paso 1: Crear un endpoint')
+    # devuelve el json
+    #endpoint_creation_response = save_endpoint()
 
-        # Crea un endpoint
-        endpoint = runpod.Endpoint(runpod_endpoint)
+    #ndpoint_data = endpoint_creation_response.get("data", {}).get("saveEndpoint", {})
 
-        # Ejecuta el pod
-        run_request = endpoint.run({"input": "types of data in python"})
-        print(run_request)
-        # Imprime la respuesta del pod
-        print(run_request.result())
-        return f"Failed to get response: {response.status_code}, {response.text}"
+    # Verificar si la creación fue exitosa
+    #if not endpoint_data:
+    #    return f'Error al crear el endpoint. {endpoint_data}'
+
+    endpoint_id = 'ok0xlshz9u4fjd' #endpoint_data.get("id")
+    if not endpoint_id:
+        print("ID del endpoint no encontrado en la respuesta.")
+        return f'ID del endpoint no encontrado en la respuesta. {endpoint_id}'
+
+    print(f"Endpoint creado con ID: {endpoint_id}")
+
+    try:
+        # Paso 2 y 3: Enviar pregunta y obtener respuesta
+        print("Paso 2 y 3: Enviar pregunta y obtener respuesta")
+        post_response = runpod_post_query(endpoint_id, format_prompt)
+        ia_response = runpod_get_status(endpoint_id, post_response)
+        #while post_response
+        print("Respuesta obtenida:", post_response)
+
+        # Paso 4: Eliminar el endpoint
+        #delete_response = modify_endpoint(endpoint_id)
+        #print("Paso 4: Eliminar el endpoint")
+        #print("Endpoint eliminado:", delete_response)
+
+        return ia_response
+
+    except Exception as e:
+        print(f"Ocurrió un error durante la operación: {e}")
+        #delete_endpoint(endpoint_id)  # Intentar eliminar el endpoint en caso de error
+        return None
 
 
 def generate_json(user_info):

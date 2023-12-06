@@ -21,6 +21,7 @@ from AI_Team.Logic.sender_mails import Contac_us_mail, notice_error_forms
 from AI_Team.Logic.Data_Saver import DataSaver
 from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from AI_Team.Logic.Charge_Context import Charge_Context
+from AI_Team.Logic.runpod_control import *
 from .create_paypal import *
 from hashids import Hashids
 import time
@@ -64,12 +65,12 @@ class ChatUIView(View):
         page_data = DataSaver()
         # Si el contexto es uno de los personalizados
         if self.context_value not in valid_contexts:
-            site_exists = page_data.check_site(check_context=self.context_value)
+            site_exists = False #page_data.check_if_user_data_exists(check_context=self.context_value)
             if not site_exists:
                 return redirect('/chat/main')
             # Extraer el valor real del context
             context_filename = "memory-AI-with-" + self.context_value.split('Uptc%3Fto=')[-1].rstrip('$')
-            data_dict = page_data.json_to_dict(context_filename)
+            data_dict = False #page_data.json_to_dict(context_filename)
             if data_dict:
                 context = {
                     'website_data': data_dict,
@@ -80,7 +81,7 @@ class ChatUIView(View):
         # Si el contexto es uno de los predeterminados
         else:
             user_id = request.user.id
-            site_exists = page_data.check_site(user_id)
+            site_exists = False #page_data.check_site(user_id)
 
             # Si el usuario está autenticado, obtenemos la URL del sitio del usuario.
             if request.user.is_authenticated:
@@ -88,7 +89,7 @@ class ChatUIView(View):
                 user_page = f'Uptc%3Fto={hashed_id}$'
                 url = reverse('ai-team', kwargs={'context': user_page})
                 context_filename = "memory-AI-with-" + hashed_id
-                data_dict = page_data.json_to_dict(context_filename)
+                data_dict = False #page_data.json_to_dict(context_filename)
                 
                 context = {
                     'title': titles[self.context_value][0],
@@ -151,7 +152,13 @@ class ChatUIView(View):
     def handle_template_messages(self, request, template_name):
         response_data = {}
         print(template_name)
-        response_data['template_message_div'] = render_html(f'chat_messages/{template_name}.html', '')
+        if template_name == 'generate_endpoint':
+            action_endpoint = start_pod()
+        elif template_name == 'delete_endpoint':
+            action_endpoint = stop_pod()
+        else:
+            response_data['template_message_div'] = render_html(f'chat_messages/{template_name}.html', '')
+        
         if template_name == 'contact_us':
             request.session['send_us_email'] = True            
         time.sleep(2)

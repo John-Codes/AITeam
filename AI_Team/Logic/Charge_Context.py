@@ -82,7 +82,7 @@ class Charge_Context:
                 print(json_read)
                 # Llamar a create_page de DataSaver
                 data_saver = DataSaver()
-                data_saver.create_page(user_id, json_read)
+                data_saver.create_or_update_page(user_id, json_read)
                 context_details['status'] += _(' and site generated successfully.')
         except Client.DoesNotExist:
             context_details['status'] = _('Login required')
