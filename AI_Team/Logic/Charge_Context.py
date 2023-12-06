@@ -76,8 +76,9 @@ class Charge_Context:
             context_details['extract'] = f"{user_context.context[:200]}...{user_context.context[-200:]}" if len(user_context.context) > 450 else user_context.context
             
             context_user = hashids.encode(user_id)
+            print('llamamos a la IA)
             json_read, data_page = Consulta_IA_JSON(context_user)
-            context_details['keywords'] = data_page
+            context_details['keywords'] = json_read
             if json_read:
                 print(json_read)
                 # Llamar a create_page de DataSaver
@@ -177,7 +178,8 @@ class Charge_Context:
                     image_html = render_html('chat_messages/image_message.html', file_detail)
                     response_data['user_message_div'] += image_html
                 elif file_detail['type'] == 'text':
-                    if file_detail['keywords']:
+                    details = file_datail.get('keywords', False)
+                    if details:
                         request.session['create-json-page'] = True
                     text_html = render_html('chat_messages/text_message.html', file_detail)
                     response_data['user_message_div'] += text_html
