@@ -76,7 +76,7 @@ class Charge_Context:
             context_details['extract'] = f"{user_context.context[:200]}...{user_context.context[-200:]}" if len(user_context.context) > 450 else user_context.context
             
             context_user = hashids.encode(user_id)
-            print('llamamos a la IA)
+            print("Llamamos a la IA")
             json_read, data_page = Consulta_IA_JSON(context_user)
             context_details['keywords'] = json_read
             if json_read:
