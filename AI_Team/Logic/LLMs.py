@@ -20,11 +20,10 @@ from .endpoint_runpod import *
 def runpod_calling(prompt, context, last_messages):
     # Paso 1: Crear un endpoint
     format_prompt = (
-    f"AI, please read the following instructions carefully before responding:\n"
-    f"- Prompt: '{prompt}' - Use this as the main theme or question for your response.\n"
-    f"- Context: '{context}' - This provides background information and details relevant to the current conversation. Incorporate this into your understanding.\n"
-    f"- Last Messages: '{last_messages}' - These are the most recent exchanges in the conversation. Consider these to ensure continuity and relevance in your reply.\n"
-    f"Your response should be coherent, contextually appropriate, and directly address the prompt while integrating insights from the context and last messages."
+    f"A user asked the following question: {prompt}\n"
+    f"Keep the following information in mind when responding to the user: {context}\n"
+    f"Remember the last messages in this conversation: {last_messages}\n"
+    f'Remember only return the response not the last messages or the prompt of teh user only the response'
 )
     print('Paso 1: Crear un endpoint')
     # devuelve el json
@@ -36,7 +35,7 @@ def runpod_calling(prompt, context, last_messages):
     #if not endpoint_data:
     #    return f'Error al crear el endpoint. {endpoint_data}'
 
-    endpoint_id = 'ok0xlshz9u4fjd' #endpoint_data.get("id")
+    endpoint_id = '3yyxiivpolg9rs' #endpoint_data.get("id")
     if not endpoint_id:
         print("ID del endpoint no encontrado en la respuesta.")
         return f'ID del endpoint no encontrado en la respuesta. {endpoint_id}'
@@ -50,7 +49,7 @@ def runpod_calling(prompt, context, last_messages):
         ia_response = runpod_get_status(endpoint_id, post_response)
         #while post_response
         print("Respuesta obtenida:", post_response)
-
+        ia_response = ia_response.replace(format_prompt, '')
         # Paso 4: Eliminar el endpoint
         #delete_response = modify_endpoint(endpoint_id)
         #print("Paso 4: Eliminar el endpoint")
@@ -61,7 +60,7 @@ def runpod_calling(prompt, context, last_messages):
     except Exception as e:
         print(f"Ocurrió un error durante la operación: {e}")
         #delete_endpoint(endpoint_id)  # Intentar eliminar el endpoint en caso de error
-        return None
+        return "Ocurrió un error durante la operación: {e}"
 
 
 def generate_json(user_info):
