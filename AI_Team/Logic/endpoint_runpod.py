@@ -111,7 +111,7 @@ def runpod_post_query(endpoint_id, prompt):
         'input': {
             'Prompt': prompt,
             'SetModelName': None,
-            'TokenCount': 1000,
+            'TokenCount': 2000,
             'Train': False,
             'DataSet': None
         }
