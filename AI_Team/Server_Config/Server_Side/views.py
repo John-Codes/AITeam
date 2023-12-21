@@ -18,8 +18,8 @@ import time
 
 # redirect the pattern url to chatui
 def home(request):
-    if request.method =='GET':
-        return redirect('chat_ui')
+    # Render the chat UI template for non-POST requests.
+    return render(request, 'landing_page.html')
 
 # chat_ui handle events and requests
 
