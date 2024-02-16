@@ -84,13 +84,13 @@
                 <div class="chat-body px-3 py-2" id="chatBox">
                     {% if context_value == "main" %}
                         <div class="message-left glass">
-                            <p class="message-content">
-                                {% trans "Website creation service with"%} AI: {% trans "24/7 customer service better than a human being with AI like gpt 4. Integration with database and systems of your website or app. Create an AI bot in 5 minutes that sends emails and processes payments and orders."%}<br>
-                                <br>
-                                {% if user.is_authenticated %}
-                                    {% trans "Welcome to AI Team"%} {{ user.email}} {% trans "Ask your questions about our services"%} <br>
-                                {% endif %}
-                                
+                            <h2 class="message-content">{% trans "Website Creation Service with AI" %}</h2>
+                            <p class="message-content">{% trans "24/7 customer service better than a human being with AI like gpt 4. Integration with database and systems of your website or app. Create an AI bot in 5 minutes that sends emails and processes payments and orders." %}</p>
+                            
+                            {% if user.is_authenticated %}
+                                <h3 class="message-content">{% trans "Welcome to AI Team" %} {{ user.email }}</h3>
+                                <p class="message-content">{% trans "Ask your questions about our services" %}</p>
+                            {% endif %}                                
                             </p>           
                             <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                             <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
@@ -100,15 +100,25 @@
                         {% if user.is_subscribe %}
                             <!-- Aiteam give info to user about our plans -->
                             <div class="message-left glass">
-                                <p class="message-content">
-                                    {% trans "Information about your subscription:"%} <br>
-                                    {% trans "you current plan:"%} {{user.subscription_detail.plan_name}} <br>
-                                    {% trans "Subscription Status:"%} {{user.subscription_status}} <br>
-                                    {% trans "Pay with:"%} Paypal <br>
-                                    {% trans "the plan expires:"%} {{user.next_date_pay}} <br>
-                                    {% trans "Subscribed from Date:"%} {{user.date_subscription}}  <br>
-                                    {% trans "if you wanna upgrade your current subscription visit the"%} <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link" >{% trans "Subscription"%}</strong></a> {% trans "page"%}
-                                </p>            
+                                <div class="message-content">
+                                    <h2>{% trans "Information about your subscription:" %}</h2>
+                                    <h3>{% trans "Your Current Plan:" %}</h3>
+                                    <p>{{ user.subscription_detail.plan_name }}</p>
+                                    
+                                    <h3>{% trans "Subscription Status:" %}</h3>
+                                    <p>{{ user.subscription_status }}</p>
+                                    
+                                    <h3>{% trans "Pay with:" %}</h3>
+                                    <p>Paypal</p>
+                                    
+                                    <h3>{% trans "The Plan Expires:" %}</h3>
+                                    <p>{{ user.next_date_pay }}</p>
+                                    
+                                    <h3>{% trans "Subscribed from Date:" %}</h3>
+                                    <p>{{ user.date_subscription }}</p>
+                                    
+                                    <p>{% trans "If you wanna upgrade your current subscription visit the" %} <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
+                                </div>           
                                 <div class="mt-2">
                                     <form id="cancel-subscription-form" method="post">
                                         {% csrf_token %}
@@ -120,14 +130,15 @@
                             </div>
                         {% else %}
                             <div class="message-left glass">
-                                <p class="message-content">
-                                    {% trans "We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website. These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us:" %} <br>
-                                    <strong>{% trans "Entry Plan" %}</strong> <br>
-                                    <strong>{% trans "Premium Plan" %}</strong> <br>
-                                    <strong>{% trans "Enterprise Plan" %}</strong> <br>
-                                    {% trans "you can get any of this subscriptions en the next page:" %}  <a href="{% url 'subscription' %}" title="login to AI Team for more"><strong class="white-link" >{% trans "Subscription" %}</strong></a> {% trans "page"%}
-                                </p>
-                                <p class="message-content">{% trans "if you wanna know about each plan, only send a message and AI Team response you" %}</p>
+                                <h2 class="message-content">{% trans "Discover Our Subscription Plans" %}</h2>
+                                <p class="message-content">{% trans "We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website. These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us:" %}</p>
+                                <h3 class="message-content">{% trans "Entry Plan" %}</h3>
+                                <p class="message-content">{% trans "Designed for the individual user, our Entry Plan offers a focused and streamlined experience. Perfect for those looking to explore our services without commitment, it's your gateway to understanding the full potential of our platform. Dive in and discover what we have to offer at an unbeatable value." %}</p>
+                                <h3 class="message-content">{% trans "Premium Plan" %}</h3>
+                                <p class="message-content">{% trans "Elevate your business with our Premium Plan, which delivers enhanced performance and tools specifically designed to boost productivity and customer service. Ideal for businesses looking to gain a competitive edge, this plan provides the resources and support you need to excel in your industry." %}</p>
+                                <h3 class="message-content">{% trans "Enterprise Plan" %}</h3>
+                                <p class="message-content">{% trans "Our Enterprise Plan is the epitome of customization and dedicated support. Tailored to fit each client's unique needs, this plan offers 24/7 attention and a suite of customizable features to ensure your enterprise operates seamlessly and at its peak potential. Experience unparalleled service and flexibility with our Enterprise Plan." %}</p>
+                                <p class="message-content">{% trans "if you wanna know more about each plan, only send a message and AI Team response you" %}</p>
                                 <div class="mt-2">
                                     <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                                     <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
@@ -137,28 +148,31 @@
                         {% endif %}
                     {% elif context_value == "panel-admin" %}
                     <div class="message-left glass">
-                        <p class="message-content">
-                            {% trans "Welcome to our AI Chat Page Creation tool! With this tool, you can craft a unique AI Chat Experience by providing information through uploaded files (PDF or TXT). Here's how to proceed:" %}<br><br>
+                        <div class="message-content">
+                            <h2 class="message-content">{% trans "Welcome to our AI Chat Page Creation Tool!" %}</h2>
+                            <p class="message-content">{% trans "With this tool, you can craft a unique AI Chat Experience by providing information through uploaded files (PDF or TXT). Here's how to proceed:" %}</p>
                             
-                            <strong>{% trans "1 Upload Your Content:" %}</strong> 
-                            {% trans "Prepare a PDF or TXT file including the following details for your custom AI Chat Page:" %}<br>
-                            - {% trans "Page Title: The name shown on the browser tab." %}<br>
-                            - {% trans "Page Header: The main title or heading on your page." %}<br>
-                            - {% trans "Navigation Links: List of navigation items and their URLs." %}<br>
-                            - {% trans "Default Chat Message: A greeting message for visitors." %}<br>
-                            - {% trans "Products: Detailed descriptions of your products." %}<br>
-                            - {% trans "Context Information: Any additional information, questions, and answers you want the AI to use for personalized responses." %}<br><br>
+                            <h3 class="message-content">{% trans "1 Upload Your Content:" %}</h3>
+                            <p class="message-content">{% trans "Prepare a PDF or TXT file including the following details for your custom AI Chat Page:" %}</p>
+                            <ul>
+                                <li>{% trans "Page Title: The name shown on the browser tab." %}</li>
+                                <li>{% trans "Page Header: The main title or heading on your page." %}</li>
+                                <li>{% trans "Navigation Links: List of navigation items and their URLs." %}</li>
+                                <li>{% trans "Default Chat Message: A greeting message for visitors." %}</li>
+                                <li>{% trans "Products: Detailed descriptions of your products." %}</li>
+                                <li>{% trans "Context Information: Any additional information, questions, and answers you want the AI to use for personalized responses." %}</li>
+                            </ul>
                             
-                            <strong>{% trans "2 Images:" %}</strong> 
-                            {% trans "For product images, upload each image with the name matching exactly with the product name described in your file." %}<br><br>
+                            <h3 class="message-content">{% trans "2 Images:" %}</h3>
+                            <p class="message-content">{% trans "For product images, upload each image with the name matching exactly with the product name described in your file." %}</p>
                             
-                            <strong>{% trans "3 Consult and Monitor:" %}</strong> 
-                            {% trans "Use this chat to consult the details of your site and monitor the progress. Once your content is processed, a custom link to your AI Chat Page will be available." %}<br><br>
+                            <h3 class="message-content">{% trans "3 Consult and Monitor:" %}</h3>
+                            <p class="message-content">{% trans "Use this chat to consult the details of your site and monitor the progress. Once your content is processed, a custom link to your AI Chat Page will be available." %}</p>
                             
-                            {% trans "Remember, the AI will respond based on the context and information provided in your uploaded files, ensuring a tailored experience for your visitors. We're here to help you every step of the way!" %}<br><br>
-                    
-                            {% trans "Get started now by uploading your file and let's create an amazing AI Chat Experience together!" %}
-                        </p>
+                            <p class="message-content">{% trans "Remember, the AI will respond based on the context and information provided in your uploaded files, ensuring a tailored experience for your visitors. We're here to help you every step of the way!" %}</p>
+                            
+                            <p class="message-content">{% trans "Get started now by uploading your file and let's create an amazing AI Chat Experience together!" %}</p>
+                        </div>
                        
                         <div class="mt-2">
                             <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
