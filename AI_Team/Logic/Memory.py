@@ -59,11 +59,11 @@ def Consulta_IA_PALM(prompt, context):
     
     # Retrieve the most similar text fragments using the VectorDB class.
     try:
-        store_name = f"memoryAI_store-{context}"
+        #store_name = f"memoryAI_store-{context}"
         contenido, products= vector_db.context_palm(context)
-        if contenido:
-            vector_db.process_text(contenido, store_name)
-            docs_palm = vector_db.get_context_palm(prompt)
+        #if contenido:
+            #vector_db.process_text(contenido, store_name)
+        docs_palm = contenido #vector_db.get_context_palm(prompt)
     except FileNotFoundError:
         return message_error
 
@@ -96,15 +96,15 @@ def Consulta_IA_PALM(prompt, context):
                 product_info = False
             docs_palm = f"""You offer the following products, if the user asks about any you must give them a brief message of the information:
             \n{str(products)}\n Here's the information you should base your answer on:\n{docs_palm}"""
-        palm_response = CallPalm(prompt, docs_palm, examples)
-        runpod = calling_runpod(docs_palm, examples, prompt)
-        print('runpod',runpod)
+        palm_response = Call_openrouter(prompt, docs_palm)
+        #runpod = calling_runpod(docs_palm, examples, prompt)
     except Exception as e:
         print(e)
         palm_response = message_error
 
     if palm_response != message_error:
         vector_db.add_to_context(prompt, palm_response)
+    print('IA:',palm_response)
     return palm_response, product_info
 
 def Consulta_IA_JSON(context):

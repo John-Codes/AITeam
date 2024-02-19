@@ -1,5 +1,5 @@
 from Server_Config.Server_Side.models import Client, ClienContext
-from langchain.document_loaders import PyPDFLoader
+#from langchain.document_loaders import PyPDFLoader
 from .Data_Saver import DataSaver
 from .sender_mails import image_seve_fail_email
 from .response_utils import *
@@ -10,6 +10,12 @@ from hashids import Hashids
 from django.utils.translation import gettext as _
 
 hashids = Hashids(salt = os.getenv("salt"), min_length=8)
+"""sumary_line
+
+Keyword arguments:
+argument -- description
+Return: return_description
+"""
 
 class Charge_Context:
     def extract_text(self, user, uploaded_file):
@@ -26,13 +32,13 @@ class Charge_Context:
                 temp_file_path = temp_file.name
             
             # Cargar el PDF utilizando PyPDFLoader
-            loader = PyPDFLoader(temp_file_path)
-            documentos = loader.load()
+            # loader = PyPDFLoader(temp_file_path)
+            # documentos = loader.load()
             
             # Extraer el contenido de cada página del PDF
             contenido = ""
-            for documento in documentos:
-                contenido += documento.page_content
+            # for documento in documentos:
+            #     contenido += documento.page_content
             
             # Eliminar el archivo temporal
             os.remove(temp_file_path)
