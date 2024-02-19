@@ -2,9 +2,8 @@ import os
 import pickle
 from Server_Config.Server_Side.models import ClienContext
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-import faiss
+#from langchain_openai import OpenAIEmbeddings
+#from langchain_community.vectorstores import FAISS
 from pathlib import Path
 from hashids import Hashids
 # quitar el punto para usar Gradio.py
@@ -29,10 +28,10 @@ class VectorDB:
         chunks = text_splitter.split_text(text)
         return chunks
 
-    def convert_text_to_embeddings(self, chunks):
+    #def convert_text_to_embeddings(self, chunks):
         #convert text into embeddings, type int, texto to vectors
-        embeddings = OpenAIEmbeddings()
-        return FAISS.from_texts(chunks, embedding=embeddings)
+        #embeddings = OpenAIEmbeddings()
+        #return FAISS.from_texts(chunks, embedding=embeddings)
 
     def save_vector_store(self, store_name, vector_store):
         vectorstore_dir = Path(__file__).parent / "vectorstore"

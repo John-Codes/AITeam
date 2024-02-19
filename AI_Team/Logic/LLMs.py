@@ -3,7 +3,6 @@ import openai
 import json
 import google.generativeai as palm
 from langchain.prompts import PromptTemplate
-from langchain.chat_models import ChatOpenAI, ChatGooglePalm
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import LLMChain
 from langchain.callbacks import get_openai_callback
@@ -128,90 +127,90 @@ def generate_json(user_info):
     )
     _input = prompt.format_prompt(question=user_query, user_info= user_info)
     #ChatGooglePalm(google_api_key=google_api_key, temperature=0.5, top_k=40, top_p = 0.95, max_output_tokens= 4024)
-    chat_model = ChatOpenAI(
-        model="openai/gpt-4-32k",
-        openai_api_key=os.getenv("Open_Router_API_KEY"),
-        openai_api_base= "https://openrouter.ai/api/v1",
-        headers={
-            "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
-        },
-        max_tokens=3000
-    )
+    #chat_model = ChatOpenAI(
+    #    model="openai/gpt-4-32k",
+    #    openai_api_key=os.getenv("Open_Router_API_KEY"),
+    #    openai_api_base= "https://openrouter.ai/api/v1",
+    #    headers={
+    #        "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
+    #    },
+    #    max_tokens=3000
+    #)
     # Run the Chain and capture the output
-    output = chat_model(_input.to_messages())
-    token_response = len(encoding.encode(output.content))
-    tokens_used =token_response + token_prompt
-    try:
-        parsed = parser.parse(output.content)
-        return output.content, tokens_used
-    except Exception as  e:
-        print('error')
-        print(e)
-        json_succes = str(e)
-        return json_succes, tokens_used
+    #output = chat_model(_input.to_messages())
+    # token_response = len(encoding.encode(output.content))
+    # tokens_used =token_response + token_prompt
+    # try:
+    #     parsed = parser.parse(output.content)
+    #     return output.content, tokens_used
+    # except Exception as  e:
+    #     print('error')
+    #     print(e)
+    #     json_succes = str(e)
+    #     return json_succes, tokens_used
     
     
 
-def CallChatGPT(projectDescription):
-    try:
-        encoding = tiktoken.encoding_for_model("gpt-4")
-        token_prompt = len(encoding.encode(projectDescription))
-        response = ChatOpenAI(
-        model="openai/gpt-4-32k",
-        openai_api_key=os.getenv("Open_Router_API_KEY"),
-        openai_api_base= "https://openrouter.ai/api/v1",
-        headers={
-            "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
-        },
-        max_tokens=3000,
-        temperature=0.6,
-        messages = [
-        {
-        "role": "user",
-        "content": f"{projectDescription}",
-        }
-        ],
-        )
-      # Extract the GPT response string
-        gpt_response_string = response['choices'][0]['message']['content']
+# def CallChatGPT(projectDescription):
+#     try:
+#         encoding = tiktoken.encoding_for_model("gpt-4")
+#         token_prompt = len(encoding.encode(projectDescription))
+#         response = ChatOpenAI(
+#         model="openai/gpt-4-32k",
+#         openai_api_key=os.getenv("Open_Router_API_KEY"),
+#         openai_api_base= "https://openrouter.ai/api/v1",
+#         headers={
+#             "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
+#         },
+#         max_tokens=3000,
+#         temperature=0.6,
+#         messages = [
+#         {
+#         "role": "user",
+#         "content": f"{projectDescription}",
+#         }
+#         ],
+#         )
+#       # Extract the GPT response string
+#         gpt_response_string = response['choices'][0]['message']['content']
 
-        return gpt_response_string, token_prompt
-    except Exception as e:
-        print(e.message)
+#         return gpt_response_string, token_prompt
+#     except Exception as e:
+#         print(e.message)
 
-def CallChatGPT_Langchain(pregunta,docs, context):
-    try:
-        encoding = tiktoken.encoding_for_model("gpt-4")
-        pregunta_tokens = len(encoding.encode(pregunta))
-        docs_tokens = sum(len(encoding.encode(docs)) for doc in docs)
-        total_tokens =pregunta_tokens + docs_tokens
-        max_tokens = 3000 + total_tokens
-        llm =  ChatOpenAI(
-        model="openai/gpt-4-32k",
-        openai_api_key=os.getenv("Open_Router_API_KEY"),
-        openai_api_base= "https://openrouter.ai/api/v1",
-        headers={
-            "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
-        },
-        max_tokens=max_tokens,
-        temperature=1,
-        )
+# def CallChatGPT_Langchain(pregunta,docs, context):
+#     try:
+#         encoding = tiktoken.encoding_for_model("gpt-4")
+#         pregunta_tokens = len(encoding.encode(pregunta))
+#         docs_tokens = sum(len(encoding.encode(docs)) for doc in docs)
+#         total_tokens =pregunta_tokens + docs_tokens
+#         max_tokens = 3000 + total_tokens
+#         llm =  ChatOpenAI(
+#         model="openai/gpt-4-32k",
+#         openai_api_key=os.getenv("Open_Router_API_KEY"),
+#         openai_api_base= "https://openrouter.ai/api/v1",
+#         headers={
+#             "HTTP-Referer": 'http://127.0.0.1:8000/', # To identify your app. Can be set to localhost for testing
+#         },
+#         max_tokens=max_tokens,
+#         temperature=1,
+#         )
         
-        chain = load_qa_chain(llm=llm,chain_type="stuff")
-        with get_openai_callback() as cb:
-            response = chain.run(input_documents=docs, question=pregunta)
-    except Exception as e:
-        prompt =f"""Por favor traduce este error {e} a una explicación fácil de entender para personas que no sepan programar.
-        Y dales una sugerencia de cómo pueden evitar cometer el mismo error."""
-        response, total_tokens = CallChatGPT(prompt)
-        asunto = f'Error Notice from context: {context}'
-        mensaje = f'''
-        An error has ocurred when the user asked: \n
-        {pregunta} \n
-        this was asked in a chat with context: {context}
-        '''
-        notice_error(asunto, mensaje)
-    return response, total_tokens
+#         chain = load_qa_chain(llm=llm,chain_type="stuff")
+#         with get_openai_callback() as cb:
+#             response = chain.run(input_documents=docs, question=pregunta)
+#     except Exception as e:
+#         prompt =f"""Por favor traduce este error {e} a una explicación fácil de entender para personas que no sepan programar.
+#         Y dales una sugerencia de cómo pueden evitar cometer el mismo error."""
+#         response, total_tokens = CallChatGPT(prompt)
+#         asunto = f'Error Notice from context: {context}'
+#         mensaje = f'''
+#         An error has ocurred when the user asked: \n
+#         {pregunta} \n
+#         this was asked in a chat with context: {context}
+#         '''
+#         notice_error(asunto, mensaje)
+#     return response, total_tokens
 
 def CallPalm2(prompt, products):
     google_api_key = os.getenv("Palm2APIKey")
@@ -242,10 +241,10 @@ def CallPalm2(prompt, products):
             """
     )
     _input = detected_products.format_prompt(question=user_query, prompt= prompt, products = products)
-    chat_model = ChatGooglePalm(google_api_key=google_api_key, temperature=0.7, top_k=40, top_p = 0.95, max_output_tokens= 4024)
-    output = chat_model(_input.to_messages())
+    #chat_model = ChatGooglePalm(google_api_key=google_api_key, temperature=0.7, top_k=40, top_p = 0.95, max_output_tokens= 4024)
+    #output = chat_model(_input.to_messages())
     try:        
-        return output.content
+        return 0 #output.content
     except Exception as  e:
         print('error')
         print(e)
@@ -294,3 +293,37 @@ def CallPalm(cuestion,context, examples):
         temperature=0.5)
 
     return response.last
+
+def Call_openrouter(prompt, context):
+    api_key = os.getenv("AIROBORS_API_KEY")
+    api_endpoint = "https://openrouter.ai/api/v1/chat/completions"
+
+    # Replace with the actual headers required by the API
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    data=json.dumps({
+        "model": "jondurbin/airoboros-l2-70b", # Optional
+        "messages": [{"role": "user", "content": prompt}]
+    })
+    
+    # Replace with the actual input data for the model
+    # input_data = {
+    #     "prompt": f'prompt: {prompt}\n\ncontext: {context}',
+    # }
+
+    # Send the request to the API
+    response = requests.post(api_endpoint, headers=headers, data=data)
+
+    # Check if the request was successful
+    if response.status_code ==  200:
+        # Process the response
+        output = response.json()
+        #print(output)
+        response = output['choices'][0]['message']['content']
+        #print('response',response)
+    else:
+        print(f"Request failed with status code {response.status_code}")
+    return response 
