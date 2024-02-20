@@ -96,7 +96,7 @@ def Consulta_IA_PALM(prompt, context):
                 product_info = False
             docs_palm = f"""You offer the following products, if the user asks about any you must give them a brief message of the information:
             \n{str(products)}\n Here's the information you should base your answer on:\n{docs_palm}"""
-        palm_response = Call_openrouter(prompt, docs_palm)
+        palm_response = Call_openrouter(examples, prompt, docs_palm)
         #runpod = calling_runpod(docs_palm, examples, prompt)
     except Exception as e:
         print(e)

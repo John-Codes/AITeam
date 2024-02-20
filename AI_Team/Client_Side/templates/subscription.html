@@ -53,7 +53,7 @@
 
                 </ul>
             </div>
-            <h1 class="chat-title">Subscriptions by EFEXZIUM =$=</h1> 
+            <h1 class="chat-title">Subscriptions =$=</h1> 
         </div>
     
                 
@@ -154,8 +154,11 @@
             e.preventDefault();
             const csrfToken = getCookie('csrftoken');
             var specialCode = this.special_code.value;
+            console.log(specialCode);
             const languagePrefix = getLanguagePrefix();
-            let urlEndpoint = `/${languagePrefix}/ subs-page/`;
+            console.log(languagePrefix);
+            let urlEndpoint = `/${languagePrefix}/subs-page/`;
+            console.log(urlEndpoint);
             fetch(urlEndpoint, {
                 method: 'POST',
                 headers: {

@@ -294,10 +294,15 @@ def CallPalm(cuestion,context, examples):
 
     return response.last
 
-def Call_openrouter(prompt, context):
+def Call_openrouter(examples, prompt, context):
+    print(examples)
     api_key = os.getenv("AIROBORS_API_KEY")
     api_endpoint = "https://openrouter.ai/api/v1/chat/completions"
-
+    # list the messages in the prompt
+    print(type(examples))
+    print(isinstance(examples, list))
+    examples.append({"role": "user", "content": prompt})
+    print('list_messages', examples)
     # Replace with the actual headers required by the API
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -306,7 +311,7 @@ def Call_openrouter(prompt, context):
 
     data=json.dumps({
         "model": "jondurbin/airoboros-l2-70b", # Optional
-        "messages": [{"role": "user", "content": prompt}]
+        "messages": examples
     })
     
     # Replace with the actual input data for the model

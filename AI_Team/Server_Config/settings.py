@@ -180,11 +180,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = reverse_lazy('ai-team', kwargs={'context': 'main'})
 
 #Paypal Configuration
-PAYPAL_RECEIVER_EMAIL = 'sb-m6xzg27588130@business.example.com' # where cash is paid into
+#PAYPAL_RECEIVER_EMAIL = 'sb-m6xzg27588130@business.example.com' # where cash is paid into
 #PAYPAL_BUY_BUTTON_IMAGE = 'https://res.cloudinary.com/the-proton-guy/image/upload/v1685882223/paypal-PhotoRoom_v9pay7.png'
 PCI = os.getenv('PCI')
 PCS = os.getenv('PCS')
-PAYPAL_TEST = True
 
 # Stripe Configuration
 STRIPE_SECRET_KEY = "sk_test_51IoDMBCJRk9RYTua3odVBYUrbIJoLxUD7i14lhDAfj11oHrBaFU57DFboN76hqS6Gbsbz5OnOOd7Ey0Z3zc8zSwA00JXlvL1sq"
