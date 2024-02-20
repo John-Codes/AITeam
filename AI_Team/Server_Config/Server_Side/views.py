@@ -46,10 +46,18 @@ hashids = Hashids(salt = os.getenv("salt"), min_length=8)
 #STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
 
 # ai-team chat handle events and requests
+# SANDBOX MODE
+# paypalrestsdk.configure({
+#     "mode": "sandbox",  # sandbox or live (production),  # Use 'live' for production
+#     "client_id": "AThJhSpO1NlOyyx19jAC5Vb2CStnbrurdgm3hqKzVaVoz85T9lKKoYThf7hKRNYeovC6b_iJOgkXZCMB",
+#     "client_secret": "ECk7V4Ntt5PJy4Nosm9g80gMzf2WMvwVptzlmwOzEsxz37FPM_NXa6rCFH8BcR4Mc24odULhHM2eH5Aw"
+# })
+
+# LIVE MODE
 paypalrestsdk.configure({
-    "mode": "sandbox",  # Use 'live' for production
-    "client_id": "AThJhSpO1NlOyyx19jAC5Vb2CStnbrurdgm3hqKzVaVoz85T9lKKoYThf7hKRNYeovC6b_iJOgkXZCMB",
-    "client_secret": "ECk7V4Ntt5PJy4Nosm9g80gMzf2WMvwVptzlmwOzEsxz37FPM_NXa6rCFH8BcR4Mc24odULhHM2eH5Aw"
+    "mode": "live", 
+    "client_id": os.getenv("PCI"),
+    "client_secret": os.getenv("PCS")
 })
 
 class ChatUIView(View):
@@ -282,17 +290,17 @@ class Subscription(View):
         """
         Render the subscription page with all plan details.
         """
-        plans = SubscriptionDetail.objects.filter(name__in=["Entry Suscripccion", "Premium Suscripcion", ])
+        plans = SubscriptionDetail.objects.filter(name__in=["Basic AI Team Subscription", "Premium AI Team Subscription" ])
         for plan in plans:
             plan.features_list = json.loads(plan.features_list)
             plan.market_place = json.loads(plan.market_place)
-            print(plan.market_place)
+            print(plan.features_list)
         context = {
             "plans": plans,  # Cambiado a "plans" para que sea más claro en el template
             "user": request.user,
             'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY,
         } 
-        print(context)
+        
         return render(request, self.template_name, context)
     
     def post(self, request, *args, **kwargs):
@@ -331,6 +339,8 @@ class Subscription(View):
             if access_token:
                 print('generamos access token')
                 # Llama a la función para crear la suscripción
+                print(plan_id)
+                print(request)
                 agreement_response = create_subscription_agreement(request, access_token, plan_id)
 
                 if agreement_response.status_code == 201:
@@ -465,6 +475,7 @@ def PaymentFailed(request, plan_id):
     return render(request, 'payment/payment_failed.html', {'plan': plan})
 
 def subscription_list_view(request, *args, **kwargs):
+    print(request)
     tables = {'clients': User, 'plans': SubscriptionDetail}
     list_all = kwargs.get('list_all')
     table = tables.get(list_all)

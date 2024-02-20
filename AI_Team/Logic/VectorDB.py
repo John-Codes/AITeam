@@ -75,7 +75,8 @@ class VectorDB:
             print('we get a issue to realize a query:', e)
     
     def add_to_context(self, prompt, response):
-        self.conversations.append((prompt, response))
+        self.conversations.append({"role": "user", "content": prompt})
+        self.conversations.append({"role": "assistant", "content": response})
 
     def get_conversation(self):
 

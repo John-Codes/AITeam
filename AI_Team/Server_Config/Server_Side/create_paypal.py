@@ -1,12 +1,16 @@
+import os
 import requests
 from datetime import datetime
 from datetime import timedelta
 from django.urls import reverse
-
+from Server_Config.Server_Side.models import SubscriptionDetail
 def generate_access_token():
-    client_id = 'AThJhSpO1NlOyyx19jAC5Vb2CStnbrurdgm3hqKzVaVoz85T9lKKoYThf7hKRNYeovC6b_iJOgkXZCMB'  # Replace with your PayPal client ID
-    client_secret = 'ECk7V4Ntt5PJy4Nosm9g80gMzf2WMvwVptzlmwOzEsxz37FPM_NXa6rCFH8BcR4Mc24odULhHM2eH5Aw'  # Replace with your PayPal client secret
-    token_url = 'https://api.sandbox.paypal.com/v1/oauth2/token'
+    # client_id = 'AThJhSpO1NlOyyx19jAC5Vb2CStnbrurdgm3hqKzVaVoz85T9lKKoYThf7hKRNYeovC6b_iJOgkXZCMB'  # Replace with your PayPal client ID
+    # client_secret = 'ECk7V4Ntt5PJy4Nosm9g80gMzf2WMvwVptzlmwOzEsxz37FPM_NXa6rCFH8BcR4Mc24odULhHM2eH5Aw'  # Replace with your PayPal client secret
+    # token_url = 'https://api.sandbox.paypal.com/v1/oauth2/token'
+    client_id = os.getenv('PCI')
+    client_secret = os.getenv('PCS')
+    token_url = 'https://api.paypal.com/v1/oauth2/token'
 
     response = requests.post(token_url, auth=(client_id, client_secret), data={'grant_type': 'client_credentials'})
 
@@ -30,7 +34,7 @@ def create_product(request, access_token):
     }
 
     product_response = requests.post(
-        'https://api.sandbox.paypal.com/v1/catalogs/products',
+        'https://api.paypal.com/v1/catalogs/products',
         json=product_payload,
         headers={
             'Content-Type': 'application/json',
@@ -112,7 +116,7 @@ def create_plan(request, access_token, product_id, price):
     }
 
     plan_response = requests.post(
-        'https://api.sandbox.paypal.com/v1/billing/plans',
+        'https://api.paypal.com/v1/billing/plans',
         json=plan_payload,
         headers={
             'Content-Type': 'application/json',
@@ -127,8 +131,10 @@ def create_plan(request, access_token, product_id, price):
 def create_subscription_agreement(request, access_token, plan_id):
     print(request)
     error_message = None
-    print(request.POST.get('subscription_name'))
-    subscription_name = request.POST.get('subscription_name')
+
+    subscription =  SubscriptionDetail.objects.get(plan_id=plan_id) #request.POST.get('subscription_name')
+    subscription_name = subscription.name
+    print(subscription_name)
     subscription_date = request.POST.get('date', datetime.now().strftime('%Y-%m-%d'))
     subscription_start_date = datetime.strptime(subscription_date, '%Y-%m-%d') + timedelta(minutes=5)
 
@@ -137,10 +143,10 @@ def create_subscription_agreement(request, access_token, plan_id):
 
 
     # Use the pre-approved sandbox business account email
-    payer_email = "sb-wz8t48321383@business.example.com"  # Replace with the pre-approved sandbox business account email
+    payer_email = "Efexzium@gmail.com"  # Replace with the pre-approved sandbox business account email
 
     billing_agreement_token = request.POST.get('billing_agreement_token')
-
+    print(billing_agreement_token)
     agreement_payload = {
         "name": subscription_name,
         "description": "Subscription agreement for the sample plan",
@@ -153,13 +159,21 @@ def create_subscription_agreement(request, access_token, plan_id):
             }
         },
         "shipping_address": {
-            "line1": "1234 Main St",
-            "city": "San Jose",
-            "state": "CA",
-            "postal_code": "95131",
-            "country_code": "US"
-        },
+             "line1": "Domenench ave 400 suit 207",
+             "city": "San Juan",
+             "state": "PR",
+             "postal_code": "00918",
+             "country_code": "US"
+         },
         "application_context": {
+            "brand_name": "Efexzium",
+            "shipping_preference": "NO_SHIPPING",  # Important for SaaS
+            "user_action": "SUBSCRIBE_NOW",
+            "payment_method": {
+                "payer_selected": "PAYPAL",
+                "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+            },
+
             "return_url": return_url,
             "cancel_url": cancel_url
         },
@@ -170,9 +184,38 @@ def create_subscription_agreement(request, access_token, plan_id):
             }
         ]
     }
+    # agreement_payload = {
+    #     "name": subscription_name,
+    #     "description": "Subscription agreement for the sample plan",
+    #     "start_date": subscription_start_date.isoformat(),
+    #     "plan_id": plan_id,
+    #     "payer": {
+    #         "payment_method": "paypal",
+    #         "payer_info": {
+    #             "email": company_email
+    #         }
+    #     },
+    #     "shipping_address": {
+    #         "line1": "1234 Main St",
+    #         "city": "San Jose",
+    #         "state": "CA",
+    #         "postal_code": "95131",
+    #         "country_code": "US"
+    #     },
+    #     "application_context": {
+    #         "return_url": return_url,
+    #         "cancel_url": cancel_url
+    #     },
+    #     "billing_agreement_tokens": [
+    #         {
+    #             "token_id": billing_agreement_token,  # Use the provided billing agreement token
+    #             "description": "Pre-approved billing agreement"
+    #         }
+    #     ]
+    # }
 
     agreement_response = requests.post(
-        'https://api.sandbox.paypal.com/v1/billing/subscriptions',
+        'https://api.paypal.com/v1/billing/subscriptions',
         json=agreement_payload,
         headers={
             'Content-Type': 'application/json',
