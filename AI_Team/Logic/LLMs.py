@@ -8,6 +8,7 @@ from langchain.chains import LLMChain
 from langchain.callbacks import get_openai_callback
 from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
+from ollama.ollama_rag_Module import OllamaRag
 # quitar el punto para usar Gradio.py
 from .sender_mails import *
 from .json_page import ContentPage, Product
@@ -332,3 +333,7 @@ def Call_openrouter(examples, prompt, context):
     else:
         print(f"Request failed with status code {response.status_code}")
     return response 
+
+
+def call_ollama(chat,promtp, context):
+    pass

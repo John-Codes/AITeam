@@ -65,6 +65,7 @@ class ChatUIView(View):
         super(ChatUIView, self).__init__(*args, **kwargs)
         self.context_value = None
 
+        #Gets the conversation context
     def get(self, request, *args, **kwargs):
         self.context_value = kwargs.get('context', None)
         valid_contexts = ["main", "subscription", "panel-admin"]
@@ -85,7 +86,7 @@ class ChatUIView(View):
                 }
                 return render(request, 'ai-team-customize.html', context)
 
-        # Si el contexto es uno de los predeterminados
+        # if the context is pre defined in a file
         else:
             user_id = request.user.id
             site_exists = page_data.check_site(user_id)
