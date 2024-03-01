@@ -5,6 +5,7 @@ from .VectorDB import VectorDB
 from .Data_Saver import DataSaver
 from .LLMs import *
 from .context_messages import CONTEXT_MESSAGES
+
 # Query:
 def consulta_IA_openai(pregunta, context):
     #this work with django
@@ -45,7 +46,7 @@ def Consulta_IA_PALM(prompt, context):
     global vector_db
     
     last_context = context_manager.last_context
-
+#CAMBIAR X CHAT HISTORY
     if vector_db is None:
         vector_db = VectorDB()    
 
@@ -69,10 +70,10 @@ def Consulta_IA_PALM(prompt, context):
 
     conversation = vector_db.get_conversation()
     
-    examples = CONTEXT_MESSAGES.get(context, [])
+    chat = CONTEXT_MESSAGES.get(context, [])
     if conversation:
         # only the last 5 messages will be passed to the AI because it has a limit of 20000 bytes that cant be exceeded
-        examples.extend(conversation[-5:])
+        chat.extend(conversation[-5:])
     product_info = False
     try:
         # product_info = False if the user dont ask for a product, or have the data of the product
@@ -96,7 +97,7 @@ def Consulta_IA_PALM(prompt, context):
                 product_info = False
             docs_palm = f"""You offer the following products, if the user asks about any you must give them a brief message of the information:
             \n{str(products)}\n Here's the information you should base your answer on:\n{docs_palm}"""
-        palm_response = Call_openrouter(examples, prompt, docs_palm)
+        palm_response = call_ollama(chat, prompt, docs_palm)
         #runpod = calling_runpod(docs_palm, examples, prompt)
     except Exception as e:
         print(e)
@@ -108,6 +109,7 @@ def Consulta_IA_PALM(prompt, context):
     return palm_response, product_info
 
 def Consulta_IA_JSON(context):
+
     prompt = f"""I want to create a json that contains the essential information of a website, the keys of the json are 
     title, header, description, keywords, default message, list items, products, links, text, texto, titulo, encabezado, enlaces, mensaje, productos, imagenes
     the content of the json must include the meta tags keywords, description, the tag title of the page, and the header is h1 tag of the page.
@@ -147,3 +149,5 @@ def Consulta_IA_JSON(context):
         json_response = message_error
 
     return json_response, keys
+
+
