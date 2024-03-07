@@ -205,7 +205,7 @@
                         {% csrf_token %}
                         <input type="text" class="form_input" id="userMessage" placeholder="Send a message..." onkeydown="handleKeyDown(event, '{{context_value}}')">
                         <button class="btn btn-send" onclick="sendMessage( '{{context_value}}' )">{% trans "Send" %}</button>
-                        {% if context_value == 'panel-admin' %}
+                        {% if context_value == 'panel-admin' or context_value == 'main' %}
                             <!-- Input escondido para subir archivos -->
                             
                             <input type="file" style="display: none;" id="fileInput" name="uploaded_files" multiple accept=".pdf,.txt, .png">

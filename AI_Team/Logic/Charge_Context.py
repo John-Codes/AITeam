@@ -170,24 +170,26 @@ class Charge_Context:
     
     def handle_user_input(self, request, user_message, uploaded_files_details):
         response_data = {}
+        try:
+            # Procesar mensaje del usuario
+            if user_message:
+                response_data['user_message_div'] = render_html('chat_messages/user_message.html', message=user_message)
+            else:
+                response_data['user_message_div'] = ''
 
-        # Procesar mensaje del usuario
-        if user_message:
-            response_data['user_message_div'] = render_html('chat_messages/user_message.html', message=user_message)
-        else:
-            response_data['user_message_div'] = ''
+            # Procesar archivos subidos
+            if uploaded_files_details:
+                for file_detail in uploaded_files_details:
+                    if file_detail['type'] == 'image':
+                        image_html = render_html('chat_messages/image_message.html', file_detail)
+                        response_data['user_message_div'] += image_html
+                    elif file_detail['type'] == 'text':
+                        details = file_detail.get('keywords', False)
+                        if details:
+                            request.session['create-json-page'] = True
+                        text_html = render_html('chat_messages/text_message.html', file_detail)
+                        response_data['user_message_div'] += text_html
+            return response_data
+        except Exception as hui:
+            print(hui)
 
-        # Procesar archivos subidos
-        if uploaded_files_details:
-            for file_detail in uploaded_files_details:
-                if file_detail['type'] == 'image':
-                    image_html = render_html('chat_messages/image_message.html', file_detail)
-                    response_data['user_message_div'] += image_html
-                elif file_detail['type'] == 'text':
-                    details = file_datail.get('keywords', False)
-                    if details:
-                        request.session['create-json-page'] = True
-                    text_html = render_html('chat_messages/text_message.html', file_detail)
-                    response_data['user_message_div'] += text_html
-
-        return response_data

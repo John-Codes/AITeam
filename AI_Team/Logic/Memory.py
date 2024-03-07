@@ -6,35 +6,34 @@ from .Data_Saver import DataSaver
 from .LLMs import *
 from .context_messages import CONTEXT_MESSAGES
 
-# Query:
-def consulta_IA_openai(pregunta, context):
-    #this work with django
-    # Absolute path to the .txt file
-    #current_dir = Path(__file__).parent
-    #ruta_absoluta = current_dir / "memory_text" / str(context)
+# # Query:
+# def consulta_IA_openai(pregunta, context):
+#     #this work with django
+#     # Absolute path to the .txt file
+#     #current_dir = Path(__file__).parent
+#     #ruta_absoluta = current_dir / "memory_text" / str(context)
 
-    # Data preparation:
-    with open(context, 'r', encoding='utf-8') as f:
-        contenido = f.read()
+#     # Data preparation:
+#     with open(context, 'r', encoding='utf-8') as f:
+#         contenido = f.read()
 
-    # Instantiate the VectorDB class and process the content
-    store_name = "memoryAI_store"  # Define a name for the vector store
+#     # Instantiate the VectorDB class and process the content
+#     store_name = "memoryAI_store"  # Define a name for the vector store
 
-    vector_db = VectorDB()
+#     vector_db = VectorDB()
 
-    vector_db.process_text(contenido, store_name)
-    # Retrieve the most similar text fragments using the VectorDB class.
-    docs = vector_db.query(pregunta)
+#     vector_db.process_text(contenido, store_name)
+#     # Retrieve the most similar text fragments using the VectorDB class.
+#     docs = vector_db.query(pregunta)
 
-    if not docs:
-        return "Lo siento, no tengo información al respecto."
+#     if not docs:
+#         return "Lo siento, no tengo información al respecto."
 
-    # Call a gpt with openai, if this dont work, the function call the CallChatGPT function LLMs
-    response = CallChatGPT_Langchain(pregunta, docs, context)
+#     # Call a gpt with openai, if this dont work, the function call the CallChatGPT function LLMs
+#     response = CallChatGPT_Langchain(pregunta, docs, context)
 
-    return response
+#     return response
 
-vector_db = None
 
 class ContextManager:
     def __init__(self):
@@ -43,12 +42,12 @@ class ContextManager:
 context_manager = ContextManager()
 
 def Consulta_IA_PALM(prompt, context):
-    global vector_db
+    
     
     last_context = context_manager.last_context
 #CAMBIAR X CHAT HISTORY
     if vector_db is None:
-        vector_db = VectorDB()    
+        chat_history = VectorDB()    
 
     # Restart the Vector Store class if switch chats (context)
     if context != last_context:
@@ -149,5 +148,7 @@ def Consulta_IA_JSON(context):
         json_response = message_error
 
     return json_response, keys
+
+
 
 
