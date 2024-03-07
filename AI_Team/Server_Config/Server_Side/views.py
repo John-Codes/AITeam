@@ -21,6 +21,7 @@ from AI_Team.Logic.sender_mails import Contac_us_mail, notice_error_forms
 from AI_Team.Logic.Data_Saver import DataSaver
 from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from AI_Team.Logic.Charge_Context import Charge_Context
+from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
 from .create_paypal import *
 from hashids import Hashids
 import time
@@ -43,6 +44,7 @@ from datetime import datetime, timedelta
 from django.utils.translation import gettext as _
 stripe.api_key = settings.STRIPE_SECRET_KEY
 hashids = Hashids(salt = os.getenv("salt"), min_length=8)
+ai = ai_Handler()
 #STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
 
 # ai-team chat handle events and requests
@@ -194,8 +196,10 @@ class ChatUIView(View):
                 user_message = str(user_message) + f'''There is the data of my page in json remember this to respond:  ''' + str(json_read)
                 
             # AI consultation logic
-            ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
-                
+            
+            #ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
+            ai_response = ai.call_router(user_message,context_ia)
+            
         if request.session.get('send_us_email', False):
             # Handle email sending logic
             self.send_email(user_message)

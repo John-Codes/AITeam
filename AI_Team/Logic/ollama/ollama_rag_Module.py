@@ -2,6 +2,7 @@ import os
 import ollama
 #import bs4
 import asyncio
+import chromadb
 #Ollama Rag Youtube
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.vectorstores.chroma import Chroma
@@ -31,6 +32,9 @@ pathpdf= current_directory+pdf
 class OllamaRag:
     def __init__(self):
         pass
+
+
+    #PDF Preping
     def replace_newlines_with_space(self,text):
         # Replace '\n' with a space
         return text.replace('\n', ' ')
@@ -75,7 +79,7 @@ class OllamaRag:
     def text_spliter_for_vectordbs(self,text):
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         return text_splitter.split_documents(text)
-        
+    
     def print_splits(self,splits):
         
         for i, split in enumerate(splits, start=1):
@@ -83,7 +87,60 @@ class OllamaRag:
             print(split)
             print("------")  # Separator for readability
 
-    def new_temp_chromaDB_and_retriever(self,doc_splits):
+
+#ChromaDB Use, can read DB in files.
+    def new_persisted_ChromaDb_all_mini(self,doc_splits,file_name):
+            '''Works Super Well!'''
+            dir = self.get_user_vectorDB_directory()
+            self.vectorstore= chromadb.PersistentClient(dir)
+            collection = self.vectorstore.create_collection(name=file_name)
+            collection.add(
+                documents=["Johnny is the Master of the planet","Johnny is the king of AI"],
+                metadatas=[{"source":"my_source","page":1},{"source":"mysource"}],
+                ids=["id1","id2"]
+            )
+
+    def get_persisted_ChromaDB(self):
+        '''WORKS REALLY WELL'''
+        try:
+                dir =self.get_user_vectorDB_directory()
+
+                self.vectorstore = chromadb.PersistentClient(path=dir)
+                
+                #self.retriever = self.vectorstore.as_retriever()
+                print(f"Got Persisted Vector Store in {dir}")
+        except Exception as cmdbe:
+                print(self.get_persisted_ChromaDB.__name__, cmdbe)
+
+    def query_persisted_chromadb_rag(self,question):
+        try:
+            print(self.vectorstore.list_collections())
+            collection=  self.vectorstore.get_collection("John")
+            retrieved_docs = collection.query(
+                   query_texts=[question],
+                    n_results=3,
+                    include=['documents']
+                    
+                )
+            
+          
+            #Extracting the documents from the retrieved_docs object
+            documents = retrieved_docs['documents']
+
+            #Joining the strings in the documents into a single string
+            joined_string = ' '.join(documents[0])
+
+            #Printing the result
+            print(joined_string)
+            return self.ollama_llm(question, joined_string)
+        except Exception as rg:
+            print(self.query_persisted_chromadb_rag.__name__,rg)
+
+
+
+
+#Chroma only for demo cant load saved files\|/
+    def new_temp_chroma_and_retriever(self,doc_splits):
         try:
             self.vectorstore = Chroma.from_documents(
             documents=doc_splits,
@@ -94,7 +151,7 @@ class OllamaRag:
             self.retriever= self.vectorstore.as_retriever()
             print("New Temp vector Store Created and Initialized")
         except Exception as cmdbe:
-            print(self.new_temp_chromaDB_and_retriever.__name__, cmdbe)
+            print(self.new_temp_chroma_and_retriever.__name__, cmdbe)
 
     def new_Persisted_chromadb_and_retriever(self, doc_splits, x_file_name):
         try:
@@ -125,13 +182,13 @@ class OllamaRag:
     def format_docs(self,docs):
         return "\n\n".join(doc.page_content for doc in docs)
  
-    def ollama_llm(self,question, context):
+    def ollama_llm_query_single_question(self,question, context):
         try:    
             formatted_prompt = f"Question: {question}\n\nContext: {context}"
             response = ollama.chat(model='mistral', messages=[{'role': 'user', 'content': formatted_prompt}])
             return response['message']['content']
         except Exception as oll:
-            print(self.ollama_llm.__name__,oll)
+            print(self.ollama_llm_query_single_question.__name__,oll)
     
     def format_docs(self,docs):
 
@@ -140,21 +197,34 @@ class OllamaRag:
         except Exception as fm:
             print(self.format_docs.__name__,fm)
 
-    def query_temp_rag(self,question):
+    def query_temp_rag_single_question(self,question):
         try:
             retrieved_docs = self.retriever.invoke(question)
             formatted_context = self.format_docs(retrieved_docs)
-            return self.ollama_llm(question, formatted_context)
+            return self.ollama_llm_query_single_question(question, formatted_context)
         except Exception as rg:
-            print(self.query_temp_rag.__name__,rg)
+            print(self.query_temp_rag_single_question.__name__,rg)
+    
+    def query_temp_rag_and_chat(self,conversation):
+        pass
 
     def add_pdf_to_new_temp_rag(self, pathpdf):
             text = self.extract_text_from_pdf(pathpdf)
             splits = self.semantic_text_split_bert(text, 500)
             doc_splits = self.string_list_to_hf_documents(splits, pathpdf)
             doc_splits = self.text_spliter_for_vectordbs(doc_splits)
-            o.new_temp_chromaDB_and_retriever(doc_splits)
+            o.new_temp_chroma_and_retriever(doc_splits)
     
+    def query_ollama(self,messages):
+        
+        stream = ollama.chat(
+        model='mistral',
+        messages=messages,
+        stream=False,)
+        
+        print(stream['message']["content"])
+        return stream['message']["content"]
+        
     
     
 
@@ -166,7 +236,7 @@ if __name__ == "__main__":
        try:
             o = OllamaRag()
             o.add_pdf_to_new_temp_rag(pathpdf)
-            result = o.query_temp_rag("Who is Johnny?")
+            result = o.query_temp_rag_single_question("Who is Johnny?")
             print(result)
 
         
