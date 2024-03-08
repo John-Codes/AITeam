@@ -69,6 +69,7 @@ class ChatUIView(View):
     def __init__(self, *args, **kwargs):
         super(ChatUIView, self).__init__(*args, **kwargs)
         self.context_value = None
+        self.ollama = OllamaRag()
 
         #Gets the conversation context
     def get(self, request, *args, **kwargs):
@@ -134,13 +135,13 @@ class ChatUIView(View):
         user_message = request.POST.get('message')
         phase = request.POST.get('phase')
         action = request.POST.get('action')
-
         response_html = ""
 
         # Archivos temporales
         temp_context_chat, upload_succes = process_temporary_files(request)
         if upload_succes:
             request.session['temp_context_chat'] = temp_context_chat
+            self.ollama.add_pdf_to_new_temp_rag(temp_context_chat)
             response_html += render_html('chat_messages/ia_message.html', upload_succes)
 
         if action == 'cancel_subscription':
@@ -171,7 +172,6 @@ class ChatUIView(View):
 
     def handle_ai_response(self, request, user_message):
         response_data = {}
-        chat = OllamaRag()
         product_consult = False
         
         if request.session.get('cancel-subscription', False):
@@ -199,9 +199,8 @@ class ChatUIView(View):
                 
             # AI consultation logic
             if request.session.get('temp_context_chat', False):
-                chat.add_pdf_to_new_temp_rag(request.session.get('temp_context_chat'))
                 #del request.session['temp_context_chat']
-                ai_response = chat.query_temp_rag_single_question(user_message)
+                ai_response = self.ollama.query_temp_rag_single_question(user_message)
             else:
                 #ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
                 ai_response = ai.call_router(user_message,context_ia)
