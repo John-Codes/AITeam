@@ -18,6 +18,7 @@ class ai_Handler:
     def call_router(self,prompt,context):
         
         try:
+            self.messages.add_system_message(context)
             self.messages.add_user_message(prompt)
             return self.ai.query_ollama(self.messages.get_messages())
         except Exception as clr:

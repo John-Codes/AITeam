@@ -19,6 +19,8 @@ class Chat_history:
     def add_user_message(self,prompt):
         self.messages.append({"role": "user", "content": prompt})
 
+    def add_system_message(self,prompt):
+        self.messages.append({"role": "system", "content": prompt})
     def set_page_static_messages(self,pagemessages):
         self.messages.append(dict[pagemessages][0])
         self.messages.append(dict[pagemessages][1])

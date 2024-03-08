@@ -23,7 +23,7 @@ from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from AI_Team.Logic.Charge_Context import Charge_Context
 from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
 from AI_Team.Logic.Chat.temporal_pdf_handling import process_temporary_files
-from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
+#from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from .create_paypal import *
 from hashids import Hashids
 import time
@@ -47,8 +47,8 @@ from datetime import datetime, timedelta
 from django.utils.translation import gettext as _
 stripe.api_key = settings.STRIPE_SECRET_KEY
 hashids = Hashids(salt = os.getenv("salt"), min_length=8)
-ai = ai_Handler()
-ollama = OllamaRag()
+ai = ai_Handler() #so we dont delete the temp rag retriever.
+
 #STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
 
 # ai-team chat handle events and requests
@@ -70,10 +70,15 @@ class ChatUIView(View):
     def __init__(self, *args, **kwargs):
         super(ChatUIView, self).__init__(*args, **kwargs)
         self.context_value = None
-        self.ollama = OllamaRag()
+        #self.ollama = OllamaRag()
 
         #Gets the conversation context
     def get(self, request, *args, **kwargs):
+        #chat = Chat_history()
+        ai = ai_Handler()
+        if request.session.get('temp_context_chat', False):
+            del request.session['temp_context_chat']
+        
         self.context_value = kwargs.get('context', None)
         valid_contexts = ["main", "subscription", "panel-admin"]
         titles = {"main": [_('EFEXZIUM'), _('AI Team Chat')], "subscription": [_('Subscriptions'), _('AI Team Subscriptions')], "panel-admin": [_('Create your own page'), _('AI Team Page Builder')]}
@@ -139,10 +144,11 @@ class ChatUIView(View):
         response_html = ""
 
         # Archivos temporales
-        temp_context_chat, upload_succes = process_temporary_files(request)
+        pdf_file, upload_succes = process_temporary_files(request)
         if upload_succes:
-            request.session['temp_context_chat'] = temp_context_chat
-            ollama.add_pdf_to_new_temp_rag(temp_context_chat)
+            request.session['temp_context_chat'] = pdf_file
+            #ollama.add_pdf_to_new_temp_rag(temp_context_chat)
+            ai.create_temp_rag_with_a_pdf(pdf_file)
             response_html += render_html('chat_messages/ia_message.html', upload_succes)
 
         if action == 'cancel_subscription':
@@ -188,20 +194,23 @@ class ChatUIView(View):
             
             if context_ia not in ["main", "subscription", "panel-admin"]:
                 context_ia = context_ia.split('Uptc?to=')[-1].rstrip('$')
-            else: 
-                Check_Cuestion(user_message)
+            # else: 
+            #     #Check_Cuestion(user_message)
+            #     chat.add_user_message(user_message)
+            #     ai_response = ollama.query_ollama(chat.get_messages())
 
             if context_ia == 'panel-admin':
-                reading = DataSaver()
+                reading = DataSaver()#converts to from Json to dic
                 # alistamos el prompt para generar el json
                 json_read =reading.read_from_json(f'memory-AI-with-{hashids.encode(request.user.id)}')
                 # alistamos el prompt para la IA que responde al usuario
-                user_message = str(user_message) + f'''There is the data of my page in json remember this to respond:  ''' + str(json_read)
+                user_message = str(user_message) + f''' This is the data of my page in json remember this to respond:  ''' + str(json_read)
                 
-            # AI consultation logic
+           
             if request.session.get('temp_context_chat', False):
                 #del request.session['temp_context_chat']
-                ai_response = ollama.query_temp_rag_single_question(user_message)
+                #ai_response = ollama.query_temp_rag_single_question(user_message)
+                ai_response = ai.call_ai_temp_rag(user_message)
             else:
                 #ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
                 ai_response = ai.call_router(user_message,context_ia)
