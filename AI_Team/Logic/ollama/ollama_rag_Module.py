@@ -18,7 +18,7 @@ from langchain.schema import Document
 import fitz
 from semantic_text_splitter import CharacterTextSplitter, HuggingFaceTextSplitter
 from tokenizers import Tokenizer
-  
+import re 
 #add static messages to chat history and pass it from views.
 
 model_local =ChatOllama(model="mistral")
@@ -39,14 +39,33 @@ class OllamaRag:
         # Replace '\n' with a space
         return text.replace('\n', ' ')
 
+    def clean_string_for_file_name(self,txt):
+        try:
+            
+            match = re.search(r"([^.]*)(\.[^.]*)*$", txt)  # Search for the pattern in the string
+            if match:
+                txt = match.group(1)  # Extract the part before the last dot
+                print(txt)  # Output: "/Resume 2024"
+            #txt = txt.replace(".","")
+            txt = txt.replace(" ","")
+            txt = txt.replace("/","")
+            txt = txt.replace("@","")
+            return txt
+        except Exception as csf:
+            print(self.clean_string_for_file_name.__name__,csf)
+
     def extract_text_from_pdf(self,file_path):
-        print("Path to PDF:", file_path)
-        doc = fitz.open(file_path)
-        text_contents = ""  # Initialize an empty string to store text
-        for page in doc:
-            text = page.get_text()
-            text_contents += text  # Append the text from each page
-        return self.replace_newlines_with_space(text_contents)
+        try:
+            print("Path to PDF:", file_path)
+            
+            doc = fitz.open(file_path)
+            text_contents = ""  # Initialize an empty string to store text
+            for page in doc:
+                text = page.get_text()
+                text_contents += text  # Append the text from each page
+            return self.replace_newlines_with_space(text_contents)
+        except Exception as etfp:
+            print(etfp)
 
     def semantic_text_split_no_model(self,content, maxCharacters):
         try:
@@ -199,6 +218,7 @@ class OllamaRag:
 
     def query_temp_rag_single_question(self,question):
         try:
+            
             retrieved_docs = self.retriever.invoke(question)
             formatted_context = self.format_docs(retrieved_docs)
             return self.ollama_llm_query_single_question(question, formatted_context)
@@ -213,7 +233,7 @@ class OllamaRag:
             splits = self.semantic_text_split_bert(text, 500)
             doc_splits = self.string_list_to_hf_documents(splits, pathpdf)
             doc_splits = self.text_spliter_for_vectordbs(doc_splits)
-            o.new_temp_chroma_and_retriever(doc_splits)
+            self.new_temp_chroma_and_retriever(doc_splits)
     
     def query_ollama(self,messages):
         
@@ -234,6 +254,7 @@ class OllamaRag:
 if __name__ == "__main__":
 
        try:
+            
             o = OllamaRag()
             o.add_pdf_to_new_temp_rag(pathpdf)
             result = o.query_temp_rag_single_question("Who is Johnny?")
