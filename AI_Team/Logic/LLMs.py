@@ -2,6 +2,8 @@ import os
 import openai
 import json
 import google.generativeai as palm
+from AI_Team.Logic.Chat.chat_history_module import Chat_history
+from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from langchain.prompts import PromptTemplate
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import LLMChain
@@ -15,6 +17,9 @@ from .json_page import ContentPage, Product
 import tiktoken
 import runpod
 import requests
+
+ollama = OllamaRag()
+chat = Chat_history()
 # agrega a la función  esta función la clase Count_Tokens y usala para contar los tokens generados
 
 def calling_runpod(context, last_messsages, prompt_user):
@@ -97,36 +102,43 @@ def calling_runpod2(context, last_messsages, prompt_user):
 
 
 def generate_json(user_info):
-    print("generate_json")
-    google_api_key = os.getenv("Palm2APIKey")
-    user_info = str(user_info)
-    encoding = tiktoken.encoding_for_model("gpt-4")
-    token_prompt = len(encoding.encode(user_info))
-    # Instantiate the parser with the new model.
-    parser = PydanticOutputParser(pydantic_object=ContentPage)
+    
+    try:
+        print("generate_json")
+        google_api_key = os.getenv("Palm2APIKey")
+        user_info = str(user_info)
+        encoding = tiktoken.encoding_for_model("gpt-4")
+        token_prompt = len(encoding.encode(user_info))
+        # Instantiate the parser with the new model.
+        parser = PydanticOutputParser(pydantic_object=ContentPage)
 
-    # Update the prompt to match the new query and desired format.
-    prompt = ChatPromptTemplate(
-        messages=[
-            HumanMessagePromptTemplate.from_template(
-                "answer the users question as best as possible.\n{format_instructions}\n{question}\n\nUser Information:\n{user_info}"
-            )
-        ],
-        input_variables=["question", "user_info"],
-        partial_variables={
-            "format_instructions": parser.get_format_instructions(),
-        },
-    )
+        # Update the prompt to match the new query and desired format.
+        prompt = ChatPromptTemplate(
+            messages=[
+                HumanMessagePromptTemplate.from_template(
+                    "answer the users question as best as possible.\n{format_instructions}\n{question}\n\nUser Information:\n{user_info}"
+                )
+            ],
+            input_variables=["question", "user_info"],
+            partial_variables={
+                "format_instructions": parser.get_format_instructions(),
+            },
+        )
 
-    # Generate the input using the updated prompt.
-    user_query = (
-        "Generate a detailed Custom page content of a user info"
-        "the content include the meta tags keywords, description, the tag title of the page, and the header is h1 tag of the page."
-        "Each tag includes a text that the user can read and a url to which he will be redirected when clicking."
-        "Finally, it detects the products sent by the user, each product is an item of the listand each product has the following dictionary keys:  product name, description, value, link to buy"
-        "Remember that you only give me the text, no HTML tags, you dont generate code, only generate a json file"
-    )
-    _input = prompt.format_prompt(question=user_query, user_info= user_info)
+        # Generate the input using the updated prompt.
+        user_query = (
+            "Generate a detailed Custom page content of a user info"
+            "the content include the meta tags keywords, description, the tag title of the page, and the header is h1 tag of the page."
+            "Each tag includes a text that the user can read and a url to which he will be redirected when clicking."
+            "Finally, it detects the products sent by the user, each product is an item of the listand each product has the following dictionary keys:  product name, description, value, link to buy"
+            "Remember that you only give me the text, no HTML tags, you dont generate code, only generate a json file"
+        )
+        _input = prompt.format_prompt(question=user_query, user_info= user_info)
+
+        chat.add_user_message(user_query)
+        ollama.query_ollama(chat.get_messages())
+    except Exception as gj:
+        print(gj)
     #ChatGooglePalm(google_api_key=google_api_key, temperature=0.5, top_k=40, top_p = 0.95, max_output_tokens= 4024)
     #chat_model = ChatOpenAI(
     #    model="openai/gpt-4-32k",
