@@ -204,11 +204,10 @@
                     <div class="formulary">
                         {% csrf_token %}
                         <input type="text" class="form_input" id="userMessage" placeholder="Send a message..." onkeydown="handleKeyDown(event, '{{context_value}}')">
-                        <button class="btn btn-send" onclick="sendMessage( '{{context_value}}' )">{% trans "Send" %}</button>
+                        <button class="btn btn-send" onclick="sendMessage()">{% trans "Send" %}</button>
                         {% if context_value == 'panel-admin' or context_value == 'main' %}
                             <!-- Input escondido para subir archivos -->
-                            
-                            <input type="file" style="display: none;" id="fileInput" name="uploaded_files" multiple accept=".pdf,.txt, .png">
+                            <input type="file" style="display: none;" id="fileInput" name="uploaded_files" accept=".pdf,.txt,.png" onchange="uploadFile(event)">
                             <label for="fileInput" class="btn btn-send">{% trans "Upload" %}</label>
                         {% endif %}
                     </div>
@@ -246,7 +245,6 @@
 
             // Get the first two words from the p text
             var pKeywords = pText.split(/\s+/).slice(0, 2).join(' ');
-            console.log(h1Keywords + ' , '+ pKeywords)
             // Concatenate the keywords from h1 and p
             var existingKeywords = $("meta[name='keywords']").attr('content');
 

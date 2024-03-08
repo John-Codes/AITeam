@@ -22,12 +22,15 @@ from AI_Team.Logic.Data_Saver import DataSaver
 from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from AI_Team.Logic.Charge_Context import Charge_Context
 from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
+from AI_Team.Logic.Chat.temporal_pdf_handling import process_temporary_files
+from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from .create_paypal import *
 from hashids import Hashids
 import time
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
+
 # Stripe using stripe
 import stripe
 # PayPal
@@ -131,15 +134,14 @@ class ChatUIView(View):
         user_message = request.POST.get('message')
         phase = request.POST.get('phase')
         action = request.POST.get('action')
-        charger = Charge_Context()
 
         response_html = ""
 
-        # Procesar archivos subidos, si los hay
-        upload_details = charger.process_uploaded_files(request)
-        if upload_details:
-            upload_response = charger.handle_user_input(request, user_message, upload_details)
-            response_html += upload_response.get('user_message_div', '')
+        # Archivos temporales
+        temp_context_chat, upload_succes = process_temporary_files(request)
+        if upload_succes:
+            request.session['temp_context_chat'] = temp_context_chat
+            response_html += render_html('chat_messages/ia_message.html', upload_succes)
 
         if action == 'cancel_subscription':
             response_html += render_html('chat_messages/cancel.html', '')
@@ -161,7 +163,6 @@ class ChatUIView(View):
     
     def handle_template_messages(self, request, template_name):
         response_data = {}
-        print(template_name)
         response_data['template_message_div'] = render_html(f'chat_messages/{template_name}.html', '')
         if template_name == 'contact_us':
             request.session['send_us_email'] = True            
@@ -170,6 +171,7 @@ class ChatUIView(View):
 
     def handle_ai_response(self, request, user_message):
         response_data = {}
+        chat = OllamaRag()
         product_consult = False
         
         if request.session.get('cancel-subscription', False):
@@ -196,9 +198,13 @@ class ChatUIView(View):
                 user_message = str(user_message) + f'''There is the data of my page in json remember this to respond:  ''' + str(json_read)
                 
             # AI consultation logic
-            
-            #ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
-            ai_response = ai.call_router(user_message,context_ia)
+            if request.session.get('temp_context_chat', False):
+                chat.add_pdf_to_new_temp_rag(request.session.get('temp_context_chat'))
+                #del request.session['temp_context_chat']
+                ai_response = chat.query_temp_rag_single_question(user_message)
+            else:
+                #ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
+                ai_response = ai.call_router(user_message,context_ia)
             
         if request.session.get('send_us_email', False):
             # Handle email sending logic

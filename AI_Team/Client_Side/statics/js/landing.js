@@ -36,14 +36,14 @@ function sendMessage() {
     }
 
     // Agregar archivos al FormData si están presentes
-    const fileInput = document.getElementById("fileInput");
-    let hasFiles = fileInput && fileInput.files.length > 0;
-    if (hasFiles) {
-        const files = fileInput.files;
-        for (let i = 0; i < files.length; i++) {
-            formData.append("uploaded_files", files[i]);
-        }
-    }
+    // const fileInput = document.getElementById("fileInput");
+    // let hasFiles = fileInput && fileInput.files.length > 0;
+    // if (hasFiles) {
+    //     const files = fileInput.files;
+    //     for (let i = 0; i < files.length; i++) {
+    //         formData.append("uploaded_files", files[i]);
+    //     }
+    // }
 
     // Solo realiza la solicitud si hay un mensaje o archivos
     if (message !== "" || hasFiles) {
@@ -94,6 +94,47 @@ function handleKeyDown(event) {
     }
 }
 
+// Función para cargar un solo archivo
+function uploadFile(event) {
+    const file = event.target.files[0]; // Obtener el primer archivo seleccionado
+    const formData = new FormData();
+    
+    // Agregar el archivo al FormData si está presente
+    if (file) {
+        formData.append("uploaded_files", file);
+        // Realizar la solicitud para procesar el archivo
+        const csrfToken = getCookie('csrftoken');
+        const languagePrefix = getLanguagePrefix();
+        let urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
+        console.log(urlEndpoint);
+        
+        fetch(urlEndpoint, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRFToken": csrfToken
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Realizar acciones adicionales después de cargar el archivo
+            console.log('File uploaded successfully:', data);
+            const chatBox = document.getElementById("chatBox");
+            if (data.combined_response) {
+                chatBox.insertAdjacentHTML('beforeend', data.combined_response);
+            }
+            chatBox.scrollTop = chatBox.scrollHeight;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+}
 //handle default messages
 document.addEventListener("DOMContentLoaded", function() {
     var templateLinks = document.querySelectorAll("[data-template]");
