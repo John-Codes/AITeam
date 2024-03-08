@@ -42,11 +42,12 @@ def process_temporary_files(request):
                 return None, error_message
             # Add the path of the saved file to the list
             pdf_paths.append(file_path)
+            
     
     # Success message
     success_message = "The PDF has been successfully uploaded. You can now ask questions about its content."
 
     # Return the paths of the saved PDF files and the success message
-    return pdf_paths, success_message
+    return file_path, success_message
 
 #eliminación de archivos temporales

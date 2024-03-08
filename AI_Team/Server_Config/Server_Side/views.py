@@ -48,6 +48,7 @@ from django.utils.translation import gettext as _
 stripe.api_key = settings.STRIPE_SECRET_KEY
 hashids = Hashids(salt = os.getenv("salt"), min_length=8)
 ai = ai_Handler()
+ollama = OllamaRag()
 #STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
 
 # ai-team chat handle events and requests
@@ -141,7 +142,7 @@ class ChatUIView(View):
         temp_context_chat, upload_succes = process_temporary_files(request)
         if upload_succes:
             request.session['temp_context_chat'] = temp_context_chat
-            self.ollama.add_pdf_to_new_temp_rag(temp_context_chat)
+            ollama.add_pdf_to_new_temp_rag(temp_context_chat)
             response_html += render_html('chat_messages/ia_message.html', upload_succes)
 
         if action == 'cancel_subscription':
@@ -200,7 +201,7 @@ class ChatUIView(View):
             # AI consultation logic
             if request.session.get('temp_context_chat', False):
                 #del request.session['temp_context_chat']
-                ai_response = self.ollama.query_temp_rag_single_question(user_message)
+                ai_response = ollama.query_temp_rag_single_question(user_message)
             else:
                 #ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
                 ai_response = ai.call_router(user_message,context_ia)
