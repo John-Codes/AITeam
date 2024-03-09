@@ -3,12 +3,12 @@ from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap
-
+from . import views
 sitemaps = {
     'mymodel': StaticViewSitemap,
 }
 #from paypal.standard.ipn import views as paypal_views
-from . import views
+
 #path('ipn/', paypal_views.ipn, name='paypal-ipn'),
 
 urlpatterns = [
