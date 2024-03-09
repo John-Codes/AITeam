@@ -96,6 +96,7 @@ function handleKeyDown(event) {
 
 // Función para cargar un solo archivo
 function uploadFile(event) {
+    toggleDotsAnimation(true);
     const file = event.target.files[0]; // Obtener el primer archivo seleccionado
     const formData = new FormData();
     
@@ -132,6 +133,9 @@ function uploadFile(event) {
         })
         .catch(error => {
             console.error('Error:', error);
+        })
+        .finally(() => {
+            toggleDotsAnimation(false); // Desactivar animaciones
         });
     }
 }

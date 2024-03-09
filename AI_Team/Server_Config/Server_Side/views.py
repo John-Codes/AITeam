@@ -22,7 +22,8 @@ from AI_Team.Logic.Data_Saver import DataSaver
 from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from AI_Team.Logic.Charge_Context import Charge_Context
 from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
-from AI_Team.Logic.Chat.temporal_pdf_handling import process_temporary_files
+from AI_Team.Logic.Chat.pdf_handling import proccess_context_files, delete_temp_pdfs
+from AI_Team.Logic.AI_Instructions.get_ai_instructions import get_instructions
 #from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from .create_paypal import *
 from hashids import Hashids
@@ -76,14 +77,21 @@ class ChatUIView(View):
     def get(self, request, *args, **kwargs):
         #chat = Chat_history()
         ai = ai_Handler()
-        if request.session.get('temp_context_chat', False):
-            del request.session['temp_context_chat']
-        
-        self.context_value = kwargs.get('context', None)
         valid_contexts = ["main", "subscription", "panel-admin"]
         titles = {"main": [_('EFEXZIUM'), _('AI Team Chat')], "subscription": [_('Subscriptions'), _('AI Team Subscriptions')], "panel-admin": [_('Create your own page'), _('AI Team Page Builder')]}
         page_data = DataSaver()
+        
+        if request.session.get('temp_context_chat', False):
+            delete_temp_pdfs(request.session['temp_context_chat'])
+            del request.session['temp_context_chat']
+        
+        self.context_value = kwargs.get('context', None)
+        # obtener instrucciones:
+        context_data_ai = get_instructions(self.context_value)
+        # iniciar el rag dado el path donde esta el contexto o las instrucciones para la IA
+        #
         # Si el contexto es uno de los personalizados
+        
         if self.context_value not in valid_contexts:
             site_exists = page_data.check_site(check_context=self.context_value)
             if not site_exists:
@@ -144,13 +152,14 @@ class ChatUIView(View):
         response_html = ""
 
         # Archivos temporales
-        pdf_file, upload_succes = process_temporary_files(request)
-        if upload_succes:
+        pdf_file, upload_succes = proccess_context_files(request, self.context_value)
+        if pdf_file != 'no path' and upload_succes:
             request.session['temp_context_chat'] = pdf_file
             #ollama.add_pdf_to_new_temp_rag(temp_context_chat)
             ai.create_temp_rag_with_a_pdf(pdf_file)
             response_html += render_html('chat_messages/ia_message.html', upload_succes)
-
+        elif pdf_file == 'no path':
+            response_html += render_html('chat_messages/text_message.html', upload_succes)
         if action == 'cancel_subscription':
             response_html += render_html('chat_messages/cancel.html', '')
 
