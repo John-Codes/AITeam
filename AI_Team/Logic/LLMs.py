@@ -7,7 +7,7 @@ from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from langchain.prompts import PromptTemplate
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import LLMChain
-from langchain.callbacks import get_openai_callback
+from langchain_community.chat_models import ChatOllama
 from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 #from ollama.ollama_rag_Module import OllamaRag
@@ -105,7 +105,6 @@ def generate_json(user_info):
     
     try:
         print("generate_json")
-        google_api_key = os.getenv("Palm2APIKey")
         user_info = str(user_info)
         encoding = tiktoken.encoding_for_model("gpt-4")
         token_prompt = len(encoding.encode(user_info))
@@ -135,10 +134,14 @@ def generate_json(user_info):
         )
         _input = prompt.format_prompt(question=user_query, user_info= user_info)
 
-        chat.add_user_message(user_query)
-        ollama.query_ollama(chat.get_messages())
+        #chat.add_user_message(user_query)
+        #ollama.query_ollama(chat.get_messages())
     except Exception as gj:
         print(gj)
+    chat_model = ChatOllama(
+        temperature=0.5,
+        model="mistral",
+    )
     #ChatGooglePalm(google_api_key=google_api_key, temperature=0.5, top_k=40, top_p = 0.95, max_output_tokens= 4024)
     #chat_model = ChatOpenAI(
     #    model="openai/gpt-4-32k",
@@ -150,17 +153,17 @@ def generate_json(user_info):
     #    max_tokens=3000
     #)
     # Run the Chain and capture the output
-    #output = chat_model(_input.to_messages())
-    # token_response = len(encoding.encode(output.content))
-    # tokens_used =token_response + token_prompt
-    # try:
-    #     parsed = parser.parse(output.content)
-    #     return output.content, tokens_used
-    # except Exception as  e:
-    #     print('error')
-    #     print(e)
-    #     json_succes = str(e)
-    #     return json_succes, tokens_used
+    output = chat_model(_input.to_messages())
+    token_response = len(encoding.encode(output.content))
+    tokens_used =token_response + token_prompt
+    try:
+        parsed = parser.parse(output.content)
+        return output.content, tokens_used
+    except Exception as  e:
+        print('error')
+        print(e)
+        json_succes = str(e)
+        return json_succes, tokens_used
     
     
 
