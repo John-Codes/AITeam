@@ -21,8 +21,9 @@ from AI_Team.Logic.sender_mails import Contac_us_mail, notice_error_forms
 from AI_Team.Logic.Data_Saver import DataSaver
 from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from AI_Team.Logic.Charge_Context import Charge_Context
+from AI_Team.Logic.Chat.pdf_handling import *
 from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
-from AI_Team.Logic.Chat.pdf_handling import proccess_context_files, delete_temp_pdfs
+
 from AI_Team.Logic.AI_Instructions.get_ai_instructions import get_instructions
 #from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from .create_paypal import *
@@ -159,7 +160,7 @@ class ChatUIView(View):
             ai.create_temp_rag_with_a_pdf(pdf_file)
             response_html += render_html('chat_messages/ia_message.html', upload_succes)
         elif pdf_file == 'no path':
-            response_html += render_html('chat_messages/text_message.html', upload_succes)
+            response_html += render_html('chat_messages/ia_message.html', upload_succes)
         if action == 'cancel_subscription':
             response_html += render_html('chat_messages/cancel.html', '')
 

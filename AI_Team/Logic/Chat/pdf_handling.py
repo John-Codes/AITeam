@@ -1,19 +1,37 @@
 import os
 from ..response_utils import render_html
 from ..Charge_Context import Charge_Context
+from ..ollama.ollama_rag_Module import OllamaRag
 #process_uploaded_files
-
+o = OllamaRag()
 def proccess_context_files(request, context):
     if context == 'main':
-        return proccess_temporary_files(request)
+        temp_file = proccess_temporary_files(request)
+        return temp_file
     elif context == 'panel-admin':
-        return proccess_chat_creation_files(request)
+        rag_permanent = proccess_chat_creation_files(request)
+        return rag_permanent
 
-    def proccess_chat_creation_files(request):
-        details = Charge_Context().process_uploaded_files(request)
-        print(details)
-        return 'no path', details
+def proccess_chat_creation_files(request):
+    #details = Charge_Context().process_uploaded_files(request)
+    #print(details)
+    try:
+        pathpdf, message = proccess_temporary_files(request)
+        user_email = request.user.email
+        user_email = o.clean_string_for_file_name(user_email)
+        # creación del rag con pdf
+        text = o.extract_text_from_pdf(pathpdf)
+        splits = o.semantic_text_split_bert(text,200)
+        doc_splits = o.string_list_to_hf_documents(splits, pathpdf)
+        doc_splits = o.text_spliter_for_vectordbs(doc_splits)
+        
+        #o.new_Persisted_Chroma_and_retriever(doc_splits)
+        o.new_persisted_ChromaDb_all_mini(doc_splits,user_email)
     
+        return 'no path', message   
+    except Exception as e:
+        return 'no path', str(e)
+     
 def proccess_temporary_files(request):
     # Get the list of uploaded files from the request
     uploaded_files = request.FILES.getlist('uploaded_files')

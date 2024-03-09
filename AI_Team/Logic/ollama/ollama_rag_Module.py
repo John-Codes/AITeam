@@ -27,7 +27,7 @@ pdf ="/Resume 2024.pdf"
 # Get the current working directory
 current_directory = os.getcwd()
 pathpdf= current_directory+pdf
-
+vectorDBDir="UsersVectorDbFiles"
 
 class OllamaRag:
     def __init__(self):
@@ -118,7 +118,21 @@ class OllamaRag:
                 metadatas=[{"source":"my_source","page":1},{"source":"mysource"}],
                 ids=["id1","id2"]
             )
-
+    def get_user_vectorDB_directory(self):
+        
+        try:
+            
+            # Construct the path to the VectorDbFiles directory
+            base_directory = current_directory = os.getcwd()
+            vector_db_directory = os.path.join(base_directory, vectorDBDir)
+            
+            return vector_db_directory
+        except Exception as gud:
+            print(self.get_user_directory,gud)
+        
+        # If the user's directory is not found, return None
+        return None
+    
     def get_persisted_ChromaDB(self):
         '''WORKS REALLY WELL'''
         try:
