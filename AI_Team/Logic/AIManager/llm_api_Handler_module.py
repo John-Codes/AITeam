@@ -28,7 +28,7 @@ class ai_Handler:
 
     def call_ai_temp_rag(self,prompt):
         
-        self.ai.query_temp_rag_single_question(prompt)
+        return self.ai.query_temp_rag_single_question(prompt)
 
     def create_temp_rag_with_a_pdf(self,pdfdirectory):
         
