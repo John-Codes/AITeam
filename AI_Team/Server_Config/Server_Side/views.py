@@ -231,7 +231,7 @@ class ChatUIView(View):
             request.session['send_us_email'] = False
             del request.session['send_us_email']
 
-        elif ai_response:
+        if ai_response:
             rendered_product = ''
             if product_consult:
                 rendered_product = render_html('chat_messages/message_info_product.html', product_consult)
