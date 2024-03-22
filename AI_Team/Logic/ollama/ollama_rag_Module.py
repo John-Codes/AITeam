@@ -165,7 +165,7 @@ class OllamaRag:
 
             #Printing the result
             print(joined_string)
-            return self.ollama_llm(question, joined_string)
+            return self.ollama_llm_query_single_question(question, joined_string)
         except Exception as rg:
             print(self.query_persisted_chromadb_rag.__name__,rg)
 
