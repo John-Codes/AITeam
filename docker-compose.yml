@@ -1,28 +1,14 @@
-<<<<<<< HEAD
 version: '3.8'
 
 services:
  aiteam_app:
     image: aiteam_img
-=======
-version: '3'
-
-services:
- django:
-    build: ./django-app
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./django-app:/app
->>>>>>> 8b6bd7dedd10635e355e5bb22ca14c20a8164007
     ports:
       - "8000:8000"
     depends_on:
       - ollama
     networks:
-<<<<<<< HEAD
       - aiteam-network
-    extra_hosts:
-      - "ollama:host-gateway"
 
  ollama:
     image: ollama/ollama:latest
@@ -34,22 +20,3 @@ services:
 networks:
  aiteam-network:
     driver: bridge
-=======
-      - ollama_network
-
- ollama:
-    image: ollama/ollama
-    volumes:
-      - ollama:/root/.ollama
-    ports:
-      - "11434:11434"
-    networks:
-      - ollama_network
-
-networks:
- ollama_network:
-    driver: bridge
-
-volumes:
- ollama:
->>>>>>> 8b6bd7dedd10635e355e5bb22ca14c20a8164007
