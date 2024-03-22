@@ -13,7 +13,9 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os
-
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
     
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +30,8 @@ SECRET_KEY = "django-insecure-x#@g(83fg26+c*bpz*0vepc=#eei3a&58zj3x@8z_k(2)*3n+_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+#ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1, localhost, 0.0.0.0',).split(',')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0']
 
 # email send config
 email_sender =os.environ.get('email_sender')
@@ -72,6 +75,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'django.middleware.locale.LocaleMiddleware',
     'Server_Config.Server_Side.error_middleware.ErrorHandlingMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 LOCALE_PATHS = [
