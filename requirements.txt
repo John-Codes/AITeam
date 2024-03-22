@@ -209,3 +209,5 @@ wrapt==1.16.0
 yarl==1.9.4
 zipp==3.17.0
 gunicorn==21.2.0
+pysqlite3-binary
+whitenoise==6.6.0

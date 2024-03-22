@@ -12,16 +12,16 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/
 
-# Install Ollama
-RUN curl -fsSL https://ollama.com/install.sh | sh
+# Copia el script de entrada al contenedor
+COPY entrypoint.sh /app/
 
-# Instalar el modelo Mistral
-RUN curl http://localhost:11434/api/generate -d '{"model": "mistral"}'
+# Hace el script de entrada ejecutable
+RUN chmod +x /app/entrypoint.sh
+
+# Configura el script de entrada como el punto de entrada
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 EXPOSE 8000
 
-# Copy .env file
-COPY .env /app/
-
 # Source .env file
-CMD ["sh", "-c", "source /app/.env && gunicorn AI_Team.Server_Config.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["gunicorn", "AI_Team.Server_Config.wsgi:application", "--bind", "0.0.0.0:8000"]

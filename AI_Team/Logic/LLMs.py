@@ -3,7 +3,6 @@ import openai
 import json
 import google.generativeai as palm
 from AI_Team.Logic.Chat.chat_history_module import Chat_history
-from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from langchain.prompts import PromptTemplate
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import LLMChain
@@ -18,7 +17,7 @@ import tiktoken
 import runpod
 import requests
 
-ollama = OllamaRag()
+#ollama = OllamaRag()
 chat = Chat_history()
 # agrega a la función  esta función la clase Count_Tokens y usala para contar los tokens generados
 
