@@ -19,6 +19,10 @@ import fitz
 from semantic_text_splitter import CharacterTextSplitter, HuggingFaceTextSplitter
 from tokenizers import Tokenizer
 import re 
+ollama_url = os.getenv('OLLAMA_BASE_URL', 'http://ollama:11434')
+print('config_ollama',ollama_url)
+# Configure the Ollama client with the obtained URL
+ollama_api = ollama.Client(host=ollama_url)
 #add static messages to chat history and pass it from views.
 
 model_local =ChatOllama(model="mistral")
@@ -218,7 +222,7 @@ class OllamaRag:
     def ollama_llm_query_single_question(self,question, context):
         try:    
             formatted_prompt = f"Question: {question}\n\nContext: {context}"
-            response = ollama.chat(model='mistral', messages=[{'role': 'user', 'content': formatted_prompt}])
+            response = ollama_api.chat(model='mistral', messages=[{'role': 'user', 'content': formatted_prompt}])
             return response['message']['content']
         except Exception as oll:
             print(self.ollama_llm_query_single_question.__name__,oll)
@@ -251,7 +255,7 @@ class OllamaRag:
     
     def query_ollama(self,messages):
         
-        stream = ollama.chat(
+        stream = ollama_api.chat(
         model='mistral',
         messages=messages,
         stream=False,)
