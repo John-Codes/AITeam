@@ -24,4 +24,4 @@ ENTRYPOINT ["/app/entrypoint.sh"]
 EXPOSE 8000
 
 # Source .env file
-CMD ["gunicorn", "AI_Team.Server_Config.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "-c", "gunicorn.conf.py", "AI_Team.Server_Config.wsgi:application",  "--bind", "0.0.0.0:8000"]
