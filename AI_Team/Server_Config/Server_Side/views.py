@@ -1,9 +1,11 @@
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 import os
+import json
 from pathlib import Path
-from django.http import JsonResponse, HttpResponseRedirect # send json objects
-from django.contrib.auth.forms import UserCreationForm # handle defaults forms of django
+from django.http import JsonResponse
+from django.http import StreamingHttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView 
@@ -19,6 +21,7 @@ from AI_Team.Logic.Memory import *
 from AI_Team.Logic.response_utils import * # IA message render templates method
 from AI_Team.Logic.sender_mails import Contac_us_mail, notice_error_forms
 from AI_Team.Logic.Data_Saver import DataSaver
+from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from AI_Team.Logic.Charge_Context import Charge_Context
 from AI_Team.Logic.Chat.pdf_handling import *
@@ -245,9 +248,24 @@ class ChatUIView(View):
 
     def send_email(self, user_message):
         if ('@' and '.') in user_message:
-            Contac_us_mail(user_message)    
+            Contac_us_mail(user_message)  
 
-# Class to handle the form of Reset Password
+@csrf_exempt
+def stream_chat(request):
+    if request.method == 'POST':        
+        chat_ollama = OllamaRag()
+        data = json.loads(request.body)
+        # Acceder al mensaje usando la clave 'content'
+        message = data.get('content', None)
+        
+        messages = ai.call_router_async(message, 'main')
+        
+        return StreamingHttpResponse(chat_ollama.stream_query_ollama(messages), content_type='text/event-stream')
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+    # Class to handle the form of Reset Password
 class PasswordResetView(PasswordResetView):
     template_name = 'registration/password_reset.html'
     form_class = CustomPasswordResetForm
