@@ -23,6 +23,16 @@ class ai_Handler:
             return self.ai.query_ollama(self.messages.get_messages())
         except Exception as clr:
             print(clr)
+    
+    def call_router_async(self, prompt, context):
+        try:
+            print('call router', prompt, context)
+            self.messages.add_system_message(context)
+            self.messages.add_user_message(prompt)
+            # Llamada a la función asíncrona
+            return self.messages.get_messages()
+        except Exception as clr:
+            print(clr)
         
         
 

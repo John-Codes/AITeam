@@ -20,6 +20,58 @@ function getLanguagePrefix() {
     return languageCode;
 }
 
+// Function async to streaming chat responses.
+async function sendMessageStream() {
+    const message = document.getElementById("userMessage").value.trim();
+    console.log(message);
+    const chatBox = document.getElementById("chatBox");
+    const languagePrefix = getLanguagePrefix();
+    let async_chat = `/${languagePrefix}/stream_chat/`;
+
+    chatBox.insertAdjacentHTML('beforeend', `
+        <div class="message-right glass float-end">
+            <p class="message-content">${message}</p>
+        </div>
+        <div class="clearfix"></div>
+    `);
+    toggleDotsAnimation(true); // Activar animaciones
+    const aiMessageId = 'aiMessage' + Date.now(); // Generar un ID único para el elemento
+    
+    var response = await fetch(async_chat, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content: message })
+            });
+    document.getElementById("userMessage").value = "";
+    var reader = response.body.getReader();
+    var decoder = new TextDecoder('utf-8');
+    toggleDotsAnimation(false); // Activar animaciones
+    chatBox.insertAdjacentHTML('beforeend', `
+        <div class="message-left glass">
+            <p class="message-content" id="${aiMessageId}"> </p>
+            <div class="mt-2">
+                <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
+                <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
+                <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    `);
+    reader.read().then(function processResult(result) {
+        if (result.done) return;
+        let token = decoder.decode(result.value);
+        if (token.endsWith('.') || token.endsWith('!') || token.endsWith('?')) {
+            document.getElementById(aiMessageId).innerHTML += token + "<br>";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        } else {
+            document.getElementById(aiMessageId).innerHTML += token;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        return reader.read().then(processResult);
+    });
+}
 // Function to send the user's message and receive the response.
 function sendMessage() {
     const message = document.getElementById("userMessage").value.trim();
@@ -51,8 +103,6 @@ function sendMessage() {
         const csrfToken = getCookie('csrftoken');
         const languagePrefix = getLanguagePrefix();
         let urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
-        formData.append("phase", "ai_response"); // Añadir phase para la solicitud
-
         fetch(urlEndpoint, {
             method: "POST",
             body: formData,
@@ -88,7 +138,7 @@ function sendMessage() {
 // Handle Enter key press to send the message.
 function handleKeyDown(event) {
     if (event.keyCode === 13) {  // 13 is the keyCode for Enter key.
-        sendMessage();
+        sendMessageStream();
         //console.log("Tecla presionada", event.keyCode);
         event.preventDefault();  // Prevents the Enter action from triggering a page reload.
     }
