@@ -22,7 +22,7 @@ function getLanguagePrefix() {
 
 // Function async to streaming chat responses.
 async function sendMessageStream() {
-    const message = document.getElementById("userMessage").value.trim();
+    const message = document.getElementById("userMessage").value;
     console.log(message);
     const chatBox = document.getElementById("chatBox");
     const languagePrefix = getLanguagePrefix();

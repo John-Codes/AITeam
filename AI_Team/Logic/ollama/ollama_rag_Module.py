@@ -20,7 +20,8 @@ import fitz
 from semantic_text_splitter import CharacterTextSplitter, HuggingFaceTextSplitter
 from tokenizers import Tokenizer
 import re 
-ollama_url = os.getenv('OLLAMA_BASE_URL', "http://localhost:11434")  #'http://ollama:11434
+#ollama_url = os.getenv('OLLAMA_BASE_URL', "http://localhost:11434")  #'http://ollama:11434
+ollama_url = "http://localhost:11434"
 print('config_ollama',ollama_url)
 # Configure the Ollama client with the obtained URL
 ollama_api = ollama.Client(host=ollama_url)

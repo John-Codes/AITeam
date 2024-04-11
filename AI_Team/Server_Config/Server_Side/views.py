@@ -257,7 +257,7 @@ def stream_chat(request):
         data = json.loads(request.body)
         # Acceder al mensaje usando la clave 'content'
         message = data.get('content', None)
-        
+        print(message)
         messages = ai.call_router_async(message, 'main')
         
         return StreamingHttpResponse(chat_ollama.stream_query_ollama(messages), content_type='text/event-stream')
