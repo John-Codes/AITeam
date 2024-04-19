@@ -186,6 +186,7 @@
                             <h3 class="message-content">{% trans "Enterprise Plan" %}</h3>
                             <p class="message-content">{% trans "Our Enterprise Plan is the epitome of customization and dedicated support. Tailored to fit each client's unique needs, this plan offers 24/7 attention and a suite of customizable features to ensure your enterprise operates seamlessly and at its peak potential. Experience unparalleled service and flexibility with our Enterprise Plan." %}</p>
                             <p class="message-content">{% trans "if you wanna know more about each plan, only send a message and AI Team response you" %}</p>
+                            <p class="message-content">{% trans "If you wanna get any subscription visit the" %} <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
                             <div class="mt-2">
                                 <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                                 <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
@@ -240,6 +241,8 @@
                         <span class="dot dot-2"></span>
                         <span class="dot dot-3"></span>
                     </div>
+                    <br>
+                    <br>
                 </div>
                 <div class="columns is-mobile is-centered is-vcentered">
                     <div class="column is-full-mobile is-full-tablet is-full-desktop">
@@ -257,7 +260,7 @@
                                     <!-- Input escondido para subir archivos -->
                                     <input type="file" style="display: none;" id="fileInput" name="uploaded_files" accept=".pdf,.txt,.png" onchange="uploadFile(event)">
                                     <label for="fileInput" class="button btn-send">
-                                        <i class="fas fa-paperclip"></i> <!-- Icono de cargar archivo -->
+                                        <i class="fa-sharp fa-solid fa-paperclip" style="padding-left: 2px;"></i> <!-- Icono de cargar archivo -->
                                     </label>
                                 {% endif %}
                             </div>

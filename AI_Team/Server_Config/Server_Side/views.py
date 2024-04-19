@@ -285,7 +285,7 @@ class PasswordResetView(PasswordResetView):
         """
         for field, errors in form.errors.items():
             for error in errors:
-                messages.error(self.request, f"Error en el campo '{field}': {error}")
+                messages.error(self.request, f"Error in {field}: {error}")
         return self.render_to_response(self.get_context_data(form=form))
 
 # Handle the form to create an cliente account 
@@ -298,15 +298,15 @@ class SignupView(CreateView):
         error_details = ''
         for field, errors in form.errors.items():
             for error in errors:
-                error_message = f"Error in field '{field}': {error}"
+                error_message = f"Error in {field}: {error}"
                 error_details += error_message + '\n'
 
         if error_details:
-            notice_error_forms(f"Signup Form Error: \n{error_details}")
+            email_contact =form.cleaned_data.get('email')
+            notice_error_forms(f"Signup Form Error: \n{error_details}", email_contact)
 
-        messages.error(self.request, _('There was an error processing your form. Please check the details and try again.'))
+        messages.error(self.request, error_details)
         return super().form_invalid(form)
-
 class CustomLoginView(LoginView):
     form_class = CustomLoginForm
     template_name = 'registration/login.html'
@@ -319,11 +319,13 @@ class CustomLoginView(LoginView):
             for error in errors:
                 error_message = f"Error in field '{field}': {error}"
                 error_details += error_message + '\n'
+                messages.error(self.request, 'error in both fields: ' + error)
 
         if error_details:
-            notice_error_forms(f"Login Form Error: \n{error_details}")
+            email_contact =form.cleaned_data.get('username')
+            notice_error_forms(f"Login Form Error: \n{error_details}", email_contact)
 
-        messages.error(self.request, _('There was an error processing your form. Please check the details and try again.'))
+        
         return super().form_invalid(form)
 
 

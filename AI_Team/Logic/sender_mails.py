@@ -60,11 +60,13 @@ def notice_error(asunto, mensaje, email_origen = os.environ.get('emeil_error_not
     except Exception as e:
         print(f"Error al enviar el correo: {e}")
 
-def notice_error_forms(data):
+def notice_error_forms(data, email_contact):
     # check variables
         subject = 'An error has ocurred in the login forms'
         message = f""" Data of the server error:
         {data}
+        
+        email for contact: {email_contact}
             """
         from_email = settings.EMAIL_HOST_USER
         recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']
