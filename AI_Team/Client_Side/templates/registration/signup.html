@@ -5,16 +5,16 @@ Sign Up for EFEXZIUM
 {% endblock %}
 {% block logo %} EFEXZIUM =$={% endblock %}
 {% block header %}
-Sign Up =$=
+Sign Up
 {% endblock %}
 
 {% block form_content %}
     <!-- Bloque para mostrar mensajes -->
     {% if messages %}
         {% for message in messages %}
-            <div class="alert flex-container alert_error" role="alert" style="background-color: #0A2342; color: white">
+            <div class="notification is-gray" role="alert" id="alert-message">
+                <button class="delete" onclick="closeAlert()"></button>
                 <strong>{{ message }}</strong>
-                <button type="button" class="btn btn-close close_error" style="background-color: transparent; color: gray; border: none;" data-bs-dismiss="alert" aria-label="Close">X</button>
             </div>
         {% endfor %}
     {% endif %}
@@ -36,12 +36,12 @@ Sign Up =$=
             <input type="password" name="password2" id="id_password2" required class="focus">
         </div>
         
-        <button type="submit" class="btn-dark-submit">Register</button>
+        <button type="submit" class="button is-dark">Register</button>
         <br>
     </form>
 {% endblock %}
 
 {% block additional_content %}
     <p>Already have an account?</p>
-    <a href="{% url 'login' %}" class="register-link">Log in</a>
+    <a href="{% url 'login' %}" class="button is-link">Log in</a>
 {% endblock %}
