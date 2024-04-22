@@ -296,14 +296,15 @@ class SignupView(CreateView):
     
     def form_invalid(self, form):
         error_details = ''
+        fields = {'password1': 'password', 'password2': 'confirm password'}
         for field, errors in form.errors.items():
             for error in errors:
-                error_message = f"Error in {field}: {error}"
+                error_message = f"Error in {fields.get(field, field)}: {error}"
                 error_details += error_message + '\n'
 
         if error_details:
             email_contact =form.cleaned_data.get('email')
-            notice_error_forms(f"Signup Form Error: \n{error_details}", email_contact)
+            notice_error_forms(f"Signup Form Error: \n{error_details}", email_contact, 'Signup')
 
         messages.error(self.request, error_details)
         return super().form_invalid(form)
@@ -323,7 +324,7 @@ class CustomLoginView(LoginView):
 
         if error_details:
             email_contact =form.cleaned_data.get('username')
-            notice_error_forms(f"Login Form Error: \n{error_details}", email_contact)
+            notice_error_forms(f"Login Form Error: \n{error_details}", email_contact, 'Login')
 
         
         return super().form_invalid(form)
@@ -536,7 +537,6 @@ def subscription_list_view(request, *args, **kwargs):
         cancel_message = cancel_subscription(request, cancel_order_id)
 
     if table:
-        print(table)
         if list_all == 'clients':
             columns = ['email','subscription_detail__plan_name', 'order_id', 'status_subscription', 'next_date_pay', 'date_subscription']
             subscriptions = table.objects.all()
@@ -567,6 +567,8 @@ def error_handler(request):
     print('error handler')
     if request.method == 'POST':
         error_data = request.json
-        notice_error_forms(error_data)
+        email = error_data.get('email')
+        url = error_data.get('url')
+        notice_error_forms(error_data, email, url, side = 'Client Side')
         return JsonResponse({'status': 'error logged'})
     return JsonResponse({'status': 'error'}, status=400)

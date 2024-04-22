@@ -76,8 +76,16 @@
                     const errorData = {
                         url: window.location.href,
                         errors: Array.from(form.querySelectorAll('.alert')).map(div => div.textContent.trim()),
-                        formData: new FormData(form)
+                        formData: new FormData(form),
+                        javaScriptErrors: [event.message], 
+                        filename: event.filename,
+                        lineno: event.lineno,
+                        colno: event.colno,
+                        timestamp: new Date().toISOString(),
+                        region: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        browser: navigator.userAgent,
                     };
+                    console.log('error detectado')
                     fetch('{% url 'error_handler' %}', {
                         method: 'POST',
                         headers: {
@@ -88,6 +96,25 @@
                     });
                 }
             }, false);
+        });
+    });
+    
+    // Agregar un manejador de errores para capturar errores de JavaScript
+    window.addEventListener('error', function(event) {
+        const errorData = {
+            url: window.location.href,
+            errors: [event.message],
+            timestamp: new Date().toISOString(),
+            region: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            browser: navigator.userAgent,
+        };
+        fetch('{% url 'error_handler' %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(errorData)
         });
     });
     document.addEventListener("DOMContentLoaded", function() {
