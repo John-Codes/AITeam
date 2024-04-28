@@ -21,6 +21,7 @@
     <!-- Bootstrap CSS python manage.py runserver-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href={% static "css/style_chat.css" %} rel="stylesheet"> 
+    <link href={% static "css/style_cards.css" %} rel="stylesheet"> 
     <script src={% static 'js/landing.js' %} ></script> 
     
 <script>
@@ -70,7 +71,7 @@
 </head>
 
 <body data-language-prefix="{{ LANGUAGE_CODE }}"></body>
-    <div class="container-fluid h-100">
+    <div class="container-fluid h-100 height-chat">
         
         <div class="column is-full-mobile is-full-tablet is-full-desktop">
 
@@ -245,7 +246,7 @@
                     <br>
                 </div>
                 <div class="columns is-mobile is-centered is-vcentered">
-                    <div class="column is-full-mobile is-full-tablet is-full-desktop">
+                    <div class="column is-full-mobile is-full-tablet is-full-desktop no-padding-footer">
                         <div class="field is-grouped">
                             <div class="textarea-container">
                                 <textarea class="form_input" id="userMessage" placeholder="Send a message..." onkeydown="handleKeyDown(event, '{{context_value}}')"></textarea>

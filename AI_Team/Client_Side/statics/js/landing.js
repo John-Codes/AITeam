@@ -26,7 +26,7 @@ async function sendMessageStream() {
     console.log(message);
     const chatBox = document.getElementById("chatBox");
     const languagePrefix = getLanguagePrefix();
-    let async_chat = `/${languagePrefix}/stream_chat/`;
+    let async_chat = `/${languagePrefix}/stream-chat/`;
 
     chatBox.insertAdjacentHTML('beforeend', `
         <div class="message-right glass float-end">
@@ -203,14 +203,14 @@ document.addEventListener("DOMContentLoaded", function() {
             const languagePrefix = getLanguagePrefix();
             
 
-            let urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
+            let urlEndpoint = `/${languagePrefix}/static-messages/`;
 
             fetch(urlEndpoint, {
                 method: "POST",
-                body: new URLSearchParams({ "template_name": templateName }),
+                body: JSON.stringify({ "template_name": templateName }),
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "X-CSRFToken": csrfToken
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie('csrftoken') 
                 }
             })
             .then(response => {
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(data => {
                 const chatBox = document.getElementById("chatBox");
-                chatBox.insertAdjacentHTML('beforeend', data.combined_response);
+                chatBox.insertAdjacentHTML('beforeend', data.template_message_div);
                 chatBox.scrollTop = chatBox.scrollHeight;
             })
             .catch(error => {
@@ -263,6 +263,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 return response.json();
             })
             .then(data => {
+                console.log(data);
                 chatBox.insertAdjacentHTML('beforeend', data.combined_response);
                 chatBox.scrollTop = chatBox.scrollHeight;
             })

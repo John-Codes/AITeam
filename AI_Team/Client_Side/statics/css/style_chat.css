@@ -1,15 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Asegura que el body ocupe al menos el 100% de la altura de la ventana */
+}
+
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0; 
+    padding: 0;
     background-color: #181818;
     background-image: url('../img/hubble.jpg');
     background-size: 100% 100%;
     background-repeat: no-repeat; 
     background-position: top left; 
-    margin: 0; 
-    min-height: 100vh; /* Asegura que el fondo cubra toda la altura de la pantalla */
 }
 
+.height-chat{
+    height: 100%;
+}
 .bi-list, .bi-x-lg{   
     font-size: 40px;
     color: white;
@@ -190,9 +202,8 @@ h2.reset-styles {
     width: 70%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 50px;
     overflow-y: auto; 
-    height: calc(100vh - 230px);
+    height: calc(100vh - 200px);
 }
 /* Estilo básico para el scrollbar */
 .chat-body::-webkit-scrollbar {
@@ -243,11 +254,14 @@ h2.reset-styles {
     border: none;
 }
 .message-content {  
-    color: #ffffff;
+    color: #ffffff!important;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+.message-content strong {
+    color: #ffffff!important;
 }
 table { 
     /*color: #1c1c1c;*/
@@ -300,7 +314,9 @@ table {
 
 
 .chat-footer {
-    width: 100%;  
+    width: 70%;  
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
     display: flex; 
     bottom: 0;
@@ -321,6 +337,10 @@ table {
     margin-right: auto;
     margin-top: 10px;  /* Espacio en la parte superior */
     padding-bottom: 5px;  /* Este espacio será el que separará el input del borde inferior */
+}
+
+.no-padding-footer{
+    padding: 0%!important;
 }
 
 .footer-content-modal {
@@ -537,6 +557,9 @@ table {
 /* Dispositivos móviles pequeños (<= 576px) */
 /* Para teléfonos móviles en modo vertical */
 @media (max-width: 480px) {
+    .chat-footer {
+        width: 100%;
+    }
     .chat-body {
         width: auto;
     }

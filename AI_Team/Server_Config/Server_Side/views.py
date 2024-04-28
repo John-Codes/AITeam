@@ -181,14 +181,6 @@ class ChatUIView(View):
             return JsonResponse({"error": "Invalid request"})
 
         return JsonResponse({'combined_response': response_html})
-    
-    def handle_template_messages(self, request, template_name):
-        response_data = {}
-        response_data['template_message_div'] = render_html(f'chat_messages/{template_name}.html', '')
-        if template_name == 'contact_us':
-            request.session['send_us_email'] = True            
-        time.sleep(2)
-        return response_data
 
     def handle_ai_response(self, request, user_message):
         response_data = {}
@@ -264,6 +256,20 @@ def stream_chat(request):
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+@csrf_exempt
+def handle_template_messages(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        template_name = data.get('template_name', None)
+        if template_name:
+            response_data = {}
+            response_data['template_message_div'] = render_html(f'chat_messages/{template_name}.html', '')
+            if template_name == 'contact_us':
+                request.session['send_us_email'] = True            
+            time.sleep(2)
+            return JsonResponse(response_data)
+        else:
+            return JsonResponse({"error": "template_name not provided"}, status=400)
 
     # Class to handle the form of Reset Password
 class PasswordResetView(PasswordResetView):
@@ -342,6 +348,7 @@ class Subscription(View):
         Render the subscription page with all plan details.
         """
         plans = SubscriptionDetail.objects.filter(name__in=["Basic AI Team Subscription", "Premium AI Team Subscription" ])
+        print('plans',plans)
         for plan in plans:
             plan.features_list = json.loads(plan.features_list)
             plan.market_place = json.loads(plan.market_place)
@@ -350,7 +357,7 @@ class Subscription(View):
             "plans": plans,  # Cambiado a "plans" para que sea más claro en el template
             "user": request.user,
             'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY,
-        } 
+        }
         
         return render(request, self.template_name, context)
     
