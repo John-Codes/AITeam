@@ -2,8 +2,15 @@
 function toggleDotsAnimation(shouldShow) {
     const loadingDots = document.querySelector('.loading-dots-container');
     const metallicText = document.querySelector('.metallic-text');
+    const chatBox = document.getElementById('chatBox');
     const displayValue = shouldShow ? 'flex' : 'none';
-
+    if (shouldShow) {
+        // Disminuye la altura en 30px
+        chatBox.style.height = `calc(${chatBox.style.height} - 100)`;
+    } else {
+        // Restaura la altura original (asumiendo que la altura original es 100vh - 160px)
+        chatBox.style.height = 'calc(100vh - 160px)';
+    }
     loadingDots.style.display = displayValue;
     metallicText.style.display = displayValue;
 }

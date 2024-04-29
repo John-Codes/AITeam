@@ -12,11 +12,13 @@ body {
     min-height: 100vh;
     margin: 0; 
     padding: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
     background-color: #181818;
-    background-image: url('../img/hubble.jpg');
-    background-size: 100% 100%;
+    background-image: url('../img/hubble.svg');
+    background-size: cover;
     background-repeat: no-repeat; 
-    background-position: top left; 
+    background-position: center center; 
 }
 
 .height-chat{
@@ -203,7 +205,7 @@ h2.reset-styles {
     margin-left: auto;
     margin-right: auto;
     overflow-y: auto; 
-    height: calc(100vh - 200px);
+    height: calc(100vh - 160px);
 }
 /* Estilo básico para el scrollbar */
 .chat-body::-webkit-scrollbar {

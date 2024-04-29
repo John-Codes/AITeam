@@ -26,6 +26,16 @@
     object-position: 50% 50%; 
 }
 
+/* Para pantallas muy pequeñas (menos de 600px de ancho) */
+@media (max-width: 600px) {
+    .card_background {
+        max-width: 17rem!important; /* Ajusta el max-width para pantallas muy pequeñas */
+    }
+    .card-image-profile {
+        width: 8rem;  
+        height: 8rem;
+    }
+}
 
 /* Para pantallas medianas (entre 600px y 900px de ancho) */
 @media (min-width: 600px) and (max-width: 900px) {
