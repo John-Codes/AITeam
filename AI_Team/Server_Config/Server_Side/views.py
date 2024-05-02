@@ -52,7 +52,6 @@ from datetime import datetime, timedelta
 from django.utils.translation import gettext as _
 stripe.api_key = settings.STRIPE_SECRET_KEY
 hashids = Hashids(salt = os.getenv("salt"), min_length=8)
-ai = ai_Handler() #so we dont delete the temp rag retriever.
 
 #STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
 
@@ -75,12 +74,13 @@ class ChatUIView(View):
     def __init__(self, *args, **kwargs):
         super(ChatUIView, self).__init__(*args, **kwargs)
         self.context_value = None
+        self.ai = ai_Handler()
         #self.ollama = OllamaRag()
 
         #Gets the conversation context
     def get(self, request, *args, **kwargs):
         #chat = Chat_history()
-        ai = ai_Handler()
+        
         valid_contexts = ["main", "subscription", "panel-admin"]
         titles = {"main": [_('EFEXZIUM'), _('AI Team Chat')], "subscription": [_('Subscriptions'), _('AI Team Subscriptions')], "panel-admin": [_('Create your own page'), _('AI Team Page Builder')]}
         page_data = DataSaver()
@@ -112,6 +112,7 @@ class ChatUIView(View):
 
         # if the context is pre defined in a file
         else:
+            messages = self.ai.static_messages(self.context_value)
             user_id = request.user.id
             site_exists = page_data.check_site(user_id)
 
@@ -128,7 +129,8 @@ class ChatUIView(View):
                     'header': titles[self.context_value][1],
                     'context_value': self.context_value,
                     'valid_contexts': valid_contexts,
-                    'site_exists': site_exists
+                    'site_exists': site_exists,
+                    'static_messages': messages
                 }
                 
                 if site_exists:
@@ -160,17 +162,13 @@ class ChatUIView(View):
         if pdf_file != 'no path' and upload_succes:
             request.session['temp_context_chat'] = pdf_file
             #ollama.add_pdf_to_new_temp_rag(temp_context_chat)
-            ai.create_temp_rag_with_a_pdf(pdf_file)
+            self.ai.create_temp_rag_with_a_pdf(pdf_file)
             response_html += render_html('chat_messages/ia_message.html', upload_succes)
         elif pdf_file == 'no path':
             response_html += render_html('chat_messages/ia_message.html', upload_succes)
         if action == 'cancel_subscription':
             response_html += render_html('chat_messages/cancel.html', '')
 
-        # Manejar plantillas de mensajes
-        if template_name:
-            template_response = self.handle_template_messages(request, template_name)
-            response_html += template_response.get('template_message_div', '')
 
         # Si hay una respuesta de la IA, procesarla
         if phase == 'ai_response':
@@ -199,10 +197,7 @@ class ChatUIView(View):
             
             if context_ia not in ["main", "subscription", "panel-admin"]:
                 context_ia = context_ia.split('Uptc?to=')[-1].rstrip('$')
-            # else: 
-            #     #Check_Cuestion(user_message)
-            #     chat.add_user_message(user_message)
-            #     ai_response = ollama.query_ollama(chat.get_messages())
+
 
             if context_ia == 'panel-admin':
                 reading = DataSaver()#converts to from Json to dic
@@ -215,10 +210,10 @@ class ChatUIView(View):
             if request.session.get('temp_context_chat', False):
                 #del request.session['temp_context_chat']
                 #ai_response = ollama.query_temp_rag_single_question(user_message)
-                ai_response = ai.call_ai_temp_rag(user_message)
+                ai_response = self.ai.call_ai_temp_rag(user_message)
             else:
                 #ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
-                ai_response = ai.call_router(user_message,context_ia)
+                ai_response = self.ai.call_router(user_message,context_ia)
             
         if request.session.get('send_us_email', False):
             # Handle email sending logic
@@ -244,6 +239,7 @@ class ChatUIView(View):
 
 @csrf_exempt
 def stream_chat(request):
+    ai = ai_Handler
     if request.method == 'POST':        
         chat_ollama = OllamaRag()
         data = json.loads(request.body)
