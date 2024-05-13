@@ -1,0 +1,30 @@
+{
+  "name": "aumatic_test",
+  "version": "1.0.0",
+  "description": "cypress testing buttons of django project of app AI_Team to handle errors and development for productions",
+  "main": "index.js",
+  "scripts": {
+    "test": "cytest",
+    "cypress:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/John-Codes/AITeam.git"
+  },
+  "keywords": [
+    "python",
+    "django",
+    "cypress",
+    "test",
+    "Front-end"
+  ],
+  "author": "Santiago Reina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/John-Codes/AITeam/issues"
+  },
+  "homepage": "https://github.com/John-Codes/AITeam#readme",
+  "devDependencies": {
+    "cypress": "^13.1.0"
+  }
+}

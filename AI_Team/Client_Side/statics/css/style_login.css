@@ -1,0 +1,283 @@
+body { 
+  background-image: url('../img/hubble.svg');
+  background-color: #f4f4f4;
+  margin: 20px 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+ }
+
+.full-screen-container {
+    flex-wrap: wrap;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    width: 100vw;
+    padding: 0 15%;
+}
+
+.top-content{
+  height: 20vh;
+  max-height: 5%;
+  width: 100%;
+}
+.form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    min-height: 60%;
+}
+.minimal-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0, 0, 0, 0.37);
+  border-radius: 10px;
+  box-shadow:  4px 24px rgba(0, 0, 0, 0.1);
+}
+.minimal-wrapper {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 10px 0;
+
+}
+
+.minimal-body{
+  display: flex;
+  flex-direction: column;
+  max-width: 512px;
+  margin: 0px auto 28px auto;
+  padding-top: 10px;
+  width: 314px;
+  gap: 10px;
+  align-items: center;
+
+}
+
+.glass-effect {  
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+ }
+ 
+ .glass-effect label {
+  color: #ffffff;
+}
+ .logo {
+  font-family:D-DIN-Medium, Arial, Verdana, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+  margin-bottom: 0px;
+  background: linear-gradient(to bottom, #ffffff 0%, #a3a3a3 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  text-align: center;
+ }
+ 
+ h2 {
+  font-family: D-DIN-Medium, Arial, Verdana, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px;
+  color: #f4f4f4;
+ }
+ 
+ .input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0;
+  width: 100%;
+ }
+ 
+ label, p {
+  display: flex;
+  justify-content: center;
+  font-family: D-DIN-Medium, Arial, Verdana, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin-bottom: 5px;
+  color: #f4f4f4;
+  width: 100%;
+ }
+ 
+ input[type="email"], 
+ input[type="text"],
+ input[type="password"] {
+  width: 295px;
+  min-width: 250px;
+  padding: 5px;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  font-size: 16px;
+  background: transparent;
+  color: #f4f4f4;
+  box-sizing: border-box;
+ }
+ 
+ input[type="email"]:focus, 
+ input[type="text"]:focus,
+ input[type="password"]:focus {
+  border: solid;
+  border-color: #3778a3;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+ }
+ 
+ .button.is-dark {
+  width: 50%;
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  transition: 0.3s;
+  margin: 0 auto;
+  display: block;
+  font-size: 16px;
+  padding: 7px 10px;
+ }
+ 
+ .button.is-dark:hover {
+  background-color: #222;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  cursor: pointer;
+ }
+ 
+ .button.is-link {
+  font-size: 16px;
+  display: block;
+  margin-top: 5px;
+  background-color: transparent !important;
+  color: #3498db !important;
+ }
+
+ .chat-header {
+  width: 100%;
+  background: transparent;
+}
+
+.chat-title {  
+  font: 16px/30px "D-DIN-Medium", Arial, Verdana, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #ffffff;    
+    position: absolute;
+    left: 50%;
+    letter-spacing: 3px;
+    word-spacing: 3px;
+    font-size: 40px; 
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #ffffff 0%, #a3a3a3 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: none;
+  
+}
+
+
+h2.reset-styles {
+  margin: 0;        
+  padding: 0;       
+  font-size: 1em;   
+  font-weight: normal;  
+  color: inherit;   
+  text-transform: none; 
+  background: none; 
+  border: none;     
+  text-decoration: none; 
+  
+}
+
+.card-transparent-background {
+  background: transparent;
+  border: none; 
+}
+
+.card-transparent-background .card-body {
+  background: transparent; 
+  color: #fff; 
+}
+
+.notification.is-gray {
+    background-color: #454141; /* Color gris claro */
+    color: #ffffff; /* Color del texto */
+}
+/* Estilos personalizados para formulario de restablecimiento de contraseña */
+.form-column-layout label,
+.form-column-layout input {
+    display: block; /* Asegura que los elementos se muestren en bloques, uno debajo del otro */
+    width: 100%; /* Asegura que los elementos ocupen todo el ancho disponible */
+    margin-bottom: 10px; /* Añade un margen en la parte inferior para separar los elementos */
+}
+
+@media (max-width: 575px) {
+
+    .chat-title {
+        font-size: 15px;
+    }
+  }
+
+@media (min-width: 576px) and (max-width: 767px) {
+ .form-content {
+     height: 75%;
+     width: 80%;
+ }
+
+ label, p, .input[type="email"], input[type="text"], input[type="password"] {
+    font-size: 14px;
+ }
+
+ .chat-title {
+     position: relative;
+     font-size: 30px;
+ }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+ .form-content {
+     height: 80%;
+     width: 80%;
+ }
+.minimal-body{
+  min-width: 512px;
+  gap: 10px;
+}
+  label,  p,  input[type="email"],  input[type="text"],  input[type="password"] {
+    font-size: 14px;
+ }
+}
+
+@media (min-width: 992px) {
+ .form-content {
+     height: 80%;
+     width: 90%;
+     padding: 1% 4% 4% 4%;
+ }
+
+ label, p, input[type="email"], input[type="text"], input[type="password"] {
+    font-size: 16px;
+ }
+
+ .minimal-body{
+  min-width: 512px;
+  gap: 10px;
+}
+}
+

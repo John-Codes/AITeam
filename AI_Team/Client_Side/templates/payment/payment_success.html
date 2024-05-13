@@ -1,0 +1,25 @@
+{% extends "registration/base_auth.html" %}
+
+{% block title %}Payment Successful{% endblock %}
+{% block logo %} Payment Successful{% endblock %}
+{% block header %}
+Payment Successful for {{ plan.name }}
+{% endblock %}
+
+{% block form_content %}
+<div class="card card-transparent-background">
+    <div class="card-body">
+        <h5 class="card-title">Payment Successful</h5>
+        <p class="card-text">Thank you for your payment for {{ plan.name }}. Your subscription plan has been activated.</p>
+        
+        <!-- Actualización para mostrar el precio y otros detalles del plan -->
+        <p>Price: $ {{ plan.price }}</p>
+        <!-- Puedes añadir más detalles del plan aquí si es necesario -->
+
+        <a href="{% url 'ai-team' context='subscription' %}" class="btn btn-primary">Go to AI Team</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_content %}
+{% endblock %}

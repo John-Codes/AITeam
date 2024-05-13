@@ -1,0 +1,432 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-30 16:16-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\Client_Side\templates\ai-team.html:13
+msgid " Artificial Intelligence Services by Ai-team"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:41
+#: .\Client_Side\templates\subscription.html:39
+msgid "Home"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:44
+msgid "Logout"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:46
+#: .\Client_Side\templates\subscription.html:13
+#: .\Server_Config\Server_Side\views.py:63
+msgid "Subscriptions"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:53
+#: .\Client_Side\templates\subscription.html:42
+msgid "Login"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:54
+#: .\Client_Side\templates\ai-team.html:60
+msgid "FAQs"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:55
+#: .\Client_Side\templates\ai-team.html:61
+msgid "Contact Us"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:56
+#: .\Client_Side\templates\ai-team.html:62
+msgid "About Us"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:82
+msgid "An AI Team is writing"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:88
+msgid "Website creation service with"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:88
+msgid ""
+"24/7 customer service better than a human being with AI like gpt 4. "
+"Integration with database and systems of your website or app. Create an AI "
+"bot in 5 minutes that sends emails and processes payments and orders."
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:91
+msgid "Welcome to AI Team"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:91
+msgid "Ask your questions about our services"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:104
+msgid "Information about your subscription:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:105
+msgid "you current plan:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:106
+msgid "Subscription Status:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:107
+msgid "Pay with:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:108
+msgid "the plan expires:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:109
+msgid "Subscribed from Date:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:110
+msgid "if you wanna upgrade your current subscription visit the"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:110
+#: .\Client_Side\templates\ai-team.html:128
+msgid "Subscription"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:110
+#: .\Client_Side\templates\ai-team.html:128
+msgid "page"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:116
+msgid "Cancel Subscription"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:124
+msgid ""
+"We are thrilled to introduce our range of subscription plans tailored to "
+"enhance your experience on our website. These plans are designed to provide "
+"you with exclusive benefits and access to premium features, ensuring you get "
+"the most out of your online journey with us:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:125
+msgid "Entry Plan"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:126
+msgid "Premium Plan"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:127
+msgid "Enterprise Plan"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:128
+msgid "you can get any of this subscriptions en the next page:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:130
+msgid ""
+"if you wanna know about each plan, only send a message and AI Team response "
+"you"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:141
+msgid ""
+"Welcome to our AI Chat Page Creation tool! With this tool, you can craft a "
+"unique AI Chat Experience by providing information through uploaded files "
+"(PDF or TXT). Here's how to proceed:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:143
+msgid "1 Upload Your Content:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:144
+msgid ""
+"Prepare a PDF or TXT file including the following details for your custom AI "
+"Chat Page:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:145
+msgid "Page Title: The name shown on the browser tab."
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:146
+msgid "Page Header: The main title or heading on your page."
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:147
+msgid "Navigation Links: List of navigation items and their URLs."
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:148
+msgid "Default Chat Message: A greeting message for visitors."
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:149
+msgid "Products: Detailed descriptions of your products."
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:150
+msgid ""
+"Context Information: Any additional information, questions, and answers you "
+"want the AI to use for personalized responses."
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:152
+msgid "2 Images:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:153
+msgid ""
+"For product images, upload each image with the name matching exactly with "
+"the product name described in your file."
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:155
+msgid "3 Consult and Monitor:"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:156
+msgid ""
+"Use this chat to consult the details of your site and monitor the progress. "
+"Once your content is processed, a custom link to your AI Chat Page will be "
+"available."
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:158
+msgid ""
+"Remember, the AI will respond based on the context and information provided "
+"in your uploaded files, ensuring a tailored experience for your visitors. "
+"We're here to help you every step of the way!"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:160
+msgid ""
+"Get started now by uploading your file and let's create an amazing AI Chat "
+"Experience together!"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:193
+msgid "Send"
+msgstr ""
+
+#: .\Client_Side\templates\ai-team.html:198
+msgid "Upload"
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\cancel.html:5
+msgid "Yes"
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\cancel.html:5
+msgid "or"
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\cancel.html:5
+msgid "No"
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\contact_us.html:4
+msgid "To contact us, send us your email in the next message."
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\image_message.html:4
+msgid "Status of the image: "
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\image_message.html:6
+msgid ""
+"Remember that the name of the file has to be the same as the name of the "
+"product and it must be in png format, here is the your products names"
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\text_message.html:5
+msgid "Status of the text: "
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\text_message.html:7
+msgid "submit text"
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\text_message.html:14
+msgid "We've found enough keywords to create your site"
+msgstr ""
+
+#: .\Client_Side\templates\chat_messages\text_message.html:16
+msgid "We haven't found enough keywords to create your site"
+msgstr ""
+
+#: .\Client_Side\templates\registration\password_reset_complete.html:5
+msgid "Password Reset Complete"
+msgstr ""
+
+#: .\Client_Side\templates\registration\password_reset_complete.html:9
+msgid "Your password has been set successfully. You can now"
+msgstr ""
+
+#: .\Client_Side\templates\registration\password_reset_complete.html:9
+msgid "log in"
+msgstr ""
+
+#: .\Client_Side\templates\registration\password_reset_complete.html:9
+msgid "using your new password."
+msgstr ""
+
+#: .\Client_Side\templates\registration\password_reset_confirm.html:5
+#: .\Client_Side\templates\registration\password_reset_confirm.html:12
+msgid "Set New Password"
+msgstr ""
+
+#: .\Client_Side\templates\registration\password_reset_done.html:5
+msgid "Email Sent"
+msgstr ""
+
+#: .\Client_Side\templates\registration\password_reset_done.html:9
+msgid "An email has been sent with instructions to reset your password."
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:43
+msgid "Singup"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:44
+msgid "Reset Password"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:69
+msgid "Special Code"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:75
+msgid "Send Code"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:88
+msgid "Product Name"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:89
+msgid "Plan Name"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:90
+msgid "Price"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:91
+msgid "Subscription Status"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:93
+msgid "Features"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:100
+msgid "Target Market"
+msgstr ""
+
+#: .\Client_Side\templates\subscription.html:112
+msgid "Pay with PayPal"
+msgstr ""
+
+#: .\Logic\Charge_Context.py:59
+msgid "Total size including existing data exceeds the 100 MB limit"
+msgstr ""
+
+#: .\Logic\Charge_Context.py:72
+msgid "New context created successfully."
+msgstr ""
+
+#: .\Logic\Charge_Context.py:74
+msgid "context updated successfully."
+msgstr ""
+
+#: .\Logic\Charge_Context.py:86
+msgid " and site generated successfully."
+msgstr ""
+
+#: .\Logic\Charge_Context.py:88
+msgid "Login required"
+msgstr ""
+
+#: .\Logic\Charge_Context.py:90
+msgid "Error saving context, an email has send to support: {str(e)}"
+msgstr ""
+
+#: .\Logic\Charge_Context.py:133
+msgid "Saved Successfully"
+msgstr ""
+
+#: .\Server_Config\Server_Side\forms.py:30
+msgid "There are no registered users with this email."
+msgstr ""
+
+#: .\Server_Config\Server_Side\forms.py:36
+msgid "Email"
+msgstr ""
+
+#: .\Server_Config\Server_Side\forms.py:41
+msgid "Password"
+msgstr ""
+
+#: .\Server_Config\Server_Side\forms.py:53
+msgid "This account is inactive."
+msgstr ""
+
+#: .\Server_Config\Server_Side\views.py:63
+msgid "EFEXZIUM"
+msgstr ""
+
+#: .\Server_Config\Server_Side\views.py:63
+msgid "AI Team Chat"
+msgstr ""
+
+#: .\Server_Config\Server_Side\views.py:63
+msgid "AI Team Subscriptions"
+msgstr ""
+
+#: .\Server_Config\Server_Side\views.py:63
+msgid "Create your own page"
+msgstr ""
+
+#: .\Server_Config\Server_Side\views.py:63
+msgid "AI Team Page Builder"
+msgstr ""
+
+#: .\Server_Config\Server_Side\views.py:251
+#: .\Server_Config\Server_Side\views.py:270
+msgid ""
+"There was an error processing your form. Please check the details and try "
+"again."
+msgstr ""
+
+#: .\Server_Config\settings.py:82
+msgid "English"
+msgstr ""
+
+#: .\Server_Config\settings.py:83
+msgid "Español"
+msgstr ""

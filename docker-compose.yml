@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  aiteam_app:
+    image: aiteam_img
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ollama
+    networks:
+      - aiteam-network
+    restart: always
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    networks:
+      - aiteam-network
+    volumes:
+      - ollama_data:/home/ollama/.ollama
+
+networks:
+  aiteam-network:
+    driver: bridge
+
+volumes:
+  ollama_data:

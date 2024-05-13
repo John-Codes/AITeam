@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<div class="message-left glass">
+    <p class="message-content">
+        {%trans "Status of the text: "%} {{ message.status }} <br>
+
+        {% trans "submit text" %} <br>
+
+        {%if message.extract%}
+            {{message.extract}}
+        {%endif%}
+        <br>
+        {% if message.keywords == True %}
+            <strong>{% trans "We've found enough keywords to create your site" %}</strong>
+        {% else %}
+            <strong>{% trans "We haven't found enough keywords to create your site" %}</strong>
+        {% endif %}
+    </p>
+</div>
+<div class="clearfix"></div>

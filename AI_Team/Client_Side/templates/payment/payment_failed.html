@@ -1,0 +1,20 @@
+{% extends "registration/base_auth.html" %}
+
+{% block title %}Payment Failure{% endblock %}
+{% block logo %} Payment Failure{% endblock %}
+{% block header %}
+Payment Failure
+{% endblock %}
+
+{% block form_content %}
+<div class="card card-transparent-background">
+    <div class="card-body">
+        <h5 class="card-title">Payment Failure</h5>
+        <p class="card-text">Sorry, there was an issue with your payment. Your subscription plan could not be activated.</p>
+        <a href="{% url 'subscription' %}" class="btn btn-primary">Back to subscription</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_content %}
+{% endblock %}
