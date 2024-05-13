@@ -4,7 +4,7 @@ from django.views.generic.base import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap
 from . import views
-from .views import stream_chat
+from .views import stream_chat, handle_template_messages
 sitemaps = {
     'mymodel': StaticViewSitemap,
 }
@@ -18,7 +18,8 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
     path('chat/<str:context>/', views.ChatUIView.as_view(), name='ai-team'),
-    path('stream_chat/', stream_chat, name='stream_chat'),
+    path('stream-chat/', stream_chat, name='stream_chat'),
+    path('static-messages/', handle_template_messages, name = 'static_messages'),
     path('signup/', views.SignupView.as_view(), name='signup'),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', views.custom_logout, name='logout'),

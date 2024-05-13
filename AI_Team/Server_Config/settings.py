@@ -13,9 +13,9 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os
-__import__('pysqlite3')
+__import__('sqlite3')
 import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('sqlite3')
     
 
 BASE_DIR = Path(__file__).resolve().parent.parent

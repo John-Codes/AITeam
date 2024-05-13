@@ -8,105 +8,132 @@
     <meta name="description" content="AI Team Chat: Gain insights and consult on our artificial intelligence services.">
     <meta name="keywords" content="EFEXZIUM, AI Team, AI, Team, Chat, Artificial Intelligence, Website creation, sitios web con IA, Create, clients, plans, Subscriptions, en, Home">
     <title>{% block title %} {% endblock %} - AI Team Chat Services</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 
     <link rel="stylesheet" href="{% static 'css/style_login.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/style_nav.css' %}">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 </head>
-<body >
-    <div class="row"><div class="chat-header d-flex justify-content-between  px-3 py-2 glass" style="align-items: start;justify-content: flex-start;">
-        <div class="nav-container d-flex align-items-center">
-            <!-- Asegúrate de que el checkbox tiene el id correcto -->
-            <input class="checkbox" type="checkbox" id="hamburgerToggle">
-            <!-- Vincula el label (hamburger-lines) con el checkbox mediante el atributo "for" -->
-            <label class="hamburger-lines" for="hamburgerToggle">
-                <i class="bi bi-list"></i>
-            </label>
-             <!-- Añade esta línea para el menú -->
-            <div class="menu-items glass"> <!-- Ajusta la posición vertical -->
-                <ul>
-                    <li cy-data="home-link"><a href="/es/chat/main/" title="Main page of AI Team Chat"><h2 class="reset-styles">Home</h2></a></li>
-
-                    
-                        <li cy-data="login-link"><a href="/es/login/" title="login to AI Team for more"><h2 class="reset-styles">Login</h2></a></li>
-                        <li><a href="{% url 'signup' %}" title="login to AI Team for more"><h2 class="reset-styles">Singup</h2></a></li>
-                        <li><h2 class="reset-styles"><a href="{% url 'password_reset' %}" data-template="faqs_messages" title="Reset password">Reset Password</a></h2></li>
-
-                </ul>
+<body>
+    <div class="full-screen-container">
+        <div class="column top-content">
+            <div class="chat-header glass">
+                <div class="nav-container d-flex align-items-center">
+                    <!-- Asegúrate de que el checkbox tiene el id correcto -->
+                    <input class="checkbox" type="checkbox" id="hamburgerToggle" />
+                    <!-- Vincula el label (hamburger-lines) con el checkbox mediante el atributo "for" -->
+                    <label class="hamburger-lines" for="hamburgerToggle">
+                        <i class="bi-list"></i>
+                    </label>
+                    <div class="menu-items glass"> <!-- Ajusta la posición vertical -->
+                        <ul>
+                            <li cy-data="home-link"><a href="/es/chat/main/" title="Main page of AI Team Chat"><h2 class="reset-styles">Home</h2></a></li>
+        
+                            
+                                <li cy-data="login-link"><a href="/es/login/" title="login to AI Team for more"><h2 class="reset-styles">Login</h2></a></li>
+                                <li><a href="{% url 'signup' %}" title="login to AI Team for more"><h2 class="reset-styles">Singup</h2></a></li>
+                                <li><h2 class="reset-styles"><a href="{% url 'password_reset' %}" data-template="faqs_messages" title="Reset password">Reset Password</a></h2></li>
+        
+                        </ul>
+                    </div>
+                    <h1 class="chat-title">EFEXZIUM =$=</h1> 
+                </div>
             </div>
-            <h1 class="chat-title">EFEXZIUM =$=</h1> 
         </div>
-    
-                
-    </div></div><br>
-    <div class="row" style="
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-">
-        <div class="glass-effect">
-            <div class="logo">{% block header %}{% endblock %}</div>
-            {% block form_content %}{% endblock %}
-            
-            {% block additional_content %}{% endblock %}
-        </div>
-        {% block additional_styles %}{% endblock %}
-    </div>
+        <div class="flex-container">            
+        
+            <div class="column form-content">
+                <div class="minimal-frame glass-effect">
+                    <div class="minimal-wrapper">
+                        <div class="minimal-body">
 
-    
-    
+                            <div class="logo">{% block header %}{% endblock %}</div>
+                            {% block form_content %}{% endblock %}
+                            
+                            {% block additional_content %}{% endblock %}
+                            {% block additional_styles %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        
+        </div>
+    </div>
 </body>
 <script>
-// base.html o un archivo JS incluido en base.html
-document.addEventListener('DOMContentLoaded', () => {
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', (event) => {
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-                const errorData = {
-                    url: window.location.href,
-                    errors: Array.from(form.querySelectorAll('.alert')).map(div => div.textContent.trim()),
-                    formData: new FormData(form)
-                };
-                fetch('{% url 'error_handler' %}', { // Sustituye con la ruta de tu servidor
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken') // Asegúrate de tener una función getCookie
-                    },
-                    body: JSON.stringify(errorData)
-                });
-            }
-        }, false);
+    document.addEventListener('DOMContentLoaded', () => {
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    const errorData = {
+                        url: window.location.href,
+                        errors: Array.from(form.querySelectorAll('.alert')).map(div => div.textContent.trim()),
+                        formData: new FormData(form),
+                        javaScriptErrors: [event.message], 
+                        filename: event.filename,
+                        lineno: event.lineno,
+                        colno: event.colno,
+                        timestamp: new Date().toISOString(),
+                        region: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        browser: navigator.userAgent,
+                    };
+                    console.log('error detectado')
+                    fetch('{% url 'error_handler' %}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCookie('csrftoken')
+                        },
+                        body: JSON.stringify(errorData)
+                    });
+                }
+            }, false);
+        });
     });
-});
-document.addEventListener("DOMContentLoaded", function() {
-
-    // Toggle hamburger menu.
-    const hamburgerToggle = document.querySelector("#hamburgerToggle");
-    const menuItems = document.querySelector(".menu-items");
-    const hamburgerIcon = document.querySelector(".hamburger-lines i");
-
-    hamburgerToggle.addEventListener("change", function() {
-
-      hamburgerIcon.className = this.checked ? 'bi bi-x-lg' : 'bi bi-list';
-
-        menuItems.style.transform = this.checked ? 'translateX(0)' : 'translateX(-100%)';
-    });
-});
-</script>
     
+    // Agregar un manejador de errores para capturar errores de JavaScript
+    window.addEventListener('error', function(event) {
+        const errorData = {
+            url: window.location.href,
+            errors: [event.message],
+            timestamp: new Date().toISOString(),
+            region: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            browser: navigator.userAgent,
+        };
+        fetch('{% url 'error_handler' %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(errorData)
+        });
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        const hamburgerToggle = document.querySelector("#hamburgerToggle");
+        const menuItems = document.querySelector(".menu-items");
+        const hamburgerIcon = document.querySelector(".hamburger-lines i");
+
+        hamburgerToggle.addEventListener("change", function() {
+            hamburgerIcon.className = this.checked ? 'bi bi-x-lg' : 'bi bi-list';
+            menuItems.style.transform = this.checked ? 'translateX(0)' : 'translateX(-100%)';
+        });
+    });
+</script>
+<script>
+    function closeAlert() {
+        var alertMessage = document.getElementById('alert-message');
+        if (alertMessage) {
+            alertMessage.style.display = 'none';
+        }
+    }
+</script>
 </html>
