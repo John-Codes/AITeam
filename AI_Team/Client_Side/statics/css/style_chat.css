@@ -1,15 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Asegura que el body ocupe al menos el 100% de la altura de la ventana */
+}
+
 body {
-    background-color: #181818;
-    
-    /* Imagen de fondo */
-    background-image: url('../img/hubble.jpg');
-    /* Tamaño de fondo: Esto garantiza que la imagen cubra todo el espacio disponible. */
-    background-size: 100% 100%;
-    background-repeat: no-repeat; 
-    background-position: top left; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     margin: 0; 
+    padding: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+    background-color: #181818;
+    background-image: url('../img/hubble.svg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center; 
+}
+
+.height-chat{
+    height: 100%;
 }
 .bi-list, .bi-x-lg{   
     font-size: 40px;
@@ -188,36 +201,34 @@ h2.reset-styles {
 }
 
 .chat-body {
-    margin-bottom: 50px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
     overflow-y: auto; 
-    height: calc(100vh - 200px);
+    height: calc(100vh - 160px);
 }
-.chat-body::-webkit-scrollbar{
-    width: 8px; /* Ancho del scrollbar */
-}
-
-.chat-body::-webkit-scrollbar-thumb{
-    background-color: rgba(255, 255, 255, 0.3); /* Color del thumb (barra) del scrollbar */
-    border-radius: 10px; /* Borde redondeado del thumb */
+/* Estilo básico para el scrollbar */
+.chat-body::-webkit-scrollbar {
+    width: 10px; /* Ancho del scrollbar */
 }
 
-.chat-body::-webkit-scrollbar-thumb:hover{
-    background-color: rgba(255, 255, 255, 0.5); /* Color del thumb al pasar el mouse */
+/* Estilo para el thumb (la parte que se desplaza) */
+.chat-body::-webkit-scrollbar-thumb {
+    background: gray; /* Color de fondo del thumb a gris */
+    border-radius: 10px; /* Bordes redondeados */
 }
 
-/* Estilo para el scrollbar en navegadores que soportan scrollbar-width (Firefox) */
-.chat-body{
-    scrollbar-width: thin; /* Ancho del scrollbar */
+/* Estilo para el track (la parte que no se desplaza) */
+.chat-body::-webkit-scrollbar-track {
+    background: black; /* Color de fondo del track a negro */
 }
 
-.chat-body::-webkit-scrollbar-thumb{
-    background-color: rgba(255, 255, 255, 0.3); /* Color del thumb (barra) del scrollbar */
-    border-radius: 10px; /* Borde redondeado del thumb */
+/* Estilo para el thumb al pasar el mouse */
+.chat-body::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color de fondo del thumb al pasar el mouse */
 }
 
-.chat-body::-webkit-scrollbar-thumb:hover{
-    background-color: rgba(255, 255, 255, 0.5); /* Color del thumb al pasar el mouse */
-}
+
 
 .modal-body {
     height: min-content;
@@ -244,7 +255,16 @@ h2.reset-styles {
     background: transparent;
     border: none;
 }
-.message-content,
+.message-content {  
+    color: #ffffff!important;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.message-content strong {
+    color: #ffffff!important;
+}
 table { 
     /*color: #1c1c1c;*/
     color: #ffffff;
@@ -296,13 +316,22 @@ table {
 
 
 .chat-footer {
-    width: 100%;  /* Asegura que ocupe todo el ancho */
-    position: fixed;
+    width: 70%;  
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
+    display: flex; 
     bottom: 0;
     left: 0;
+    position: relative; 
+    padding: 10px; 
 }
-
+.control.is-expanded {
+    flex-grow: 1; /* Asegura que el div del input crezca y ocupe el espacio disponible */
+    display: flex; /* Asegura que el div del input sea un contenedor flex */
+    flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
+    justify-content: center; /* Centra los elementos hijos verticalmente */
+}
 .footer-content,
 .footer-content-modal {
     max-width: 70%;
@@ -310,6 +339,10 @@ table {
     margin-right: auto;
     margin-top: 10px;  /* Espacio en la parte superior */
     padding-bottom: 5px;  /* Este espacio será el que separará el input del borde inferior */
+}
+
+.no-padding-footer{
+    padding: 0%!important;
 }
 
 .footer-content-modal {
@@ -363,60 +396,85 @@ table {
 .dot-3 {
     animation: dotAnimation 1s infinite 0.66s;
 }
-.formulary {
+
+/* Estilo para el contenedor del textarea */
+.textarea-container {
+    flex-grow: 1;
     display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    align-items: stretch;
-    width: 100%;
+    flex-direction: column;
+    justify-content: flex-end; 
+    overflow: hidden; 
 }
+
 .form_input {
-    flex-grow: 1; /* Esto permite que el input crezca y ocupe el espacio disponible */
+    flex-grow: 1;
     flex-basis: 0;
-    padding-left: 10px;
-    margin-right: 5px;
-    width: 80%;
-    height: 40px;
+    padding: 10px;
+    width: 100%;
+    height: auto; 
+    min-height: 50px; 
+    max-height: 200px;
     border-radius: 15px;
     margin-bottom: 5px;
-    background-color: black; /* Fondo negro */
-    border-color: gray; /* Cambia el color de borde al enfocar (azul claro) */
-    color: white; /* Letra blanca */
-    font-family: "Montserrat", Arial, sans-serif; /* Fuente de letra profesional (usando Montserrat como ejemplo) */
+    background-color: black;
+    border-color: gray;
+    color: white;
+    font-family: "Montserrat", Arial, sans-serif;
     transition: border 0.3s, box-shadow 0.3s;
-  }
+    resize: vertical; 
+    overflow: auto; 
+    overflow-y: auto;
+}
+
+
+/* Estilo para el contenedor de los botones */
+.buttons-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
   
 .form_input:focus {
     border-radius: 15px;
-    color: white; /* Letra blanca */
-    outline: none; /* Elimina el borde de resaltado predeterminado */
-    border-color: #3498db; /* Cambia el color de borde al enfocar (azul claro) */
+    color: white; 
+    outline: none; 
+    border-color: #3498db; 
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-    font-family: "Montserrat", Arial, sans-serif; /* Fuente de letra profesional (usando Montserrat como ejemplo) */
-    background-color: black; /* Fondo negro */
+    font-family: "Montserrat", Arial, sans-serif; 
+    background-color: black; 
   }
 
-  .btn-send {
+  .btn-send, .message {
     flex-basis: auto;
     margin-left: 5px;
     border-radius: 15px;
-    background-color: black; /* Fondo negro */
-    border-color: gray; /* Cambia el color de borde al enfocar (azul claro) */
+    background-color: black;
+    border-color: gray;
     margin-bottom: 5px;
-    color: white; /* Letra blanca */
-    font-family: "Montserrat", Arial, sans-serif; /* Fuente de letra profesional (usando Montserrat como ejemplo) */
+    color: white;
+    font-family: "Montserrat", Arial, sans-serif;
     transition: border 0.3s, box-shadow 0.3s;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-send i {
+    margin-right: 5px; 
 }
 
 .btn-send:hover {
     border-radius: 15px;
-    color: white; /* Letra blanca */
-    outline: none; /* Elimina el borde de resaltado predeterminado */
-    border-color: #3498db; /* Cambia el color de borde al enfocar (azul claro) */
+    color: white; 
+    outline: none; 
+    border-color: #3498db; 
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-    font-family: "Montserrat", Arial, sans-serif; /* Fuente de letra profesional (usando Montserrat como ejemplo) */
-    background-color: black; /* Fondo negro */
+    font-family: "Montserrat", Arial, sans-serif; 
+    background-color: black; 
 }
+
+
 
 .dynamic-modal .modal-dialog {
     min-height: 30%; /* Establece el tamaño mínimo */
@@ -442,13 +500,6 @@ table {
     
 }
 
-/* Media Queries para pantallas pequeñas */
-@media (max-width: 480px) {
-    .form_input, .btn-send {
-        width: 100%; /* Ambos elementos toman el ancho completo en dispositivos pequeños */
-        margin-right: 0;
-    }
-}
 
 :root {
     --leader: url('../img/leader.jpg');
@@ -506,42 +557,55 @@ table {
 } */ 
 
 /* Dispositivos móviles pequeños (<= 576px) */
-@media (max-width: 576px) {
-    .message-content {
-        font-size: 14px; /* Ajusta según tus necesidades */
+/* Para teléfonos móviles en modo vertical */
+@media (max-width: 480px) {
+    .chat-footer {
+        width: 100%;
+    }
+    .chat-body {
+        width: auto;
     }
     .chat-title {
-        position: relative;
-        font-size: 24px; /* Ajusta según tus necesidades */
+        font-size: 18px; /* Ajusta el tamaño de la fuente según sea necesario */
+    }
+    .message-content {
+        font-size: 14px; /* Ajusta el tamaño de la fuente según sea necesario */
+        
     }
 }
 
-/* Dispositivos móviles (<= 768px) */
-@media (max-width: 768px) {
-    .message-content {
-        font-size: 15px; /* Ajusta según tus necesidades */
+/* Para teléfonos móviles en modo horizontal y tablets en modo vertical */
+@media (min-width: 481px) and (max-width: 768px) {
+    .chat-body {
+        width: 100%;
     }
     .chat-title {
-        font-size: 28px; /* Ajusta según tus necesidades */
+        font-size: 28px; /* Ajusta el tamaño de la fuente según sea necesario */
+    }
+    .message-content {
+        font-size: 20px; /* Ajusta el tamaño de la fuente según sea necesario */
     }
 }
 
-/* Tablets (<= 992px) */
-@media (max-width: 992px) {
-    .message-content {
-        font-size: 16px; /* Ajusta según tus necesidades */
+/* Para tablets en modo horizontal y pantallas de escritorio pequeñas */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .chat-body {
+        width: 90%;
     }
     .chat-title {
-        font-size: 32px; /* Ajusta según tus necesidades */
+        font-size: 36px; /* Ajusta el tamaño de la fuente según sea necesario */
+    }
+    .message-content {
+        font-size: 20px; /* Ajusta el tamaño de la fuente según sea necesario */
     }
 }
 
-/* Pantallas grandes (>= 992px) */
-@media (min-width: 992px) {
-    .message-content {
-        font-size: 18px; /* Ajusta según tus necesidades */
-    }
+/* Para pantallas de escritorio medianas y grandes */
+@media (min-width: 1025px) {
     .chat-title {
-        font-size: 40px; /* Ya tienes este valor establecido en tus estilos */
+        font-size: 40px; /* Ajusta el tamaño de la fuente según sea necesario */
+    }
+    .message-content {
+        font-size: 20px; /* Ajusta el tamaño de la fuente según sea necesario */
     }
 }

@@ -20,7 +20,8 @@ import fitz
 from semantic_text_splitter import CharacterTextSplitter, HuggingFaceTextSplitter
 from tokenizers import Tokenizer
 import re 
-ollama_url = os.getenv('OLLAMA_BASE_URL', "http://localhost:11434")  #'http://ollama:11434
+#ollama_url = os.getenv('OLLAMA_BASE_URL', "http://localhost:11434")  #'http://ollama:11434
+ollama_url = "http://localhost:11434"
 print('config_ollama',ollama_url)
 # Configure the Ollama client with the obtained URL
 ollama_api = ollama.Client(host=ollama_url)
@@ -259,21 +260,23 @@ class OllamaRag:
         stream = ollama_api.chat(
         model='mistral',
         messages=messages,
-        stream=False,)
+        stream=False)
         
         print(stream['message']["content"])
         return stream['message']["content"]
         
     def stream_query_ollama(self, messages):
-        stream = ollama_api.chat(
-        model='mistral',
+        chat = ollama_api.chat(
+        model='qwen:0.5b',
         messages=messages,
-        stream=True,)
-        
-        
-        for chunk in stream:
-            print(chunk['message']['content'], end='', flush=True)
-            yield chunk['message']['content']
+        stream=True)
+        try:
+            for chunk in chat:
+                # print(chunk)
+                print(chunk['message']['content'], end='', flush=True)
+                yield chunk['message']['content']
+        except Exception as e:
+            print(e)
 
 
 

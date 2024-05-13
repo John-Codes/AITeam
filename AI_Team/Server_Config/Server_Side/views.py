@@ -52,7 +52,6 @@ from datetime import datetime, timedelta
 from django.utils.translation import gettext as _
 stripe.api_key = settings.STRIPE_SECRET_KEY
 hashids = Hashids(salt = os.getenv("salt"), min_length=8)
-ai = ai_Handler() #so we dont delete the temp rag retriever.
 
 #STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
 
@@ -75,17 +74,19 @@ class ChatUIView(View):
     def __init__(self, *args, **kwargs):
         super(ChatUIView, self).__init__(*args, **kwargs)
         self.context_value = None
+        self.ai = ai_Handler()
         #self.ollama = OllamaRag()
 
         #Gets the conversation context
     def get(self, request, *args, **kwargs):
         #chat = Chat_history()
-        ai = ai_Handler()
+        
         valid_contexts = ["main", "subscription", "panel-admin"]
         titles = {"main": [_('EFEXZIUM'), _('AI Team Chat')], "subscription": [_('Subscriptions'), _('AI Team Subscriptions')], "panel-admin": [_('Create your own page'), _('AI Team Page Builder')]}
         page_data = DataSaver()
         
         if request.session.get('temp_context_chat', False):
+            print(request.session.get('temp_context_chat', False))
             delete_temp_pdfs(request.session['temp_context_chat'])
             del request.session['temp_context_chat']
         
@@ -112,6 +113,7 @@ class ChatUIView(View):
 
         # if the context is pre defined in a file
         else:
+            messages = self.ai.static_messages(self.context_value)
             user_id = request.user.id
             site_exists = page_data.check_site(user_id)
 
@@ -128,7 +130,8 @@ class ChatUIView(View):
                     'header': titles[self.context_value][1],
                     'context_value': self.context_value,
                     'valid_contexts': valid_contexts,
-                    'site_exists': site_exists
+                    'site_exists': site_exists,
+                    'static_messages': messages
                 }
                 
                 if site_exists:
@@ -160,17 +163,13 @@ class ChatUIView(View):
         if pdf_file != 'no path' and upload_succes:
             request.session['temp_context_chat'] = pdf_file
             #ollama.add_pdf_to_new_temp_rag(temp_context_chat)
-            ai.create_temp_rag_with_a_pdf(pdf_file)
+            self.ai.create_temp_rag_with_a_pdf(pdf_file)
             response_html += render_html('chat_messages/ia_message.html', upload_succes)
         elif pdf_file == 'no path':
             response_html += render_html('chat_messages/ia_message.html', upload_succes)
         if action == 'cancel_subscription':
             response_html += render_html('chat_messages/cancel.html', '')
 
-        # Manejar plantillas de mensajes
-        if template_name:
-            template_response = self.handle_template_messages(request, template_name)
-            response_html += template_response.get('template_message_div', '')
 
         # Si hay una respuesta de la IA, procesarla
         if phase == 'ai_response':
@@ -181,14 +180,6 @@ class ChatUIView(View):
             return JsonResponse({"error": "Invalid request"})
 
         return JsonResponse({'combined_response': response_html})
-    
-    def handle_template_messages(self, request, template_name):
-        response_data = {}
-        response_data['template_message_div'] = render_html(f'chat_messages/{template_name}.html', '')
-        if template_name == 'contact_us':
-            request.session['send_us_email'] = True            
-        time.sleep(2)
-        return response_data
 
     def handle_ai_response(self, request, user_message):
         response_data = {}
@@ -207,10 +198,7 @@ class ChatUIView(View):
             
             if context_ia not in ["main", "subscription", "panel-admin"]:
                 context_ia = context_ia.split('Uptc?to=')[-1].rstrip('$')
-            # else: 
-            #     #Check_Cuestion(user_message)
-            #     chat.add_user_message(user_message)
-            #     ai_response = ollama.query_ollama(chat.get_messages())
+
 
             if context_ia == 'panel-admin':
                 reading = DataSaver()#converts to from Json to dic
@@ -223,10 +211,10 @@ class ChatUIView(View):
             if request.session.get('temp_context_chat', False):
                 #del request.session['temp_context_chat']
                 #ai_response = ollama.query_temp_rag_single_question(user_message)
-                ai_response = ai.call_ai_temp_rag(user_message)
+                ai_response = self.ai.call_ai_temp_rag(user_message)
             else:
                 #ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
-                ai_response = ai.call_router(user_message,context_ia)
+                ai_response = self.ai.call_router(user_message,context_ia)
             
         if request.session.get('send_us_email', False):
             # Handle email sending logic
@@ -252,18 +240,34 @@ class ChatUIView(View):
 
 @csrf_exempt
 def stream_chat(request):
+    ai = ai_Handler()
     if request.method == 'POST':        
         chat_ollama = OllamaRag()
         data = json.loads(request.body)
         # Acceder al mensaje usando la clave 'content'
         message = data.get('content', None)
-        
+
+        print(message)
         messages = ai.call_router_async(message, 'main')
         
         return StreamingHttpResponse(chat_ollama.stream_query_ollama(messages), content_type='text/event-stream')
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+@csrf_exempt
+def handle_template_messages(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        template_name = data.get('template_name', None)
+        if template_name:
+            response_data = {}
+            response_data['template_message_div'] = render_html(f'chat_messages/{template_name}.html', '')
+            if template_name == 'contact_us':
+                request.session['send_us_email'] = True            
+            time.sleep(2)
+            return JsonResponse(response_data)
+        else:
+            return JsonResponse({"error": "template_name not provided"}, status=400)
 
     # Class to handle the form of Reset Password
 class PasswordResetView(PasswordResetView):
@@ -285,7 +289,7 @@ class PasswordResetView(PasswordResetView):
         """
         for field, errors in form.errors.items():
             for error in errors:
-                messages.error(self.request, f"Error en el campo '{field}': {error}")
+                messages.error(self.request, f"Error in {field}: {error}")
         return self.render_to_response(self.get_context_data(form=form))
 
 # Handle the form to create an cliente account 
@@ -296,17 +300,18 @@ class SignupView(CreateView):
     
     def form_invalid(self, form):
         error_details = ''
+        fields = {'password1': 'password', 'password2': 'confirm password'}
         for field, errors in form.errors.items():
             for error in errors:
-                error_message = f"Error in field '{field}': {error}"
+                error_message = f"Error in {fields.get(field, field)}: {error}"
                 error_details += error_message + '\n'
 
         if error_details:
-            notice_error_forms(f"Signup Form Error: \n{error_details}")
+            email_contact =form.cleaned_data.get('email')
+            notice_error_forms(f"Signup Form Error: \n{error_details}", email_contact, 'Signup')
 
-        messages.error(self.request, _('There was an error processing your form. Please check the details and try again.'))
+        messages.error(self.request, error_details)
         return super().form_invalid(form)
-
 class CustomLoginView(LoginView):
     form_class = CustomLoginForm
     template_name = 'registration/login.html'
@@ -319,11 +324,13 @@ class CustomLoginView(LoginView):
             for error in errors:
                 error_message = f"Error in field '{field}': {error}"
                 error_details += error_message + '\n'
+                messages.error(self.request, 'error in both fields: ' + error)
 
         if error_details:
-            notice_error_forms(f"Login Form Error: \n{error_details}")
+            email_contact =form.cleaned_data.get('username')
+            notice_error_forms(f"Login Form Error: \n{error_details}", email_contact, 'Login')
 
-        messages.error(self.request, _('There was an error processing your form. Please check the details and try again.'))
+        
         return super().form_invalid(form)
 
 
@@ -339,6 +346,7 @@ class Subscription(View):
         Render the subscription page with all plan details.
         """
         plans = SubscriptionDetail.objects.filter(name__in=["Basic AI Team Subscription", "Premium AI Team Subscription" ])
+        print('plans',plans)
         for plan in plans:
             plan.features_list = json.loads(plan.features_list)
             plan.market_place = json.loads(plan.market_place)
@@ -347,7 +355,7 @@ class Subscription(View):
             "plans": plans,  # Cambiado a "plans" para que sea más claro en el template
             "user": request.user,
             'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY,
-        } 
+        }
         
         return render(request, self.template_name, context)
     
@@ -534,7 +542,6 @@ def subscription_list_view(request, *args, **kwargs):
         cancel_message = cancel_subscription(request, cancel_order_id)
 
     if table:
-        print(table)
         if list_all == 'clients':
             columns = ['email','subscription_detail__plan_name', 'order_id', 'status_subscription', 'next_date_pay', 'date_subscription']
             subscriptions = table.objects.all()
@@ -565,6 +572,8 @@ def error_handler(request):
     print('error handler')
     if request.method == 'POST':
         error_data = request.json
-        notice_error_forms(error_data)
+        email = error_data.get('email')
+        url = error_data.get('url')
+        notice_error_forms(error_data, email, url, side = 'Client Side')
         return JsonResponse({'status': 'error logged'})
     return JsonResponse({'status': 'error'}, status=400)

@@ -1,6 +1,5 @@
 #CONTEXT MESSAGES = PAGE STATIC MESSAGES
 from AI_Team.Logic.context_messages import CONTEXT_MESSAGES
-
 class Chat_history:
     
 
@@ -22,6 +21,6 @@ class Chat_history:
     def add_system_message(self,prompt):
         self.messages.append({"role": "system", "content": prompt})
     def set_page_static_messages(self,pagemessages):
-        self.messages.append(dict[pagemessages][0])
-        self.messages.append(dict[pagemessages][1])
+        self.messages.append(CONTEXT_MESSAGES[pagemessages][0])
+        self.messages.append(CONTEXT_MESSAGES[pagemessages][1])
         self.messages.append(pagemessages)

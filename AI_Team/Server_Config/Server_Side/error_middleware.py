@@ -29,17 +29,17 @@ class ErrorHandlingMiddleware:
 
         # Intentar obtener el ID del usuario si está autenticado
         user = getattr(request, 'user', None)
-        if user and user.is_authenticated:
-            error_message += f"User INFO: {user.email}\n"
-
+        try:
+            email_contact = user.email
+        except:
+            email_contact= "user no authenticate"
         # Datos del POST si el método es POST
         if request.method == 'POST':
             post_data = request.POST if request.POST else request.body
             error_message += f"Post Data: {post_data}\n"
 
         # Enviar error por correo electrónico
-        print(error_message)  # Opcional, para depuración
-        notice_error_forms(error_message)
+        notice_error_forms(error_message, user.email, request.path)
 
 
         # Puedes decidir qué hacer a continuación: 

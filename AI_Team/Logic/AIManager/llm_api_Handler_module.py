@@ -45,7 +45,9 @@ class ai_Handler:
         self.ai.add_pdf_to_new_temp_rag(pdfdirectory)
 
 
-    
+    def static_messages(self, context):
+        self.messages.set_page_static_messages(context)
+        return self.messages
 
     
     
