@@ -267,7 +267,7 @@ class OllamaRag:
         
     def stream_query_ollama(self, messages):
         chat = ollama_api.chat(
-        model='qwen:0.5b',
+        model='llama3',
         messages=messages,
         stream=True)
         try:

@@ -39,7 +39,7 @@ class ErrorHandlingMiddleware:
             error_message += f"Post Data: {post_data}\n"
 
         # Enviar error por correo electrónico
-        notice_error_forms(error_message, user.email, request.path)
+        notice_error_forms(error_message, email_contact, request.path)
 
 
         # Puedes decidir qué hacer a continuación: 

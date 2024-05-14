@@ -24,6 +24,7 @@ from AI_Team.Logic.Data_Saver import DataSaver
 from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from AI_Team.Logic.Charge_Context import Charge_Context
+from AI_Team.Logic.chat_history_view_utils  import validate_request_data, get_chat_history_from_session, update_session_with_chat_history
 from AI_Team.Logic.Chat.pdf_handling import *
 from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
 
@@ -240,17 +241,15 @@ class ChatUIView(View):
 
 @csrf_exempt
 def stream_chat(request):
-    ai = ai_Handler()
+    # ya no es necesario ai_Handler para eso es el endpoint
+    #ai = ai_Handler()
     if request.method == 'POST':        
         chat_ollama = OllamaRag()
         data = json.loads(request.body)
         # Acceder al mensaje usando la clave 'content'
-        message = data.get('content', None)
-
-        print(message)
-        messages = ai.call_router_async(message, 'main')
+        list_messages = data.get('list_messages', None)
         
-        return StreamingHttpResponse(chat_ollama.stream_query_ollama(messages), content_type='text/event-stream')
+        return StreamingHttpResponse(chat_ollama.stream_query_ollama(list_messages), content_type='text/event-stream')
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
@@ -269,7 +268,40 @@ def handle_template_messages(request):
         else:
             return JsonResponse({"error": "template_name not provided"}, status=400)
 
-    # Class to handle the form of Reset Password
+
+
+@csrf_exempt
+def handle_chat_history(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            validated_data, error_response = validate_request_data(data)
+            
+            if error_response:
+                return error_response
+            
+            action, current_chat, message = validated_data
+            
+            chat_history = get_chat_history_from_session(request)
+            
+            # Set current chat and reset history if the user has changed
+            chat_history.set_current_chat(current_chat)
+            
+            if action == 'add_user_message':
+                chat_history.add_user_message(message)
+            elif action == 'add_system_message':
+                chat_history.add_system_message(message)
+            
+            update_session_with_chat_history(request, chat_history)
+            
+            return JsonResponse({'messages': chat_history.get_messages()})
+        
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+# Class to handle the form of Reset Password
 class PasswordResetView(PasswordResetView):
     template_name = 'registration/password_reset.html'
     form_class = CustomPasswordResetForm

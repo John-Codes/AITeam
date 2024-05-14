@@ -196,7 +196,7 @@
                                         '</ul>' +
                                         '{% endif %}' +
                                         '<div class="pay-buttons buttons-group">'+                                    
-                                        '<<form class="paypal-form" action="{% url "'+ subscription +'" %}" method="post">' +
+                                        '<<form class="paypal-form" action="{% url 'subscription' %}" method="post">' +
                                         '{% csrf_token %}' +
                                         '<input type="hidden" name="plan_id" value="' + data.plan_id + '">' +
                                         '<button type="submit" class="btn button-to-pay">Pay with PayPal</button>' +
