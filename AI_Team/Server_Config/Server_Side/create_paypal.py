@@ -18,6 +18,8 @@ def generate_access_token():
         access_token = response.json().get('access_token')
         return access_token
     else:
+        print(f"Error: {response.status_code}")
+        print(f"Response: {response.text}")
         return None
     
 

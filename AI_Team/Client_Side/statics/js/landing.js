@@ -27,6 +27,32 @@ function getLanguagePrefix() {
     return languageCode;
 }
 
+// Function to add a message to the chat history.
+async function add_message_to_history(action, message) {
+    const languagePrefix = getLanguagePrefix();
+    const url = `/${languagePrefix}/chat-history/`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')  // Assuming CSRF token is needed
+        },
+        body: JSON.stringify({
+            action: action,
+            current_chat: currentContext,  // Assuming currentContext is defined globally
+            message: message
+        })
+    });
+
+    if (!response.ok) {
+        console.error('Failed to add message to history:', response.statusText);
+        return [];
+    }
+
+    const data = await response.json();
+    return data.messages || [];
+}
 // Function async to streaming chat responses.
 async function sendMessageStream() {
     const message = document.getElementById("userMessage").value;
@@ -35,6 +61,9 @@ async function sendMessageStream() {
     const languagePrefix = getLanguagePrefix();
     let async_chat = `/${languagePrefix}/stream-chat/`;
 
+    // Add user message to history and get the updated list of messages
+    const messages = await add_message_to_history('add_user_message', message);
+
     chatBox.insertAdjacentHTML('beforeend', `
         <div class="message-right glass float-end">
             <p class="message-content">${message}</p>
@@ -42,6 +71,7 @@ async function sendMessageStream() {
         <div class="clearfix"></div>
     `);
     toggleDotsAnimation(true); // Activar animaciones
+    document.getElementById("userMessage").value = "";
     const aiMessageId = 'aiMessage' + Date.now(); // Generar un ID único para el elemento
     
     var response = await fetch(async_chat, {
@@ -49,9 +79,9 @@ async function sendMessageStream() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ content: message })
+                body: JSON.stringify({ list_messages: messages })
             });
-    document.getElementById("userMessage").value = "";
+    
     var reader = response.body.getReader();
     var decoder = new TextDecoder('utf-8');
     toggleDotsAnimation(false); // Activar animaciones
@@ -66,9 +96,16 @@ async function sendMessageStream() {
         </div>
         <div class="clearfix"></div>
     `);
+    let aiMessage = '';
+
     reader.read().then(function processResult(result) {
-        if (result.done) return;
+        if (result.done) {
+            // Add AI message to history after the entire response is received
+            add_message_to_history('add_system_message', aiMessage);
+            return;
+        }
         let token = decoder.decode(result.value);
+        aiMessage += token;
         if (token.endsWith('.') || token.endsWith('!') || token.endsWith('?')) {
             document.getElementById(aiMessageId).innerHTML += token + "<br>";
             chatBox.scrollTop = chatBox.scrollHeight;

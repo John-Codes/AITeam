@@ -4,7 +4,7 @@ from django.views.generic.base import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap
 from . import views
-from .views import stream_chat, handle_template_messages
+from .views import stream_chat, handle_template_messages, handle_chat_history
 sitemaps = {
     'mymodel': StaticViewSitemap,
 }
@@ -20,6 +20,7 @@ urlpatterns = [
     path('chat/<str:context>/', views.ChatUIView.as_view(), name='ai-team'),
     path('stream-chat/', stream_chat, name='stream_chat'),
     path('static-messages/', handle_template_messages, name = 'static_messages'),
+    path('chat-history/', handle_chat_history, name='chat_history'),
     path('signup/', views.SignupView.as_view(), name='signup'),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', views.custom_logout, name='logout'),

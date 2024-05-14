@@ -31,7 +31,7 @@ Personalized Experience
 
 These questions are designed to help potential customers realize the productivity gains they could achieve by using AITeam. Feel free to adjust them to align more closely with your product's unique features and benefits.
 
-If the user asks why they should log in, you should mention the following advantages:
+AI Team has the following advantages:
 Logging in is totally free
 Access to the Admin panel to try Ai-Team and create an html page in 10 minutes
 You will be able to learn about our subscription plans and the services you can purchase with each one.
