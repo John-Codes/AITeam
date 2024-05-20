@@ -1,12 +1,11 @@
-from django.shortcuts import get_object_or_404
-from django.conf import settings
 import os
 import json
+import time
+import uuid
 from pathlib import Path
-from django.http import JsonResponse
-from django.http import StreamingHttpResponse
+from django.http import JsonResponse, StreamingHttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView
 from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView 
 from django.views import View
@@ -16,7 +15,8 @@ from django.contrib import messages
 from .models import Client as User
 from .models import ClienContext, SubscriptionDetail
 from django.contrib.auth import logout 
-from django.shortcuts import render,redirect 
+from django.shortcuts import render,redirect, get_object_or_404
+
 from AI_Team.Logic.Memory import *
 from AI_Team.Logic.response_utils import * # IA message render templates method
 from AI_Team.Logic.sender_mails import Contac_us_mail, notice_error_forms
@@ -24,18 +24,18 @@ from AI_Team.Logic.Data_Saver import DataSaver
 from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from AI_Team.Logic.Cancel_Subscription import cancel_subscription
 from AI_Team.Logic.Charge_Context import Charge_Context
-from AI_Team.Logic.chat_history_view_utils  import validate_request_data, get_chat_history_from_session, update_session_with_chat_history
+from AI_Team.Logic.chat_history_endpoint_utils  import validate_request_data, get_chat_history_from_session, get_ai_handler_from_session, update_session_with_chat_history
 from AI_Team.Logic.Chat.pdf_handling import *
+from AI_Team.Logic.Chat.handle_temporal_rag import process_temp_context_chat
 from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
 
 from AI_Team.Logic.AI_Instructions.get_ai_instructions import get_instructions
 #from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from .create_paypal import *
 from hashids import Hashids
-import time
-from django.views.decorators.csrf import csrf_exempt
+
+from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordResetView
 
 # Stripe using stripe
 import stripe
@@ -44,7 +44,7 @@ import stripe
 #from paypal.standard.ipn.models import PayPalIPN
 from django.dispatch import receiver
 #from paypal.standard.ipn.signals import valid_ipn_received
-import uuid
+
 import paypalrestsdk
 from django.conf import settings
 from AI_Team.Logic.Payments import plans_data
@@ -75,21 +75,19 @@ class ChatUIView(View):
     def __init__(self, *args, **kwargs):
         super(ChatUIView, self).__init__(*args, **kwargs)
         self.context_value = None
-        self.ai = ai_Handler()
-        #self.ollama = OllamaRag()
+        self.conversation = Conversation()
+        self.stream_calls_methods_dict = {'main': self.conversation.main_query_temp_rag_if_it_exist,
+                                        'subscription': self.conversation.stream_chat,
+                                        'panel-admin': self.conversation.main_query_perm_rag_if_it_exist}
 
-        #Gets the conversation context
+        
     def get(self, request, *args, **kwargs):
-        #chat = Chat_history()
+        
+        process_temp_context_chat(request)
         
         valid_contexts = ["main", "subscription", "panel-admin"]
         titles = {"main": [_('EFEXZIUM'), _('AI Team Chat')], "subscription": [_('Subscriptions'), _('AI Team Subscriptions')], "panel-admin": [_('Create your own page'), _('AI Team Page Builder')]}
         page_data = DataSaver()
-        
-        if request.session.get('temp_context_chat', False):
-            print(request.session.get('temp_context_chat', False))
-            delete_temp_pdfs(request.session['temp_context_chat'])
-            del request.session['temp_context_chat']
         
         self.context_value = kwargs.get('context', None)
         # obtener instrucciones:
@@ -114,7 +112,6 @@ class ChatUIView(View):
 
         # if the context is pre defined in a file
         else:
-            messages = self.ai.static_messages(self.context_value)
             user_id = request.user.id
             site_exists = page_data.check_site(user_id)
 
@@ -132,7 +129,6 @@ class ChatUIView(View):
                     'context_value': self.context_value,
                     'valid_contexts': valid_contexts,
                     'site_exists': site_exists,
-                    'static_messages': messages
                 }
                 
                 if site_exists:
@@ -149,109 +145,32 @@ class ChatUIView(View):
 
             return render(request, 'ai-team.html', context)
 
-
+    @method_decorator(csrf_exempt)
     def post(self, request, *args, **kwargs):
-        # Preparación de datos de la solicitud
-        self.context_value = kwargs.get('context', None)
-        template_name = request.POST.get('template_name', None)
-        user_message = request.POST.get('message')
-        phase = request.POST.get('phase')
-        action = request.POST.get('action')
-        response_html = ""
-
-        # Archivos temporales
-        pdf_file, upload_succes = proccess_context_files(request, self.context_value)
-        if pdf_file != 'no path' and upload_succes:
-            request.session['temp_context_chat'] = pdf_file
-            #ollama.add_pdf_to_new_temp_rag(temp_context_chat)
-            self.ai.create_temp_rag_with_a_pdf(pdf_file)
-            response_html += render_html('chat_messages/ia_message.html', upload_succes)
-        elif pdf_file == 'no path':
-            response_html += render_html('chat_messages/ia_message.html', upload_succes)
-        if action == 'cancel_subscription':
-            response_html += render_html('chat_messages/cancel.html', '')
-
-
-        # Si hay una respuesta de la IA, procesarla
-        if phase == 'ai_response':
-            ai_response_data = self.handle_ai_response(request, user_message)
-            response_html += ai_response_data.get('ia_message_div', '')
-
-        if not response_html:
-            return JsonResponse({"error": "Invalid request"})
-
-        return JsonResponse({'combined_response': response_html})
-
-    def handle_ai_response(self, request, user_message):
-        response_data = {}
-        product_consult = False
+        # Preparación de datos de la solicitu
+        self.context_value = kwargs.get('context')
+        method = request.POST.get('action', None)
+        if method is None:
+            data = json.loads(request.body)
+            method = data.get('action', None)
+        # use the creator_rag function when endpoint in data == 'creator_rag'    
         
-        if request.session.get('cancel-subscription', False):
-            if str(user_message).lower() == 'yes':
+        if method == 'create-rag':
+            return self.conversation.temp_rag_creator(request)
 
-                ai_response = cancel_subscription(request)
+        elif method == 'call-stream-ia':
+            if self.context_value in self.stream_calls_methods_dict:
+            # Call the corresponding method dynamically
+                return self.stream_calls_methods_dict[self.context_value](request)
             else:
-                ai_response = None
-            request.session['cancel-subscription'] = False
-            del request.session['cancel-subscription']
+                return JsonResponse({'error': 'Invalid context provided'}, status=400)
         else:
-            context_ia = self.context_value
-            
-            if context_ia not in ["main", "subscription", "panel-admin"]:
-                context_ia = context_ia.split('Uptc?to=')[-1].rstrip('$')
-
-
-            if context_ia == 'panel-admin':
-                reading = DataSaver()#converts to from Json to dic
-                # alistamos el prompt para generar el json
-                json_read =reading.read_from_json(f'memory-AI-with-{hashids.encode(request.user.id)}')
-                # alistamos el prompt para la IA que responde al usuario
-                user_message = str(user_message) + f''' This is the data of my page in json remember this to respond:  ''' + str(json_read)
-                
-           
-            if request.session.get('temp_context_chat', False):
-                #del request.session['temp_context_chat']
-                #ai_response = ollama.query_temp_rag_single_question(user_message)
-                ai_response = self.ai.call_ai_temp_rag(user_message)
-            else:
-                #ai_response, product_consult = Consulta_IA_PALM(user_message, context_ia)
-                ai_response = self.ai.call_router(user_message,context_ia)
-            
-        if request.session.get('send_us_email', False):
-            # Handle email sending logic
-            self.send_email(user_message)
-            request.session['send_us_email'] = False
-            del request.session['send_us_email']
-
-        if ai_response:
-            rendered_product = ''
-            if product_consult:
-                rendered_product = render_html('chat_messages/message_info_product.html', product_consult)
-            response_data['ia_message_div'] = render_html('chat_messages/ia_message.html', ai_response, format=True) + rendered_product
-
-        else:
-            error_message = 'The API could not respond.'
-            response_data['ia_message_div'] = render_html('chat_messages/ia_message.html',error_message)
-        return response_data
+            return JsonResponse({'error': 'Invalid request method'}, status=400)
       
 
     def send_email(self, user_message):
         if ('@' and '.') in user_message:
             Contac_us_mail(user_message)  
-
-@csrf_exempt
-def stream_chat(request):
-    # ya no es necesario ai_Handler para eso es el endpoint
-    #ai = ai_Handler()
-    if request.method == 'POST':        
-        chat_ollama = OllamaRag()
-        data = json.loads(request.body)
-        # Acceder al mensaje usando la clave 'content'
-        list_messages = data.get('list_messages', None)
-        
-        return StreamingHttpResponse(chat_ollama.stream_query_ollama(list_messages), content_type='text/event-stream')
-    else:
-        return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 @csrf_exempt
 def handle_template_messages(request):
@@ -269,37 +188,104 @@ def handle_template_messages(request):
             return JsonResponse({"error": "template_name not provided"}, status=400)
 
 
+class Conversation():
+    def __init__(self):
+        self.ai_handler = ai_Handler()
+        self.chat_history = Chat_history()
+        self.stream_ollama = OllamaRag
 
-@csrf_exempt
-def handle_chat_history(request):
-    if request.method == 'POST':
-        try:
+    
+    @method_decorator(csrf_exempt)
+    def stream_chat(self,request):
+        # ya no es necesario ai_Handler para eso es el endpoint
+        #ai = ai_Handler()
+        if request.method == 'POST':        
+            chat_ollama = OllamaRag()
             data = json.loads(request.body)
+            list_messages =self.reset_chat_history(data)
+            # Acceder al mensaje usando la clave 'content'
+            message = data.get('message_user')
+            last_ia_response = data.get('last_ia_response', None)
+            list_messages = self.ai_handler.update_messages(last_ia_response, message)
+            # CLient Side add ia response
+            return StreamingHttpResponse(chat_ollama.stream_query_ollama(list_messages), content_type='text/event-stream')
+        else:
+            return JsonResponse({'error': 'Invalid request method'}, status=400)
+        
+    # call this method as endpointd
+    
+    @method_decorator(csrf_exempt)
+    def main_query_temp_rag_if_it_exist(self, request):
+        data = json.loads(request.body)
+        message = data.get('message_user')
+        last_ia_response = data.get('last_ia_response', None)
+        list_messages =self.reset_chat_history(data)
+        
+        # if temp rag exist
+        if request.session.get('temp_rag_exist', False):
+            print(request.session['temp_rag_exist']['temp_uuid'])
+            self.ai_handler.get_vectorstore_by_rag_name(request.session['temp_rag_exist']['temp_uuid'])
+            print(self.ai_handler.ai.retriever)
+            # then call ai_handler method: call_ai_temp_rag that returns a formatted prompt with the context
+            formatted_prompt =self.ai_handler.call_ai_temp_rag(message)
+
+            # then update_messages with the formatted prompt
+            list_messages = self.ai_handler.update_messages(last_ia_response, formatted_prompt)
+            
+        #if not then call ai_handler llm query no rag
+        else:
+            list_messages = self.ai_handler.update_messages(last_ia_response, message)
+
+        return StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/event-stream')
+        
+    
+    @method_decorator(csrf_exempt)
+    def main_query_perm_rag_if_it_exist(self, request):
+        #call reset_chat_history if its necessary
+        data = json.loads(request.body)
+        list_messages =self.reset_chat_history(data)
+        # if persisted rag exist:
+            # 
+            # then update_messages
+            # and last StreamingHttpResponse with call_ollama_stream
+        #if not then call ai_handler llm query no rag
+        return StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/event-stream')
+    # only reset chat history
+    def reset_chat_history(self, data):
+        try:
             validated_data, error_response = validate_request_data(data)
             
             if error_response:
                 return error_response
             
-            action, current_chat, message = validated_data
+            current_chat = validated_data
             
-            chat_history = get_chat_history_from_session(request)
+            # set static messages current chat and reset history if the user has changed
+            # return list of messages with get_messages method
+            history = self.ai_handler.reset_history(current_chat)
             
-            # Set current chat and reset history if the user has changed
-            chat_history.set_current_chat(current_chat)
-            
-            if action == 'add_user_message':
-                chat_history.add_user_message(message)
-            elif action == 'add_system_message':
-                chat_history.add_system_message(message)
-            
-            update_session_with_chat_history(request, chat_history)
-            
-            return JsonResponse({'messages': chat_history.get_messages()})
-        
+            return history
+    
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
-    else:
-        return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+    # call this method in ChatUIView POST method
+    def temp_rag_creator(self, request):
+        if request.method == 'POST':
+            context_value = request.POST.get('context_value')
+            pdf_file, upload_success = proccess_context_files(request, context_value)
+            temp_uuid = str(uuid.uuid4())
+            if pdf_file != 'no path' and upload_success:
+                
+                self.ai_handler.create_perm_rag_with_a_pdf(pdf_file, temp_uuid)
+                request.session['temp_rag_exist'] = {'pdf_path': pdf_file, 'temp_uuid': temp_uuid} 
+                return JsonResponse({'message': 'Files processed successfully', 'upload_success': upload_success})
+            elif pdf_file == 'no path':
+                return JsonResponse({'message': 'No path for PDF file', 'upload_success': upload_success})
+            else:
+                return JsonResponse({'error': 'File processing failed'}, status=400)
+        else:
+            return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 # Class to handle the form of Reset Password
 class PasswordResetView(PasswordResetView):
