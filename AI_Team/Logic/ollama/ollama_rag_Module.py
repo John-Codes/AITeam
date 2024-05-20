@@ -1,6 +1,6 @@
 import os
 import ollama
-
+import json
 #import bs4
 import asyncio
 import chromadb
@@ -27,7 +27,7 @@ print('config_ollama',ollama_url)
 ollama_api = ollama.Client(host=ollama_url)
 #add static messages to chat history and pass it from views.
 
-model_local =ChatOllama(model="mistral")
+model_local =ChatOllama(model="llama3")
 pdf ="/Resume 2024.pdf"
 
 # Get the current working directory
@@ -37,7 +37,9 @@ vectorDBDir="UsersVectorDbFiles"
 
 class OllamaRag:
     def __init__(self):
-        pass
+        self.retriever = None
+        self.vectorstore = None
+        self.client = None
 
 
     #PDF Preping
@@ -129,7 +131,7 @@ class OllamaRag:
         try:
             
             # Construct the path to the VectorDbFiles directory
-            base_directory = current_directory = os.getcwd()
+            base_directory = current_directory
             vector_db_directory = os.path.join(base_directory, vectorDBDir)
             
             return vector_db_directory
@@ -179,11 +181,12 @@ class OllamaRag:
 
 
 #Chroma only for demo cant load saved files\|/
+#deprecated
     def new_temp_chroma_and_retriever(self,doc_splits):
         try:
             self.vectorstore = Chroma.from_documents(
             documents=doc_splits,
-            embedding = embeddings.ollama.OllamaEmbeddings(model='mistral'),
+            embedding = embeddings.ollama.OllamaEmbeddings(model='llama3'),
             collection_name="rag_chroma",
             )
             
@@ -208,15 +211,57 @@ class OllamaRag:
 
             self.vectorstore = Chroma.from_documents(
                 documents=doc_splits,
-                embedding=embeddings.ollama.OllamaEmbeddings(model='mistral'),
+                embedding=embeddings.ollama.OllamaEmbeddings(model='llama3'),
                 collection_name="rag_chroma",
                 persist_directory=persist_directory  # Pass the newly formed directory to persist the data
             )
+
             
             self.retriever = self.vectorstore.as_retriever()
             print(f"New Persisted Vector Store Created and Initialized at {persist_directory}")
         except Exception as cmdbe:
             print(self.new_Persisted_chromadb_and_retriever.__name__, cmdbe)
+    
+    def get_persist_directory(self, rag_name):
+        try:
+            # Base directory where all vector DB files will be stored
+            base_directory = os.path.join(os.getcwd(), "VectorDbFiles")
+            
+            # Directory for specific file vectors
+            x_file_vectors_directory = os.path.join(base_directory, f"{rag_name}Vectors")
+            
+            # Final directory for the specific vector DB
+            persist_directory = os.path.join(x_file_vectors_directory, f"{rag_name}Vdb")
+            
+            return persist_directory
+        except Exception as e:
+            print(self.get_persist_directory.__name__, e)
+            return None
+    
+    def find_vectorstore_by_rag_name(self, rag_name):
+        try:         
+            # Obtener el directorio de persistencia
+            persist_directory = self.get_persist_directory(rag_name)
+            
+            if persist_directory:
+                self.vectorstore = Chroma(
+                    persist_directory=persist_directory,
+                    embedding_function=embeddings.ollama.OllamaEmbeddings(model='llama3',)
+                    )
+                self.retriever = self.vectorstore.as_retriever()
+                print(f"Vector Store Loaded from {persist_directory}")
+                return self.vectorstore
+            else:
+                print("Persist directory not found.")
+                return None
+        except Exception as e:
+            print(self.find_vectorstore_by_rag_name.__name__, e)
+            return None
+    
+    
+    def reconstruct_vectorstore(self, rag_name):
+        pass
+
 
     def format_docs(self,docs):
         return "\n\n".join(doc.page_content for doc in docs)
@@ -224,8 +269,8 @@ class OllamaRag:
     def ollama_llm_query_single_question(self,question, context):
         try:    
             formatted_prompt = f"Question: {question}\n\nContext: {context}"
-            response = ollama_api.chat(model='mistral', messages=[{'role': 'user', 'content': formatted_prompt}])
-            return response['message']['content']
+            #response = ollama_api.chat(model='llama3', messages=[{'role': 'user', 'content': formatted_prompt}])
+            return formatted_prompt
         except Exception as oll:
             print(self.ollama_llm_query_single_question.__name__,oll)
     
@@ -255,10 +300,17 @@ class OllamaRag:
             doc_splits = self.text_spliter_for_vectordbs(doc_splits)
             self.new_temp_chroma_and_retriever(doc_splits)
     
+    def add_pdf_to_new_perm_rag(self, pathpdf, rag_name):
+        text = self.extract_text_from_pdf(pathpdf)
+        splits = self.semantic_text_split_bert(text, 500)
+        doc_splits = self.string_list_to_hf_documents(splits, pathpdf)
+        doc_splits = self.text_spliter_for_vectordbs(doc_splits)
+        self.new_Persisted_chromadb_and_retriever(doc_splits,rag_name)
+        
     def query_ollama(self,messages):
         
         stream = ollama_api.chat(
-        model='mistral',
+        model='llama3',
         messages=messages,
         stream=False)
         

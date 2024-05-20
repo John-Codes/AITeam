@@ -4,12 +4,13 @@ from django.views.generic.base import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap
 from . import views
-from .views import stream_chat, handle_template_messages, handle_chat_history
+from .views import handle_template_messages
+from .views import Conversation
 sitemaps = {
     'mymodel': StaticViewSitemap,
 }
 #from paypal.standard.ipn import views as paypal_views
-
+conversation_instance = Conversation()
 #path('ipn/', paypal_views.ipn, name='paypal-ipn'),
 
 urlpatterns = [
@@ -18,9 +19,10 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
     path('chat/<str:context>/', views.ChatUIView.as_view(), name='ai-team'),
-    path('stream-chat/', stream_chat, name='stream_chat'),
+    path('stream-chat/', conversation_instance.stream_chat, name='stream_chat'),
+    path('main-query-temp-rag/', conversation_instance.main_query_temp_rag_if_it_exist, name='main_query_temp_rag'),
+    path('main-query-perm-rag/', conversation_instance.main_query_perm_rag_if_it_exist, name='main_query_perm_rag'),
     path('static-messages/', handle_template_messages, name = 'static_messages'),
-    path('chat-history/', handle_chat_history, name='chat_history'),
     path('signup/', views.SignupView.as_view(), name='signup'),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', views.custom_logout, name='logout'),
