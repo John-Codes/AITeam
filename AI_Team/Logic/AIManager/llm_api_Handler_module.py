@@ -58,10 +58,25 @@ class ai_Handler:
         
         self.ai.add_pdf_to_new_temp_rag(pdfdirectory)
     
-    def create_perm_rag_with_a_pdf(self,pdfdirectory,rag_name):
+    def create_collection_rag_with_a_pdf(self,pdfdirectory,rag_name):
         
-        self.ai.add_pdf_to_new_perm_rag(pdfdirectory, rag_name)
+        self.ai.add_pdf_to_new_perm_collection(pdfdirectory, rag_name)
+    
+    # function that get collection by name
+    def get_collection_by_name(self, collection_name):
+        # get the collection
+        collection = self.ai.get_or_create_collection_for_user_email(collection_name)
+        return collection
+    
+    def query_user_collection_with_chat_context(self, path_to_pdf_metadata, user_question, collection):
+        # path_to_pdf_metadata, user_question
+        collection_result =self.ai.query_collection(path_to_pdf_metadata, user_question, collection)
+        return self.ai.query_user_collection_with_context(user_question, collection_result)
 
+    #method that deletes a collection by name
+    def delete_collection_by_name(self, collection_name):
+        self.ai.delete_collection(collection_name)
+    #deprecated
     def get_vectorstore_by_rag_name(self, rag_name):
 
         self.ai.find_vectorstore_by_rag_name(rag_name)
