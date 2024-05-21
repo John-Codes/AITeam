@@ -21,8 +21,9 @@ from semantic_text_splitter import CharacterTextSplitter, HuggingFaceTextSplitte
 from tokenizers import Tokenizer
 import re 
 #ollama_url = os.getenv('OLLAMA_BASE_URL', "http://localhost:11434")  #'http://ollama:11434
+base_directory = os.path.join(os.getcwd(), "VectorDbFiles")
+model_name = "llama3"
 ollama_url = "http://localhost:11434"
-print('config_ollama',ollama_url)
 # Configure the Ollama client with the obtained URL
 ollama_api = ollama.Client(host=ollama_url)
 #add static messages to chat history and pass it from views.
@@ -40,6 +41,8 @@ class OllamaRag:
         self.retriever = None
         self.vectorstore = None
         self.client = None
+        self.chroma_client = chromadb.PersistentClient(path=base_directory)
+
 
 
     #PDF Preping
@@ -195,32 +198,33 @@ class OllamaRag:
         except Exception as cmdbe:
             print(self.new_temp_chroma_and_retriever.__name__, cmdbe)
 
-    def new_Persisted_chromadb_and_retriever(self, doc_splits, x_file_name):
+    def Create_embbedings_and_persisted_crhomadb_and_retriever_in_directory(self, doc_splits, x_file_name):
         try:
-            # Base directory where all vector DB files will be stored
-            base_directory = os.path.join(os.getcwd(), "VectorDbFiles")
+            
+            
             
             # Directory for specific file vectors
-            x_file_vectors_directory = os.path.join(base_directory, f"{x_file_name}Vectors")
+            #x_file_vectors_directory = os.path.join(base_directory, f"{x_file_name}Vectors")
             
             # Final directory for the specific vector DB
-            persist_directory = os.path.join(x_file_vectors_directory, f"{x_file_name}Vdb")
+            #persist_directory = os.path.join(x_file_vectors_directory, f"{x_file_name}Vdb")
 
             # Ensure the final persist directory exists or create it
-            os.makedirs(persist_directory, exist_ok=True)
+            #Base directory where all vector DB files will be stored
+            os.makedirs(base_directory, exist_ok=True)
 
             self.vectorstore = Chroma.from_documents(
                 documents=doc_splits,
-                embedding=embeddings.ollama.OllamaEmbeddings(model='llama3'),
-                collection_name="rag_chroma",
-                persist_directory=persist_directory  # Pass the newly formed directory to persist the data
+                embedding=embeddings.ollama.OllamaEmbeddings(model=model_name),
+                collection_name=x_file_name,
+                persist_directory=base_directory  # Pass the newly formed directory to persist the data
             )
 
             
             self.retriever = self.vectorstore.as_retriever()
-            print(f"New Persisted Vector Store Created and Initialized at {persist_directory}")
+            print(f"New Persisted Vector Store Created and Initialized at {base_directory}")
         except Exception as cmdbe:
-            print(self.new_Persisted_chromadb_and_retriever.__name__, cmdbe)
+            print(self.Create_embbedings_and_persisted_crhomadb_and_retriever_in_directory.__name__, cmdbe)
     
     def get_persist_directory(self, rag_name):
         try:
@@ -258,6 +262,90 @@ class OllamaRag:
             print(self.find_vectorstore_by_rag_name.__name__, e)
             return None
     
+    def get_or_create_collection_for_user_email(self,collection_name):
+        try:
+            # switch create_collection to get_or_create_collection to avoid creating a new collection every time
+            # remove @ from collection_name
+            #collection_name = collection_name.replace("@","")
+            
+
+            #query_embedding = llama_embeddings.embed_query(user_question)
+            collection = self.chroma_client.get_or_create_collection(name=collection_name)
+            return collection
+        except Exception as e:
+            print(self.get_or_create_collection_for_user_email.__name__, e)
+    #add a method decoretor to execute this without having to create an instance of the class
+    @classmethod
+    def delete_collection(self, collection_name, chroma_client):
+        try:
+            chroma_client.delete_collection(name=collection_name)
+            print(f"Collection '{collection_name}' deleted successfully.")
+        except Exception as e:
+            print(self.delete_collection.__name__, e)
+    
+    def get_ollama_list_of_embeddings(self,docs_splits):
+        llama_embeddings = OllamaEmbeddings(model=model_name)
+
+        embeddings = []
+        for doc in docs_splits:
+            embedding = llama_embeddings.embed_query(doc.page_content)
+            embeddings.append(embedding)
+        return embeddings
+    
+    #add documents to the collection
+    def add_documents_to_collection(self, split_documents, list_embeddings, collection):
+        ids = [str(i) for i in range(len(split_documents))]
+        collection.add(
+            ids=ids,
+            documents=[doc.page_content for doc in split_documents],
+            embeddings=list_embeddings,
+            metadatas=[doc.metadata for doc in split_documents]
+        )
+
+
+    # create a method that query a collection passed as parameter
+    def query_collection(self, metadata_source, user_question, collection):
+        # llamar un método que convierte a embedings la preghuta
+        llama_embeddings = OllamaEmbeddings(model=model_name)
+
+        query_embedding = llama_embeddings.embed_query(user_question)
+        try:
+            list_query_embeddings = [query_embedding]
+            collection_query_results = collection.query(
+                n_results=5,
+                query_embeddings=list_query_embeddings,
+                where={"source": metadata_source},
+                include=['documents']
+            )
+
+            documents_results = collection_query_results['documents']
+        except Exception as e:
+            print(self.query_collection.__name__, e)
+
+        return documents_results
+
+    #method to pass n_results how context in the query
+    def query_user_collection_with_context(self, user_question, documents_results):
+        #Joining the strings in the documents into a single string
+        joined_string = ' '.join(documents_results[0])
+
+        #Printing the result
+        print(joined_string)
+        return self.ollama_llm_query_single_question(user_question, joined_string)
+    
+    #create a method for upsertind a collection passed as parameter
+    def upsert_collection(self,collection):
+        try:
+            #before upserting, create embeddings for the documents
+            
+            collection.upsert(
+
+
+            )
+        except Exception as uc:
+            print(self.upsert_collection._name_,uc)
+    #create a method that create a collection named by paramater collection_name
+    
     
     def reconstruct_vectorstore(self, rag_name):
         pass
@@ -283,7 +371,9 @@ class OllamaRag:
 
     def query_temp_rag_single_question(self,question):
         try:
-            
+            # consulta el collection que se envia como parametro
+            # con format docs para agregar al mensaje
+            # con ollama_llm_query_single_question para formatear la respuesta
             retrieved_docs = self.retriever.invoke(question)
             formatted_context = self.format_docs(retrieved_docs)
             return self.ollama_llm_query_single_question(question, formatted_context)
@@ -300,12 +390,16 @@ class OllamaRag:
             doc_splits = self.text_spliter_for_vectordbs(doc_splits)
             self.new_temp_chroma_and_retriever(doc_splits)
     
-    def add_pdf_to_new_perm_rag(self, pathpdf, rag_name):
+    def add_pdf_to_new_perm_collection(self, pathpdf, collection_name):
         text = self.extract_text_from_pdf(pathpdf)
         splits = self.semantic_text_split_bert(text, 500)
         doc_splits = self.string_list_to_hf_documents(splits, pathpdf)
         doc_splits = self.text_spliter_for_vectordbs(doc_splits)
-        self.new_Persisted_chromadb_and_retriever(doc_splits,rag_name)
+        collection = self.get_or_create_collection_for_user_email(collection_name)
+        list_embeddings = self.get_ollama_list_of_embeddings(doc_splits)
+        self.add_documents_to_collection(doc_splits,list_embeddings, collection)
+
+        #self.Create_embbedings_and_persisted_crhomadb_and_retriever_in_directory(doc_splits,rag_name)
         
     def query_ollama(self,messages):
         

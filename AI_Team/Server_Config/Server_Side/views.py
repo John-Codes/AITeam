@@ -82,9 +82,10 @@ class ChatUIView(View):
 
         
     def get(self, request, *args, **kwargs):
+        crhoma_client = self.conversation.ai_handler.ai.chroma_client
+        process_temp_context_chat(request, crhoma_client)
         
-        process_temp_context_chat(request)
-        
+        #delete_collection_by_name
         valid_contexts = ["main", "subscription", "panel-admin"]
         titles = {"main": [_('EFEXZIUM'), _('AI Team Chat')], "subscription": [_('Subscriptions'), _('AI Team Subscriptions')], "panel-admin": [_('Create your own page'), _('AI Team Page Builder')]}
         page_data = DataSaver()
@@ -222,12 +223,14 @@ class Conversation():
         list_messages =self.reset_chat_history(data)
         
         # if temp rag exist
-        if request.session.get('temp_rag_exist', False):
-            print(request.session['temp_rag_exist']['temp_uuid'])
-            self.ai_handler.get_vectorstore_by_rag_name(request.session['temp_rag_exist']['temp_uuid'])
-            print(self.ai_handler.ai.retriever)
+        if request.session.get('temp_collection_exist', False):
+            print(request.session['temp_collection_exist']['temp_uuid'])
+            collection_name = request.session['temp_collection_exist']['temp_uuid']
+            metadata = request.session['temp_collection_exist']['pdf_path']
+            collection = self.ai_handler.get_collection_by_name(collection_name)
+            
             # then call ai_handler method: call_ai_temp_rag that returns a formatted prompt with the context
-            formatted_prompt =self.ai_handler.call_ai_temp_rag(message)
+            formatted_prompt = self.ai_handler.query_user_collection_with_chat_context(metadata, message, collection)
 
             # then update_messages with the formatted prompt
             list_messages = self.ai_handler.update_messages(last_ia_response, formatted_prompt)
@@ -277,8 +280,9 @@ class Conversation():
             temp_uuid = str(uuid.uuid4())
             if pdf_file != 'no path' and upload_success:
                 
-                self.ai_handler.create_perm_rag_with_a_pdf(pdf_file, temp_uuid)
-                request.session['temp_rag_exist'] = {'pdf_path': pdf_file, 'temp_uuid': temp_uuid} 
+                self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, temp_uuid)
+                request.session['temp_collection_exist'] = {'pdf_path': pdf_file, 'temp_uuid': temp_uuid} 
+                delete_temp_pdfs(pdf_file)
                 return JsonResponse({'message': 'Files processed successfully', 'upload_success': upload_success})
             elif pdf_file == 'no path':
                 return JsonResponse({'message': 'No path for PDF file', 'upload_success': upload_success})
