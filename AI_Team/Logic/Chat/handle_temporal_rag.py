@@ -1,4 +1,3 @@
-from .pdf_handling import delete_temp_pdfs
 from ..ollama.ollama_rag_Module import OllamaRag
 def process_temp_context_chat(request, crhoma_client):
     if request.session.get('temp_collection_exist', False):

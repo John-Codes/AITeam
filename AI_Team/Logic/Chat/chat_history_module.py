@@ -15,14 +15,15 @@ class Chat_history:
         self.messages.append({"role": "system", "content": prompt})
 
     def set_page_static_messages(self, current_chat):
-        self.messages.append(CONTEXT_MESSAGES[current_chat][0])
-        self.messages.append(CONTEXT_MESSAGES[current_chat][1])
+        self.messages.append(CONTEXT_MESSAGES[current_chat])
 
     def reset_history(self, pagemessages):
         self.messages = []
         self.set_page_static_messages(pagemessages)
 
     def set_current_chat(self, current_chat):
-        if self.current_chat is None or self.current_chat != current_chat:
-            self.current_chat = current_chat
+        if current_chat is None or current_chat != current_chat:
+            print('reseteamos el historial')
+            print('current_chat de chat_history',current_chat,'current_chat', current_chat)
+            current_chat = current_chat
             self.reset_history(current_chat)
