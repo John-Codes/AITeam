@@ -92,7 +92,7 @@ class ChatUIView(View):
         
         self.context_value = kwargs.get('context', None)
         # obtener instrucciones:
-        context_data_ai = get_instructions(self.context_value)
+        #context_data_ai = get_instructions(self.context_value)
         # iniciar el rag dado el path donde esta el contexto o las instrucciones para la IA
         #
         # Si el contexto es uno de los personalizados
@@ -156,8 +156,11 @@ class ChatUIView(View):
             method = data.get('action', None)
         # use the creator_rag function when endpoint in data == 'creator_rag'    
         
-        if method == 'create-rag':
+        if method == 'create-temp-rag':
             return self.conversation.temp_rag_creator(request)
+
+        elif method == 'create-perm-rag':
+            return self.conversation.permanent_rag_creator(request)
 
         elif method == 'call-stream-ia':
             if self.context_value in self.stream_calls_methods_dict:
@@ -203,11 +206,11 @@ class Conversation():
         if request.method == 'POST':        
             chat_ollama = OllamaRag()
             data = json.loads(request.body)
-            list_messages =self.reset_chat_history(data)
-            # Acceder al mensaje usando la clave 'content'
-            message = data.get('message_user')
-            last_ia_response = data.get('last_ia_response', None)
-            list_messages = self.ai_handler.update_messages(last_ia_response, message)
+            current_chat = data.get('current_chat')
+            list_messages = data.get('list_messages')#self.reset_chat_history(data)
+            list_messages = self.ai_handler.load_static_messages(list_messages, current_chat)
+            
+            #list_messages = self.ai_handler.update_messages(last_ia_response, message)
             # CLient Side add ia response
             return StreamingHttpResponse(chat_ollama.stream_query_ollama(list_messages), content_type='text/event-stream')
         else:
@@ -218,26 +221,28 @@ class Conversation():
     @method_decorator(csrf_exempt)
     def main_query_temp_rag_if_it_exist(self, request):
         data = json.loads(request.body)
-        message = data.get('message_user')
-        last_ia_response = data.get('last_ia_response', None)
-        list_messages =self.reset_chat_history(data)
-        
-        # if temp rag exist
+        current_chat = data.get('current_chat')
+        # get the list messages
+        list_messages = data.get('list_messages')
+        # get the last message of the user
+        message = list_messages[-1]['content']
+
+        # if there is a temp collection
         if request.session.get('temp_collection_exist', False):
-            print(request.session['temp_collection_exist']['temp_uuid'])
+            
+            #get the collection by name using the temp_uuid
             collection_name = request.session['temp_collection_exist']['temp_uuid']
             metadata = request.session['temp_collection_exist']['pdf_path']
             collection = self.ai_handler.get_collection_by_name(collection_name)
-            
+
             # then call ai_handler method: call_ai_temp_rag that returns a formatted prompt with the context
             formatted_prompt = self.ai_handler.query_user_collection_with_chat_context(metadata, message, collection)
 
-            # then update_messages with the formatted prompt
-            list_messages = self.ai_handler.update_messages(last_ia_response, formatted_prompt)
-            
-        #if not then call ai_handler llm query no rag
+            # update the last message with the formatted prompt
+            list_messages[-1]['content'] = formatted_prompt
         else:
-            list_messages = self.ai_handler.update_messages(last_ia_response, message)
+            # if not temp collection then load static messages at the beginning of the list of messages
+            list_messages = self.ai_handler.load_static_messages(list_messages, current_chat)
 
         return StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/event-stream')
         
@@ -246,12 +251,16 @@ class Conversation():
     def main_query_perm_rag_if_it_exist(self, request):
         #call reset_chat_history if its necessary
         data = json.loads(request.body)
-        list_messages =self.reset_chat_history(data)
+        current_chat = data.get('current_chat')
+        list_messages = data.get('list_messages')
+        list_messages = self.ai_handler.load_static_messages(list_messages, current_chat)
+        #message = list_messages[-1]['content']
         # if persisted rag exist:
             # 
             # then update_messages
             # and last StreamingHttpResponse with call_ollama_stream
         #if not then call ai_handler llm query no rag
+
         return StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/event-stream')
     # only reset chat history
     def reset_chat_history(self, data):
@@ -284,6 +293,32 @@ class Conversation():
                 request.session['temp_collection_exist'] = {'pdf_path': pdf_file, 'temp_uuid': temp_uuid} 
                 delete_temp_pdfs(pdf_file)
                 return JsonResponse({'message': 'Files processed successfully', 'upload_success': upload_success})
+            elif pdf_file == 'no path':
+                return JsonResponse({'message': 'No path for PDF file', 'upload_success': upload_success})
+            else:
+                return JsonResponse({'error': 'File processing failed'}, status=400)
+        else:
+            return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+    def permanent_rag_creator(self, request):
+        if request.method == 'POST':
+            context_value = request.POST.get('context_value')
+            pdf_file, upload_success = proccess_context_files(request, context_value)
+            if request.user.is_authenticated:
+                collection_name = request.user.email
+                # hashea el id del usuario con Hashid
+                hashed_id = hashids.encode(request.user.id)
+                user_page = f'Uptc%3Fto={hashed_id}$'
+
+            else:
+                return JsonResponse({'error': 'No user authenticated'}, status=400)
+            
+            if pdf_file != 'no path' and upload_success:
+                
+                self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, collection_name)
+                delete_temp_pdfs(pdf_file)
+
+                return JsonResponse({'message': 'Files processed successfully', 'upload_success': upload_success, 'user_page': user_page})
             elif pdf_file == 'no path':
                 return JsonResponse({'message': 'No path for PDF file', 'upload_success': upload_success})
             else:

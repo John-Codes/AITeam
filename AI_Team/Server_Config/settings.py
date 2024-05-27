@@ -64,12 +64,11 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
-
+#"django.middleware.csrf.CsrfViewMiddleware",
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -112,23 +111,23 @@ WSGI_APPLICATION = "AI_Team.Server_Config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#DATABASES = {
-#    "default": {
-#        "ENGINE": "django.db.backends.sqlite3",
-#        "NAME": BASE_DIR / "Server_Config/AITeam.sqlite3",
-#    }
-#}
-#añade las variables de entorno a la base de datos
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('db_name'),
-        'USER': os.getenv('db_user'),
-        'PASSWORD': os.getenv('db_pass'),
-        'HOST': os.getenv('dv_host'), 
-        'PORT': os.getenv('db_port'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "Server_Config/AITeam.sqlite3",
     }
 }
+#añade las variables de entorno a la base de datos
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': os.getenv('db_name'),
+#        'USER': os.getenv('db_user'),
+#        'PASSWORD': os.getenv('db_pass'),
+#        'HOST': os.getenv('db_host'), 
+#        'PORT': os.getenv('db_port'),
+#    }
+#}
 MIGRATION_MODULES = {
     'Server_Side': 'Server_Config.Server_Side.migrations',
 }

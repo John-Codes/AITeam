@@ -1,12 +1,11 @@
 // Function to toggle the animation of dots.
-var last_ia_response = false;
 
 const urlDictionary = {
     'main': 'main-query-temp-rag',
     'subscription': 'stream-chat',
     'panel-admin': 'main-query-perm-rag'
 };
-
+var list_messages = [];
 function toggleDotsAnimation(shouldShow) {
     const loadingDots = document.querySelector('.loading-dots-container');
     const metallicText = document.querySelector('.metallic-text');
@@ -40,14 +39,12 @@ function getLanguagePrefix() {
 async function sendMessageStream() {
     const csrfToken = getCookie('csrftoken');
     const message = document.getElementById("userMessage").value;
-    console.log(message);
     const chatBox = document.getElementById("chatBox");
     const languagePrefix = getLanguagePrefix();
     const urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
 
     const async_chat = `/${languagePrefix}/${urlDictionary[currentContext]}/`;
 
-    console.log(async_chat)
 
     chatBox.insertAdjacentHTML('beforeend', `
         <div class="message-right glass float-end">
@@ -58,14 +55,13 @@ async function sendMessageStream() {
     toggleDotsAnimation(true); // Activar animaciones
     document.getElementById("userMessage").value = "";
     const aiMessageId = 'aiMessage' + Date.now(); // Generar un ID único para el elemento
-    
+    list_messages.push({"role": "user", "content": message});
     var response = await fetch(urlEndpoint, {
                 method: 'POST',
                 headers: {
-                    "X-CSRFToken": csrfToken,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ 'message_user': message, 'last_ia_response': last_ia_response, 'current_chat':currentContext, 'action': 'call-stream-ia' })
+                body: JSON.stringify({ 'list_messages': list_messages, 'current_chat':currentContext, 'action': 'call-stream-ia' })
             });
     
     var reader = response.body.getReader();
@@ -87,12 +83,12 @@ async function sendMessageStream() {
     reader.read().then(function processResult(result) {
         if (result.done) {
             // Add AI message to history after the entire response is received
-            last_ia_response = aiMessage
+            list_messages.push({"role": "system", "content": aiMessage});
             return;
         }
         let token = decoder.decode(result.value);
         aiMessage += token;
-        if (token.endsWith('.') || token.endsWith('!') || token.endsWith('?')) {
+        if (token.endsWith(':') || token.endsWith('!') || token.endsWith('?')) {
             document.getElementById(aiMessageId).innerHTML += token + "<br>";
             chatBox.scrollTop = chatBox.scrollHeight;
         } else {
@@ -183,7 +179,13 @@ function uploadFile(event) {
     if (file) {
         formData.append("uploaded_files", file);
         formData.append("context_value", currentContext); // Asumiendo que currentContext está definido globalmente
-        formData.append("action", "create-rag")
+        //if currentContext == main: action == create-rag
+        if (currentContext == "main") {
+            formData.append("action", "create-temp-rag");
+        } else if (currentContext == "panel-admin") {
+            formData.append("action", "create-perm-rag");
+        }
+        
 
         // Realizar la solicitud para procesar el archivo
         const csrfToken = getCookie('csrftoken');
@@ -208,9 +210,13 @@ function uploadFile(event) {
             console.log('File uploaded successfully:', data);
             const chatBox = document.getElementById("chatBox");
             if (data.upload_success) {
+                let messageContent = data.upload_success;
+                if (data.user_page) {
+                    messageContent += `<br>Visita tu página: <a href="${data.user_page}" target="_blank">${data.user_page}</a>`;
+                }
                 chatBox.insertAdjacentHTML('beforeend', `
                     <div class="message-left glass">
-                        <p class="message-content">${data.upload_success}</p>
+                        <p class="message-content">${messageContent}</p>
                         <div class="mt-2">
                             <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                             <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
@@ -232,7 +238,8 @@ function uploadFile(event) {
                     <div class="clearfix"></div>
                 `);
             }
-            chatBox.scrollTop = chatBox.scrollHeight;
+            chatBox.scrollTop = chatBox.scrollHeight; 
+            list_messages = [];
         })
         .catch(error => {
             console.error('Error:', error);

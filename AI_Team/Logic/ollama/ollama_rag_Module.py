@@ -266,7 +266,7 @@ class OllamaRag:
         try:
             # switch create_collection to get_or_create_collection to avoid creating a new collection every time
             # remove @ from collection_name
-            #collection_name = collection_name.replace("@","")
+            collection_name = collection_name.replace("@","at").replace(".","dot")
             
 
             #query_embedding = llama_embeddings.embed_query(user_question)
