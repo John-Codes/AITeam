@@ -83,7 +83,7 @@ async function sendMessageStream() {
     reader.read().then(function processResult(result) {
         if (result.done) {
             // Add AI message to history after the entire response is received
-            list_messages.push({"role": "system", "content": aiMessage});
+            list_messages.push({"role": "assistant", "content": aiMessage});
             return;
         }
         let token = decoder.decode(result.value);
@@ -212,6 +212,7 @@ function uploadFile(event) {
             if (data.upload_success) {
                 let messageContent = data.upload_success;
                 if (data.user_page) {
+                    // change the message to be multilenguajes
                     messageContent += `<br>Visita tu página: <a href="${data.user_page}" target="_blank">${data.user_page}</a>`;
                 }
                 chatBox.insertAdjacentHTML('beforeend', `

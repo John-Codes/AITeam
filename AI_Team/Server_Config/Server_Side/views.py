@@ -309,7 +309,7 @@ class Conversation():
                 # hashea el id del usuario con Hashid
                 hashed_id = hashids.encode(request.user.id)
                 user_page = f'Uptc%3Fto={hashed_id}$'
-
+                # if user has a collection, use upsert method else use create collection
             else:
                 return JsonResponse({'error': 'No user authenticated'}, status=400)
             
@@ -317,7 +317,8 @@ class Conversation():
                 
                 self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, collection_name)
                 delete_temp_pdfs(pdf_file)
-
+                # call to create_json_page
+                
                 return JsonResponse({'message': 'Files processed successfully', 'upload_success': upload_success, 'user_page': user_page})
             elif pdf_file == 'no path':
                 return JsonResponse({'message': 'No path for PDF file', 'upload_success': upload_success})
@@ -325,7 +326,11 @@ class Conversation():
                 return JsonResponse({'error': 'File processing failed'}, status=400)
         else:
             return JsonResponse({'error': 'Invalid request method'}, status=405)
-
+    
+    def create_json_page(self, request):
+        # add methods to create json file of the page
+        # add block try-execpt and send mail if error
+        
 # Class to handle the form of Reset Password
 class PasswordResetView(PasswordResetView):
     template_name = 'registration/password_reset.html'

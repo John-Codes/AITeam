@@ -9,7 +9,7 @@ class ContentPage(BaseModel):
     keywords: List[str] = Field(description="Keywords of the page.")
     default_message: str = Field(description="Default message of the page.")
     list_items: List[dict] = Field(description="List items of the page.")
-    products: List[dict] = Field(description="Products of the page, this are a list of dictionaries, each item in the list is a product, and each product has the following dictionary keys: name, description, value, url.")
+    #products: List[dict] = Field(description="Products of the page, this are a list of dictionaries, each item in the list is a product, and each product has the following dictionary keys: name, description, value, url.")
 
 class Product(BaseModel):
     name: str = Field(description="Name of the product.")
