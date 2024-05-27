@@ -5,12 +5,14 @@ from ..ollama.ollama_rag_Module import OllamaRag
 #process_uploaded_files
 o = OllamaRag()
 def proccess_context_files(request, context):
-    if context == 'main':
-        temp_file = proccess_temporary_files(request)
-        return temp_file
-    elif context == 'panel-admin':
-        rag_permanent = proccess_chat_creation_files(request)
-        return rag_permanent
+    temp_file = proccess_temporary_files(request)
+    return temp_file
+    #if context == 'main':
+    #    temp_file = proccess_temporary_files(request)
+    #    return temp_file
+    #elif context == 'panel-admin':
+    #    rag_permanent = proccess_chat_creation_files(request)
+    #    return rag_permanent
 
 def proccess_chat_creation_files(request):
     #details = Charge_Context().process_uploaded_files(request)

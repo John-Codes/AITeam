@@ -27,3 +27,8 @@ class Chat_history:
             print('current_chat de chat_history',current_chat,'current_chat', current_chat)
             current_chat = current_chat
             self.reset_history(current_chat)
+    #metodo que agrega al inicio de una lista con elementos los mensajes estaticos
+    def set_static_messages_from_list(self, list_messages, current_chat):
+        # agrega al inicio de una lista con elementos los mensajes estaticos
+        list_messages.insert(0, CONTEXT_MESSAGES[current_chat])
+        return list_messages

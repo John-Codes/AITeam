@@ -26,8 +26,11 @@ class ai_Handler:
         return self.messages.get_messages()
     
     def reset_history(self, current_chat_user):
-        self.messages.set_current_chat(current_chat_user)
+        self.messages.reset_history(current_chat_user)
         return self.messages.get_messages()
+    def load_static_messages(self, list_messages, current_chat_user):
+        return self.messages.set_static_messages_from_list(list_messages, current_chat_user)
+    
     #deprecated
     def call_router(self,prompt,context):
         #
