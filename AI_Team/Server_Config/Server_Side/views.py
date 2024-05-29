@@ -79,7 +79,9 @@ class ChatUIView(View):
         self.conversation = Conversation()
         self.stream_calls_methods_dict = {'main': self.conversation.main_query_temp_rag_if_it_exist,
                                         'subscription': self.conversation.stream_chat,
-                                        'panel-admin': self.conversation.main_query_perm_rag_if_it_exist}
+                                        'panel-admin': self.conversation.main_query_perm_rag_if_it_exist,
+                                        'default': self.conversation.user_chat_query_existing_perm_rag
+                                        }
 
         
     def get(self, request, *args, **kwargs):
@@ -168,7 +170,7 @@ class ChatUIView(View):
             # Call the corresponding method dynamically
                 return self.stream_calls_methods_dict[self.context_value](request)
             else:
-                return JsonResponse({'error': 'Invalid context provided'}, status=400)
+                return self.stream_calls_methods_dict['default'](request)
         else:
             return JsonResponse({'error': 'Invalid request method'}, status=400)
       
@@ -262,6 +264,28 @@ class Conversation():
             # then update_messages
             # and last StreamingHttpResponse with call_ollama_stream
         #if not then call ai_handler llm query no rag
+
+        return StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/event-stream')
+    
+    # create a method that named user_chat_query_existing_perm_rag and his parameters are the same as main_query_perm_rag_if_it_exist
+    def user_chat_query_existing_perm_rag(self, request):
+        # que the data with json.loads request.body
+        data = json.loads(request.body)
+        current_chat = data.get('current_chat')
+        list_messages = data.get('list_messages')
+        message = list_messages[-1]['content']
+
+        # get the user_id from the current_chat
+        user_id = current_chat.split('Uptc%3Fto=')[-1].rstrip('$')
+        user_id = hashids.decode(user_id)[0]
+
+        # get the user email from the user_id using the model User
+        user_email_page_creator = User.objects.get(id=user_id).email
+
+        # get the collection by name using the email_ user
+        collection = self.ai_handler.get_collection_by_name(user_email_page_creator)
+        formatted_prompt = self.ai_handler.query_user_collection_with_chat_context(user_email_page_creator ,message, collection)
+        list_messages = self.ai_handler.update_messages(ia_response=False, prompt=formatted_prompt)
 
         return StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/event-stream')
     # only reset chat history

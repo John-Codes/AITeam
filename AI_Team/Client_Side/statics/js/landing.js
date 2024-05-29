@@ -43,7 +43,7 @@ async function sendMessageStream() {
     const languagePrefix = getLanguagePrefix();
     const urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
 
-    const async_chat = `/${languagePrefix}/${urlDictionary[currentContext]}/`;
+    //const async_chat = `/${languagePrefix}/${urlDictionary[currentContext]}/`;
 
 
     chatBox.insertAdjacentHTML('beforeend', `
