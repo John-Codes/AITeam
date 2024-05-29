@@ -209,24 +209,9 @@ function uploadFile(event) {
             // Realizar acciones adicionales después de cargar el archivo
             console.log('File uploaded successfully:', data);
             const chatBox = document.getElementById("chatBox");
-            if (data.upload_success) {
-                let messageContent = data.upload_success;
-                if (data.user_page) {
-                    // change the message to be multilenguajes
-                    messageContent += `<br>Visita tu página: <a href="${data.user_page}" target="_blank">${data.user_page}</a>`;
-                }
-                chatBox.insertAdjacentHTML('beforeend', `
-                    <div class="message-left glass">
-                        <p class="message-content">${messageContent}</p>
-                        <div class="mt-2">
-                            <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                            <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                            <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                `);
-            } else {
+            if (data.message) {
+                chatBox.insertAdjacentHTML('beforeend', data.message);
+            } else  if (data.error) {
                 chatBox.insertAdjacentHTML('beforeend', `
                     <div class="message-left glass">
                         <p class="message-content">File upload failed.</p>

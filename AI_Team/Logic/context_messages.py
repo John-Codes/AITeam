@@ -64,4 +64,8 @@ Explain the dictionary with this message replacing the description with the dict
 - default message: Serves as the introductory message displayed when users visit the page.
 - list items: Consists of navigation links and their respective URLs.
 - products: Contains a list of dictionaries, each item in the list is a product, and each product has the following dictionary keys: name, description, value, link to buy."""},
+'summary': {
+      "role": "system",
+      "content": "Tu trabajo es realizar un resumen del contexto que te de el Usuario sin importar el contenido, menciona los datos relevantes y los temas principale, incluye cualquier URL que te pase el usuario."
+    },
 }

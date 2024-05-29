@@ -105,8 +105,6 @@ def generate_json(user_info):
     try:
         print("generate_json")
         user_info = str(user_info)
-        encoding = tiktoken.encoding_for_model("gpt-4")
-        token_prompt = len(encoding.encode(user_info))
         # Instantiate the parser with the new model.
         parser = PydanticOutputParser(pydantic_object=ContentPage)
 
@@ -135,11 +133,11 @@ def generate_json(user_info):
 
         #chat.add_user_message(user_query)
         #ollama.query_ollama(chat.get_messages())
-    except Exception as gj:
-        print(gj)
+    except Exception as e:
+        print('error generating the json',e)
     chat_model = ChatOllama(
-        temperature=0.5,
-        model="mistral",
+        temperature=0.8,
+        model="llama3",
     )
     #ChatGooglePalm(google_api_key=google_api_key, temperature=0.5, top_k=40, top_p = 0.95, max_output_tokens= 4024)
     #chat_model = ChatOpenAI(
@@ -152,17 +150,15 @@ def generate_json(user_info):
     #    max_tokens=3000
     #)
     # Run the Chain and capture the output
-    output = chat_model(_input.to_messages())
-    token_response = len(encoding.encode(output.content))
-    tokens_used =token_response + token_prompt
+    output = chat_model.invoke(_input.to_messages())
     try:
         parsed = parser.parse(output.content)
-        return output.content, tokens_used
+        return output.content
     except Exception as  e:
         print('error')
         print(e)
         json_succes = str(e)
-        return json_succes, tokens_used
+        return json_succes
     
     
 
