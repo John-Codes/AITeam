@@ -16,7 +16,8 @@ from .models import Client as User
 from .models import ClienContext, SubscriptionDetail
 from django.contrib.auth import logout 
 from django.shortcuts import render,redirect, get_object_or_404
-
+from django.template.loader import render_to_string
+from AI_Team.Logic.ollama.ollama_json_generator import jsonPageDescriptionOllama
 from AI_Team.Logic.Memory import *
 from AI_Team.Logic.response_utils import * # IA message render templates method
 from AI_Team.Logic.sender_mails import Contac_us_mail, notice_error_forms
@@ -196,7 +197,8 @@ class Conversation():
     def __init__(self):
         self.ai_handler = ai_Handler()
         self.chat_history = Chat_history()
-        self.stream_ollama = OllamaRag
+        self.stream_ollama = OllamaRag()
+        self.json_page = DataSaver()
 
     
     @method_decorator(csrf_exempt)
@@ -289,10 +291,11 @@ class Conversation():
             temp_uuid = str(uuid.uuid4())
             if pdf_file != 'no path' and upload_success:
                 
-                self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, temp_uuid)
+                self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, temp_uuid, permanent=context_value)
                 request.session['temp_collection_exist'] = {'pdf_path': pdf_file, 'temp_uuid': temp_uuid} 
                 delete_temp_pdfs(pdf_file)
-                return JsonResponse({'message': 'Files processed successfully', 'upload_success': upload_success})
+                html_message = render_to_string('chat_messages/temp_rag_success.html')
+                return JsonResponse({'message': html_message})
             elif pdf_file == 'no path':
                 return JsonResponse({'message': 'No path for PDF file', 'upload_success': upload_success})
             else:
@@ -315,11 +318,15 @@ class Conversation():
             
             if pdf_file != 'no path' and upload_success:
                 
-                self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, collection_name)
+                collection =self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, collection_name, permanent=request.user.email)
+                self.create_json_page(request.user.id ,request.user.email,collection=collection)
                 delete_temp_pdfs(pdf_file)
                 # call to create_json_page
-                
-                return JsonResponse({'message': 'Files processed successfully', 'upload_success': upload_success, 'user_page': user_page})
+                context = {
+                    'user_page_url': reverse('ai-team', kwargs={'context': user_page})
+                }
+                html_message = render_to_string('chat_messages/perm_rag_success.html', context)
+                return JsonResponse({'message': html_message})
             elif pdf_file == 'no path':
                 return JsonResponse({'message': 'No path for PDF file', 'upload_success': upload_success})
             else:
@@ -327,10 +334,25 @@ class Conversation():
         else:
             return JsonResponse({'error': 'Invalid request method'}, status=405)
     
-    def create_json_page(self, request):
-        # add methods to create json file of the page
-        # add block try-execpt and send mail if error
-        
+    def create_json_page(self, user_id, user_email, collection):
+        try:
+                       
+            summary_prompt = "Necesito tu ayuda ya que mi trabajo es realizar resumenes de textos y me han dado uno complicado, menciona el tema del texto. Datos importantes y cualquier url que se mencione."
+            
+            formatted_prompt = self.ai_handler.query_user_collection_with_chat_context(user_email, summary_prompt, collection)
+            list_messages = self.ai_handler.update_messages(ia_response=False, prompt=formatted_prompt)
+            list_messages = self.ai_handler.load_static_messages(list_messages,'summary')
+
+            summary_response = self.ai_handler.call_ollama_no_rag(list_messages)
+
+            json_generator = jsonPageDescriptionOllama(summary_response)
+            json_output = json_generator.generate_json()
+            self.json_page.create_page(user_id, json_output)
+
+        except Exception as e:
+            # print nombre de la función y el error
+            print(self.create_json_page.__name__, e)
+
 # Class to handle the form of Reset Password
 class PasswordResetView(PasswordResetView):
     template_name = 'registration/password_reset.html'

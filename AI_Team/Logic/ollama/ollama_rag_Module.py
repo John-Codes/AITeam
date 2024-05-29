@@ -5,6 +5,7 @@ import json
 import asyncio
 import chromadb
 #Ollama Rag Youtube
+from django.utils.translation import gettext as _
 from langchain_community.chat_models import ChatOllama
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.vectorstores.chroma import Chroma
@@ -294,13 +295,30 @@ class OllamaRag:
     
     #add documents to the collection
     def add_documents_to_collection(self, split_documents, list_embeddings, collection):
-        ids = [str(i) for i in range(len(split_documents))]
-        collection.add(
-            ids=ids,
-            documents=[doc.page_content for doc in split_documents],
-            embeddings=list_embeddings,
-            metadatas=[doc.metadata for doc in split_documents]
-        )
+        try: 
+            # Verify if the collection is empty
+            all_ids = collection.get()["documents"]
+
+            # Delete all documents in the collection
+            if all_ids:
+                collection_name = collection.name
+                self.chroma_client.delete_collection(name=collection_name)
+                collection = self.chroma_client.create_collection(name=collection_name)
+                
+
+            ids = [str(i) for i in range(len(split_documents))]
+
+            # Add the new documents to the collection or update them if they already exist
+            collection.add(
+                ids=ids,
+                documents=[doc.page_content for doc in split_documents],
+                embeddings=list_embeddings,
+                metadatas=[doc.metadata for doc in split_documents]
+            )
+
+            return collection
+        except Exception as e:
+            print(self.add_documents_to_collection.__name__, e)
 
 
     # create a method that query a collection passed as parameter
@@ -356,7 +374,11 @@ class OllamaRag:
  
     def ollama_llm_query_single_question(self,question, context):
         try:    
-            formatted_prompt = f"Question: {question}\n\nContext: {context}"
+            
+            context_label = _("Context")
+            question_label = _("Question")
+
+            formatted_prompt = f"{question_label}: {question}\n\n{context_label}: {context}"
             #response = ollama_api.chat(model='llama3', messages=[{'role': 'user', 'content': formatted_prompt}])
             return formatted_prompt
         except Exception as oll:
@@ -390,14 +412,17 @@ class OllamaRag:
             doc_splits = self.text_spliter_for_vectordbs(doc_splits)
             self.new_temp_chroma_and_retriever(doc_splits)
     
-    def add_pdf_to_new_perm_collection(self, pathpdf, collection_name):
-        text = self.extract_text_from_pdf(pathpdf)
+    def add_pdf_to_new_perm_collection(self, source_metadata, collection_name, permanent_source):
+        text = self.extract_text_from_pdf(source_metadata)
         splits = self.semantic_text_split_bert(text, 500)
-        doc_splits = self.string_list_to_hf_documents(splits, pathpdf)
+        # source metada == pathpdf if temp_rag, else source_metadata is email_user
+        source_metadata = permanent_source if permanent_source else source_metadata
+        doc_splits = self.string_list_to_hf_documents(splits, source_metadata)
         doc_splits = self.text_spliter_for_vectordbs(doc_splits)
         collection = self.get_or_create_collection_for_user_email(collection_name)
         list_embeddings = self.get_ollama_list_of_embeddings(doc_splits)
-        self.add_documents_to_collection(doc_splits,list_embeddings, collection)
+        collection = self.add_documents_to_collection(doc_splits,list_embeddings, collection)
+        return collection
 
         #self.Create_embbedings_and_persisted_crhomadb_and_retriever_in_directory(doc_splits,rag_name)
         

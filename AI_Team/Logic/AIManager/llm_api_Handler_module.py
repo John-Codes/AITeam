@@ -13,8 +13,8 @@ class ai_Handler:
         self.retriever = None
         
 
-    def call_ollama_no_rag(self,messages):
-       return o.query_ollama(messages)
+    def call_ollama_no_rag(self, messages):
+       return self.ai.query_ollama(messages)
 
     def call_ollama_stream(self, messsages):
         return self.ai.stream_query_ollama(messsages)
@@ -61,9 +61,9 @@ class ai_Handler:
         
         self.ai.add_pdf_to_new_temp_rag(pdfdirectory)
     
-    def create_collection_rag_with_a_pdf(self,pdfdirectory,rag_name):
+    def create_collection_rag_with_a_pdf(self,pdfdirectory,rag_name, permanent = False):
         
-        self.ai.add_pdf_to_new_perm_collection(pdfdirectory, rag_name)
+        return self.ai.add_pdf_to_new_perm_collection(pdfdirectory, rag_name, permanent)
     
     # function that get collection by name
     def get_collection_by_name(self, collection_name):
@@ -71,9 +71,9 @@ class ai_Handler:
         collection = self.ai.get_or_create_collection_for_user_email(collection_name)
         return collection
     
-    def query_user_collection_with_chat_context(self, path_to_pdf_metadata, user_question, collection):
-        # path_to_pdf_metadata, user_question
-        collection_result =self.ai.query_collection(path_to_pdf_metadata, user_question, collection)
+    def query_user_collection_with_chat_context(self, source_value_metadata, user_question, collection):
+        # source_value_metadata, user_question
+        collection_result =self.ai.query_collection(source_value_metadata, user_question, collection)
         return self.ai.query_user_collection_with_context(user_question, collection_result)
 
     #method that deletes a collection by name

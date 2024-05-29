@@ -1,5 +1,5 @@
 # Define a new Pydantic model with field descriptions and tailored for Twitter.
-from pydantic import BaseModel, Field
+from langchain.pydantic_v1 import BaseModel, Field
 from typing import List, Union
 
 class ContentPage(BaseModel):

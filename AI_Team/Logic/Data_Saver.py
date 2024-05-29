@@ -66,7 +66,9 @@ class DataSaver:
     
     def create_page(self, user_id, user_json_page):
         user_name_page = hashids.encode(user_id)
-        data_dict = self.format_str_to_dict(user_json_page)
+        user_json_page_cleaned = self.clean_input(user_json_page)
+        data_dict = json.loads(user_json_page_cleaned)
+        #data_dict = self.format_str_to_dict(user_json_page_cleaned)
         self.save_to_json(data_dict, f"memory-AI-with-{user_name_page}")
 
     def check_site(self, user_id=None, check_context=None):
@@ -86,3 +88,6 @@ class DataSaver:
         
         # Print whether the file exists or not
         return exists
+    #create a method that takes a parameter named input and cleans it of /n / and *
+    def clean_input(self, input):
+        return input.replace('\n', '').replace('\r', '').replace('*', '').replace('\\n', '').replace('\\', '')
