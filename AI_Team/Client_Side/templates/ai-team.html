@@ -17,7 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Bootstrap CSS python manage.py runserver-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href={% static "css/style_chat.css" %} rel="stylesheet"> 
@@ -121,14 +121,11 @@
                                 <h3>{% trans "Subscribed from Date:" %}</h3>
                                 <p>{{ user.date_subscription }}</p>
                                 
-                                <p>{% trans "If you wanna upgrade your current subscription visit the" %} <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
+                                <p>{% trans "If you wanna upgrade your current subscription visit the"%}<a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
                             </div>           
                             <div class="mt-2">
-                                <form id="cancel-subscription-form" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="action" value="cancel_subscription">
-                                    <button type="submit" class="btn btn-danger">{% trans "Cancel Subscription" %}</button>
-                                </form>
+                                
+                                <button data-target="modal-cancel-subscription" type="submit" class="button js-modal-trigger btn btn-danger">{% trans "Cancel Subscription" %}</button>
                                                                                                                     
                             </div>
                         </div>
@@ -136,29 +133,24 @@
                         <div class="message-left glass" >
                             <h2 class="message-content">{% trans "Discover Our Subscription Plans" %}</h2>
                             <p class="message-content">{% trans "We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website. These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us:" %}</p>
-<!--                             <h3 class="message-content">{% trans "Entry Plan" %}</h3>
-                            <p class="message-content">{% trans "Designed for the individual user, our Entry Plan offers a focused and streamlined experience. Perfect for those looking to explore our services without commitment, it's your gateway to understanding the full potential of our platform. Dive in and discover what we have to offer at an unbeatable value." %}</p>
-                            <h3 class="message-content">{% trans "Premium Plan" %}</h3>
-                            <p class="message-content">{% trans "Elevate your business with our Premium Plan, which delivers enhanced performance and tools specifically designed to boost productivity and customer service. Ideal for businesses looking to gain a competitive edge, this plan provides the resources and support you need to excel in your industry." %}</p>
-                            <h3 class="message-content">{% trans "Enterprise Plan" %}</h3>
-                            <p class="message-content">{% trans "Our Enterprise Plan is the epitome of customization and dedicated support. Tailored to fit each client's unique needs, this plan offers 24/7 attention and a suite of customizable features to ensure your enterprise operates seamlessly and at its peak potential. Experience unparalleled service and flexibility with our Enterprise Plan." %}</p> -->
+                            <br>
                             <div class="columns is-justify-content-center ">
                                 <div class="column is-4" >
                                     <div class="box has-background-black" >
-                                        <h3 class="title is-4 has-text-white has-text-centered is-justify-content-center">Entry Plan</h3>
-                                        <p class="has-text-centered has-text-white">Designed for the individual user, our Entry Plan offers a focused and streamlined experience. Perfect for those looking to explore our services without commitment, it's your gateway to understanding the full potential of our platform. Dive in and discover what we have to offer at an unbeatable value.</p>
+                                        <h3 class="title is-4 has-text-white has-text-centered is-justify-content-center">{% trans "Entry Plan"%}</h3>
+                                        <p class="has-text-centered has-text-white">{% trans "Designed for the individual user, our Entry Plan offers a focused and streamlined experience. Perfect for those looking to explore our services without commitment, it's your gateway to understanding the full potential of our platform. Dive in and discover what we have to offer at an unbeatable value."%}</p>
                                     </div>
                                 </div>
                                 <div class="column is-4" >
                                     <div class="box has-background-black">
-                                        <h3 class="title is-4 has-text-white has-text-centered is-justify-content-center">Premium Plan</h3>
-                                        <p class="has-text-centered has-text-white">Elevate your business with our Premium Plan, which delivers enhanced performance and tools specifically designed to boost productivity and customer service. Ideal for businesses looking to gain a competitive edge, this plan provides the resources and support you need to excel in your industry.</p>
+                                        <h3 class="title is-4 has-text-white has-text-centered is-justify-content-center">{% trans "Premium Plan"%}</h3>
+                                        <p class="has-text-centered has-text-white">{%trans "Elevate your business with our Premium Plan, which delivers enhanced performance and tools specifically designed to boost productivity and customer service. Ideal for businesses looking to gain a competitive edge, this plan provides the resources and support you need to excel in your industry."%}</p>
                                     </div>
                                 </div>
                                 <div class="column is-4">
                                     <div class="box has-background-black" >
-                                        <h3 class="title is-4 has-text-white has-text-centered is-justify-content-center">Enterprise Plan</h3>
-                                        <p class="has-text-centered has-text-white">Our Enterprise Plan is the epitome of customization and dedicated support. Tailored to fit each client's unique needs, this plan offers 24/7 attention and a suite of customizable features to ensure your enterprise operates seamlessly and at its peak potential. Experience unparalleled service and flexibility with our Enterprise Plan.</p>
+                                        <h3 class="title is-4 has-text-white has-text-centered is-justify-content-center">{% trans "Enterprise Plan"%}</h3>
+                                        <p class="has-text-centered has-text-white">{%trans "Our Enterprise Plan is the epitome of customization and dedicated support. Tailored to fit each client's unique needs, this plan offers 24/7 attention and a suite of customizable features to ensure your enterprise operates seamlessly and at its peak potential. Experience unparalleled service and flexibility with our Enterprise Plan."%}</p>
                                     </div>
                                 </div>
                             </div>
@@ -250,7 +242,7 @@
     </div>
     
     {% include "hidden-ai-team.html" %}
-
+    {% include 'modal-cancel-subscrition.html' %}
 
 </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

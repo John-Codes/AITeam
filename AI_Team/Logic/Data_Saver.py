@@ -21,27 +21,36 @@ class DataSaver:
             json.dump(data_dict, file, ensure_ascii=False, indent=4)
 
     def read_from_json(self, filename, keys=False):
-        # Lee datos de un archivo JSON. Si se proporciona una key, devuelve solo el valor de esa key.
+        try:
+            # Lee datos de un archivo JSON. Si se proporciona una key, devuelve solo el valor de esa key.
 
-        file_path = self.base_path / f"{filename}.json"
-        
-        if not file_path.exists():
-            return False
+            file_path = self.base_path / f"{filename}.json"
+            
+            if not file_path.exists():
+                return False, "File Does not Exist"
 
-        with file_path.open('r', encoding='utf-8') as file:
-            data = json.load(file)
-        if keys:
-            data_selected = {}
-            for key in keys:
-                value = data.get(key)
-                data_selected[key] = value
-            return data_selected
-        else:
-            return  data
+            with file_path.open('r', encoding='utf-8') as file:
+                data = json.load(file)
+            if keys:
+                data_selected = {}
+                for key in keys:
+                    value = data.get(key)
+                    data_selected[key] = value
+                return data_selected, False
+            else:
+                return  data, False
+        except Exception as e:
+            error = f"Error al leer el archivo JSON: {e}"
+            if data_selected:
+                error += f"\nData selected: {data_selected}"
+            return False, error
 
     def json_to_dict(self, filename):
+        data, error = self.read_from_json(filename)
+        if error:
+            return False, error
+        return data, False
         # Convierte un archivo JSON a un diccionario de Python
-        return self.read_from_json(filename)
     
     def format_str_to_dict(self, json_str):
         # Primero, extraemos el contenido entre las llaves
@@ -68,7 +77,6 @@ class DataSaver:
         user_name_page = hashids.encode(user_id)
         user_json_page_cleaned = self.clean_input(user_json_page)
         data_dict = json.loads(user_json_page_cleaned)
-        #data_dict = self.format_str_to_dict(user_json_page_cleaned)
         self.save_to_json(data_dict, f"memory-AI-with-{user_name_page}")
 
     def check_site(self, user_id=None, check_context=None):

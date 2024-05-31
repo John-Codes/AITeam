@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-27 23:54+0000\n"
+"POT-Creation-Date: 2024-05-31 12:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: Client_Side/templates/ai-team-customize.html:57
+#: Client_Side/templates/ai-team.html:84
+msgid "An AI Team is writing"
+msgstr "Un AI-Team está escribiendo"
 
 #: Client_Side/templates/ai-team.html:13
 #, fuzzy
@@ -35,7 +40,7 @@ msgstr "Cerrar sesión"
 
 #: Client_Side/templates/ai-team.html:51
 #: Client_Side/templates/subscription.html:13
-#: Server_Config/Server_Side/views.py:91
+#: Server_Config/Server_Side/views.py:93
 msgid "Subscriptions"
 msgstr "Suscripciones"
 
@@ -55,10 +60,6 @@ msgstr "Contáctenos"
 #: Client_Side/templates/ai-team.html:61 Client_Side/templates/ai-team.html:67
 msgid "About Us"
 msgstr "Acerca de nosotros"
-
-#: Client_Side/templates/ai-team.html:84
-msgid "An AI Team is writing"
-msgstr "Un IA-Team está escribiendo"
 
 #: Client_Side/templates/ai-team.html:91
 msgid "Website Creation Service with AI"
@@ -119,30 +120,29 @@ msgid "Subscribed from Date:"
 msgstr "Suscrito desde la fecha:"
 
 #: Client_Side/templates/ai-team.html:124
-#, fuzzy
-#| msgid "if you wanna upgrade your current subscription visit the"
 msgid "If you wanna upgrade your current subscription visit the"
-msgstr "si desea actualizar su suscripción actual, visite"
+msgstr "si desea obtener cualquier suscripción, visite la"
 
 #: Client_Side/templates/ai-team.html:124
-#: Client_Side/templates/ai-team.html:167
+#: Client_Side/templates/ai-team.html:158
 msgid "Subscription"
 msgstr "Suscripción"
 
 #: Client_Side/templates/ai-team.html:124
-#: Client_Side/templates/ai-team.html:167
+#: Client_Side/templates/ai-team.html:158
 msgid "page"
 msgstr "pagina "
 
-#: Client_Side/templates/ai-team.html:130
+#: Client_Side/templates/ai-team.html:128
+#: Client_Side/templates/modal-cancel-subscrition.html:6
 msgid "Cancel Subscription"
 msgstr "Cancelar suscripción"
 
-#: Client_Side/templates/ai-team.html:137
+#: Client_Side/templates/ai-team.html:134
 msgid "Discover Our Subscription Plans"
 msgstr "Descubra nuestros planes de suscripción"
 
-#: Client_Side/templates/ai-team.html:138
+#: Client_Side/templates/ai-team.html:135
 msgid ""
 "We are thrilled to introduce our range of subscription plans tailored to "
 "enhance your experience on our website. These plans are designed to provide "
@@ -157,7 +157,7 @@ msgstr ""
 
 #: Client_Side/templates/ai-team.html:139
 msgid "Entry Plan"
-msgstr "Plan de entrada"
+msgstr "Plan Básico"
 
 #: Client_Side/templates/ai-team.html:140
 msgid ""
@@ -167,17 +167,17 @@ msgid ""
 "our platform. Dive in and discover what we have to offer at an unbeatable "
 "value."
 msgstr ""
-"Diseñado para el usuario individual, nuestro Plan de Entrada ofrece un "
-"enfoque y experiencia optimizada. Perfecto para aquellos que buscan explorar "
-"nuestros servicios sin compromiso, es su puerta de entrada para comprender "
-"todo el potencial de nuestra plataforma. Sumérgete y descubre lo que tenemos "
-"para ofrecerte a un precio inmejorable."
+"Diseñado para el usuario individual, nuestro Plan Básico ofrece una "
+"experiencia enfocada y simplificada. Perfecto para aquellos que buscan "
+"explorar nuestros servicios sin compromiso, es su puerta de entrada para "
+"comprender el potencial completo de nuestra plataforma. Sumérjase y descubra "
+"lo que tenemos para ofrecer a un valor inmejorable."
 
-#: Client_Side/templates/ai-team.html:141
+#: Client_Side/templates/ai-team.html:145
 msgid "Premium Plan"
 msgstr "Plan Premium"
 
-#: Client_Side/templates/ai-team.html:142
+#: Client_Side/templates/ai-team.html:146
 msgid ""
 "Elevate your business with our Premium Plan, which delivers enhanced "
 "performance and tools specifically designed to boost productivity and "
@@ -185,17 +185,17 @@ msgid ""
 "this plan provides the resources and support you need to excel in your "
 "industry."
 msgstr ""
-"Mejore su negocio con nuestro Plan Premium, que ofrece mejorasrendimiento y "
-"herramientas diseñadas específicamente para aumentar la productividad y "
-"servicio al cliente. Ideal para empresas que buscan obtener una ventaja "
-"competitiva, este plan proporciona los recursos y el apoyo que necesita para "
-"sobresalir en su industria."
+"Eleve su negocio con nuestro Plan Premium, que ofrece un rendimiento "
+"mejorado y herramientas específicamente diseñadas para aumentar la "
+"productividad y el servicio al cliente. Ideal para empresas que buscan "
+"obtener una ventaja competitiva, este plan proporciona los recursos y el "
+"apoyo que necesita para sobresalir en su industria."
 
-#: Client_Side/templates/ai-team.html:143
+#: Client_Side/templates/ai-team.html:151
 msgid "Enterprise Plan"
 msgstr "Plan Empresarial"
 
-#: Client_Side/templates/ai-team.html:144
+#: Client_Side/templates/ai-team.html:152
 msgid ""
 "Our Enterprise Plan is the epitome of customization and dedicated support. "
 "Tailored to fit each client's unique needs, this plan offers 24/7 attention "
@@ -204,34 +204,32 @@ msgid ""
 "flexibility with our Enterprise Plan."
 msgstr ""
 "Nuestro Plan Empresarial es el epítome de la personalización y el soporte "
-"dedicado.Diseñado para satisfacer las necesidades únicas de cada cliente, "
-"este plan ofrece atención 24/7y un conjunto de funciones personalizables "
-"para garantizar el funcionamiento de su empresasin problemas y en su máximo "
-"potencial. Experimente un servicio incomparable y flexibilidad con nuestro "
-"Plan Empresarial."
+"dedicado. Adaptado para satisfacer las necesidades únicas de cada cliente, "
+"este plan ofrece atención 24/7 y una suite de características "
+"personalizables para asegurar que su empresa opere sin problemas y en su "
+"máximo potencial. Experimente un servicio y flexibilidad inigualables con "
+"nuestro Plan Empresarial."
 
-#: Client_Side/templates/ai-team.html:166
-#, fuzzy
-#| msgid ""
-#| "if you wanna know about each plan, only send a message and AI Team "
-#| "response you"
+#: Client_Side/templates/ai-team.html:157
 msgid ""
 "if you wanna know more about each plan, only send a message and AI Team "
 "response you"
 msgstr ""
-"si quieres conocer cada plan, solo envía un mensaje y AI Team te respondera"
+"si desea saber más sobre cada plan, solo envíe un mensaje y el Equipo de IA "
+"le responderá"
 
-#: Client_Side/templates/ai-team.html:167
+#: Client_Side/templates/ai-team.html:158
 #, fuzzy
 #| msgid "if you wanna upgrade your current subscription visit the"
 msgid "If you wanna get any subscription visit the"
-msgstr "si desea actualizar su suscripción actual, visite"
+msgstr "si desea obtener cualquier suscripción, visite la"
 
-#: Client_Side/templates/ai-team.html:178
+#: Client_Side/templates/ai-team.html:169
 msgid "Welcome to our AI Chat Page Creation Tool!"
 msgstr ""
+"¡Bienvenido a nuestra herramienta de creación de páginas de chat con IA!"
 
-#: Client_Side/templates/ai-team.html:179
+#: Client_Side/templates/ai-team.html:170
 #, fuzzy
 #| msgid ""
 #| "Welcome to our AI Chat Page Creation tool! With this tool, you can craft "
@@ -246,11 +244,11 @@ msgstr ""
 "proporcionar información a través de archivos cargados(PDF o TXT). Aquí se "
 "explica cómo proceder:"
 
-#: Client_Side/templates/ai-team.html:181
+#: Client_Side/templates/ai-team.html:172
 msgid "1 Upload Your Content:"
 msgstr "1 Sube tu contenido:"
 
-#: Client_Side/templates/ai-team.html:182
+#: Client_Side/templates/ai-team.html:173
 msgid ""
 "Prepare a PDF or TXT file including the following details for your custom AI "
 "Chat Page:"
@@ -258,29 +256,29 @@ msgstr ""
 "Prepare un archivo PDF o TXT que incluya los siguientes detalles para su IA "
 "personalizadaPágina de chat:"
 
-#: Client_Side/templates/ai-team.html:184
+#: Client_Side/templates/ai-team.html:175
 msgid "Page Title: The name shown on the browser tab."
 msgstr ""
 "Título de la página: El nombre que se muestra en la pestaña del navegador."
 
-#: Client_Side/templates/ai-team.html:185
+#: Client_Side/templates/ai-team.html:176
 msgid "Page Header: The main title or heading on your page."
 msgstr "Encabezado de página: El título o encabezado principal de su página."
 
-#: Client_Side/templates/ai-team.html:186
+#: Client_Side/templates/ai-team.html:177
 msgid "Navigation Links: List of navigation items and their URLs."
 msgstr "Enlaces de navegación: Lista de elementos de navegación y sus URL."
 
-#: Client_Side/templates/ai-team.html:187
+#: Client_Side/templates/ai-team.html:178
 msgid "Default Chat Message: A greeting message for visitors."
 msgstr ""
 "Mensaje de chat predeterminado: un mensaje de saludo para los visitantes."
 
-#: Client_Side/templates/ai-team.html:188
+#: Client_Side/templates/ai-team.html:179
 msgid "Products: Detailed descriptions of your products."
 msgstr "Productos: Descripciones detalladas de sus productos."
 
-#: Client_Side/templates/ai-team.html:189
+#: Client_Side/templates/ai-team.html:180
 msgid ""
 "Context Information: Any additional information, questions, and answers you "
 "want the AI to use for personalized responses."
@@ -288,11 +286,11 @@ msgstr ""
 "Información de contexto: cualquier información adicional, preguntas y "
 "respuestas quequiera que la IA se utilice para respuestas personalizadas."
 
-#: Client_Side/templates/ai-team.html:192
+#: Client_Side/templates/ai-team.html:183
 msgid "2 Images:"
 msgstr "2 imágenes:"
 
-#: Client_Side/templates/ai-team.html:193
+#: Client_Side/templates/ai-team.html:184
 msgid ""
 "For product images, upload each image with the name matching exactly with "
 "the product name described in your file."
@@ -300,11 +298,11 @@ msgstr ""
 "Para imágenes de productos, cargue cada imagen con el nombre que coincida "
 "exactamente con el nombre del producto descrito en su archivo."
 
-#: Client_Side/templates/ai-team.html:195
+#: Client_Side/templates/ai-team.html:186
 msgid "3 Consult and Monitor:"
 msgstr "3 Consultar y monitorear:"
 
-#: Client_Side/templates/ai-team.html:196
+#: Client_Side/templates/ai-team.html:187
 msgid ""
 "Use this chat to consult the details of your site and monitor the progress. "
 "Once your content is processed, a custom link to your AI Chat Page will be "
@@ -314,7 +312,7 @@ msgstr ""
 "progreso.Una vez que se procese su contenido, aparecerá un enlace "
 "personalizado a su página de chat AIdisponible."
 
-#: Client_Side/templates/ai-team.html:198
+#: Client_Side/templates/ai-team.html:189
 msgid ""
 "Remember, the AI will respond based on the context and information provided "
 "in your uploaded files, ensuring a tailored experience for your visitors. "
@@ -325,7 +323,7 @@ msgstr ""
 "personalizada para sus visitantes.¡Estamos aquí para ayudarle en cada paso "
 "del camino!"
 
-#: Client_Side/templates/ai-team.html:200
+#: Client_Side/templates/ai-team.html:191
 msgid ""
 "Get started now by uploading your file and let's create an amazing AI Chat "
 "Experience together!"
@@ -401,6 +399,22 @@ msgstr "Hemos encontrado suficientes palabras clave para crear su sitio"
 #: Client_Side/templates/chat_messages/text_message.html:16
 msgid "We haven't found enough keywords to create your site"
 msgstr "No hemos encontrado suficientes palabras clave para crear su sitio"
+
+#: Client_Side/templates/modal-cancel-subscrition.html:10
+msgid "Why do you want to cancel?"
+msgstr "¿Por qué quieres cancelar?"
+
+#: Client_Side/templates/modal-cancel-subscrition.html:14
+msgid "How can we improve?"
+msgstr "¿Cómo podemos mejorar?"
+
+#: Client_Side/templates/modal-cancel-subscrition.html:18
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: Client_Side/templates/modal-cancel-subscrition.html:19
+msgid "Close"
+msgstr "Cerrar"
 
 #: Client_Side/templates/registration/password_reset_complete.html:5
 msgid "Password Reset Complete"
@@ -508,11 +522,239 @@ msgstr ""
 msgid "Saved Successfully"
 msgstr "Guardado exitosamente"
 
-#: Logic/ollama/ollama_rag_Module.py:376
+#: Logic/ollama/ollama_json_generator.py:15
+#, python-brace-format
+msgid ""
+"Always respond clearly, concisely, briefly, and simply. Answer plainly to "
+"the user's instruction, avoid long answers and unnecessary suggestions.\n"
+" {system_prompt}"
+msgstr ""
+"Responde siempre de manera clara, concisa, breve y simple. Contesta "
+"llanamente a la instrucción del usuario, evita respuestas largas y "
+"sugerencias innecesarias.\n"
+" {system_prompt}"
+
+#: Logic/ollama/ollama_json_generator.py:26
+msgid ""
+"Generate a title for a web page based on the PDF summary. The title should "
+"be catchy, concise, and reflect the main theme of the content. It should not "
+"be too long and a maximum of 3 words."
+msgstr ""
+"Genera un título para una página web basado en el resumen del PDF. El título "
+"debe ser atractivo, conciso y reflejar el tema principal del contenido. No "
+"debe ser demasiado largo y de máximo de 3 palabras."
+
+#: Logic/ollama/ollama_json_generator.py:27
+#, fuzzy, python-format
+#| msgid ""
+#| "I need a catchy and concise title for a web page that reflects the main "
+#| "theme of this summary: %(summary). It should be brief. Respond in the "
+#| "same language as this message."
+msgid ""
+"I need a catchy and concise title for a web page that reflects the main "
+"theme of this summary: %(summary)s. It should be brief. Respond in the same "
+"language as this message."
+msgstr ""
+"Necesito un título atractivo y conciso para una página web que refleje el "
+"tema principal de este resumen: %(summary)s. Debe ser breve. Responde en el "
+"mismo idioma que este mensaje."
+
+#: Logic/ollama/ollama_json_generator.py:32
+msgid ""
+"Generate a content for a html title tag based on the content that the user "
+"gives. The title should be informative and concise, ideal for display in the "
+"browser tab, so it should be a maximum of 5 words."
+msgstr ""
+"Genera el contenido para una etiqueta de título HTML basado en el contenido "
+"que proporciona el usuario. El título debe ser informativo y conciso, ideal "
+"para mostrarse en la pestaña del navegador, por lo que debe tener un máximo "
+"de 5 palabras."
+
+#: Logic/ollama/ollama_json_generator.py:33
+#, fuzzy, python-format
+#| msgid ""
+#| "I need a header for the browser tab that is brief and captures the "
+#| "essence of this content: %(summary). It should be sufficiently "
+#| "informative but concise, ideal for display in the browser tab, so it "
+#| "should be a maximum of 5 words. Respond in the same language as this "
+#| "message."
+msgid ""
+"I need a header for the browser tab that is brief and captures the essence "
+"of this content: %(summary)s. It should be sufficiently informative but "
+"concise, ideal for display in the browser tab, so it should be a maximum of "
+"5 words. Respond in the same language as this message."
+msgstr ""
+"Necesito un encabezado para la pestaña del navegador que sea breve y capture "
+"la esencia de este contenido: %(summary). Debe ser suficientemente "
+"informativo pero conciso, ideal para mostrarse en la pestaña del navegador, "
+"por lo que debe tener un máximo de 5 palabras. Responde en el mismo idioma "
+"que este mensaje."
+
+#: Logic/ollama/ollama_json_generator.py:39
+msgid ""
+"Generate an SEO meta description for a web page based on the content that "
+"the user gives. It should be attractive and summarize the key points. It "
+"should not be too long and a maximum of 160 characters."
+msgstr ""
+"Genera una descripción meta SEO para una página web basada en el contenido "
+"que proporciona el usuario. Debe ser atractiva y resumir los puntos clave. "
+"No debe ser demasiado larga y con máximo 160 caracteres."
+
+#: Logic/ollama/ollama_json_generator.py:40
+#, fuzzy, python-format
+#| msgid ""
+#| "I need a description for the 'description' meta tag of a web page, which "
+#| "should be short and concise between 150 and 160 characters. This "
+#| "description will help improve SEO and will not be directly visible to "
+#| "users. It should summarize the key points of this content: %(summary). "
+#| "Respond in the same language as this message."
+msgid ""
+"I need a description for the 'description' meta tag of a web page, which "
+"should be short and concise between 150 and 160 characters. This description "
+"will help improve SEO and will not be directly visible to users. It should "
+"summarize the key points of this content: %(summary)s. Respond in the same "
+"language as this message."
+msgstr ""
+"Necesito una descripción para la etiqueta meta 'description' de una página "
+"web, que debe ser corta y concisa entre 150 y 160 caracteres. Esta "
+"descripción ayudará a mejorar el SEO y no será visible directamente para los "
+"usuarios. Debe resumir los puntos clave de este contenido: %(summary). "
+"Responde en el mismo idioma que este mensaje."
+
+#: Logic/ollama/ollama_json_generator.py:46
+msgid ""
+"Generate a list of 10 relevant SEO keywords based on the PDF content. The "
+"keywords should be separated by commas."
+msgstr ""
+"Genera una lista de 10 palabras clave relevantes para SEO basadas en el "
+"contenido del PDF. Las palabras clave deben estar separadas por comas."
+
+#: Logic/ollama/ollama_json_generator.py:47
+#, python-format
+msgid ""
+"I need a list of 10 keywords that are relevant for SEO and based on this "
+"content: %(summary)s. They should be well-selected and separated by commas. "
+"Respond in the same language as this message."
+msgstr ""
+"Necesito una lista de 10 palabras clave que sean relevantes para SEO y "
+"basadas en este contenido: %(summary)s. Deben estar bien seleccionadas y "
+"separadas por comas. Responde en el mismo idioma que este mensaje."
+
+#: Logic/ollama/ollama_json_generator.py:53
+msgid ""
+"Generate a default message to be displayed to users on the web page to "
+"explain the purpose of the content or the interactive chat."
+msgstr ""
+"Genera un mensaje predeterminado para mostrar a los usuarios en la página "
+"web para explicar el propósito del contenido o del chat interactivo."
+
+#: Logic/ollama/ollama_json_generator.py:54
+#, python-format
+msgid ""
+"I want to create a chat where the following summary or content will be "
+"discussed: %(summary)s. I need a short and concise text so that, upon "
+"entering the chat, people know what the topic or purpose of the chat is. The "
+"chat is by message. Respond in the same language as this message."
+msgstr ""
+"Quiero crear un chat donde se discutirá el siguiente resumen o contenido: "
+"%(summary)s. Necesito un texto corto y conciso para que, al entrar al chat, "
+"las personas sepan cuál es el tema o propósito del chat. El chat es por "
+"mensaje. Responde en el mismo idioma que este mensaje."
+
+#: Logic/ollama/ollama_json_generator.py:60
+msgid ""
+"Generate a list of items with text and URL based on the URLs present in the "
+"summary. The expected format is [{text: 'text seen by the user', url: "
+"'url'}]. remember that text should be short and concise (maximum 3 words). "
+"If there are no URLs in the summary, return a list of empty strings."
+msgstr ""
+"Genera una lista de elementos con texto y URL basados en las URLs presentes "
+"en el resumen. El formato esperado es [{text: 'texto visto por el usuario', "
+"url: 'url'}]. recuerda que el texto debe ser corto y conciso (máximo 3 "
+"palabras). Si no hay URLs en el resumen, devuelve una lista de cadenas "
+"vacías."
+
+#: Logic/ollama/ollama_json_generator.py:63
+#, python-format
+msgid ""
+"Summary: %(summary)s. Please use only the URLs that are in the text, and "
+"generate a list of items with text and URL. IF there are no URLs in the "
+"summary, return a list of empty strings. Respond in the same language as "
+"this message."
+msgstr ""
+"Resumen: %(summary)s. Por favor, usa solo las URLs que están en el texto, y "
+"genera una lista de elementos con texto y URL. Si no hay URLs en el resumen, "
+"devuelve una lista de cadenas vacías. Responde en el mismo idioma que este "
+"mensaje."
+
+#: Logic/ollama/ollama_json_generator.py:83
+msgid ""
+"Generate a JSON with the following structure, using only the provided "
+"information. Do not add additional text or greetings, only the JSON. The "
+"JSON should contain the following keys with the expected data types: "
+"'title' (string), 'header' (string), 'description' (string), "
+"'keywords' (list of strings), 'default_message' (string), and "
+"'list_items' (list of objects with 'text' and 'url', if there is no url in "
+"the content list_items will be an empty list, without objects). Each key "
+"should contain only the relevant and direct information from the provided "
+"context. Do not invent information; use only the given data. Remember that "
+"each key, each value, each item of any list must go with double quotes, make "
+"sure to place them well in the JSON, do not use single quotes and less leave "
+"the keys and values of the json without quotes as this brings problems when "
+"processing the quotes."
+msgstr ""
+"Genera un JSON con la siguiente estructura, utilizando solo la información "
+"proporcionada. No agregues texto adicional ni saludos, solo el JSON. El JSON "
+"debe contener las siguientes claves con los tipos de datos esperados: "
+"'title' (cadena), 'header' (cadena), 'description' (cadena), "
+"'keywords' (lista de cadenas), 'default_message' (cadena) y "
+"'list_items' (lista de objetos con 'text' y 'url', si no hay url en el "
+"contenido, list_items será una lista vacía, sin objetos). Cada clave debe "
+"contener solo la información relevante y directa del contexto proporcionado. "
+"No inventes información; usa solo los datos dados. Recuerda que cada clave, "
+"cada valor, cada elemento de cualquier lista debe ir con comillas dobles, "
+"asegúrate de colocarlas bien en el JSON, no uses comillas simples y menos "
+"dejes las claves y valores del JSON sin comillas, ya que esto trae problemas "
+"al procesar las comillas."
+
+#: Logic/ollama/ollama_json_generator.py:84
+#, fuzzy, python-format
+msgid ""
+"My task is to create a JSON from a given context. The structure of the JSON "
+"should be as follows: You must include the following keys: 'title' which is "
+"a brief and descriptive string, 'header' which is a brief string for the "
+"browser tab, 'description' which is a string for the SEO meta tag "
+"description, 'keywords' which is a list of relevant SEO strings, "
+"'default_message' which is a string that introduces the purpose of the chat "
+"on the page, and 'list_items' which is a list of objects where each item has "
+"the keys 'text' and 'url', or an empty list if there are no URLs. Make sure "
+"that each part of the content corresponds to the appropriate key of the "
+"JSON: %(concatenated_responses)s. Use only the provided information and "
+"ensure that the format is strictly JSON, for this you must use double quotes "
+"when declaring the keys, the values. The keys or fields of the JSON should "
+"always be in English, but the content values should be in the same language "
+"as this message."
+msgstr ""
+"Mi trabajo es crear un JSON a partir de un contexto dado. La estructura del "
+"JSON debe ser la siguiente: Debes incluir las siguientes claves: 'title', "
+"que es una cadena breve y descriptiva, 'header', que es una cadena breve "
+"para la pestaña del navegador, 'description', que es una cadena para la "
+"etiqueta meta de descripción SEO, 'keywords', que es una lista de cadenas "
+"relevantes para SEO, 'default_message', que es una cadena que introduce el "
+"propósito del chat en la página, y 'list_items', que es una lista de objetos "
+"donde cada elemento tiene las claves 'text' y 'url', o una lista vacía si no "
+"hay URLs. Asegúrate de que cada parte del contenido corresponda a la clave "
+"apropiada del JSON: %(concatenated_responses)s. Usa solo la información "
+"proporcionada y asegúrate de que el formato sea estrictamente JSON, para "
+"esto debes usar comillas dobles al declarar las claves y los valores. Las "
+"claves o campos del JSON deben estar siempre en inglés, pero los valores del "
+"contenido deben estar en el mismo idioma que este mensaje."
+
+#: Logic/ollama/ollama_rag_Module.py:378
 msgid "Context"
 msgstr "Contexto"
 
-#: Logic/ollama/ollama_rag_Module.py:377
+#: Logic/ollama/ollama_rag_Module.py:379
 msgid "Question"
 msgstr "Pregunta"
 
@@ -536,38 +778,41 @@ msgstr "Restablecer contraseña"
 msgid "This account is inactive."
 msgstr "Esta cuenta es inactiva"
 
-#: Server_Config/Server_Side/views.py:91
+#: Server_Config/Server_Side/views.py:93
 msgid "EFEXZIUM"
 msgstr "EFEXZIUM"
 
-#: Server_Config/Server_Side/views.py:91
+#: Server_Config/Server_Side/views.py:93
 msgid "AI Team Chat"
 msgstr "AI Team Chat"
 
-#: Server_Config/Server_Side/views.py:91
+#: Server_Config/Server_Side/views.py:93
 msgid "AI Team Subscriptions"
 msgstr "AI Team Subscriptions"
 
-#: Server_Config/Server_Side/views.py:91
+#: Server_Config/Server_Side/views.py:93
 msgid "Create your own page"
 msgstr "Crea tu propia página"
 
-#: Server_Config/Server_Side/views.py:91
+#: Server_Config/Server_Side/views.py:93
 msgid "AI Team Page Builder"
 msgstr "Creador de páginas de IA Team"
 
-#: Server_Config/Server_Side/views.py:339
+#: Server_Config/Server_Side/views.py:388
 msgid ""
-"Summarize the following content in a single paragraph. Include the context "
-"of the topic and identify keywords that match the following fields: title, "
-"header, description, keywords, default_message, and list_items. If keywords "
-"are not found, deduce which parts of the content correspond to these fields."
+"I need your help because my job is to summarize texts and I have been given "
+"a complicated one. Mention the topic of the text, important data such as "
+"titles, messages, keywords, focus of the topic, and any URLs mentioned. "
+"After extracting this data, make the summary. It is important that you only "
+"use the information I provide, not the information you already know about "
+"the topic, but the information I give you to make the summary."
 msgstr ""
-"Resume el siguiente contenido en un solo párrafo. Incluye el contexto del "
-"tema e identifica las palabras clave que coincidan con los siguientes campos: "
-"título, encabezado, descripción, palabras clave, mensaje_predeterminado y "
-"elementos_de_lista. Si no se encuentran palabras clave, deduce qué partes del "
-"contenido corresponden a estos campos."
+"Necesito tu ayuda ya que mi trabajo es realizar resúmenes de textos y me han "
+"dado uno complicado. Menciona el tema del texto, datos importantes como "
+"títulos, mensajes, palabras clave, enfoque del tema y cualquier URL que se "
+"mencione. Después de extraer esos datos, haz el resumen. Es importante que "
+"solo utilices la información que te pase, no la información que ya sabes "
+"sobre el tema, sino la que te dé para hacer el resumen."
 
 #: Server_Config/settings.py:85
 msgid "English"
@@ -576,6 +821,22 @@ msgstr "Inglés"
 #: Server_Config/settings.py:86
 msgid "Español"
 msgstr "Español"
+
+#~ msgid "Confirm Cancellation"
+#~ msgstr "Confirmar cancelación"
+
+#~ msgid ""
+#~ "Summarize the following content in a single paragraph. Include the "
+#~ "context of the topic and identify keywords that match the following "
+#~ "fields: title, header, description, keywords, default_message, and "
+#~ "list_items. If keywords are not found, deduce which parts of the content "
+#~ "correspond to these fields."
+#~ msgstr ""
+#~ "Resume el siguiente contenido en un solo párrafo. Incluye el contexto del "
+#~ "tema e identifica las palabras clave que coincidan con los siguientes "
+#~ "campos: título, encabezado, descripción, palabras clave, "
+#~ "mensaje_predeterminado y elementos_de_lista. Si no se encuentran palabras "
+#~ "clave, deduce qué partes del contenido corresponden a estos campos."
 
 #~ msgid "Send"
 #~ msgstr "Enviar"
