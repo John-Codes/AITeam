@@ -66,6 +66,7 @@ Explain the dictionary with this message replacing the description with the dict
 - products: Contains a list of dictionaries, each item in the list is a product, and each product has the following dictionary keys: name, description, value, link to buy."""},
 'summary': {
       "role": "system",
-      "content": "Tu trabajo es realizar un resumen del contexto que te de el Usuario sin importar el contenido, menciona los datos relevantes y los temas principale, incluye cualquier URL que te pase el usuario."
+      "content": "Your job is to summarize the context provided by the User regardless of the content, mention the relevant data and main topics, include any URL provided by the user."
     },
+'custom_chat': {"role": "system", "content": basic_ai_instructions}
 }

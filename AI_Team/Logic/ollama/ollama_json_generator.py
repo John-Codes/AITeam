@@ -1,73 +1,74 @@
 import ollama
+from django.utils.translation import gettext as _
 
 class jsonPageDescriptionOllama:
     def __init__(self, summary):
         self.summary = summary
 
     def call_ollama(self, user_prompt, system_prompt):
-        """ Método central para llamar a la API de Ollama. """
+        """ Central method to call the Ollama API. """
         try:
             ollama_response = ollama.chat(
                 
                 model='llama3', 
                 messages=[
-                    {'role': 'system', 'content': f"Contesta siempre de forma clara, concisa, corta y sencilla. responde llanamente a la instrucción que de da el usuario, evita respuestas largas y sugerencias innecesarias.\n {system_prompt}"},
+                    {'role': 'system', 'content': _(f"Always respond clearly, concisely, briefly, and simply. Answer plainly to the user's instruction, avoid long answers and unnecessary suggestions.\n {system_prompt}")},
                     {'role': 'user', 'content': user_prompt}
                 ]
             )
             return ollama_response['message']['content']
         except Exception as e:
             print(e)
-            print ("Error al llamar a Ollama. Intenta de nuevo.")
+            print("Error calling Ollama. Please try again.")
+    
     def create_title(self):
-        """ Genera el título utilizando Ollama. """
-        system_prompt = "Genera un título para una página web basado en el resumen del PDF. El título debe ser llamativo, conciso y reflejar el tema principal del contenido. Que no sea demasiado largo y de maximo 3 palabras"
-        user_prompt = f"Necesito un título llamativo y conciso para una página web que refleje el tema principal de este resumen: {self.summary}. Debe ser breve. Respondeme en el mismo idioma que este mensaje."
+        """ Generates the title using Ollama. """
+        system_prompt = _("Generate a title for a web page based on the PDF summary. The title should be catchy, concise, and reflect the main theme of the content. It should not be too long and a maximum of 3 words.")
+        user_prompt = _("I need a catchy and concise title for a web page that reflects the main theme of this summary: %(summary)s. It should be brief. Respond in the same language as this message.") % {'summary': self.summary}
         return self.call_ollama(user_prompt, system_prompt)
 
     def create_header(self):
-        """ Genera el encabezado utilizando Ollama. """
-        system_prompt = "Genera un encabezado secundario para una página web que complemente el título y ofrezca más detalles sobre el contenido del PDF."
-        user_prompt = f"Necesito un encabezado para la pestaña del navegador que sea breve y capte la esencia de este contenido: {self.summary}. Debe ser suficientemente informativo pero conciso, ideal para mostrar en la pestaña del navegador así que debe ser corto de maximo 5 palabras. Respondeme en el mismo idioma que este mensaje."
-
+        """ Generates the title header using Ollama. """
+        system_prompt = _("Generate a content for a html title tag based on the content that the user gives. The title should be informative and concise, ideal for display in the browser tab, so it should be a maximum of 5 words.")
+        user_prompt = _("I need a header for the browser tab that is brief and captures the essence of this content: %(summary)s. It should be sufficiently informative but concise, ideal for display in the browser tab, so it should be a maximum of 5 words. Respond in the same language as this message.") % {'summary': self.summary}
+        
         return self.call_ollama(user_prompt, system_prompt)
 
     def create_description(self):
-        """ Genera la descripción utilizando Ollama. """
-        system_prompt = "Genera una descripción meta para SEO de una página web basada en el contenido del PDF. Debe ser atractiva y resumir los puntos clave."
-        user_prompt = f"Necesito una descripción para el meta tag 'description' de una página web, que debe ser corta y concisa. Esta descripción ayudará a mejorar el SEO y no será visible directamente para los usuarios. Debe resumir los puntos clave de este contenido: {self.summary}. Respondeme en el mismo idioma que este mensaje."
-
+        """ Generates the description using Ollama. """
+        system_prompt = _("Generate an SEO meta description for a web page based on the content that the user gives. It should be attractive and summarize the key points. It should not be too long and a maximum of 160 characters.")
+        user_prompt = _("I need a description for the 'description' meta tag of a web page, which should be short and concise between 150 and 160 characters. This description will help improve SEO and will not be directly visible to users. It should summarize the key points of this content: %(summary)s. Respond in the same language as this message.") % {'summary': self.summary}
+        
         return self.call_ollama(user_prompt, system_prompt)
 
     def create_keywords(self):
-        """ Genera las palabras clave utilizando Ollama. """
-        system_prompt = "Genera una lista de 10 palabras clave relevantes para SEO basadas en el contenido del PDF. Las palabras clave deben estar separadas por comas."
-        user_prompt = f"Necesito una lista de 10 palabras clave que sean relevantes para SEO y estén basadas en este contenido: {self.summary}. Deben estar bien seleccionadas y separadas por comas. Respondeme en el mismo idioma que este mensaje."
+        """ Generates the keywords using Ollama. """
+        system_prompt = _("Generate a list of 10 relevant SEO keywords based on the PDF content. The keywords should be separated by commas.")
+        user_prompt = _("I need a list of 10 keywords that are relevant for SEO and based on this content: %(summary)s. They should be well-selected and separated by commas. Respond in the same language as this message.") % {'summary': self.summary}
         keywords = self.call_ollama(user_prompt, system_prompt)
-        return keywords.split(", ")
+        return keywords
 
     def create_default_message(self):
-        """ Genera el mensaje predeterminado utilizando Ollama. """
-        system_prompt = "Genera un mensaje predeterminado que se mostrará a los usuarios en la página web para explicar el propósito del contenido o del chat interactivo."
-        user_prompt = f"Quiero crear un chat donde se hablará sobre el siguiente resumen o contenido: {self.summary}. Necesito un texto corto y conciso para que, al entrar al chat, las personas sepan sobre qué tema o propósito es el chat. El chat es por mensaje. Respondeme en el mismo idioma que este mensaje."
-
+        """ Generates the default message using Ollama. """
+        system_prompt = _("Generate a default message to be displayed to users on the web page to explain the purpose of the content or the interactive chat.")
+        user_prompt = _("I want to create a chat where the following summary or content will be discussed: %(summary)s. I need a short and concise text so that, upon entering the chat, people know what the topic or purpose of the chat is. The chat is by message. Respond in the same language as this message.") % {'summary': self.summary}
+        
         return self.call_ollama(user_prompt, system_prompt)
 
     def create_list_items(self):
-        """ Genera los elementos de la lista utilizando Ollama basados en URLs encontradas en el resumen. """
-        system_prompt = "Genera una lista de elementos con texto y URL basados en las URLs presentes en el resumen. " \
-                        "El formato esperado es [{text: 'texto que ve el usuario', url: 'url'}]. recuerda que text debe ser corto y conciso (maximo 3 palabras). " \
-                        "Si no hay URLs en el resumen, no devuelvas nada."
-                        
-        user_prompt = f"Resumen: {self.summary}. Por favor, utiliza solo las URLs que están en el texto. Respondeme en el mismo idioma que este mensaje."
-
-        # Llamada a Ollama
+        """ Generates the list items using Ollama based on URLs found in the summary. """
+        system_prompt = _("Generate a list of items with text and URL based on the URLs present in the summary. " \
+                        "The expected format is [{text: 'text seen by the user', url: 'url'}]. remember that text should be short and concise (maximum 3 words). " \
+                        "If there are no URLs in the summary, return a list of empty strings.")
+        user_prompt = _("Summary: %(summary)s. Please use only the URLs that are in the text, and generate a list of items with text and URL. IF there are no URLs in the summary, return a list of empty strings. Respond in the same language as this message.") % {'summary': self.summary}
+        
+        # Call to Ollama
         response_text = self.call_ollama(user_prompt, system_prompt)
-
+        
         return response_text
         
     def generate_json(self):
-        # Recolectar respuestas individuales
+        # Collect individual responses
         title_response = self.create_title()
         header_response = self.create_header()
         description_response = self.create_description()
@@ -75,18 +76,17 @@ class jsonPageDescriptionOllama:
         default_message_response = self.create_default_message()
         list_items_response = self.create_list_items()
         try:
-        # Concatenar todas las respuestas para enviar a Ollama
+        # Concatenate all responses to send to Ollama
             concatenated_responses = f"Title: {title_response}\nHeader: {header_response}\nDescription: {description_response}\nKeywords: {keywords_response}\nDefault Message: {default_message_response}\nList Items: {list_items_response}"
 
-            # Instrucciones para Ollama
-            system_prompt = "Genera un JSON con la siguiente estructura, utilizando únicamente la información proporcionada. No agregues texto adicional ni saludos solo el JSON. El JSON debe contener las siguientes llaves con los tipos de datos esperados: 'title' (string), 'header' (string), 'description' (string), 'keywords' (lista de strings), 'default_message' (string), y 'list_items' (lista de objetos con 'text' y 'url', si no hay una url en el contenido list_items será una lista vacía, sin objetos). Cada llave debe contener solo la información relevante y directa del contexto proporcionado. No inventes información; utiliza únicamente los datos dados. Recuerda que cada llave, cada valor, cada item de cualquier lista debe ir con comillas dobles, asegurate de colocarlas bien en el JSON, no vayas a utilizar comillas simples y menos vayas a dejar las llaves y valores del json sin comillas ya que esto trae problemas al procesar las comillas."
-            user_prompt = f"Tengo como trabajo crear un JSON a partir de un contexto dado. La estructura del JSON debe ser la siguiente: Debes incluir las siguientes llaves: 'title' que es un string breve y descriptivo, 'header' que es un string breve para la pestaña del navegador, 'description' que es un string para el meta tag description de SEO, 'keywords' que es una lista de strings relevantes para SEO, 'default_message' que es un string que introduce el propósito del chat en la página, y 'list_items' que es una lista de objetos donde cada item tiene las llaves 'text' y 'url', si no hay una url en el contenido list_items debe ser una lista vacía. Asegúrate de que cada parte del contenido corresponda a la llave adecuada del JSON: {concatenated_responses}. Utiliza solo la información proporcionada y asegúrate de que el formato sea estrictamente JSON, para ello debes usar comillas dobles al declarar las llaves, los valores. Las llaves o campos del JSON siempre deben estar en ingles, pero los valores del contenido deben estar en el mismo idioma que este mensaje."
+            # Instructions for Ollama
+            system_prompt = _("Generate a JSON with the following structure, using only the provided information. Do not add additional text or greetings, only the JSON. The JSON should contain the following keys with the expected data types: 'title' (string), 'header' (string), 'description' (string), 'keywords' (list of strings), 'default_message' (string), and 'list_items' (list of objects with 'text' and 'url', if there is no url in the content list_items will be an empty list, without objects). Each key should contain only the relevant and direct information from the provided context. Do not invent information; use only the given data. Remember that each key, each value, each item of any list must go with double quotes, make sure to place them well in the JSON, do not use single quotes and less leave the keys and values of the json without quotes as this brings problems when processing the quotes.")
+            user_prompt = _("My task is to create a JSON from a given context. The structure of the JSON should be as follows: You must include the following keys: 'title' which is a brief and descriptive string, 'header' which is a brief string for the browser tab, 'description' which is a string for the SEO meta tag description, 'keywords' which is a list of relevant SEO strings, 'default_message' which is a string that introduces the purpose of the chat on the page, and 'list_items' which is a list of objects where each item has the keys 'text' and 'url', or an empty list if there are no URLs. Make sure that each part of the content corresponds to the appropriate key of the JSON: %(concatenated_responses)s. Use only the provided information and ensure that the format is strictly JSON, for this you must use double quotes when declaring the keys, the values. The keys or fields of the JSON should always be in English, but the content values should be in the same language as this message.") % {'concatenated_responses': concatenated_responses}
 
-            # Llamada final a Ollama para generar el JSON
+            # Final call to Ollama to generate the JSON
             final_json = self.call_ollama(user_prompt, system_prompt)
-            # convertir a JSON
-            #final_json = json.loads(final_json)
+
             return str(final_json)
         except Exception as e:
-            print('generate_jsos',f"Error: {e}")
+            print('generate_json',f"Error: {e}")
             return None

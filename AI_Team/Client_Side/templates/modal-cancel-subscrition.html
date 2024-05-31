@@ -1,0 +1,23 @@
+{% load static %}
+{% load i18n %}
+
+<div id="modal-cancel-subscription" class="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 "style="display: none;">
+    <div class="modal-cancel-subscription p-4 rounded-lg w-full max-w-md">
+        <h2 class="text-lg font-bold text-white dark:text-zinc-300 mb-4">{% trans "Cancel Subscription" %}</h2>
+        <form id="cancel-subscription-form" method="POST" action="{% url 'cancel_subscription' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="reason"  class="block text-sm font-medium text-white dark:text-zinc-300">{% trans 'Why do you want to cancel?' %}</label>
+                <textarea id="reason" name="reason" rows="1" placeholder="Enter your reason here" class="form_input w-full mt-1 p-2 border border-zinc-300 dark:border-zinc-700 rounded-md focus:outline-none focus:ring focus:ring-blue-500"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="improvement"  class="block text-sm font-medium text-white dark:text-zinc-300">{% trans 'How can we improve?' %}</label>
+                <textarea id="improvement" name="improvement" rows="1" placeholder="Enter your suggestions here" class="w-full mt-1 p-2 border border-zinc-300 dark:border-zinc-700 rounded-md focus:outline-none focus:ring focus:ring-blue-500 form_input"></textarea>
+            </div>
+            <div class="flex justify-end">
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md mr-2">{% trans "Confirm" %} </button>
+                <button type="button" class="text-zinc-500 dark:text-zinc-300 px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 ">{% trans "Close" %}</button>
+            </div>
+        </form>
+    </div>
+</div>

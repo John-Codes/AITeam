@@ -3,7 +3,7 @@ import json
 import time
 import uuid
 from pathlib import Path
-from django.http import JsonResponse, StreamingHttpResponse
+from django.http import JsonResponse, StreamingHttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.views import LoginView, PasswordResetView
 from django.urls import reverse_lazy, reverse
@@ -29,7 +29,7 @@ from AI_Team.Logic.chat_history_endpoint_utils  import validate_request_data, ge
 from AI_Team.Logic.Chat.pdf_handling import *
 from AI_Team.Logic.Chat.handle_temporal_rag import process_temp_context_chat
 from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
-
+from AI_Team.Logic.sender_mails import notice_error
 from AI_Team.Logic.AI_Instructions.get_ai_instructions import get_instructions
 #from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from .create_paypal import *
@@ -106,13 +106,18 @@ class ChatUIView(View):
                 return redirect('/chat/main')
             # Extraer el valor real del context
             context_filename = "memory-AI-with-" + self.context_value.split('Uptc%3Fto=')[-1].rstrip('$')
-            data_dict = page_data.json_to_dict(context_filename)
+            # obten el data_dict y el error si hay error enviamos email con notice_error
+            data_dict, error = page_data.json_to_dict(context_filename)
             if data_dict:
                 context = {
                     'website_data': data_dict,
                     'context_value': self.context_value,
                 }
-                return render(request, 'ai-team-customize.html', context)
+            # si hay error enviamos email con notice_error
+            elif error:
+                # parametro de notice error asunto = Error al cargar chat perzonalizado del usuario con filename = context_filename mensaje = error (en ingles)
+                notice_error(f"Error charging custom chat page with filename: {context_filename} ", error)
+            return render(request, 'ai-team-customize.html', context)
 
         # if the context is pre defined in a file
         else:
@@ -125,7 +130,7 @@ class ChatUIView(View):
                 user_page = f'Uptc%3Fto={hashed_id}$'
                 url = reverse('ai-team', kwargs={'context': user_page})
                 context_filename = "memory-AI-with-" + hashed_id
-                data_dict = page_data.json_to_dict(context_filename)
+                data_dict, error = page_data.json_to_dict(context_filename)
                 
                 context = {
                     'title': titles[self.context_value][0],
@@ -193,6 +198,25 @@ def handle_template_messages(request):
             return JsonResponse(response_data)
         else:
             return JsonResponse({"error": "template_name not provided"}, status=400)
+
+
+# create a method to handle a cancel subscription post request
+def handle_cancel_subscription(request):
+    if request.method == 'POST':
+        # Recoger las respuestas del formulario
+        reason = request.POST.get('reason', '')
+        improvement = request.POST.get('improvement', '')
+        # Concatenar las respuestas en una variable de texto con saltos de línea
+        cancel_status = cancel_subscription(request,request.user.order_id)
+        subject = F'Subscription Cancellation by User {request.user.email}'
+        user_feedback = f"Reason for cancellation:\n{reason}\nSuggestions for improvement:\n{improvement} \n Status of cancellation: {cancel_status}"   
+        notice_error(subject, user_feedback)
+        # Aquí llamarías a la función que maneja la cancelación de la suscripción
+        
+        return HttpResponseRedirect(reverse('ai-team', kwargs={'context': 'subscription'}))
+    else:
+        # Si no es un POST, simplemente renderiza la página con el formulario
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
 class Conversation():
@@ -285,7 +309,8 @@ class Conversation():
         # get the collection by name using the email_ user
         collection = self.ai_handler.get_collection_by_name(user_email_page_creator)
         formatted_prompt = self.ai_handler.query_user_collection_with_chat_context(user_email_page_creator ,message, collection)
-        list_messages = self.ai_handler.update_messages(ia_response=False, prompt=formatted_prompt)
+        list_messages[-1]['content'] = formatted_prompt
+        list_messages = self.ai_handler.load_static_messages(list_messages, 'custom_chat')
 
         return StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/event-stream')
     # only reset chat history
@@ -361,7 +386,7 @@ class Conversation():
     def create_json_page(self, user_id, user_email, collection):
         try:
                        
-            summary_prompt = "Necesito tu ayuda ya que mi trabajo es realizar resumenes de textos y me han dado uno complicado, menciona el tema del texto. Datos importantes y cualquier url que se mencione."
+            summary_prompt = _("I need your help because my job is to summarize texts and I have been given a complicated one. Mention the topic of the text, important data such as titles, messages, keywords, focus of the topic, and any URLs mentioned. After extracting this data, make the summary. It is important that you only use the information I provide, not the information you already know about the topic, but the information I give you to make the summary.")
             
             formatted_prompt = self.ai_handler.query_user_collection_with_chat_context(user_email, summary_prompt, collection)
             list_messages = self.ai_handler.update_messages(ia_response=False, prompt=formatted_prompt)
@@ -374,6 +399,9 @@ class Conversation():
             self.json_page.create_page(user_id, json_output)
 
         except Exception as e:
+            # Mensaje de error que in incluye el error y el user_email bien formateado y el nombre de la función y el summary_response y un salto de linea entre cada campo, el mensaje va en ingles
+            email_message = f"Error generating json page for User: {user_email}:\n Error: {e}\nSummary response: {summary_response}\n Json Output: {json_output}\n"
+            notice_error("Error generating json page", email_message)
             # print nombre de la función y el error
             print(self.create_json_page.__name__, e)
 

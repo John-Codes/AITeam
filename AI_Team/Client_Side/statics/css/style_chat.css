@@ -233,7 +233,14 @@ h2.reset-styles {
 .modal-body {
     height: min-content;
 }
-
+.modal-cancel-subscription {
+    background:linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 .message-left.glass, .message-right.glass {
     background:linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
     backdrop-filter: blur(10px);

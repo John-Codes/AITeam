@@ -280,48 +280,65 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    const cancelSubscriptionForm = document.getElementById('cancel-subscription-form');
-    const chatBox = document.getElementById("chatBox");
-    
-    if (cancelSubscriptionForm) {
-        cancelSubscriptionForm.addEventListener('submit', function(e) {
-            e.preventDefault();  // Evita la recarga de la página
-
-            toggleDotsAnimation(true);
-            const csrfToken = getCookie('csrftoken');
-            const languagePrefix = getLanguagePrefix();
-            let urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
-
-            // Envía los datos del formulario al servidor
-            fetch(urlEndpoint, {
-                method: "POST",
-                body: new URLSearchParams(new FormData(cancelSubscriptionForm)),
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "X-CSRFToken": csrfToken
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                chatBox.insertAdjacentHTML('beforeend', data.combined_response);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                toggleDotsAnimation(false);
-            });
-        });
+document.addEventListener('DOMContentLoaded', () => {
+    // Función para abrir el modal
+    const openModal = () => {
+      const modal = document.getElementById('modal-cancel-subscription');
+      modal.style.display = 'flex';
+    };
+  
+    // Función para cerrar el modal
+    const closeModal = () => {
+      const modal = document.getElementById('modal-cancel-subscription');
+      modal.style.display = 'none';
+    };
+  
+    // Evento para abrir el modal
+    const modalTrigger = document.querySelector('.js-modal-trigger');
+    if (modalTrigger) {
+      modalTrigger.addEventListener('click', openModal);
     }
-});
+  
+    // Eventos para cerrar el modal
+    const closeModalButton = document.querySelector('#modal-cancel-subscription button[type="button"]');
+    if (closeModalButton) {
+      closeModalButton.addEventListener('click', closeModal);
+    }
+  
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+  
+    // Interceptar el envío del formulario de cancelación de suscripción
+    const cancelSubscriptionForm = document.getElementById('cancel-subscription-form');
+    if (cancelSubscriptionForm) {
+      cancelSubscriptionForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevenir el envío tradicional del formulario
+  
+        const formData = new FormData(cancelSubscriptionForm);
+        const csrfToken = getCookie('csrftoken');
+        const response = await fetch(cancelSubscriptionForm.action, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': csrfToken
+          },
+          body: formData
+        });
+  
+        if (response.ok) {
+          // Manejar la respuesta exitosa
+          closeModal();
+          // Puedes agregar lógica adicional aquí, como mostrar un mensaje de éxito
+        } else {
+          // Manejar errores
+          console.error('Error al cancelar la suscripción');
+        }
+      });
+    }
+  });
+
 
 // Initialize event listeners.
 //document.getElementById("userMessage").addEventListener("input", checkAndAutocomplete);
