@@ -23,6 +23,8 @@
     <link href={% static "css/style_chat.css" %} rel="stylesheet"> 
     <link href={% static "css/style_cards.css" %} rel="stylesheet"> 
     <script src={% static 'js/landing.js' %} ></script> 
+    <script src={% static 'js/interactions-users-messages.js' %} ></script> 
+    
 
 </head>
 
@@ -56,15 +58,15 @@
                                 {% endif %}
                             {% else %}
                                 <li cy-data="login-link"><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >{% trans "Login" %}</h2></a></li>
-                                <li cy-data="faq-link"><a onclick="clearChatBox()" title="frequently asked questions about AI Team"><h2 data-template="faqs_messages" class="reset-styles">{% trans "FAQs"%}</h2></a></li>
-                                <li cy-data="contact-link"><a onclick="clearChatBox()" title="How to Contac us"><h2 data-template="contact_us" class="reset-styles">{% trans "Contact Us"%}</h2></a></li>
-                                <li cy-data="about-link"><a onclick="clearChatBox()" title="Who we are and our members"><h2 data-template="about_us" class="reset-styles">{% trans "About Us"%}</h2></a></li>
+                                <li cy-data="faq-link"><a title="frequently asked questions about AI Team"><h2 data-template="faqs_messages" class="reset-styles">{% trans "FAQs"%}</h2></a></li>
+                                <li cy-data="contact-link"><a title="How to Contac us"><h2 data-template="contact_us" class="reset-styles">{% trans "Contact Us"%}</h2></a></li>
+                                <li cy-data="about-link"><a title="Who we are and our members"><h2 data-template="about_us" class="reset-styles">{% trans "About Us"%}</h2></a></li>
                             {% endif %}
                             
                             {% if context_value == "main" and user.is_authenticated%}
-                            <li cy-data="faq-link"><a onclick="clearChatBox()" title="frequently asked questions about AI Team"><h2 data-template="faqs_messages" class="reset-styles">{% trans "FAQs"%}</h2></a></li>
-                            <li cy-data="contact-link"><a onclick="clearChatBox()" title="How to Contac us"><h2 data-template="contact_us" class="reset-styles">{% trans "Contact Us"%}</h2></a></li>
-                            <li cy-data="about-link"><a onclick="clearChatBox()" title="Who we are and our members"><h2 data-template="about_us" class="reset-styles">{% trans "About Us"%}</h2></a></li>
+                            <li cy-data="faq-link"><a title="frequently asked questions about AI Team"><h2 data-template="faqs_messages" class="reset-styles">{% trans "FAQs"%}</h2></a></li>
+                            <li cy-data="contact-link"><a title="How to Contac us"><h2 data-template="contact_us" class="reset-styles">{% trans "Contact Us"%}</h2></a></li>
+                            <li cy-data="about-link"><a title="Who we are and our members"><h2 data-template="about_us" class="reset-styles">{% trans "About Us"%}</h2></a></li>
                             {% endif %}
 
                             {% if context_value in valid_contexts %}
@@ -292,9 +294,4 @@
            });
     </script>
     <!-- JavaScript function to clear the chatbox -->
-    <script>
-    function clearChatBox() {
-        document.getElementById("chatBox").innerHTML = ""; // Clear the inner HTML of the chatbox div
-    }
-    </script>
 </html>

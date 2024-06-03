@@ -189,15 +189,36 @@ def handle_template_messages(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         template_name = data.get('template_name', None)
+        print(template_name)
         if template_name:
             response_data = {}
-            response_data['template_message_div'] = render_html(f'chat_messages/{template_name}.html', '')
-            if template_name == 'contact_us':
-                request.session['send_us_email'] = True            
+            response_data['html'] = render_to_string(f'chat_messages/{template_name}.html')
+            if template_name == "contact_us":
+                request.session['awaiting_contact_email'] = True    
             time.sleep(2)
             return JsonResponse(response_data)
         else:
             return JsonResponse({"error": "template_name not provided"}, status=400)
+
+@csrf_exempt
+def send_contact_email(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        email = data.get('email', None)
+        if email:
+            if '@' in email and '.' in email:
+            # Aquí puedes usar tu lógica para enviar el correo
+                Contac_us_mail(email)
+                message = _('Thank you! We will contact you soon.')
+            else:
+                # mensaje en inglés que informa de un falle y le pide al usuario que de click en Contact Us otra vez
+                message = _('Failed to send your email. Please click on Contact Us and try again.')
+            message_html =render_to_string(f'chat_messages/ia_message.html', {'message': message})
+            return JsonResponse({"success": "Email sent successfully", "message": message_html})
+        else:
+            return JsonResponse({"error": "Email not provided"}, status=400)
+    else:
+        return JsonResponse({"error": "Invalid request method"}, status=400)
 
 
 # create a method to handle a cancel subscription post request
@@ -216,6 +237,27 @@ def handle_cancel_subscription(request):
         return HttpResponseRedirect(reverse('ai-team', kwargs={'context': 'subscription'}))
     else:
         # Si no es un POST, simplemente renderiza la página con el formulario
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+def handle_interaction_user_messages(request):
+    print('body request',request.body)
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        message = data.get('message')
+        action = data.get('action')
+        url = data.get('url')
+        if not request.user.is_authenticated:
+            # Render the login form or any other HTML you want to show when the user is not authenticated
+            html_content = render_to_string('chat_messages/create_acccount_message.html')
+            return JsonResponse({'not_authenticated': True, 'html': html_content})
+        else:
+            user_email = request.user.email
+            notice_error(subject=f'An user {user_email} {action} the message in chat {url} ', message=f'Message: {message}')
+        # Handle the interaction (like or dislike) here
+        # For example, you can save the interaction to the database or perform any other action
+
+        return JsonResponse({'success': True, 'message': f'{action} recorded successfully'})
+    else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 

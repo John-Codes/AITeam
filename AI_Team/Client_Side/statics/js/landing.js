@@ -43,8 +43,27 @@ async function sendMessageStream() {
     const languagePrefix = getLanguagePrefix();
     const urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
 
-    //const async_chat = `/${languagePrefix}/${urlDictionary[currentContext]}/`;
-
+    // Verificar si estamos esperando el correo del usuario
+    if (sessionStorage.getItem('awaitingContactEmail') === 'true') {
+        // Enviar el correo a un nuevo endpoint
+        document.getElementById("userMessage").value = "";
+        const emailEndpoint = `/${languagePrefix}/send-contact-email/`;
+        const response = await fetch(emailEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({ 'email': message })
+        });
+        const responseData = await response.json();
+        if (response.ok) {
+            // Limpiar la marca de la sesión
+            sessionStorage.removeItem('awaitingContactEmail');
+        }
+        chatBox.insertAdjacentHTML('beforeend', responseData.message);
+        return;
+    }
 
     chatBox.insertAdjacentHTML('beforeend', `
         <div class="message-right glass float-end">
@@ -113,15 +132,6 @@ function sendMessage() {
         document.getElementById("userMessage").value = "";
     }
 
-    // Agregar archivos al FormData si están presentes
-    // const fileInput = document.getElementById("fileInput");
-    // let hasFiles = fileInput && fileInput.files.length > 0;
-    // if (hasFiles) {
-    //     const files = fileInput.files;
-    //     for (let i = 0; i < files.length; i++) {
-    //         formData.append("uploaded_files", files[i]);
-    //     }
-    // }
 
     // Solo realiza la solicitud si hay un mensaje o archivos
     if (message !== "" || hasFiles) {
@@ -245,10 +255,11 @@ document.addEventListener("DOMContentLoaded", function() {
             var templateName = e.target.getAttribute("data-template");
             console.log(templateName);
             toggleDotsAnimation(true);
+            // get an element byid chatBox in a const named messages_div
+            const messages_div = document.getElementById("chatBox");
             const csrfToken = getCookie('csrftoken');
             const languagePrefix = getLanguagePrefix();
             
-
             let urlEndpoint = `/${languagePrefix}/static-messages/`;
 
             fetch(urlEndpoint, {
@@ -256,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 body: JSON.stringify({ "template_name": templateName }),
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie('csrftoken') 
+                    "X-CSRFToken": csrfToken 
                 }
             })
             .then(response => {
@@ -265,10 +276,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 return response.json();
             })
-            .then(data => {
-                const chatBox = document.getElementById("chatBox");
-                chatBox.insertAdjacentHTML('beforeend', data.template_message_div);
-                chatBox.scrollTop = chatBox.scrollHeight;
+            .then(data => {    
+                //insert the template html in the buttom of the messages_div          
+                messages_div.insertAdjacentHTML('beforeend', data.html);
+                messages_div.scrollTop = messages_div.scrollHeight;
+                // Si el template es "contact_us", marcar que estamos esperando el correo del usuario
+                if (templateName === "contact_us") {
+                    sessionStorage.setItem('awaitingContactEmail', 'true');
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
