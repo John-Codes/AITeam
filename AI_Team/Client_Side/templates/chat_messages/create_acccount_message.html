@@ -1,0 +1,10 @@
+{% load i18n %}
+<div class="message-left glass">
+    <div class="clearfix"></div>
+    <!--message to tell the user that has to create her account to get support and help, and its free -->
+    <p class="message-content">
+        {% trans "You need to create an account to get support and help. It's free! " %}
+        <a href="{% url 'signup' %}"> <strong class="white-link"> {% trans "Click here to register." %}</strong></a>
+    
+</div>
+<div class="clearfix"></div>
