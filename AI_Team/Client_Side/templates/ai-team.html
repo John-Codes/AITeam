@@ -98,9 +98,13 @@
                             <p class="message-content">{% trans "Ask your questions about our services" %}</p>
                         {% endif %}                                
                         </p>           
-                        <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                        <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                        <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
+                        <div class="clearfix"></div>
+                        <div class="mt-2">
+                            <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
+                            <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
+                            <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                 {% elif context_value == "subscription" %}
                     {% if user.is_subscribe %}
@@ -124,12 +128,14 @@
                                 <p>{{ user.date_subscription }}</p>
                                 
                                 <p>{% trans "If you wanna upgrade your current subscription visit the"%}<a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
-                            </div>           
+                            </div>
+                            <div class="clearfix"></div>           
                             <div class="mt-2">
                                 
                                 <button data-target="modal-cancel-subscription" type="submit" class="button js-modal-trigger btn btn-danger">{% trans "Cancel Subscription" %}</button>
                                                                                                                     
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     {% else %}
                         <div class="message-left glass" >
@@ -159,11 +165,13 @@
                             
                             <p class="message-content">{% trans "if you wanna know more about each plan, only send a message and AI Team response you" %}</p>
                             <p class="message-content">{% trans "If you wanna get any subscription visit the" %} <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
+                            <div class="clearfix"></div>
                             <div class="mt-2">
                                 <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                                 <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
                                 <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     {% endif %}
                 {% elif context_value == "panel-admin" %}
@@ -193,12 +201,13 @@
                         
                         <p class="message-content">{% trans "Get started now by uploading your file and let's create an amazing AI Chat Experience together!" %}</p>
                     </div>
-                
+                    <div class="clearfix"></div>
                     <div class="mt-2">
                         <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
                         <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
                         <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
                 
                 {% else %}

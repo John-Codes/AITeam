@@ -61,8 +61,8 @@ hashids = Hashids(salt = os.getenv("salt"), min_length=8)
 # SANDBOX MODE
 # paypalrestsdk.configure({
 #     "mode": "sandbox",  # sandbox or live (production),  # Use 'live' for production
-#     "client_id": "AThJhSpO1NlOyyx19jAC5Vb2CStnbrurdgm3hqKzVaVoz85T9lKKoYThf7hKRNYeovC6b_iJOgkXZCMB",
-#     "client_secret": "ECk7V4Ntt5PJy4Nosm9g80gMzf2WMvwVptzlmwOzEsxz37FPM_NXa6rCFH8BcR4Mc24odULhHM2eH5Aw"
+#     "client_id": os.getenv("PCI"),
+#     "client_secret": os.getenv("PCS")
 # })
 
 # LIVE MODE
