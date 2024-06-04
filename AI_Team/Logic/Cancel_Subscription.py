@@ -4,13 +4,16 @@ from django.conf import settings
 import requests
 from django.shortcuts import redirect, get_object_or_404
 from Server_Config.Server_Side.models import Client as User
-def generate_access_token():
-    
-    client_id = 'AThJhSpO1NlOyyx19jAC5Vb2CStnbrurdgm3hqKzVaVoz85T9lKKoYThf7hKRNYeovC6b_iJOgkXZCMB'  # Replace with your PayPal client ID
-    client_secret = 'ECk7V4Ntt5PJy4Nosm9g80gMzf2WMvwVptzlmwOzEsxz37FPM_NXa6rCFH8BcR4Mc24odULhHM2eH5Aw'  # Replace with your PayPal client secret
-    token_url = 'https://api.sandbox.paypal.com/v1/oauth2/token'
+def generate_access_token():    
+    # GET A variable from django.conf.settings
+    client_id = settings.PCI
+    client_secret = settings.PCS
+    print('client_id', client_id)
+    print('client_secret', client_secret)
+    #token_url_debug = 'https://api.sandbox.paypal.com/v1/oauth2/token'
+    token_url_production = 'https://api.paypal.com/v1/oauth2/token'
 
-    response = requests.post(token_url, auth=(client_id, client_secret), data={'grant_type': 'client_credentials'})
+    response = requests.post(token_url_production, auth=(client_id, client_secret), data={'grant_type': 'client_credentials'})
 
     if response.status_code == 200:
         access_token = response.json().get('access_token')
@@ -29,10 +32,11 @@ def cancel_subscription(request, order_id):
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {access_token}'
     }
-    paypal_api_endpoint = 'https://api.sandbox.paypal.com'
+    #paypal_api_endpoint_debug = 'https://api.sandbox.paypal.com'
+    paypal_api_endpoint_production = 'https://api.paypal.com'
 
     cancel_subscription_response = requests.post(
-        f'{paypal_api_endpoint}/v1/billing/subscriptions/{user.order_id}/cancel',
+        f'{paypal_api_endpoint_production}/v1/billing/subscriptions/{user.order_id}/cancel',
         headers=headers
     )
 

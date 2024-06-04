@@ -573,10 +573,10 @@ table {
         width: auto;
     }
     .chat-title {
-        font-size: 18px; /* Ajusta el tamaño de la fuente según sea necesario */
+        font-size: 18px;
     }
     .message-content {
-        font-size: 14px; /* Ajusta el tamaño de la fuente según sea necesario */
+        font-size: 14px;
         
     }
 }
