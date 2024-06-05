@@ -107,13 +107,9 @@ async function sendMessageStream() {
         }
         let token = decoder.decode(result.value);
         aiMessage += token;
-        if (token.endsWith(':') || token.endsWith('!') || token.endsWith('?')) {
-            document.getElementById(aiMessageId).innerHTML += token + "<br>";
-            chatBox.scrollTop = chatBox.scrollHeight;
-        } else {
-            document.getElementById(aiMessageId).innerHTML += token;
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
+        let htmlContent = marked.parse(aiMessage);
+        document.getElementById(aiMessageId).innerHTML = htmlContent;
+        chatBox.scrollTop = chatBox.scrollHeight;
         return reader.read().then(processResult);
     });
 }
