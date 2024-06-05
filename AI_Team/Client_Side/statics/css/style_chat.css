@@ -44,6 +44,8 @@ body {
 .chat-header {
     width: 100%;
     background: transparent;
+    /*Este div esta en un nivel z superior para se superponga al chat*/
+    z-index: 2;
 }
 
 .chat-title,
@@ -128,7 +130,7 @@ body {
 }
 
 .menu-items {
-    z-index: 1;
+    z-index: 3;
     color: #ffffff;
     font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;  
     font-style: normal;
@@ -148,7 +150,10 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
+.bullet-point{
+    list-style-type: disc;
+    margin-left: 2rem;
+}
 .menu-items ul {
     margin-top: 0; /* Elimina el margen superior */
     padding-top: 5px; /* Agrega espacio superior */
@@ -306,7 +311,7 @@ table {
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1;
+    z-index: 3;
 }
 
 @keyframes shimmer {

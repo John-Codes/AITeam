@@ -10,6 +10,18 @@
     max-width:  30rem!important;
 }
 
+.card_background_static {
+    background:linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #ffffff;
+    max-width:  100% !important;
+}
+
 .title_card {
     color: #ffffff;
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-31 22:05+0000\n"
+"POT-Creation-Date: 2024-06-05 01:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,47 +22,55 @@ msgstr ""
 msgid " Artificial Intelligence Services by Ai-team"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:48
+#: Client_Side/templates/ai-team.html:49
 #: Client_Side/templates/subscription.html:39
 msgid "Home"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:51
+#: Client_Side/templates/ai-team.html:52
 msgid "Logout"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:53
+#: Client_Side/templates/ai-team.html:54 Client_Side/templates/ai-team.html:178
 #: Client_Side/templates/subscription.html:13
 #: Server_Config/Server_Side/views.py:93
 msgid "Subscriptions"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:60
+#: Client_Side/templates/ai-team.html:61
 #: Client_Side/templates/subscription.html:42
 msgid "Login"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:61 Client_Side/templates/ai-team.html:67
+#: Client_Side/templates/ai-team.html:62 Client_Side/templates/ai-team.html:68
 msgid "FAQs"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:62 Client_Side/templates/ai-team.html:68
+#: Client_Side/templates/ai-team.html:63 Client_Side/templates/ai-team.html:69
 msgid "Contact Us"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:63 Client_Side/templates/ai-team.html:69
+#: Client_Side/templates/ai-team.html:64 Client_Side/templates/ai-team.html:70
 msgid "About Us"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:86
+#: Client_Side/templates/ai-team.html:87
 msgid "An AI Team is writing"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:93
+#: Client_Side/templates/ai-team.html:97
 msgid "Website Creation Service with AI"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:94
+#: Client_Side/templates/ai-team.html:101
+msgid "Welcome to AI Team"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:102
+msgid "Ask your questions about our services"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:104
 msgid ""
 "24/7 customer service better than a human being with the best AIs. "
 "Integration with database and systems of your website or app. Create an AI "
@@ -70,62 +78,52 @@ msgid ""
 "processes payments and orders."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:97
-msgid "Welcome to AI Team"
-msgstr ""
-
-#: Client_Side/templates/ai-team.html:98
-msgid "Ask your questions about our services"
-msgstr ""
-
-#: Client_Side/templates/ai-team.html:110
+#: Client_Side/templates/ai-team.html:118
 msgid "Information about your subscription:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:111
+#: Client_Side/templates/ai-team.html:119
 msgid "Your Current Plan:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:114
+#: Client_Side/templates/ai-team.html:122
 msgid "Subscription Status:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:117
+#: Client_Side/templates/ai-team.html:125
 msgid "Pay with:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:120
+#: Client_Side/templates/ai-team.html:128
 msgid "The Plan Expires:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:123
+#: Client_Side/templates/ai-team.html:131
 msgid "Subscribed from Date:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:126
+#: Client_Side/templates/ai-team.html:134
 msgid "If you wanna upgrade your current subscription visit the"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:126
-#: Client_Side/templates/ai-team.html:161
+#: Client_Side/templates/ai-team.html:134
 msgid "Subscription"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:126
-#: Client_Side/templates/ai-team.html:161
+#: Client_Side/templates/ai-team.html:134
 msgid "page"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:130
+#: Client_Side/templates/ai-team.html:138
 #: Client_Side/templates/modal-cancel-subscrition.html:6
 msgid "Cancel Subscription"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:136
+#: Client_Side/templates/ai-team.html:148
 msgid "Discover Our Subscription Plans"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:137
+#: Client_Side/templates/ai-team.html:149
 msgid ""
 "We are thrilled to introduce our range of subscription plans tailored to "
 "enhance your experience on our website. These plans are designed to provide "
@@ -133,130 +131,144 @@ msgid ""
 "the most out of your online journey with us:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:142
-msgid "Entry Plan"
+#: Client_Side/templates/ai-team.html:151
+msgid "Our plans include:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:143
-msgid ""
-"Designed for the individual user, our Entry Plan offers a focused and "
-"streamlined experience. Perfect for those looking to explore our services "
-"without commitment, it's your gateway to understanding the full potential of "
-"our platform. Dive in and discover what we have to offer at an unbeatable "
-"value."
-msgstr ""
-
-#: Client_Side/templates/ai-team.html:148
-msgid "Premium Plan"
-msgstr ""
-
-#: Client_Side/templates/ai-team.html:149
-msgid ""
-"Elevate your business with our Premium Plan, which delivers enhanced "
-"performance and tools specifically designed to boost productivity and "
-"customer service. Ideal for businesses looking to gain a competitive edge, "
-"this plan provides the resources and support you need to excel in your "
-"industry."
-msgstr ""
-
-#: Client_Side/templates/ai-team.html:154
-msgid "Enterprise Plan"
+#: Client_Side/templates/ai-team.html:153
+msgid "1 Basic Plan"
 msgstr ""
 
 #: Client_Side/templates/ai-team.html:155
-msgid ""
-"Our Enterprise Plan is the epitome of customization and dedicated support. "
-"Tailored to fit each client's unique needs, this plan offers 24/7 attention "
-"and a suite of customizable features to ensure your enterprise operates "
-"seamlessly and at its peak potential. Experience unparalleled service and "
-"flexibility with our Enterprise Plan."
+msgid "AI website"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:156
+msgid "AI 24/7 customer service"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:157
+msgid "Links 🔗 for payment"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:158
+msgid "Links 🔗 for website"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:159
+msgid "Real human client service"
 msgstr ""
 
 #: Client_Side/templates/ai-team.html:160
-msgid ""
-"if you wanna know more about each plan, only send a message and AI Team "
-"response you"
+msgid "SEO optimized with AI"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:161
-msgid "If you wanna get any subscription visit the"
+#: Client_Side/templates/ai-team.html:163
+msgid "2 Premium Plan"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:165
+msgid "Everything in basic"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:166
+msgid "1 business integration per month subject to approval."
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:169
+msgid "3 Enterprise Plan"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:171
+msgid "Everything in basic and premium."
 msgstr ""
 
 #: Client_Side/templates/ai-team.html:172
-msgid "Welcome to our AI Chat Page Creation Tool!"
+msgid "Unlimited integrations"
 msgstr ""
 
 #: Client_Side/templates/ai-team.html:173
+msgid "Get quote."
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:177
+msgid ""
+"If you want to ask questions about anything, just send a message AITeam is "
+"here to help."
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:178
+msgid "We still have one subscription integration available this month."
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:193
+msgid "Welcome to our AI Chat Page Creation Tool!"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:194
 msgid ""
 "With this tool, you can craft a unique AI Chat Experience by providing "
 "information through uploaded files (PDF or TXT). Here's how to proceed:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:175
-msgid "1 Upload Your Content:"
+#: Client_Side/templates/ai-team.html:196
+msgid "1. Upload Your Content:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:176
+#: Client_Side/templates/ai-team.html:197
 msgid ""
-"Prepare a PDF or TXT file including the following details for your custom AI "
-"Chat Page:"
+"Prepare a PDF file including the following details for your custom AI "
+"website Chat Page:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:178
+#: Client_Side/templates/ai-team.html:199
 msgid "Page Title: The name shown on the browser tab."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:179
+#: Client_Side/templates/ai-team.html:200
 msgid "Page Header: The main title or heading on your page."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:180
+#: Client_Side/templates/ai-team.html:201
 msgid "Navigation Links: List of navigation items and their URLs."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:181
+#: Client_Side/templates/ai-team.html:202
 msgid "Default Chat Message: A greeting message for visitors."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:182
+#: Client_Side/templates/ai-team.html:203
 msgid "Products: Detailed descriptions of your products."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:183
+#: Client_Side/templates/ai-team.html:204
 msgid ""
 "Context Information: Any additional information, questions, and answers you "
 "want the AI to use for personalized responses."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:186
-msgid "2 Images:"
+#: Client_Side/templates/ai-team.html:207
+msgid "2. Test and Monitor:"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:187
-msgid ""
-"For product images, upload each image with the name matching exactly with "
-"the product name described in your file."
-msgstr ""
-
-#: Client_Side/templates/ai-team.html:189
-msgid "3 Consult and Monitor:"
-msgstr ""
-
-#: Client_Side/templates/ai-team.html:190
+#: Client_Side/templates/ai-team.html:209
 msgid ""
 "Use this chat to consult the details of your site and monitor the progress. "
 "Once your content is processed, a custom link to your AI Chat Page will be "
 "available."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:192
+#: Client_Side/templates/ai-team.html:211
 msgid ""
-"Remember, the AI will respond based on the context and information provided "
-"in your uploaded files, ensuring a tailored experience for your visitors. "
-"We're here to help you every step of the way!"
+"Remember, the AI will respond based on the information provided in your "
+"uploaded files, ensuring a tailored experience for your visitors."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:194
+#: Client_Side/templates/ai-team.html:213
+msgid "We're here to help you every step of the way!"
+msgstr ""
+
+#: Client_Side/templates/ai-team.html:215
 msgid ""
 "Get started now by uploading your file and let's create an amazing AI Chat "
 "Experience together!"
