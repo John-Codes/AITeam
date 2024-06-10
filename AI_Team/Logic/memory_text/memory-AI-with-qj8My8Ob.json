@@ -1,0 +1,36 @@
+{
+    "title": "Comfort Inside Out",
+    "header": "Amazon Ropa Interior para Hombres",
+    "description": "Discover comfortable and practical men's innerwear with Value Pack! Enjoy soft 6-oz cotton, a full cut for room to move, and a ribbed crewneck that holds its shape. Perfect for one-and-done shopping.",
+    "keywords": [
+        "Ropa interior",
+        "Value Pack",
+        "Amazon",
+        "Comfortable Undershirts",
+        "Men's Underwear",
+        "Soft Cotton",
+        "Ribbed Crewneck",
+        "Full Cut",
+        "Mens Undies",
+        "Quick Shopping"
+    ],
+    "default_message": "¡Bienvenido al chat sobre Ropa interior para hombres! En este espacio, discutiremos el producto VALUE PACK disponible en Amazon. ¡Comenzamos a hablar sobre la comodidad y práctica de usar esta ropa interior para hombres! ¿Qué te gustaría saber o compartir al respecto?",
+    "list_items": [
+        {
+            "text": "Available",
+            "url": ""
+        },
+        {
+            "text": "HOLDS ITS SHAPE",
+            "url": ""
+        },
+        {
+            "text": "ROOM TO MOVE",
+            "url": ""
+        },
+        {
+            "text": "COTTON GOODNESS",
+            "url": ""
+        }
+    ]
+}

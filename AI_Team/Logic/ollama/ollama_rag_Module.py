@@ -278,7 +278,7 @@ class OllamaRag:
     #add a method decoretor to execute this without having to create an instance of the class
     @classmethod
     def delete_collection(self, collection_name, chroma_client):
-        try:
+        try:        
             chroma_client.delete_collection(name=collection_name)
             print(f"Collection '{collection_name}' deleted successfully.")
         except Exception as e:
@@ -305,8 +305,7 @@ class OllamaRag:
                 self.chroma_client.delete_collection(name=collection_name)
                 collection = self.chroma_client.create_collection(name=collection_name)
                 
-
-            ids = [str(i) for i in range(len(split_documents))]
+            ids = [str(i) for i in range(1, len(split_documents) + 1)]
 
             # Add the new documents to the collection or update them if they already exist
             collection.add(
@@ -337,10 +336,13 @@ class OllamaRag:
             )
 
             documents_results = collection_query_results['documents']
+
+            return documents_results
         except Exception as e:
             print(self.query_collection.__name__, e)
 
-        return documents_results
+        return False
+        
 
     #method to pass n_results how context in the query
     def query_user_collection_with_context(self, user_question, documents_results):

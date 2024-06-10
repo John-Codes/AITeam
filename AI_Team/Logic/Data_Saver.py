@@ -76,8 +76,13 @@ class DataSaver:
     def create_page(self, user_id, user_json_page):
         user_name_page = hashids.encode(user_id)
         user_json_page_cleaned = self.clean_input(user_json_page)
-        data_dict = json.loads(user_json_page_cleaned)
+        try:
+            data_dict = json.loads(user_json_page_cleaned)
+        except Exception as e:
+            print(e, 'not json generated')
+            return str(e), False
         self.save_to_json(data_dict, f"memory-AI-with-{user_name_page}")
+        return 'no error', False
 
     def check_site(self, user_id=None, check_context=None):
         """Checks if the user has a personal site saved or if a given context is valid."""

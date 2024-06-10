@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 01:25+0000\n"
+"POT-Creation-Date: 2024-06-10 17:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,7 +103,7 @@ msgid "Subscribed from Date:"
 msgstr ""
 
 #: Client_Side/templates/ai-team.html:134
-msgid "If you wanna upgrade your current subscription visit the"
+msgid "If you wanna upgrade your current subscription visit the "
 msgstr ""
 
 #: Client_Side/templates/ai-team.html:134
@@ -112,11 +112,6 @@ msgstr ""
 
 #: Client_Side/templates/ai-team.html:134
 msgid "page"
-msgstr ""
-
-#: Client_Side/templates/ai-team.html:138
-#: Client_Side/templates/modal-cancel-subscrition.html:6
-msgid "Cancel Subscription"
 msgstr ""
 
 #: Client_Side/templates/ai-team.html:148
@@ -264,11 +259,11 @@ msgid ""
 "uploaded files, ensuring a tailored experience for your visitors."
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:213
+#: Client_Side/templates/ai-team.html:214
 msgid "We're here to help you every step of the way!"
 msgstr ""
 
-#: Client_Side/templates/ai-team.html:215
+#: Client_Side/templates/ai-team.html:216
 msgid ""
 "Get started now by uploading your file and let's create an amazing AI Chat "
 "Experience together!"
@@ -286,7 +281,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: Client_Side/templates/chat_messages/contact_us.html:4
+#: Client_Side/templates/chat_messages/contact_us.html:6
 msgid "To contact us, send us your email in the next message."
 msgstr ""
 
@@ -297,6 +292,57 @@ msgstr ""
 #: Client_Side/templates/chat_messages/create_acccount_message.html:7
 msgid "Click here to register."
 msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:5
+msgid "FAQS"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:8
+msgid "We transform your business."
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:11
+msgid "How will my AI know what to say or do to my clients?"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:14
+msgid ""
+"You provide your data in a PDF or any other data format to us. If it's not a "
+"PDF, send us a message with '?' or '!' and we will answer ASAP."
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:18
+msgid "What does the chatbot do?"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:21
+msgid ""
+"Provides better-than-human 24/7 customer service. Your data is yours, and "
+"you can use it to improve your business."
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:25
+msgid "What services do you offer?"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:28
+msgid ""
+"High-quality, better-than-human customer service that constantly improves "
+"and gathers data to provide you with game-changing information to grow your "
+"business."
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:33
+msgid "Copiar"
+msgstr "Copy"
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:34
+msgid "Me gusta"
+msgstr "Like"
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:35
+msgid "No me gusta"
+msgstr "Dislike"
 
 #: Client_Side/templates/chat_messages/image_message.html:4
 msgid "Status of the image: "
@@ -311,7 +357,7 @@ msgstr ""
 #: Client_Side/templates/chat_messages/perm_rag_success.html:4
 msgid ""
 "The PDF file has been successfully uploaded and you can now ask questions "
-"about its content in your new chat. Visit your page by clicking here."
+"about its content in your new chat. Visit your page by clicking"
 msgstr ""
 
 #: Client_Side/templates/chat_messages/perm_rag_success.html:5
@@ -319,7 +365,7 @@ msgid "your own website"
 msgstr ""
 
 #: Client_Side/templates/chat_messages/perm_rag_success.html:5
-msgid "this link"
+msgid " on this link"
 msgstr ""
 
 #: Client_Side/templates/chat_messages/temp_rag_success.html:3
@@ -342,6 +388,10 @@ msgstr ""
 
 #: Client_Side/templates/chat_messages/text_message.html:16
 msgid "We haven't found enough keywords to create your site"
+msgstr ""
+
+#: Client_Side/templates/modal-cancel-subscrition.html:6
+msgid "Cancel Subscription"
 msgstr ""
 
 #: Client_Side/templates/modal-cancel-subscrition.html:10
@@ -594,16 +644,17 @@ msgid ""
 "that each part of the content corresponds to the appropriate key of the "
 "JSON: %(concatenated_responses)s. Use only the provided information and "
 "ensure that the format is strictly JSON, for this you must use double quotes "
-"when declaring the keys, the values. The keys or fields of the JSON should "
-"always be in English, but the content values should be in the same language "
-"as this message."
+"when declaring the keys. avoid using the following character: \\, because "
+"they will break the JSON. The keys or fields of the JSON should always be in "
+"English, but the content values should be in the same language as this "
+"message."
 msgstr ""
 
-#: Logic/ollama/ollama_rag_Module.py:378
+#: Logic/ollama/ollama_rag_Module.py:380
 msgid "Context"
 msgstr ""
 
-#: Logic/ollama/ollama_rag_Module.py:379
+#: Logic/ollama/ollama_rag_Module.py:381
 msgid "Question"
 msgstr ""
 
@@ -651,7 +702,7 @@ msgstr ""
 msgid "Failed to send your email. Please click on Contact Us and try again."
 msgstr ""
 
-#: Server_Config/Server_Side/views.py:431
+#: Server_Config/Server_Side/views.py:432
 msgid ""
 "I need your help because my job is to summarize texts and I have been given "
 "a complicated one. Mention the topic of the text, important data such as "
