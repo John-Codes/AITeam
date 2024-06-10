@@ -310,6 +310,7 @@ class Conversation():
 
             # update the last message with the formatted prompt
             list_messages[-1]['content'] = formatted_prompt
+            list_messages = self.ai_handler.load_static_messages(list_messages, 'custom_chat')
         else:
             # if not temp collection then load static messages at the beginning of the list of messages
             list_messages = self.ai_handler.load_static_messages(list_messages, current_chat)
@@ -382,9 +383,9 @@ class Conversation():
             temp_uuid = str(uuid.uuid4())
             if pdf_file != 'no path' and upload_success:
                 
-                self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, temp_uuid, permanent=context_value)
+                self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, temp_uuid, permanent=False)
                 request.session['temp_collection_exist'] = {'pdf_path': pdf_file, 'temp_uuid': temp_uuid} 
-                delete_temp_pdfs(pdf_file)
+                #delete_temp_pdfs(pdf_file)
                 html_message = render_to_string('chat_messages/temp_rag_success.html')
                 return JsonResponse({'message': html_message})
             elif pdf_file == 'no path':
@@ -410,16 +411,19 @@ class Conversation():
             if pdf_file != 'no path' and upload_success:
                 
                 collection =self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, collection_name, permanent=request.user.email)
-                self.create_json_page(request.user.id ,request.user.email,collection=collection)
-                delete_temp_pdfs(pdf_file)
+                create_json = self.create_json_page(request.user.id ,request.user.email,collection=collection)
+                #delete_temp_pdfs(pdf_file)
                 # call to create_json_page
                 context = {
                     'user_page_url': reverse('ai-team', kwargs={'context': user_page})
                 }
                 html_message = render_to_string('chat_messages/perm_rag_success.html', context)
-                return JsonResponse({'message': html_message})
+                if not create_json:
+                    return JsonResponse({'error': 'An error occurred while uploading your page, please upload the file again', 'upload_success': upload_success}) 
+                else:
+                    return JsonResponse({'message': html_message})
             elif pdf_file == 'no path':
-                return JsonResponse({'message': 'No path for PDF file', 'upload_success': upload_success})
+                return JsonResponse({'error': 'No path for PDF file', 'upload_success': upload_success})
             else:
                 return JsonResponse({'error': 'File processing failed'}, status=400)
         else:
@@ -439,13 +443,14 @@ class Conversation():
             json_generator = jsonPageDescriptionOllama(summary_response)
             json_output = json_generator.generate_json()
             self.json_page.create_page(user_id, json_output)
-
+            return True
         except Exception as e:
             # Mensaje de error que in incluye el error y el user_email bien formateado y el nombre de la función y el summary_response y un salto de linea entre cada campo, el mensaje va en ingles
             email_message = f"Error generating json page for User: {user_email}:\n Error: {e}\nSummary response: {summary_response}\n Json Output: {json_output}\n"
             notice_error("Error generating json page", email_message)
             # print nombre de la función y el error
             print(self.create_json_page.__name__, e)
+            return False
 
 # Class to handle the form of Reset Password
 class PasswordResetView(PasswordResetView):
@@ -524,11 +529,11 @@ class Subscription(View):
         Render the subscription page with all plan details.
         """
         plans = SubscriptionDetail.objects.filter(name__in=["Basic AI Team Subscription", "Premium AI Team Subscription" ])
-        print('plans',plans)
+        
         for plan in plans:
             plan.features_list = json.loads(plan.features_list)
             plan.market_place = json.loads(plan.market_place)
-            print(plan.features_list)
+            
         context = {
             "plans": plans,  # Cambiado a "plans" para que sea más claro en el template
             "user": request.user,
@@ -538,18 +543,14 @@ class Subscription(View):
         return render(request, self.template_name, context)
     
     def post(self, request, *args, **kwargs):
-        print('post')
-        print(request.POST)
-          # Asegúrate de tener esta función definida
+        # Asegúrate de tener esta función definida
         special_code = request.POST.get('special_code')
         plan_id = request.POST.get('plan_id')
-        print('especial code detected',special_code)
         if special_code:
             # Buscar el plan por el código especial
             try:
                 # Obtener el plan
                 plan = SubscriptionDetail.objects.get(code=special_code)
-                print('plan',plan)
                 features = json.loads(plan.features_list)  # Decodifica el JSON para obtener la lista
                 markets = json.loads(plan.market_place)
                 # Construir la respuesta con los detalles del plan
@@ -563,7 +564,6 @@ class Subscription(View):
                     'markets': markets,
                     # Añadir otros campos según sea necesario
                 }
-                print('plan_details', plan_details)
                 return JsonResponse(plan_details)
             except SubscriptionDetail.DoesNotExist:
                 # Código no encontrado
@@ -571,27 +571,16 @@ class Subscription(View):
         elif plan_id:
             access_token = generate_access_token()
             if access_token:
-                print('generamos access token')
-                # Llama a la función para crear la suscripción
-                print(plan_id)
-                print(request)
                 agreement_response = create_subscription_agreement(request, access_token, plan_id)
 
                 if agreement_response.status_code == 201:
                     # Suscripción creada con éxito
-                    print('agreement_response', agreement_response)
                     subscription_data = agreement_response.json()
                     subscription_id = subscription_data.get('id')
                     status = subscription_data.get('status')
                     approval_url = next((link['href'] for link in subscription_data['links'] if link['rel'] == 'approve'), None)
-                    print('subscription_id', subscription_id)
-                    print('status', status)
-                    print('approval_url', approval_url)
                     if approval_url:
-                        print('redirecting')
-                        print(approval_url)
                         # Guardar datos de la suscripción en tu modelo, si es necesario
-                        
                         return redirect(approval_url)
                     else:
                         # N0  se pudo obtener la URL de aprobación

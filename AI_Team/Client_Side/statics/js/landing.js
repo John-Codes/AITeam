@@ -62,6 +62,7 @@ async function sendMessageStream() {
             sessionStorage.removeItem('awaitingContactEmail');
         }
         chatBox.insertAdjacentHTML('beforeend', responseData.message);
+        chatBox.scrollTop = chatBox.scrollHeight;
         return;
     }
 
@@ -71,6 +72,7 @@ async function sendMessageStream() {
         </div>
         <div class="clearfix"></div>
     `);
+    chatBox.scrollTop = chatBox.scrollHeight;
     toggleDotsAnimation(true); // Activar animaciones
     document.getElementById("userMessage").value = "";
     const aiMessageId = 'aiMessage' + Date.now(); // Generar un ID único para el elemento

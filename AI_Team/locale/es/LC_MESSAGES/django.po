@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 01:26+0000\n"
+"POT-Creation-Date: 2024-06-10 17:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,22 +73,16 @@ msgid "Ask your questions about our services"
 msgstr "Haz tus preguntas sobre nuestros servicios"
 
 #: Client_Side/templates/ai-team.html:104
-#, fuzzy
-#| msgid ""
-#| "Website creation service with AI: 24/7 customer service better than a "
-#| "human being with AI like gpt 4. Integration with database and systems of "
-#| "your website or app. Create an AI bot in 5 minutes that sends emails and "
-#| "processes payments and orders."
 msgid ""
 "24/7 customer service better than a human being with the best AIs. "
 "Integration with database and systems of your website or app. Create an AI "
 "chat that is an expert in your business in 5 minutes that sends emails and "
 "processes payments and orders."
 msgstr ""
-"El servicio al cliente 24 horas al día, 7 días a la semana es mejor que el "
-"de un ser humano con IA como gpt 4. Integración con base de datos y sistemas "
-"de tu sitio web o app. Crea una IAbot en 5 minutos que envía correos "
-"electrónicos y procesa pagos y pedidos."
+"El servicio al cliente 24/7 es mejor que el de un ser humano con las mejores "
+"IAs.Integración con base de datos y sistemas de tu sitio web o app. Crea un "
+"chatbot experto en tu negocio en 5 minutos que envía correos electrónicos y "
+"procesa pagos y pedidos."
 
 #: Client_Side/templates/ai-team.html:118
 msgid "Information about your subscription:"
@@ -119,7 +113,9 @@ msgid "Subscribed from Date:"
 msgstr "Suscrito desde la fecha:"
 
 #: Client_Side/templates/ai-team.html:134
-msgid "If you wanna upgrade your current subscription visit the"
+#, fuzzy
+#| msgid "If you wanna upgrade your current subscription visit the"
+msgid "If you wanna upgrade your current subscription visit the "
 msgstr "si desea obtener cualquier suscripción, visite la"
 
 #: Client_Side/templates/ai-team.html:134
@@ -131,11 +127,6 @@ msgstr "Suscripciones"
 #: Client_Side/templates/ai-team.html:134
 msgid "page"
 msgstr "pagina "
-
-#: Client_Side/templates/ai-team.html:138
-#: Client_Side/templates/modal-cancel-subscrition.html:6
-msgid "Cancel Subscription"
-msgstr "Cancelar suscripción"
 
 #: Client_Side/templates/ai-team.html:148
 msgid "Discover Our Subscription Plans"
@@ -307,11 +298,11 @@ msgstr ""
 "tusarchivos cargados, asegurando una experiencia personalizada para tus "
 "visitantes."
 
-#: Client_Side/templates/ai-team.html:213
+#: Client_Side/templates/ai-team.html:214
 msgid "We're here to help you every step of the way!"
 msgstr "¡Estamos aquí para ayudarte en cada paso del camino!"
 
-#: Client_Side/templates/ai-team.html:215
+#: Client_Side/templates/ai-team.html:216
 msgid ""
 "Get started now by uploading your file and let's create an amazing AI Chat "
 "Experience together!"
@@ -331,7 +322,7 @@ msgstr "o"
 msgid "No"
 msgstr "No"
 
-#: Client_Side/templates/chat_messages/contact_us.html:4
+#: Client_Side/templates/chat_messages/contact_us.html:6
 msgid "To contact us, send us your email in the next message."
 msgstr ""
 "Para contactarnos, envíanos tu correo electrónico en el siguiente mensaje."
@@ -344,6 +335,63 @@ msgstr ""
 #: Client_Side/templates/chat_messages/create_acccount_message.html:7
 msgid "Click here to register."
 msgstr "Haz Click aqui para registrarte"
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:5
+msgid "FAQS"
+msgstr "FAQS"
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:8
+msgid "We transform your business."
+msgstr "Transformamos tu negocio."
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:11
+msgid "How will my AI know what to say or do to my clients?"
+msgstr "¿Cómo sabrá mi IA qué decir o hacer a mis clientes?"
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:14
+msgid ""
+"You provide your data in a PDF or any other data format to us. If it's not a "
+"PDF, send us a message with '?' or '!' and we will answer ASAP."
+msgstr ""
+"Nos proporcionas tus datos en un PDF o cualquier otro formato de datos. Si no es un" 
+"PDF, envíanos un mensaje con '?' o '!' y responderemos lo antes posible."
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:18
+msgid "What does the chatbot do?"
+msgstr "¿Qué hace el chatbot?"
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:21
+msgid ""
+"Provides better-than-human 24/7 customer service. Your data is yours, and "
+"you can use it to improve your business."
+msgstr ""
+"Proporciona un servicio al cliente 24/7 mejor que el humano. Tus datos son tuyos y "
+"puedes usarlos para mejorar tu negocio."
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:25
+msgid "What services do you offer?"
+msgstr "¿Quw servicios ofrecen?"
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:28
+msgid ""
+"High-quality, better-than-human customer service that constantly improves "
+"and gathers data to provide you with game-changing information to grow your "
+"business."
+msgstr ""
+"Servicio al cliente de alta calidad, mejor que el humano, que mejora constantemente "
+"y recopila datos para proporcionarte información revolucionaria para hacer crecer tu negocio."
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:33
+msgid "Copiar"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:34
+msgid "Me gusta"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/faqs_messages.html:35
+msgid "No me gusta"
+msgstr ""
 
 #: Client_Side/templates/chat_messages/image_message.html:4
 msgid "Status of the image: "
@@ -360,18 +408,18 @@ msgstr ""
 #: Client_Side/templates/chat_messages/perm_rag_success.html:4
 msgid ""
 "The PDF file has been successfully uploaded and you can now ask questions "
-"about its content in your new chat. Visit your page by clicking here."
+"about its content in your new chat. Visit your page by clicking"
 msgstr ""
 "El archivo PDF se ha subido correctamente y ahora puedes hacer preguntas "
-"sobre su contenido en tu nuevo chat. Visita tu página haciendo clic aquí."
+"sobre su contenido en tu nuevo chat. Visita tu página haciendo clic"
 
 #: Client_Side/templates/chat_messages/perm_rag_success.html:5
 msgid "your own website"
 msgstr "tu propio sitio web"
 
 #: Client_Side/templates/chat_messages/perm_rag_success.html:5
-msgid "this link"
-msgstr "este enlace"
+msgid " on this link"
+msgstr " en este enlace"
 
 #: Client_Side/templates/chat_messages/temp_rag_success.html:3
 msgid ""
@@ -396,6 +444,10 @@ msgstr "Hemos encontrado suficientes palabras clave para crear su sitio"
 #: Client_Side/templates/chat_messages/text_message.html:16
 msgid "We haven't found enough keywords to create your site"
 msgstr "No hemos encontrado suficientes palabras clave para crear su sitio"
+
+#: Client_Side/templates/modal-cancel-subscrition.html:6
+msgid "Cancel Subscription"
+msgstr "Cancelar suscripción"
 
 #: Client_Side/templates/modal-cancel-subscrition.html:10
 msgid "Why do you want to cancel?"
@@ -728,11 +780,12 @@ msgid ""
 "that each part of the content corresponds to the appropriate key of the "
 "JSON: %(concatenated_responses)s. Use only the provided information and "
 "ensure that the format is strictly JSON, for this you must use double quotes "
-"when declaring the keys, the values. The keys or fields of the JSON should "
-"always be in English, but the content values should be in the same language "
-"as this message."
+"when declaring the keys. avoid using the following character: \\, because "
+"they will break the JSON. The keys or fields of the JSON should always be in "
+"English, but the content values should be in the same language as this "
+"message."
 msgstr ""
-"Mi trabajo es crear un JSON a partir de un contexto dado. La estructura del "
+"Mi tarea es crear un JSON a partir de un contexto dado. La estructura del "
 "JSON debe ser la siguiente: Debes incluir las siguientes claves: 'title', "
 "que es una cadena breve y descriptiva, 'header', que es una cadena breve "
 "para la pestaña del navegador, 'description', que es una cadena para la "
@@ -743,15 +796,16 @@ msgstr ""
 "hay URLs. Asegúrate de que cada parte del contenido corresponda a la clave "
 "apropiada del JSON: %(concatenated_responses)s. Usa solo la información "
 "proporcionada y asegúrate de que el formato sea estrictamente JSON, para "
-"esto debes usar comillas dobles al declarar las claves y los valores. Las "
-"claves o campos del JSON deben estar siempre en inglés, pero los valores del "
-"contenido deben estar en el mismo idioma que este mensaje."
+"esto debes usar comillas dobles al declarar las claves. Evita usar el "
+"siguiente carácter: \\, porque romperá el JSON. Las claves o campos del JSON "
+"deben estar siempre en inglés, pero los valores del contenido deben estar en "
+"el mismo idioma que este mensaje."
 
-#: Logic/ollama/ollama_rag_Module.py:378
+#: Logic/ollama/ollama_rag_Module.py:380
 msgid "Context"
 msgstr "Contexto"
 
-#: Logic/ollama/ollama_rag_Module.py:379
+#: Logic/ollama/ollama_rag_Module.py:381
 msgid "Question"
 msgstr "Pregunta"
 
@@ -805,7 +859,7 @@ msgstr ""
 "Hubo una falla al enviar el correo electronico, Por favor haz click en "
 "Contactanos e intenta otra vez"
 
-#: Server_Config/Server_Side/views.py:431
+#: Server_Config/Server_Side/views.py:432
 msgid ""
 "I need your help because my job is to summarize texts and I have been given "
 "a complicated one. Mention the topic of the text, important data such as "

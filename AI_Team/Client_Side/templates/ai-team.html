@@ -116,28 +116,28 @@
                             <div class="card card_background_static">
                                 <div class="card-content">
                                     <h2 class="title is-4 title_card">{% trans "Information about your subscription:" %}</h2>
-                                    <h3 class="subtitle is-6 title_card">{% trans "Your Current Plan:" %}</h3>
+                                    <p class="message-content">{% trans "Your Current Plan:" %}</p>
                                     <p class="message-content">{{ user.subscription_detail.plan_name }}</p>
                                     
-                                    <h3 class="subtitle is-6 title_card">{% trans "Subscription Status:" %}</h3>
+                                    <p class="message-content">{% trans "Subscription Status:" %}</p>
                                     <p class="message-content">{{ user.subscription_status }}</p>
                                     
-                                    <h3 class="subtitle is-6 title_card">{% trans "Pay with:" %}</h3>
+                                    <p class="message-content">{% trans "Pay with:" %}</p>
                                     <p class="message-content">Paypal</p>
                                     
-                                    <h3 class="subtitle is-6 title_card">{% trans "The Plan Expires:" %}</h3>
+                                    <p class="message-content">{% trans "The Plan Expires:" %}</p>
                                     <p class="message-content">{{ user.next_date_pay }}</p>
                                     
-                                    <h3 class="subtitle is-6 title_card">{% trans "Subscribed from Date:" %}</h3>
+                                    <p class="message-content">{% trans "Subscribed from Date:" %}</p>
                                     <p class="message-content">{{ user.date_subscription }}</p>
                                     
-                                    <p class="message-content">{% trans "If you wanna upgrade your current subscription visit the"%}<a href="{% url 'Subscriptions' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
+                                    <p class="message-content">{% trans "If you wanna upgrade your current subscription visit the "%}<a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
                                     
-                                    <div class="clearfix"></div>
-                                    <div class="mt-2">
-                                        <button data-target="modal-cancel-subscription" type="submit" class="button js-modal-trigger btn btn-danger">{% trans "Cancel Subscription" %}</button>
+                                    <div class="card-footer">
+                                        <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
+                                        <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
+                                        <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
                                     </div>
-                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
