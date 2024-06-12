@@ -31,10 +31,13 @@ from AI_Team.Logic.Chat.handle_temporal_rag import process_temp_context_chat
 from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
 from AI_Team.Logic.sender_mails import notice_error
 from AI_Team.Logic.AI_Instructions.get_ai_instructions import get_instructions
+from AI_Team.Logic.Wishper.audio_to_text import audio_to_text
+from AI_Team.Logic.Wishper.text_to_audio import text_to_audio_en, text_to_audio_es
 #from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
 from .create_paypal import *
 from hashids import Hashids
-
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -451,6 +454,18 @@ class Conversation():
             # print nombre de la función y el error
             print(self.create_json_page.__name__, e)
             return False
+
+def upload_audio(request):
+    if request.method == 'POST' and request.FILES['audio']:
+        audio_file = request.FILES['audio']
+        file_name = default_storage.save('uploads/' + audio_file.name, ContentFile(audio_file.read()))
+        file_path = default_storage.path(file_name)
+        print(file_path)
+        # Procesar el archivo de audio para obtener el texto transcrito
+        transcribed_text = audio_to_text(file_path)
+        print(transcribed_text)
+        return JsonResponse({'transcribed_text': transcribed_text})
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 # Class to handle the form of Reset Password
 class PasswordResetView(PasswordResetView):

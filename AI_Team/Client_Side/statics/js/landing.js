@@ -6,6 +6,11 @@ const urlDictionary = {
     'panel-admin': 'main-query-perm-rag'
 };
 var list_messages = [];
+
+let mediaRecorder;
+let audioChunks = [];
+let isRecording = false;
+
 function toggleDotsAnimation(shouldShow) {
     const loadingDots = document.querySelector('.loading-dots-container');
     const metallicText = document.querySelector('.metallic-text');
@@ -36,13 +41,14 @@ function getLanguagePrefix() {
 
 
 // Function async to streaming chat responses.
-async function sendMessageStream() {
+async function sendMessageStream(message = false) {
     const csrfToken = getCookie('csrftoken');
-    const message = document.getElementById("userMessage").value;
     const chatBox = document.getElementById("chatBox");
     const languagePrefix = getLanguagePrefix();
     const urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
-
+    if (!message){
+        message = document.getElementById("userMessage").value;
+    }
     // Verificar si estamos esperando el correo del usuario
     if (sessionStorage.getItem('awaitingContactEmail') === 'true') {
         // Enviar el correo a un nuevo endpoint
@@ -115,6 +121,67 @@ async function sendMessageStream() {
         return reader.read().then(processResult);
     });
 }
+async function startRecording() {
+    if (!isRecording) {
+        // Solicitar permiso para acceder al micrófono
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        
+        // Crear una instancia de MediaRecorder
+        mediaRecorder = new MediaRecorder(stream);
+        
+        // Manejar los datos de audio cuando estén disponibles
+        mediaRecorder.ondataavailable = event => {
+            audioChunks.push(event.data);
+        };
+        
+        // Manejar el evento de parada de grabación
+        mediaRecorder.onstop = async () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+            audioChunks = [];
+            
+            // Generar un UUID para el nombre del archivo
+            const uuid = URL.createObjectURL(new Blob()).split('/').pop();
+            const fileName = `${uuid}.wav`;
+            
+            // Aquí puedes enviar el audioBlob al servidor o procesarlo como necesites
+            const formData = new FormData();
+            formData.append('audio', audioBlob, fileName);
+            
+            const csrfToken = getCookie('csrftoken');
+            const languagePrefix = getLanguagePrefix();
+            const urlEndpoint = `/${languagePrefix}/upload_audio/`;
+            
+            const response = await fetch(urlEndpoint, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': csrfToken
+                }
+            });
+            
+            const responseData = await response.json();
+            if (response.ok) {
+                // Manejar la respuesta del servidor
+                console.log('Transcribed text:', responseData.transcribed_text);
+                // Aquí puedes mostrar el texto transcrito en el chat
+                sendMessageStream(responseData.transcribed_text);
+            } else {
+                console.error('Error:', responseData.error);
+            }
+        };
+        
+        // Iniciar la grabación
+        mediaRecorder.start();
+        isRecording = true;
+        console.log("Recording started...");
+    } else {
+        // Detener la grabación
+        mediaRecorder.stop();
+        isRecording = false;
+        console.log("Recording stopped...");
+    }
+}
+
 // Function to send the user's message and receive the response.
 function sendMessage() {
     const message = document.getElementById("userMessage").value.trim();

@@ -4,7 +4,7 @@ from django.views.generic.base import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap
 from . import views
-from .views import handle_template_messages, handle_cancel_subscription, handle_interaction_user_messages, send_contact_email
+from .views import handle_template_messages, handle_cancel_subscription, handle_interaction_user_messages, send_contact_email, upload_audio
 from .views import Conversation
 sitemaps = {
     'mymodel': StaticViewSitemap,
@@ -26,6 +26,7 @@ urlpatterns = [
     path('send-contact-email/', send_contact_email, name = 'send_contact_email'),
     path('interaction-user-messages/', handle_interaction_user_messages, name = 'interaction_user_messages'),
     path('cancel-subscription/', handle_cancel_subscription, name = 'cancel_subscription'),
+    path('upload_audio/', upload_audio, name='upload_audio'),
     path('signup/', views.SignupView.as_view(), name='signup'),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', views.custom_logout, name='logout'),
