@@ -88,6 +88,37 @@ function handleInteraction(event, action) {
         });
     }
 }
+
+function convertTextToAudio(button) {
+    // Obtener el texto del mensaje
+    const messageContent = button.closest('.card').querySelector('.message-content').innerText;
+    const language =  getLanguagePrefix();
+    const csrfToken = getCookie('csrftoken');
+    const urlEndpoint = `/${language}/upload_text/`;
+    // Hacer fetch al endpoint 'upload_text'
+    fetch(urlEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken // Asegúrate de incluir el token CSRF si estás usando Django
+        },
+        body: JSON.stringify({ text: messageContent, language: language })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.audio_url) {
+            // Crear un elemento de audio y reproducir el archivo MP3
+            const audio = new Audio(data.audio_url);
+            audio.play();
+        } else {
+            console.error('Error al generar el audio:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error en la solicitud:', error);
+    });
+}
+
 // Add event listeners to the buttons
 document.addEventListener('click', function(event) {
     if (event.target.closest('.bi-clipboard')) {

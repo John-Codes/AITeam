@@ -4,13 +4,15 @@ from django.views.generic.base import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap
 from . import views
-from .views import handle_template_messages, handle_cancel_subscription, handle_interaction_user_messages, send_contact_email, upload_audio
+from .views import handle_template_messages, handle_cancel_subscription, handle_interaction_user_messages, send_contact_email
 from .views import Conversation
+from .views import AudioTextManager
 sitemaps = {
     'mymodel': StaticViewSitemap,
 }
 #from paypal.standard.ipn import views as paypal_views
 conversation_instance = Conversation()
+audio_text_enpoints = AudioTextManager()
 #path('ipn/', paypal_views.ipn, name='paypal-ipn'),
 
 urlpatterns = [
@@ -26,7 +28,8 @@ urlpatterns = [
     path('send-contact-email/', send_contact_email, name = 'send_contact_email'),
     path('interaction-user-messages/', handle_interaction_user_messages, name = 'interaction_user_messages'),
     path('cancel-subscription/', handle_cancel_subscription, name = 'cancel_subscription'),
-    path('upload_audio/', upload_audio, name='upload_audio'),
+    path('upload_audio/', audio_text_enpoints.upload_audio, name='upload_audio'),
+    path('upload_text/', audio_text_enpoints.convert_text_to_audio, name='upload_text'),
     path('signup/', views.SignupView.as_view(), name='signup'),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', views.custom_logout, name='logout'),

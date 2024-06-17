@@ -150,7 +150,7 @@ async function startRecording() {
             const csrfToken = getCookie('csrftoken');
             const languagePrefix = getLanguagePrefix();
             const urlEndpoint = `/${languagePrefix}/upload_audio/`;
-            
+            formData.append('language', languagePrefix);
             const response = await fetch(urlEndpoint, {
                 method: 'POST',
                 body: formData,

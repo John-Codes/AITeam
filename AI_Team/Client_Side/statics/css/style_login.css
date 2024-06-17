@@ -167,6 +167,11 @@ body {
   color: #3498db !important;
  }
 
+ .succes-link-reset-password{
+  background-color: transparent !important;
+  color: #3498db !important;
+ }
+
  .chat-header {
   width: 100%;
   background: transparent;
@@ -224,6 +229,12 @@ h2.reset-styles {
     display: block; /* Asegura que los elementos se muestren en bloques, uno debajo del otro */
     width: 100%; /* Asegura que los elementos ocupen todo el ancho disponible */
     margin-bottom: 10px; /* Añade un margen en la parte inferior para separar los elementos */
+}
+
+/* Estilo personalizado para el mensaje de éxito */
+.success-message {
+  display: inline; /* Cambiar a inline para que el texto se muestre en una sola línea */
+  text-align: center;
 }
 
 @media (max-width: 575px) {
