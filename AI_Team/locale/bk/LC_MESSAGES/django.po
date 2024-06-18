@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-18 17:01+0000\n"
+"POT-Creation-Date: 2024-06-18 18:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,6 @@ msgid "An AI Team is writing"
 msgstr "Un IA-Team está escribiendo"
 
 #: Client_Side/templates/ai-team.html:97
-#: Client_Side/templates/chat_messages/about_us.html:12
 msgid "Website Creation Service with AI"
 msgstr ""
 
@@ -351,26 +350,22 @@ msgid "We are an American technology Start up founded in 2016."
 msgstr ""
 
 #: Client_Side/templates/chat_messages/about_us.html:11
-msgid "Main:"
-msgstr ""
-
-#: Client_Side/templates/chat_messages/about_us.html:13
 msgid ""
 "With 1 click and 5 minutes we help you create a personalized conversational "
 "website and we continuously help you improve it."
 msgstr ""
 
-#: Client_Side/templates/chat_messages/about_us.html:14
+#: Client_Side/templates/chat_messages/about_us.html:12
 msgid "Our conversational website includes"
 msgstr ""
 
-#: Client_Side/templates/chat_messages/about_us.html:15
+#: Client_Side/templates/chat_messages/about_us.html:13
 msgid ""
 "24/7 customer service better than a human being with the best AIs. Also "
 "includes"
 msgstr ""
 
-#: Client_Side/templates/chat_messages/about_us.html:16
+#: Client_Side/templates/chat_messages/about_us.html:14
 #, fuzzy
 #| msgid ""
 #| "Website creation service with AI: 24/7 customer service better than a "
@@ -388,7 +383,7 @@ msgstr ""
 "un bot de IA en 5 minutos que envíe correos electrónicos y procesar pagos y "
 "pedidos."
 
-#: Client_Side/templates/chat_messages/about_us.html:17
+#: Client_Side/templates/chat_messages/about_us.html:15
 msgid "Our goal is to improve life and businesses with technology."
 msgstr ""
 

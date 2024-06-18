@@ -37,6 +37,17 @@
     object-fit: cover;
     object-position: 50% 50%; 
 }
+/*Ajuste especial para imagen de developer, donde el object position es más alto, para que se vea mejor*/
+.card-image-profile-developer {
+    width: 15rem;  
+    height: 19rem;
+    border-radius:50%;
+    object-fit: cover;
+    object-position: 20% 40%; 
+
+    /* necesito que tenga menos zoom para que se vea mejor*/
+    zoom: 0.5;
+}
 
 /* Para pantallas muy pequeñas (menos de 600px de ancho) */
 @media (max-width: 600px) {
@@ -46,6 +57,10 @@
     .card-image-profile {
         width: 8rem;  
         height: 8rem;
+    }
+    .card-image-profile-developer {
+        width: 10rem;  
+        height: 14rem;
     }
 }
 

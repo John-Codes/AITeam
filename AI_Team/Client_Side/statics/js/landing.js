@@ -11,6 +11,7 @@ function toggleDotsAnimation(shouldShow) {
     const metallicText = document.querySelector('.metallic-text');
     const chatBox = document.getElementById('chatBox');
     const displayValue = shouldShow ? 'flex' : 'none';
+    console.log('toggleDotsAnimation called, shouldShow:', shouldShow, 'displayValue:', displayValue);
     if (shouldShow) {
         // Disminuye la altura en 30px
         chatBox.style.height = `calc(${chatBox.style.height} - 100)`;
@@ -19,7 +20,7 @@ function toggleDotsAnimation(shouldShow) {
         chatBox.style.height = 'calc(100vh - 160px)';
     }
     loadingDots.style.display = displayValue;
-    metallicText.style.display = displayValue;
+    //metallicText.style.display = displayValue;
 }
 
 // Helper function to retrieve a cookie value by name.
@@ -110,10 +111,40 @@ async function sendMessageStream() {
         let token = decoder.decode(result.value);
         aiMessage += token;
         let htmlContent = marked.parse(aiMessage);
+        htmlContent = addCustomClasses(htmlContent);
         document.getElementById(aiMessageId).innerHTML = htmlContent;
         chatBox.scrollTop = chatBox.scrollHeight;
         return reader.read().then(processResult);
     });
+}
+
+// Function to add custom classes to the HTML
+// Function to add custom classes to the HTML
+function addCustomClasses(htmlContent) {
+    // Create a temporary DOM element to manipulate the HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+
+    // Add classes to <li> elements
+    const listItems = tempDiv.querySelectorAll('li');
+    listItems.forEach(li => {
+        li.classList.add('message-content', 'bullet-point');
+    });
+
+    // Add classes to <h*> elements
+    for (let i = 1; i <= 6; i++) {
+        const headers = tempDiv.querySelectorAll(`h${i}`);
+        headers.forEach(header => {
+            header.classList.add('subtitle');
+            if (i <= 3) {
+                header.classList.add('is-3');
+            } else {
+                header.classList.add('is-4');
+            }
+        });
+    }
+
+    return tempDiv.innerHTML;
 }
 // Function to send the user's message and receive the response.
 function sendMessage() {

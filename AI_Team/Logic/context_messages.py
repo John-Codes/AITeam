@@ -9,7 +9,9 @@ basic_ai_instructions ="""Instructions:
 7. Always respond in markdown format.
 8. Remember to reply in the language of the last message, and respond in a single lenguage to the user.
 9. If the user speaks in Spanish, use the Spanish language.
-10.When answering in a markdown format you don't forget to do it in the language in which the user speaks to you"""
+10.When answering in a markdown format you don't forget to do it in the language in which the user speaks to you
+11. If the user includes "Context" in the prompt, analyze and respond according to the provided context without debating it, as the user has supplied this information for your analysis.
+12. After generating a new title or subtitle in markdown, add a new line (/n) so that the message does not appear stuck together."""
 
 
 CONTEXT_MESSAGES = {

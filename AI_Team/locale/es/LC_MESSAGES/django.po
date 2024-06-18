@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-18 17:01+0000\n"
+"POT-Creation-Date: 2024-06-18 18:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,6 @@ msgid "An AI Team is writing"
 msgstr "Un AI-Team está escribiendo"
 
 #: Client_Side/templates/ai-team.html:97
-#: Client_Side/templates/chat_messages/about_us.html:12
 msgid "Website Creation Service with AI"
 msgstr "Servicio de creación de sitios web con IA"
 
@@ -313,52 +312,45 @@ msgstr ""
 
 #: Client_Side/templates/chat_messages/about_us.html:8
 msgid "About the company"
-msgstr ""
+msgstr "Acerca de la empresa"
 
 #: Client_Side/templates/chat_messages/about_us.html:10
 msgid "We are an American technology Start up founded in 2016."
-msgstr ""
+msgstr "Somos una startup tecnológica estadounidense fundada en 2016."
 
 #: Client_Side/templates/chat_messages/about_us.html:11
-msgid "Main:"
-msgstr ""
-
-#: Client_Side/templates/chat_messages/about_us.html:13
 msgid ""
 "With 1 click and 5 minutes we help you create a personalized conversational "
 "website and we continuously help you improve it."
 msgstr ""
+"Con 1 clic y 5 minutos te ayudamos a crear un sitio web conversacional "
+"personalizado y te ayudamos continuamente a mejorarlo."
 
-#: Client_Side/templates/chat_messages/about_us.html:14
-msgid "Our conversational website includes"
-msgstr ""
+#: Client_Side/templates/chat_messages/about_us.html:12
+msgid "Our conversational website includes:"
+msgstr "Nuestro sitio web conversacional incluye:"
 
-#: Client_Side/templates/chat_messages/about_us.html:15
+#: Client_Side/templates/chat_messages/about_us.html:13
 msgid ""
 "24/7 customer service better than a human being with the best AIs. Also "
 "includes"
 msgstr ""
+"Servicio al cliente 24/7 mejor que el de un ser humano con las mejores IAs. "
+"También incluye"
 
-#: Client_Side/templates/chat_messages/about_us.html:16
-#, fuzzy
-#| msgid ""
-#| "24/7 customer service better than a human being with the best AIs. "
-#| "Integration with database and systems of your website or app. Create an "
-#| "AI chat that is an expert in your business in 5 minutes that sends emails "
-#| "and processes payments and orders."
+#: Client_Side/templates/chat_messages/about_us.html:14
 msgid ""
 "Integration with database and systems of your website or app. Create an AI "
 "chat bot that is an expert in your business in 5 minutes that sends emails "
 "and processes payments and orders."
 msgstr ""
-"El servicio al cliente 24/7 es mejor que el de un ser humano con las mejores "
-"IAs.Integración con base de datos y sistemas de tu sitio web o app. Crea un "
+"Integración con base de datos y sistemas de tu sitio web o app. Crea un "
 "chatbot experto en tu negocio en 5 minutos que envía correos electrónicos y "
 "procesa pagos y pedidos."
 
-#: Client_Side/templates/chat_messages/about_us.html:17
+#: Client_Side/templates/chat_messages/about_us.html:15
 msgid "Our goal is to improve life and businesses with technology."
-msgstr ""
+msgstr "Nuestro objetivo es mejorar la vida y los negocios con tecnología."
 
 #: Client_Side/templates/chat_messages/cancel.html:5
 msgid "Yes"

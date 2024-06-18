@@ -337,6 +337,7 @@ table {
     left: 0;
     position: relative; 
     padding: 10px; 
+    z-index: 2;
 }
 .control.is-expanded {
     flex-grow: 1; /* Asegura que el div del input crezca y ocupe el espacio disponible */
@@ -363,18 +364,24 @@ table {
 
 .loading-dots-container {
     display: none;   
+    z-index: 3;
+    position: absolute; 
+    bottom: 4rem; 
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .loading-dots {
     display: inline-flex;
     gap: 8px;
     align-items: center;
+    z-index: 4;
 }
 
 .dot {
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 0.7rem;
+    height: 0.7rem;
     background-color: grey;
     border-radius: 50%;
 }
@@ -388,6 +395,11 @@ table {
     margin: 0 auto;
 }
 
+.subtitle{
+    font-size: 24px!important;
+    margin-top: 1rem;
+    color: #ffffff!important;
+}
 @keyframes dotAnimation {
     0%, 100% {
         background-color: grey;
