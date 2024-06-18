@@ -151,7 +151,9 @@ body {
   font-size: 16px;
   padding: 7px 10px;
  }
- 
+ .button.is-confirm-password {
+  width: 15rem !important;
+ }
  .button.is-dark:hover {
   background-color: #222;
   border-color: #3498db;

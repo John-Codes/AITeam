@@ -62,13 +62,11 @@ class CustomSetPasswordForm(SetPasswordForm):
         label=_("New password"),
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
         strip=False,
-        help_text=_("Enter a strong password."),
     )
     new_password2 = forms.CharField(
         label=_("New password confirmation"),
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
         strip=False,
-        help_text=_("Enter the same password as before, for verification."),
     )
 
     def clean_new_password2(self):

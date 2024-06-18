@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-10 17:02+0000\n"
+"POT-Creation-Date: 2024-06-18 17:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr "Cerrar sesión"
 
 #: Client_Side/templates/ai-team.html:54 Client_Side/templates/ai-team.html:178
 #: Client_Side/templates/subscription.html:13
-#: Server_Config/Server_Side/views.py:93
+#: Server_Config/Server_Side/views.py:94
 msgid "Subscriptions"
 msgstr "Suscripciones"
 
@@ -61,6 +61,7 @@ msgid "An AI Team is writing"
 msgstr "Un IA-Team está escribiendo"
 
 #: Client_Side/templates/ai-team.html:97
+#: Client_Side/templates/chat_messages/about_us.html:12
 msgid "Website Creation Service with AI"
 msgstr ""
 
@@ -341,6 +342,56 @@ msgstr ""
 "Comience ahora cargando su archivo y creemos juntos¡Una Experiencia de chat "
 "AI increíble!"
 
+#: Client_Side/templates/chat_messages/about_us.html:8
+msgid "About the company"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/about_us.html:10
+msgid "We are an American technology Start up founded in 2016."
+msgstr ""
+
+#: Client_Side/templates/chat_messages/about_us.html:11
+msgid "Main:"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/about_us.html:13
+msgid ""
+"With 1 click and 5 minutes we help you create a personalized conversational "
+"website and we continuously help you improve it."
+msgstr ""
+
+#: Client_Side/templates/chat_messages/about_us.html:14
+msgid "Our conversational website includes"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/about_us.html:15
+msgid ""
+"24/7 customer service better than a human being with the best AIs. Also "
+"includes"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/about_us.html:16
+#, fuzzy
+#| msgid ""
+#| "Website creation service with AI: 24/7 customer service better than a "
+#| "human being with AI like gpt 4. Integration with database and systems of "
+#| "your website or app. Create an AI bot in 5 minutes that sends emails and "
+#| "processes payments and orders."
+msgid ""
+"Integration with database and systems of your website or app. Create an AI "
+"chat bot that is an expert in your business in 5 minutes that sends emails "
+"and processes payments and orders."
+msgstr ""
+"Servicio de creación de sitios web con IA: servicio al cliente 24 horas al "
+"día, 7 días a la semana mejor que un humanoEstar con IA como gpt 4. "
+"Integración con bases de datos y sistemas de tu sitio web o aplicación. Cree "
+"un bot de IA en 5 minutos que envíe correos electrónicos y procesar pagos y "
+"pedidos."
+
+#: Client_Side/templates/chat_messages/about_us.html:17
+msgid "Our goal is to improve life and businesses with technology."
+msgstr ""
+
 #: Client_Side/templates/chat_messages/cancel.html:5
 msgid "Yes"
 msgstr "Sí"
@@ -502,9 +553,23 @@ msgid "using your new password."
 msgstr "usando su nueva contraseña."
 
 #: Client_Side/templates/registration/password_reset_confirm.html:5
-#: Client_Side/templates/registration/password_reset_confirm.html:12
+#: Client_Side/templates/registration/password_reset_confirm.html:15
 msgid "Set New Password"
 msgstr "Establecer nueva contraseña"
+
+#: Client_Side/templates/registration/password_reset_confirm.html:18
+#, fuzzy
+#| msgid "An email has been sent with instructions to reset your password."
+msgid ""
+"No form available. Please visit the following link to reset your password:"
+msgstr ""
+"Se ha enviado un correo electrónico con instrucciones para restablecer su "
+"contraseña."
+
+#: Client_Side/templates/registration/password_reset_confirm.html:18
+#: Client_Side/templates/subscription.html:44
+msgid "Reset Password"
+msgstr "Restablecer contraseña"
 
 #: Client_Side/templates/registration/password_reset_done.html:5
 msgid "Email Sent"
@@ -519,10 +584,6 @@ msgstr ""
 #: Client_Side/templates/subscription.html:43
 msgid "Singup"
 msgstr "Registrarse"
-
-#: Client_Side/templates/subscription.html:44
-msgid "Reset Password"
-msgstr "Restablecer contraseña"
 
 #: Client_Side/templates/subscription.html:69
 msgid "Special Code"
@@ -740,51 +801,65 @@ msgstr ""
 msgid "Question"
 msgstr "Suscripción"
 
-#: Server_Config/Server_Side/forms.py:30
+#: Server_Config/Server_Side/forms.py:31
 msgid "There are no registered users with this email."
 msgstr "No hay usuarios registrados con este correo electrónico."
 
-#: Server_Config/Server_Side/forms.py:36
+#: Server_Config/Server_Side/forms.py:37
 #, fuzzy
 #| msgid "Email Sent"
 msgid "Email"
 msgstr "Correo electrónico enviado"
 
-#: Server_Config/Server_Side/forms.py:41
+#: Server_Config/Server_Side/forms.py:42
 #, fuzzy
 #| msgid "Reset Password"
 msgid "Password"
 msgstr "Restablecer contraseña"
 
-#: Server_Config/Server_Side/forms.py:53
+#: Server_Config/Server_Side/forms.py:54
 msgid "This account is inactive."
 msgstr ""
 
-#: Server_Config/Server_Side/views.py:93
+#: Server_Config/Server_Side/forms.py:62
+#, fuzzy
+#| msgid "Set New Password"
+msgid "New password"
+msgstr "Establecer nueva contraseña"
+
+#: Server_Config/Server_Side/forms.py:67
+msgid "New password confirmation"
+msgstr ""
+
+#: Server_Config/Server_Side/forms.py:76
+msgid "The two password fields didn’t match."
+msgstr ""
+
+#: Server_Config/Server_Side/views.py:94
 msgid "EFEXZIUM"
 msgstr "EFEXZIUM"
 
-#: Server_Config/Server_Side/views.py:93
+#: Server_Config/Server_Side/views.py:94
 msgid "AI Team Chat"
 msgstr "AI Team Chat"
 
-#: Server_Config/Server_Side/views.py:93
+#: Server_Config/Server_Side/views.py:94
 msgid "AI Team Subscriptions"
 msgstr "AI Team Subscriptions"
 
-#: Server_Config/Server_Side/views.py:93
+#: Server_Config/Server_Side/views.py:94
 msgid "Create your own page"
 msgstr "Crea tu propia página"
 
-#: Server_Config/Server_Side/views.py:93
+#: Server_Config/Server_Side/views.py:94
 msgid "AI Team Page Builder"
 msgstr "Creador de páginas de IA Team"
 
-#: Server_Config/Server_Side/views.py:212
+#: Server_Config/Server_Side/views.py:213
 msgid "Thank you! We will contact you soon."
 msgstr ""
 
-#: Server_Config/Server_Side/views.py:215
+#: Server_Config/Server_Side/views.py:216
 #, fuzzy
 #| msgid ""
 #| "There was an error processing your form. Please check the details and try "
@@ -794,7 +869,7 @@ msgstr ""
 "Hubo un error al procesar su formulario. Verifique los detalles e intente de "
 "nuevo."
 
-#: Server_Config/Server_Side/views.py:432
+#: Server_Config/Server_Side/views.py:436
 msgid ""
 "I need your help because my job is to summarize texts and I have been given "
 "a complicated one. Mention the topic of the text, important data such as "
@@ -804,11 +879,15 @@ msgid ""
 "the topic, but the information I give you to make the summary."
 msgstr ""
 
-#: Server_Config/settings.py:85
+#: Server_Config/Server_Side/views.py:491
+msgid "Las contraseñas no coinciden"
+msgstr ""
+
+#: Server_Config/settings.py:96
 msgid "English"
 msgstr "Inglés"
 
-#: Server_Config/settings.py:86
+#: Server_Config/settings.py:97
 msgid "Español"
 msgstr "Español"
 
