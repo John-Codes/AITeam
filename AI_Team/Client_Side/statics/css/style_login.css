@@ -167,6 +167,17 @@ body {
   color: #3498db !important;
  }
 
+ /* Estilo personalizado para el mensaje de éxito */
+.success-message {
+  display: inline; /* Cambiar a inline para que el texto se muestre en una sola línea */
+  text-align: center;
+}
+
+ .succes-link-reset-password{
+  background-color: transparent !important;
+  color: #3498db !important;
+ }
+
  .chat-header {
   width: 100%;
   background: transparent;

@@ -6,17 +6,18 @@ from .sitemaps import StaticViewSitemap
 from . import views
 from .views import handle_template_messages, handle_cancel_subscription, handle_interaction_user_messages, send_contact_email
 from .views import Conversation
+from .views import CustomPasswordResetConfirmView
+
 sitemaps = {
     'mymodel': StaticViewSitemap,
 }
 #from paypal.standard.ipn import views as paypal_views
 conversation_instance = Conversation()
 #path('ipn/', paypal_views.ipn, name='paypal-ipn'),
-
 urlpatterns = [
     path('', RedirectView.as_view(url='/chat/main/', permanent=False)),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('reset/<uidb64>/<token>/', CustomPasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
     path('chat/<str:context>/', views.ChatUIView.as_view(), name='ai-team'),
     path('stream-chat/', conversation_instance.stream_chat, name='stream_chat'),

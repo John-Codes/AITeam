@@ -2,6 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.forms import SetPasswordForm
 from .models import Client as User
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
@@ -53,6 +54,29 @@ class CustomLoginForm(AuthenticationForm):
                 _("This account is inactive."),
                 code='inactive',
             )
+
+#generate a class Form for SetPasswordForm, this form will be used in the CustromPasswordResetConfirmView class, use all good practices for the form and include the fields new_password and confirm_new_password
+
+class CustomSetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label=_("New password"),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        strip=False,
+        help_text=_("Enter a strong password."),
+    )
+    new_password2 = forms.CharField(
+        label=_("New password confirmation"),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        strip=False,
+        help_text=_("Enter the same password as before, for verification."),
+    )
+
+    def clean_new_password2(self):
+        new_password1 = self.cleaned_data.get('new_password1')
+        new_password2 = self.cleaned_data.get('new_password2')
+        if new_password1 and new_password2 and new_password1 != new_password2:
+            raise forms.ValidationError(_("The two password fields didn’t match."))
+        return new_password2
 
 class SubscriptionForm(forms.Form):
     plan_name = forms.CharField(max_length=100, required=True)

@@ -3,9 +3,10 @@ import json
 import time
 import uuid
 from pathlib import Path
+from django.views.generic.edit import FormView
 from django.http import JsonResponse, StreamingHttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.views import LoginView, PasswordResetView
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView
 from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView 
 from django.views import View
@@ -475,7 +476,33 @@ class PasswordResetView(PasswordResetView):
                 messages.error(self.request, f"Error in {field}: {error}")
         return self.render_to_response(self.get_context_data(form=form))
 
-# Handle the form to create an cliente account 
+# Handle the form to create an cliente account and send an email
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'registration/password_reset_confirm.html'
+    success_url = reverse_lazy('password_reset_complete')
+    form_class = CustomSetPasswordForm
+
+    def form_valid(self, form):
+        # Verificar que ambas contraseñas coincidan
+        new_password1 = form.cleaned_data.get('new_password1')
+        new_password2 = form.cleaned_data.get('new_password2')
+
+        if new_password1 and new_password2 and new_password1 != new_password2:
+            form.add_error('new_password2', _('Las contraseñas no coinciden'))
+            return self.form_invalid(form)
+
+        # Si las contraseñas coinciden, procesar el formulario
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        # Renderizar el formulario con errores
+        return render(self.request, self.template_name, {'form': form})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.user})
+        return kwargs
+    
 class SignupView(CreateView):
     form_class = SignUpForm
     template_name = 'registration/signup.html'
