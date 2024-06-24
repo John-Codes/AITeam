@@ -7,12 +7,14 @@ const urlDictionary = {
 var list_messages = [];
 function toggleDotsAnimation(shouldShow) {
     const loadingDots = document.querySelector('.loading-dots-container');
+    const bodyChat = document.querySelector('.chat-body');
     const body = document.body;
     const metallicText = document.querySelector('.metallic-text');
     const chatBox = document.getElementById('chatBox');
     const chatContainer = document.querySelector('.chat-content');
 
     const displayValue = shouldShow ? 'flex' : 'none';
+    const marginValue = shouldShow ? '3%' : 'auto'
     console.log('toggleDotsAnimation called, shouldShow:', shouldShow, 'displayValue:', displayValue);
     if (shouldShow) {
         // Disminuye la altura en 30px
@@ -21,9 +23,11 @@ function toggleDotsAnimation(shouldShow) {
         chatBox.style.height = 'calc(80px + 100vh);';
     }
     loadingDots.style.display = displayValue;
+    bodyChat.style.marginBottom = marginValue;
+
     document.body.scrollTo({
         top: document.body.scrollHeight,
-        behavior: 'smooth' // Desplazamiento suave
+        behavior: 'auto' // Desplazamiento suave
     });
     //metallicText.style.display = displayValue;
 }
@@ -71,7 +75,7 @@ async function sendMessageStream() {
         chatBox.insertAdjacentHTML('beforeend', responseData.message);
         document.body.scrollTo({
             top: document.body.scrollHeight,
-            behavior: 'smooth' // Desplazamiento suave
+            behavior: 'auto' // Desplazamiento suave
         });
         // chatBox.scrollTop = chatBox.scrollHeight;
         return;
@@ -86,7 +90,7 @@ async function sendMessageStream() {
     // chatBox.scrollTop = chatBox.scrollHeight;
     document.body.scrollTo({
         top: document.body.scrollHeight,
-        behavior: 'smooth' // Desplazamiento suave
+        behavior: 'auto' // Desplazamiento suave
     });
     toggleDotsAnimation(true); // Activar animaciones
     document.getElementById("userMessage").value = "";
@@ -116,7 +120,7 @@ async function sendMessageStream() {
     `);
     document.body.scrollTo({
         top: document.body.scrollHeight,
-        behavior: 'smooth' // Desplazamiento suave
+        behavior: 'auto' // Desplazamiento suave
     });
     let aiMessage = '';
 
@@ -134,7 +138,7 @@ async function sendMessageStream() {
         // chatBox.scrollTop = chatBox.scrollHeight;
         document.body.scrollTo({
             top: document.body.scrollHeight,
-            behavior: 'smooth' // Desplazamiento suave
+            behavior: 'auto' // Desplazamiento suave
         });
         return reader.read().then(processResult);
     });

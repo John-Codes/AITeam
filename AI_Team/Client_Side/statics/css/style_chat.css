@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 html, body {
+    background: black;
     margin: 0;
     padding: 0;
     overflow-y: auto;
@@ -9,6 +10,7 @@ html, body {
 }
 
 body {
+    background: black;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -234,7 +236,6 @@ h2.reset-styles {
     z-index: 900;
     position: relative;/* Asegura que el chat-body no exceda la altura de la ventana
     overflow-y: auto; Añade esta línea para manejar el scroll dentro de chat-body */
-    max-height: 170vh;
     min-height: 50vh;
     flex-direction: column;
     z-index: 900;
@@ -297,6 +298,7 @@ body::-webkit-scrollbar-thumb {
 
 .chat-content {
     margin: 0 auto;
+    margin-bottom: 1%;
     max-width: 70%;
     background: transparent;
     border: none;
@@ -626,13 +628,12 @@ table {
     }
     .chat-body {
         width: auto;
-        max-height: 170vh;
         padding-bottom: 2.5rem !important;
     }
     .chat-content{
+        display: inline;
         width: 70%;
         margin: 0;
-        display: contents;
         padding: 10px;
         margin-top: 5%;
         background-color: transparent;
