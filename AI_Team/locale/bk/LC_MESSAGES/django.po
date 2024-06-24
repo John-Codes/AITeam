@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-18 18:32+0000\n"
+"POT-Creation-Date: 2024-06-20 22:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -356,7 +356,7 @@ msgid ""
 msgstr ""
 
 #: Client_Side/templates/chat_messages/about_us.html:12
-msgid "Our conversational website includes"
+msgid "Our conversational website includes:"
 msgstr ""
 
 #: Client_Side/templates/chat_messages/about_us.html:13
@@ -489,10 +489,20 @@ msgstr ""
 msgid " on this link"
 msgstr ""
 
-#: Client_Side/templates/chat_messages/temp_rag_success.html:3
+#: Client_Side/templates/chat_messages/temp_rag_success.html:4
+msgid "Successfully Created Temporary Conversation"
+msgstr ""
+
+#: Client_Side/templates/chat_messages/temp_rag_success.html:7
 msgid ""
 "The PDF file has been successfully uploaded and you can now ask questions "
 "about its content."
+msgstr ""
+
+#: Client_Side/templates/chat_messages/temp_rag_success.html:10
+msgid ""
+"To get a permanent web page where the AI can answer questions about your "
+"PDF, you need to create an account and get a plan."
 msgstr ""
 
 #: Client_Side/templates/chat_messages/text_message.html:5

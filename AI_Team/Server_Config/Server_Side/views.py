@@ -385,6 +385,7 @@ class Conversation():
             if pdf_file != 'no path' and upload_success:
                 
                 self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, temp_uuid, permanent=False)
+                delete_temp_pdfs(pdf_file)
                 request.session['temp_collection_exist'] = {'pdf_path': pdf_file, 'temp_uuid': temp_uuid} 
                 #delete_temp_pdfs(pdf_file)
                 html_message = render_to_string('chat_messages/temp_rag_success.html')
@@ -413,6 +414,7 @@ class Conversation():
                 
                 collection =self.ai_handler.create_collection_rag_with_a_pdf(pdf_file, collection_name, permanent=request.user.email)
                 create_json = self.create_json_page(request.user.id ,request.user.email,collection=collection)
+                delete_temp_pdfs(pdf_file)
                 #delete_temp_pdfs(pdf_file)
                 # call to create_json_page
                 context = {

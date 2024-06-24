@@ -1,4 +1,3 @@
-// Function to toggle the animation of dots.
 
 const urlDictionary = {
     'main': 'main-query-temp-rag',
@@ -8,18 +7,24 @@ const urlDictionary = {
 var list_messages = [];
 function toggleDotsAnimation(shouldShow) {
     const loadingDots = document.querySelector('.loading-dots-container');
+    const body = document.body;
     const metallicText = document.querySelector('.metallic-text');
     const chatBox = document.getElementById('chatBox');
+    const chatContainer = document.querySelector('.chat-content');
+
     const displayValue = shouldShow ? 'flex' : 'none';
     console.log('toggleDotsAnimation called, shouldShow:', shouldShow, 'displayValue:', displayValue);
     if (shouldShow) {
         // Disminuye la altura en 30px
         chatBox.style.height = `calc(${chatBox.style.height} - 100)`;
     } else {
-        // Restaura la altura original (asumiendo que la altura original es 100vh - 160px)
-        chatBox.style.height = 'calc(100vh - 160px)';
+        chatBox.style.height = 'calc(80px + 100vh);';
     }
     loadingDots.style.display = displayValue;
+    document.body.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth' // Desplazamiento suave
+    });
     //metallicText.style.display = displayValue;
 }
 
@@ -38,6 +43,7 @@ function getLanguagePrefix() {
 
 // Function async to streaming chat responses.
 async function sendMessageStream() {
+
     const csrfToken = getCookie('csrftoken');
     const message = document.getElementById("userMessage").value;
     const chatBox = document.getElementById("chatBox");
@@ -63,7 +69,11 @@ async function sendMessageStream() {
             sessionStorage.removeItem('awaitingContactEmail');
         }
         chatBox.insertAdjacentHTML('beforeend', responseData.message);
-        chatBox.scrollTop = chatBox.scrollHeight;
+        document.body.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth' // Desplazamiento suave
+        });
+        // chatBox.scrollTop = chatBox.scrollHeight;
         return;
     }
 
@@ -73,7 +83,11 @@ async function sendMessageStream() {
         </div>
         <div class="clearfix"></div>
     `);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    // chatBox.scrollTop = chatBox.scrollHeight;
+    document.body.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth' // Desplazamiento suave
+    });
     toggleDotsAnimation(true); // Activar animaciones
     document.getElementById("userMessage").value = "";
     const aiMessageId = 'aiMessage' + Date.now(); // Generar un ID único para el elemento
@@ -100,6 +114,10 @@ async function sendMessageStream() {
         </div>
         <div class="clearfix"></div>
     `);
+    document.body.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth' // Desplazamiento suave
+    });
     let aiMessage = '';
 
     reader.read().then(function processResult(result) {
@@ -113,13 +131,15 @@ async function sendMessageStream() {
         let htmlContent = marked.parse(aiMessage);
         htmlContent = addCustomClasses(htmlContent);
         document.getElementById(aiMessageId).innerHTML = htmlContent;
-        chatBox.scrollTop = chatBox.scrollHeight;
+        // chatBox.scrollTop = chatBox.scrollHeight;
+        document.body.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth' // Desplazamiento suave
+        });
         return reader.read().then(processResult);
     });
 }
 
-// Function to add custom classes to the HTML
-// Function to add custom classes to the HTML
 function addCustomClasses(htmlContent) {
     // Create a temporary DOM element to manipulate the HTML
     const tempDiv = document.createElement('div');
@@ -143,6 +163,15 @@ function addCustomClasses(htmlContent) {
             }
         });
     }
+
+    // Add <br><br> after each <strong> element
+    const strongElements = tempDiv.querySelectorAll('strong');
+    strongElements.forEach(strong => {
+        const br1 = document.createElement('br');
+        const br2 = document.createElement('br');
+        strong.insertAdjacentElement('afterend', br2);
+        strong.insertAdjacentElement('afterend', br1);
+    });
 
     return tempDiv.innerHTML;
 }
@@ -388,16 +417,31 @@ document.addEventListener('DOMContentLoaded', () => {
 //document.getElementById("userMessage").addEventListener("input", checkAndAutocomplete);
 
 document.addEventListener("DOMContentLoaded", function() {
-
-    // Toggle hamburger menu.
+    // Selección de elementos del DOM
     const hamburgerToggle = document.querySelector("#hamburgerToggle");
     const menuItems = document.querySelector(".menu-items");
     const hamburgerIcon = document.querySelector(".hamburger-lines i");
 
+    // Función para actualizar el menú y el icono
+    function updateMenu(isOpen) {
+        hamburgerIcon.className = isOpen ? 'bi bi-x-lg' : 'bi bi-list';
+        menuItems.style.transform = isOpen ? 'translateX(0)' : 'translateX(-100%)';
+    }
+
+    // Event listener para el toggle del menú hamburguesa
     hamburgerToggle.addEventListener("change", function() {
+        updateMenu(this.checked);
+    });
 
-      hamburgerIcon.className = this.checked ? 'bi bi-x-lg' : 'bi bi-list';
-
-        menuItems.style.transform = this.checked ? 'translateX(0)' : 'translateX(-100%)';
+    // Event listener para cerrar el menú si se hace clic fuera de él
+    document.addEventListener("click", function(event) {
+        // Verificar si el menú está abierto
+        if (hamburgerIcon.className === 'bi bi-x-lg') {
+            // Comprobar si el clic fue fuera del menú y del toggle
+            if (!menuItems.contains(event.target) && !event.target.closest('.hamburger-lines')) {
+                hamburgerToggle.checked = false;
+                updateMenu(false);
+            }
+        }
     });
 });

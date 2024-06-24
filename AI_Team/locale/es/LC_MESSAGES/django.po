@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-18 18:32+0000\n"
+"POT-Creation-Date: 2024-06-20 22:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -465,13 +465,25 @@ msgstr "tu propio sitio web"
 msgid " on this link"
 msgstr " en este enlace"
 
-#: Client_Side/templates/chat_messages/temp_rag_success.html:3
+#: Client_Side/templates/chat_messages/temp_rag_success.html:4
+msgid "Successfully Created Temporary Conversation"
+msgstr "Conversacion Temporal Creada Exitosamente"
+
+#: Client_Side/templates/chat_messages/temp_rag_success.html:7
 msgid ""
 "The PDF file has been successfully uploaded and you can now ask questions "
 "about its content."
 msgstr ""
 "El archivo PDF se ha subido correctamente y ahora puedes hacer preguntas "
 "sobre su contenido."
+
+#: Client_Side/templates/chat_messages/temp_rag_success.html:10
+msgid ""
+"To get a permanent web page where the AI can answer questions about your "
+"PDF, you need to create an account and get a plan."
+msgstr ""
+"Para obtener una página web permanente donde la IA pueda responder preguntas "
+"sobre su PDF, necesitas crear una cuenta y obtener un plan."
 
 #: Client_Side/templates/chat_messages/text_message.html:5
 msgid "Status of the text: "

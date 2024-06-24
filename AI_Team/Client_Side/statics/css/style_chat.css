@@ -3,15 +3,18 @@
 html, body {
     margin: 0;
     padding: 0;
+    overflow-y: auto;
+    overflow: auto;
     min-height: 100vh; /* Asegura que el body ocupe al menos el 100% de la altura de la ventana */
 }
 
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    margin: 0; 
-    padding: 0;
+    margin: 0;
+    padding-top: 60px;  /* Deja espacio para el header */
+    padding-bottom: 60px;  /* Deja espacio para el footer */
+    height: 100vh;
     padding-bottom: 0;
     border-bottom: 0;
     background-color: #181818;
@@ -21,14 +24,14 @@ body {
     background-position: center center; 
 }
 
-.height-chat{
+/* .height-chat{
     height: 100%;
-}
+} */
 .bi-list, .bi-x-lg{   
     font-size: 40px;
     color: white;
 }
-.chat-footer,
+
 .modal-footer {
     z-index: 2;
     background: linear-gradient(135deg, rgba(28,28,28,0.3), rgba(14,14,14,0.3));
@@ -36,16 +39,26 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.37);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.chat-footer{
+    z-index: 2;
+    background: black;
+    border-radius: 23px;
+    border: black;
+}
 
 .modal-footer {
     z-index: 1060;
 }
 
 .chat-header {
+    background-image: url('../img/hubble.svg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    background: transparent;
-    /*Este div esta en un nivel z superior para se superponga al chat*/
-    z-index: 2;
+    z-index: 1000; /* Ajusta el z-index para que esté por encima del contenido del chat */
 }
 
 .chat-title,
@@ -157,13 +170,13 @@ body {
 .menu-items ul {
     margin-top: 0; /* Elimina el margen superior */
     padding-top: 5px; /* Agrega espacio superior */
+    padding-left: 5px; /* Agrega espacio superior */
+
 }
 
 .menu-items.show {
     transform: translateY(0);
 }
-
-
 .menu-items li {
     margin-bottom: 
     1.2rem;
@@ -204,34 +217,56 @@ h2.reset-styles {
 #hamburgerToggle:checked ~ .menu-items {
     transform: translateX(0); /* Adjust this, the translate function doesn't need any parameters */
 }
-
-.chat-body {
+.chat-content{
+    flex: 1;
     width: 70%;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top: 5%;
+    background-color: transparent;
+    overflow-wrap: normal;
+    min-height: 50vh;
+}
+.chat-body {
+    /* width: 70%;
     margin-left: auto;
     margin-right: auto;
-    overflow-y: auto; 
-    height: calc(100vh - 160px);
-}
-/* Estilo básico para el scrollbar */
-.chat-body::-webkit-scrollbar {
-    width: 10px; /* Ancho del scrollbar */
+    z-index: 900;
+    position: relative;/* Asegura que el chat-body no exceda la altura de la ventana
+    overflow-y: auto; Añade esta línea para manejar el scroll dentro de chat-body */
+    max-height: 170vh;
+    min-height: 50vh;
+    flex-direction: column;
+    z-index: 900;
 }
 
-/* Estilo para el thumb (la parte que se desplaza) */
+/* Estilo básico para el scrollbar 
+.chat-body::-webkit-scrollbar {
+    width: 10px; Ancho del scrollbar 
+} */
+body::-webkit-scrollbar {
+    width: 10px; /* Ancho del scrollbar */
+    z-index: 9999; /* Asegura que esté por encima de otros elementos */
+}
+/* Estilo para el thumb (la parte que se desplaza) 
 .chat-body::-webkit-scrollbar-thumb {
+    /* background: gray;  Color de fondo del thumb a gris 
+    border-radius: 10px; Bordes redondeados 
+}*/
+body::-webkit-scrollbar-thumb {
     background: gray; /* Color de fondo del thumb a gris */
     border-radius: 10px; /* Bordes redondeados */
 }
 
 /* Estilo para el track (la parte que no se desplaza) */
-.chat-body::-webkit-scrollbar-track {
-    background: black; /* Color de fondo del track a negro */
-}
+/* .chat-body::-webkit-scrollbar-track {
+    background: black; 
+} */
 
 /* Estilo para el thumb al pasar el mouse */
-.chat-body::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Color de fondo del thumb al pasar el mouse */
-}
+/* .chat-body::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+} */
 
 
 
@@ -261,7 +296,6 @@ h2.reset-styles {
 }
 
 .chat-content {
-    height: 100vh;
     margin: 0 auto;
     max-width: 70%;
     background: transparent;
@@ -326,18 +360,21 @@ table {
     }
 }
 
+.field.is-grouped{
+    padding-top: 3px;
+    padding-bottom: 3px;
 
+}
 .chat-footer {
-    width: 70%;  
-    margin-left: auto;
-    margin-right: auto;
-    flex-direction: column;
-    display: flex; 
-    bottom: 0;
-    left: 0;
-    position: relative; 
-    padding: 10px; 
-    z-index: 2;
+    width: 70%; /* Ancho del footer */
+    position: fixed; /* Fija el footer */
+    bottom: 0; /* Coloca el footer en la parte inferior */
+    left: 50%; /* Alinea el centro del footer con el centro de la ventana */
+    transform: translateX(-50%); /* Corrige la posición para centrarlo horizontalmente */
+    padding: 10px; /* Espaciado interno del footer */
+    background-color: #000000; /* Color de fondo del footer */
+    z-index: 1000; /* Capa z para asegurar que esté por encima del contenido */
+    height: fit-content;
 }
 .control.is-expanded {
     flex-grow: 1; /* Asegura que el div del input crezca y ocupe el espacio disponible */
@@ -439,9 +476,8 @@ table {
     min-height: 50px; 
     max-height: 200px;
     border-radius: 15px;
-    margin-bottom: 5px;
     background-color: black;
-    border-color: gray;
+    border-color: transparent;
     color: white;
     font-family: "Montserrat", Arial, sans-serif;
     transition: border 0.3s, box-shadow 0.3s;
@@ -463,8 +499,8 @@ table {
     border-radius: 15px;
     color: white; 
     outline: none; 
-    border-color: #3498db; 
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    border-color: #000000; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     font-family: "Montserrat", Arial, sans-serif; 
     background-color: black; 
   }
@@ -473,8 +509,8 @@ table {
     flex-basis: auto;
     margin-left: 5px;
     border-radius: 15px;
-    background-color: black;
-    border-color: gray;
+    background-color: transparent;
+    border-color: transparent;
     margin-bottom: 5px;
     color: white;
     font-family: "Montserrat", Arial, sans-serif;
@@ -483,20 +519,15 @@ table {
     align-items: center;
     justify-content: center;
 }
+.btn-send{
+    border-radius: 20px;
+}
 
 .btn-send i {
     margin-right: 5px; 
 }
 
-.btn-send:hover {
-    border-radius: 15px;
-    color: white; 
-    outline: none; 
-    border-color: #3498db; 
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-    font-family: "Montserrat", Arial, sans-serif; 
-    background-color: black; 
-}
+
 
 
 
@@ -584,10 +615,30 @@ table {
 /* Para teléfonos móviles en modo vertical */
 @media (max-width: 480px) {
     .chat-footer {
-        width: 100%;
+        width: 93%;
+        max-width: 100%;
+        bottom: 0;
+        padding: inherit;
+        position: fixed;
+        z-index: 1000;
+        left: 50%;
+        transform: translateX(-50%);
     }
     .chat-body {
         width: auto;
+        max-height: 170vh;
+        padding-bottom: 2.5rem !important;
+    }
+    .chat-content{
+        width: 70%;
+        margin: 0;
+        display: contents;
+        padding: 10px;
+        margin-top: 5%;
+        background-color: transparent;
+        overflow-wrap: normal;
+        min-height: 50vh;
+        max-height: 170vh;
     }
     .chat-title {
         font-size: 18px;
