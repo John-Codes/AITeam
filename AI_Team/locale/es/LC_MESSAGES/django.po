@@ -57,8 +57,8 @@ msgid "About Us"
 msgstr "Acerca de nosotros"
 
 #: Client_Side/templates/ai-team.html:87
-msgid "An AI Team is writing"
-msgstr "Un AI-Team está escribiendo"
+msgid "AI Team is writing"
+msgstr "AI-Team está escribiendo"
 
 #: Client_Side/templates/ai-team.html:97
 msgid "Website Creation Service with AI"
@@ -115,7 +115,7 @@ msgstr "Suscrito desde la fecha:"
 #: Client_Side/templates/ai-team.html:134
 #, fuzzy
 #| msgid "If you wanna upgrade your current subscription visit the"
-msgid "If you wanna upgrade your current subscription visit the "
+msgid "If you wanna upgrade your current subscription visit "
 msgstr "si desea obtener cualquier suscripción, visite la"
 
 #: Client_Side/templates/ai-team.html:134
