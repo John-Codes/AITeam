@@ -1,0 +1,19 @@
+{
+    "title": "Unresolved Repair Alert",
+    "header": "Unresolved Repair: Mrs. Johnson's Case",
+    "description": "Unresolved repair case with Mrs. Johnson highlights system challenges. Despite efforts, repair remains pending due to safety concerns over a defective streetlight on Elm Street. Follow-up calls highlight prioritization issues.",
+    "keywords": [
+        "Unresolved case",
+        "repair delay",
+        "follow-up calls",
+        "defective streetlight",
+        "safety concerns",
+        "pending repair",
+        "priority issue",
+        "customer concern",
+        "streetlight maintenance",
+        "efficient response"
+    ],
+    "default_message": "Welcome to our Chat",
+    "list_items": []
+}

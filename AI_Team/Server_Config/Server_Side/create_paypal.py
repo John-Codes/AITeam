@@ -5,22 +5,26 @@ from datetime import timedelta
 from django.urls import reverse
 from Server_Config.Server_Side.models import SubscriptionDetail
 def generate_access_token():
-    # client_id = 'AThJhSpO1NlOyyx19jAC5Vb2CStnbrurdgm3hqKzVaVoz85T9lKKoYThf7hKRNYeovC6b_iJOgkXZCMB'  # Replace with your PayPal client ID
-    # client_secret = 'ECk7V4Ntt5PJy4Nosm9g80gMzf2WMvwVptzlmwOzEsxz37FPM_NXa6rCFH8BcR4Mc24odULhHM2eH5Aw'  # Replace with your PayPal client secret
-    # token_url = 'https://api.sandbox.paypal.com/v1/oauth2/token'
-    client_id = os.getenv('PCI')
-    client_secret = os.getenv('PCS')
-    token_url = 'https://api.paypal.com/v1/oauth2/token'
+    try:
+        # client_id = 'AThJhSpO1NlOyyx19jAC5Vb2CStnbrurdgm3hqKzVaVoz85T9lKKoYThf7hKRNYeovC6b_iJOgkXZCMB'  # Replace with your PayPal client ID
+        # client_secret = 'ECk7V4Ntt5PJy4Nosm9g80gMzf2WMvwVptzlmwOzEsxz37FPM_NXa6rCFH8BcR4Mc24odULhHM2eH5Aw'  # Replace with your PayPal client secret
+        # token_url = 'https://api.sandbox.paypal.com/v1/oauth2/token'
+        client_id = os.getenv('PCI')
+        client_secret = os.getenv('PCS')
+        token_url = 'https://api.paypal.com/v1/oauth2/token'
 
-    response = requests.post(token_url, auth=(client_id, client_secret), data={'grant_type': 'client_credentials'})
+        response = requests.post(token_url, auth=(client_id, client_secret), data={'grant_type': 'client_credentials'})
 
-    if response.status_code == 200:
-        access_token = response.json().get('access_token')
-        return access_token
-    else:
-        print(f"Error: {response.status_code}")
-        print(f"Response: {response.text}")
-        return None
+        if response.status_code == 200:
+            access_token = response.json().get('access_token')
+            return access_token
+        else:
+            print(f"Error: {response.status_code}")
+            print(f"Response: {response.text}")
+            return None
+    except Exception as pat:
+        print("Paypal Acces token error:",pat)
+        raise
     
 
 def create_product(request, access_token):

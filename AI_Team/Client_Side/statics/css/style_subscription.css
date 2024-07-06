@@ -24,7 +24,7 @@ body {
 .cont-card {
   background: transparent;
   width: 60vw;
-  height: 83vh;
+  height: fit-content;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -196,9 +196,17 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
+  
+}
+
+subs-card-body{
+
+  min-width:100rem;
+  width: fit-content;
+  height: fit-content;
 }
 .menu-items a {
-  font-weight: 100;
+  font-weight: 50;
   font-family: 16px/24px D-DIN-Medium, Arial, Verdana, sans-serif;  
   color: aliceblue;
   text-decoration: none;
@@ -307,6 +315,12 @@ tbody li::before{
 
 .features-list li:first-child, .target-list li:first-child {
   font-weight: bold;
+}
+
+.plandescription
+{
+font-size: x-small;
+
 }
 
 h2 {

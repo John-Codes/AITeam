@@ -22,16 +22,9 @@
     <script type="text/javascript">
         const csrfToken = '{{ csrf_token }}';
     </script>
-    <style>
-        body {
-            background-image: url("{% static 'img/hubble.svg' %}");
-            background-size: cover; /* Adjust as needed */
-            background-repeat: no-repeat; /* Prevents the image from repeating */
-        }
-    </style>
 </head>
 
-<body >
+<body>
     <div class="row"><div class="chat-header d-flex justify-content-between  px-3 py-2 glass" style="align-items: start;justify-content: flex-start;">
         <div class="nav-container d-flex align-items-center">
             <!-- Asegúrate de que el checkbox tiene el id correcto -->
@@ -66,10 +59,8 @@
                 
     </div>
  <br>
-
-
- <div class="row" style="justify-content: center; min-width: 60vw; min-height: 50rem;"> 
-    <div class="container" style="min-width: 25rem; min-height: 40rem;">
+ <div class="row" style="justify-content: center;"> 
+    <div class="container">
         <br>
         <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -90,12 +81,12 @@
                 </div>
                 {% for plan in plans %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                    <div class="card cont-card " style="min-height: 65rem;" >
+                    <div class="card cont-card">
                         <div class="card-header glass-header">
                             <h2>{{ plan.name }}</h2> <!-- Nombre del plan -->
                         </div>
-                        <div class="card-body glass-body" style="min-height: 60rem;">
-                            <!-- <p><strong>{% trans "Product Name" %}</strong> {{ plan.product_name }}</p> -->
+                        <div class="card-body glass-body">
+                            <p><strong>{% trans "Product Name" %}</strong> {{ plan.product_name }}</p>
                             <p><strong>{% trans "Plan Name" %}</strong> {{ plan.plan_name }}</p>
                             <p><strong>{% trans "Price" %}</strong> ${{ plan.price }} USD</p>
                             <p><strong>{% trans "Subscription Status" %}</strong> {{ plan.subscription_status }}</p>

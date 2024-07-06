@@ -15,7 +15,7 @@ def email_send(prompt):
 
         {prompt}"""
         from_email = settings.EMAIL_HOST_USER
-        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']        
+        recipient_list = [ 'efexzium@gmail.com']        
         try:
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
@@ -30,7 +30,7 @@ def Contac_us_mail(prompt):
             {prompt}
             """
         from_email = settings.EMAIL_HOST_USER
-        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']
+        recipient_list = [ 'efexzium@gmail.com']
         try:
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
@@ -40,7 +40,7 @@ def notice_error(subject, message, side="Server Side"):
     # check variables
         
         from_email = settings.EMAIL_HOST_USER
-        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']
+        recipient_list = [ 'efexzium@gmail.com']
         try:
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
@@ -57,7 +57,7 @@ def notice_error_forms(data, email_contact, page, side="Server Side"):
         """        
         
         from_email = settings.EMAIL_HOST_USER
-        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']
+        recipient_list = [ 'efexzium@gmail.com']
         try:
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
@@ -70,7 +70,18 @@ def image_seve_fail_email(data):
         {data}
         """
         from_email = settings.EMAIL_HOST_USER
-        recipient_list = ['rsanty.jw@gmail.com', 'efexzium@gmail.com']
+        recipient_list = [ 'efexzium@gmail.com']
+        try:
+            send_mail(subject, message, from_email, recipient_list)
+        except Exception as e:
+            print('correo no enviado porque:', e)
+
+
+def dislike_message(subject, message):
+    # check variables
+        
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = [ 'efexzium@gmail.com']
         try:
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:

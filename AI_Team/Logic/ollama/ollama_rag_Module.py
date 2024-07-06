@@ -21,6 +21,7 @@ import fitz
 from semantic_text_splitter import CharacterTextSplitter, HuggingFaceTextSplitter
 from tokenizers import Tokenizer
 import re 
+
 #ollama_url = os.getenv('OLLAMA_BASE_URL', "http://localhost:11434")  #'http://ollama:11434
 base_directory = os.path.join(os.getcwd(), "VectorDbFiles")
 model_name = "llama3"
@@ -378,7 +379,7 @@ class OllamaRag:
         try:    
             
             context_label = _("Context")
-            question_label = _("Question")
+            question_label = _("Prompt")
 
             formatted_prompt = f"{question_label}: {question}\n\n{context_label}: {context}"
             #response = ollama_api.chat(model='llama3', messages=[{'role': 'user', 'content': formatted_prompt}])
@@ -445,9 +446,11 @@ class OllamaRag:
         stream=True)
         try:
             for chunk in chat:
-                # print(chunk)
-                print(chunk['message']['content'], end='', flush=True)
-                yield chunk['message']['content']
+              # Create a translation table mapping colons to None (removal)
+                trans_table = str.maketrans('', '', ':')
+                content = chunk['message']['content'].translate(trans_table)  # Remove colons using translate
+                print(content, end='', flush=True)
+                yield content
         except Exception as e:
             print(e)
 

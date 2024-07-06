@@ -104,15 +104,36 @@ async function sendMessageStream() {
     var decoder = new TextDecoder('utf-8');
     toggleDotsAnimation(false); // Activar animaciones
     chatBox.insertAdjacentHTML('beforeend', `
-        <div class="message-left glass">
-            <p class="message-content" id="${aiMessageId}"> </p>
-            <div class="mt-2">
-                <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
+        <div class="card card_background_static"  >
+            
+            <div class="card-content card-stream"  >
+            
+                <p class="message-content" id="${aiMessageId}" style="padding: rem !important;"  > </p>
+            
             </div>
+                    <footer class="card-footer" style="border-top: none; background-color: transparent;" >
+                        <div style="display: flex; align-items: center;">
+                            <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
+                                    <span class="icon is-small">
+                                        <i class="fas fa-clipboard"></i>
+                                </span>
+                            </button>
+                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
+                                <span class="icon is-small">    
+                                    <i class="fas fa-thumbs-up"></i>
+                                    
+                                </span>
+                            </button>
+                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
+                                <span class="icon is-small">    
+                                    
+                                    <i class="fas fa-thumbs-down"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </footer>
         </div>
-        <div class="clearfix"></div>
+        
     `);
     document.body.scrollTo({
         top: document.body.scrollHeight,
@@ -128,8 +149,8 @@ async function sendMessageStream() {
         }
         let token = decoder.decode(result.value);
         aiMessage += token;
-        let htmlContent = marked.parse(aiMessage);
-        htmlContent = addCustomClasses(htmlContent);
+         let htmlContent = marked.parse(aiMessage);
+         htmlContent = addCustomClasses(htmlContent);
         document.getElementById(aiMessageId).innerHTML = htmlContent;
         // chatBox.scrollTop = chatBox.scrollHeight;
         document.body.scrollTo({
@@ -164,15 +185,20 @@ function addCustomClasses(htmlContent) {
         });
     }
 
-    // Add <br><br> after each <strong> element
+    
     const strongElements = tempDiv.querySelectorAll('strong');
     strongElements.forEach(strong => {
-        const br1 = document.createElement('br');
-        const br2 = document.createElement('br');
-        strong.insertAdjacentElement('afterend', br2);
-        strong.insertAdjacentElement('afterend', br1);
+        // Check if the <strong> is not part of any list (neither <ol> nor <ul>)
+        const isPartOfAnyList = strong.closest('ol') !== null || strong.closest('ul') !== null;
+        
+        // Insert <br> before and after <strong> elements that are not part of any list
+        if (!isPartOfAnyList) {
+            const brBefore = document.createElement('br');
+            const brAfter = document.createElement('br');
+            strong.insertAdjacentElement('beforebegin', brBefore);
+            strong.insertAdjacentElement('afterend', brAfter);
+        }
     });
-
     return tempDiv.innerHTML;
 }
 // Function to send the user's message and receive the response.
@@ -283,11 +309,27 @@ function uploadFile(event) {
                 chatBox.insertAdjacentHTML('beforeend', `
                     <div class="message-left glass">
                         <p class="message-content">File upload failed.</p>
-                        <div class="mt-2">
-                            <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                            <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                            <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
+                        <footer class="card-footer" style="border-top: none; background-color: transparent;" >
+                        <div style="display: flex; align-items: center;">
+                            <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
+                                    <span class="icon is-small">
+                                        <i class="fas fa-clipboard"></i>
+                                </span>
+                            </button>
+                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
+                                <span class="icon is-small">    
+                                    <i class="fas fa-thumbs-up"></i>
+                                    
+                                </span>
+                            </button>
+                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
+                                <span class="icon is-small">    
+                                    
+                                    <i class="fas fa-thumbs-down"></i>
+                                </span>
+                            </button>
                         </div>
+                    </footer>
                     </div>
                     <div class="clearfix"></div>
                 `);

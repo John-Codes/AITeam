@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="gx3tJHQRVDGpImUUJXn_cWvSrcUnGjJTgW8H1dHzIRI" />
     <title> {{header}} {% trans " Artificial Intelligence Services by Ai-team" %}</title>
-    
     <link rel="canonical" href="{% url 'ai-team' context='main' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
@@ -30,246 +29,350 @@
 </head>
 
 <body data-language-prefix="{{ LANGUAGE_CODE }}"></body>
-    <div class="container-fluid h-100 height-chat">
-        
-        <div class="column is-full-mobile is-full-tablet is-full-desktop">
+<!-- Hamburguer Menu -->
+<div class="chat-header d-flex justify-content-between align-items-center px-3 py-2 glass">
+    <div class="nav-container nav-container d-flex align-items-center">
+        <!-- Asegúrate de que el checkbox tiene el id correcto -->
+        <input class="checkbox" type="checkbox" id="hamburgerToggle" />
+        <!-- Vincula el label (hamburger-lines) con el checkbox mediante el atributo "for" -->
+        <label class="hamburger-lines" for="hamburgerToggle">
+            <i class="bi bi-list"></i>
+        </label>
+            <!-- Añade esta línea para el menú -->
+        <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
+                    <ul>
+                        <li cy-data="home-link" ><a href="{% url 'ai-team' context='main' %}" title="Main page of AI Team Chat"><h2 class="reset-styles" >{% trans "Home"%}</h2></a></li>
 
-            <!-- Chat Header-->
-            <div class="chat-header d-flex justify-content-between align-items-center px-3 py-2 glass">
-                <div class="nav-container nav-container d-flex align-items-center">
-                    <!-- Asegúrate de que el checkbox tiene el id correcto -->
-                    <input class="checkbox" type="checkbox" id="hamburgerToggle" />
-                    <!-- Vincula el label (hamburger-lines) con el checkbox mediante el atributo "for" -->
-                    <label class="hamburger-lines" for="hamburgerToggle">
-                        <i class="bi bi-list"></i>
-                    </label>
-                        <!-- Añade esta línea para el menú -->
-                    <div class="menu-items glass" > <!-- Ajusta la posición vertical -->
-                        <ul>
-                            <li cy-data="home-link" ><a href="{% url 'ai-team' context='main' %}" title="Main page of AI Team Chat"><h2 class="reset-styles" >{% trans "Home"%}</h2></a></li>
-
-                            {% if user.is_authenticated %}
-                                <li cy-data="logout-link"><a href="{% url 'logout' %}" title="logout"><h2 class="reset-styles" >{% trans "Logout"%}</h2></a></li>
-                                <li cy-data="panel-link"><a href="{% url 'ai-team' context='panel-admin' %}" id="panel-admin-link" title="Your Panel Admin to create a site-web"><h2 class="reset-styles" >Admin Panel</h2></a></li>
-                                <li><a href="{% url 'ai-team' context='subscription' %}" title="See our subscriptions plans"><h2 class="reset-styles" >{% trans "Subscriptions"%}</h2></a></li>
-                                {% if user.is_superuser %}
-                                <li><a href="{% url 'create_subscription' %}"  title="Crete Subscription"><h2 class="reset-styles">Create Subscription</h2></a></li>
-                                <li><a href="{% url 'list_subscriptions' list_all='clients'%}"  title="Clients"><h2 class="reset-styles">Clients</h2></a></li>
-                                <li><a href="{% url 'list_subscriptions' list_all='plans'%}"  title="Plans"><h2 class="reset-styles">Plans</h2></a></li>
-                                {% endif %}
-                            {% else %}
-                                <li cy-data="login-link"><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >{% trans "Login" %}</h2></a></li>
-                                <li cy-data="faq-link"><a title="frequently asked questions about AI Team"><h2 data-template="faqs_messages" class="reset-styles">{% trans "FAQs"%}</h2></a></li>
-                                <li cy-data="contact-link"><a title="How to Contac us"><h2 data-template="contact_us" class="reset-styles">{% trans "Contact Us"%}</h2></a></li>
-                                <li cy-data="about-link"><a title="Who we are and our members"><h2 data-template="about_us" class="reset-styles">{% trans "About Us"%}</h2></a></li>
+                        {% if user.is_authenticated %}
+                            <li cy-data="logout-link"><a href="{% url 'logout' %}" title="logout"><h2 class="reset-styles" >{% trans "Logout"%}</h2></a></li>
+                            <li cy-data="panel-link"><a href="{% url 'ai-team' context='panel-admin' %}" id="panel-admin-link" title="Your Panel Admin to create a site-web"><h2 class="reset-styles" >Admin Panel</h2></a></li>
+                            <li><a href="{% url 'ai-team' context='subscription' %}" title="See our subscriptions plans"><h2 class="reset-styles" >{% trans "Subscriptions"%}</h2></a></li>
+                            {% if user.is_superuser %}
+                            <li><a href="{% url 'create_subscription' %}"  title="Crete Subscription"><h2 class="reset-styles">Create Subscription</h2></a></li>
+                            <li><a href="{% url 'list_subscriptions' list_all='clients'%}"  title="Clients"><h2 class="reset-styles">Clients</h2></a></li>
+                            <li><a href="{% url 'list_subscriptions' list_all='plans'%}"  title="Plans"><h2 class="reset-styles">Plans</h2></a></li>
                             {% endif %}
-                            
-                            {% if context_value == "main" and user.is_authenticated%}
+                        {% else %}
+                            <li cy-data="login-link"><a href="{% url 'login' %}" title="login to AI Team for more"><h2 class="reset-styles" >{% trans "Login" %}</h2></a></li>
                             <li cy-data="faq-link"><a title="frequently asked questions about AI Team"><h2 data-template="faqs_messages" class="reset-styles">{% trans "FAQs"%}</h2></a></li>
                             <li cy-data="contact-link"><a title="How to Contac us"><h2 data-template="contact_us" class="reset-styles">{% trans "Contact Us"%}</h2></a></li>
                             <li cy-data="about-link"><a title="Who we are and our members"><h2 data-template="about_us" class="reset-styles">{% trans "About Us"%}</h2></a></li>
-                            {% endif %}
+                        {% endif %}
+                        
+                        {% if context_value == "main" and user.is_authenticated%}
+                        <li cy-data="faq-link"><a title="frequently asked questions about AI Team"><h2 data-template="faqs_messages" class="reset-styles">{% trans "FAQs"%}</h2></a></li>
+                        <li cy-data="contact-link"><a title="How to Contac us"><h2 data-template="contact_us" class="reset-styles">{% trans "Contact Us"%}</h2></a></li>
+                        <li cy-data="about-link"><a title="Who we are and our members"><h2 data-template="about_us" class="reset-styles">{% trans "About Us"%}</h2></a></li>
+                        {% endif %}
 
-                            {% if context_value in valid_contexts %}
-                                {% if site_exists %}
-                                <li cy-data="my-site-link"><a href="{{ my_site_IA }}">{{my_site_title}}</a></li>
-                                {% endif %}
+                        {% if context_value in valid_contexts %}
+                            {% if site_exists %}
+                            <li cy-data="my-site-link"><a href="{{ my_site_IA }}">{{my_site_title}}</a></li>
                             {% endif %}
-                        </ul>
-                    
-                    </div>
-                    <h1 class="chat-title has-text-centered">{{title}} =$=</h1>     
-                </div>
+                        {% endif %}
+                    </ul>
+        
+        </div>
+        <h1 class="chat-title has-text-centered">{{title}} =$=</h1>     
+    </div>
 
-            </div>
-            <!-- Metallic Text -->
-            <div class="metallic-text">
-                <h2 class="reset-styles">{% trans "An AI Team is writing"%}</h2>
-            </div>
-            <div class="chat-content">
-              <div class="chat-body px-3 py-4" id="chatBox">
-                <!-- Contenido del chat aquí -->
-                {% if context_value == "main" %}
-                    <div class="column is-full">
-                        <div class="card card_background_static">
-                            <div class="card-content">
-                                
-                                <h2 class="title is-4 title_card">{% trans "Website Creation Service with AI" %}</h2>
-                                
-                                {% if user.is_authenticated %}
-                                    <br>
-                                    <p class="message-content">{% trans "Welcome to AI Team" %} {{ user.email }}</p>
-                                    <p class="message-content">{% trans "Ask your questions about our services" %}</p>
-                                {% endif %}
-                                <p class="message-content">{% trans "24/7 customer service better than a human being with the best AIs. Integration with database and systems of your website or app. Create an AI chat that is an expert in your business in 5 minutes that sends emails and processes payments and orders." %}</p>
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                                <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                                <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                {% elif context_value == "subscription" %}
-                    {% if user.is_subscribe %}
-                        <div class="column is-full">
-                            <div class="card card_background_static">
-                                <div class="card-content">
-                                    <h2 class="title is-4 title_card">{% trans "Information about your subscription:" %}</h2>
-                                    <p class="message-content">{% trans "Your Current Plan:" %}</p>
-                                    <p class="message-content">{{ user.subscription_detail.plan_name }}</p>
-                                    
-                                    <p class="message-content">{% trans "Subscription Status:" %}</p>
-                                    <p class="message-content">{{ user.subscription_status }}</p>
-                                    
-                                    <p class="message-content">{% trans "Pay with:" %}</p>
-                                    <p class="message-content">Paypal</p>
-                                    
-                                    <p class="message-content">{% trans "The Plan Expires:" %}</p>
-                                    <p class="message-content">{{ user.next_date_pay }}</p>
-                                    
-                                    <p class="message-content">{% trans "Subscribed from Date:" %}</p>
-                                    <p class="message-content">{{ user.date_subscription }}</p>
-                                    
-                                    <p class="message-content">{% trans "If you wanna upgrade your current subscription visit the "%}<a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
-                                    
-                                    <div class="card-footer">
-                                        <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                                        <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                                        <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="column is-full">
-                            <div class="card card_background_static">
-                                <div class="card-content">
-                                    <h2 class="title is-4 title_card">{% trans "Discover Our Subscription Plans" %}</h2>
-                                    <p class="message-content">{% trans "We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website. These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us:" %}</p>
-                                    <br>
-                                    <p class="message-content">{% trans "Our plans include:" %}</p>
-                                    <br>
-                                    <p class="message-content"><strong>{% trans "1 Basic Plan" %}</strong></p>
-                                    <ul>
-                                        <li class="message-content bullet-point">{% trans "AI website" %}</li>
-                                        <li class="message-content bullet-point">{% trans "AI 24/7 customer service" %}</li>
-                                        <li class="message-content bullet-point">{% trans "Links 🔗 for payment" %}</li>
-                                        <li class="message-content bullet-point">{% trans "Links 🔗 for website" %}</li>
-                                        <li class="message-content bullet-point">{% trans "Real human client service" %}</li>
-                                        <li class="message-content bullet-point">{% trans "SEO optimized with AI" %}</li>
-                                    <ul>
-                                    <br>
-                                    <p class="message-content"><strong>{% trans "2 Premium Plan" %}</strong></p>
-                                    </ul>
-                                        <li class="message-content bullet-point">{% trans "Everything in basic" %}</li>
-                                        <li class="message-content bullet-point">{% trans "1 business integration per month subject to approval." %}</li>
-                                    </ul>
-                                    <br>
-                                    <p class="message-content"><strong>{% trans "3 Enterprise Plan" %}</strong></p>
-                                    <ul>
-                                        <li class="message-content bullet-point">{% trans "Everything in basic and premium." %}</li>
-                                        <li class="message-content bullet-point">{% trans "Unlimited integrations" %}</li>
-                                        <li class="message-content bullet-point">{% trans "Get quote." %}</li>
-                                    </ul>
-                                    <br>
-                                    <br>
-                                    <p class="message-content">{% trans "If you want to ask questions about anything, just send a message AITeam is here to help." %}</p>
-                                    <p class="message-content">{% trans "We still have one subscription integration available this month." %} <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscriptions" %}</strong></a></p>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                                    <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                                    <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
-                                
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                    {% elif context_value == "panel-admin" %}
-                        <div class="column is-full">
-                            <div class="card card_background_static">
-                                <div class="card-content">
-                                    <h2 class="title is-4 title_card">{% trans "Welcome to our AI Chat Page Creation Tool!" %}</h2>
-                                    <p class="message-content">{% trans "With this tool, you can craft a unique AI Chat Experience by providing information through uploaded files (PDF or TXT). Here's how to proceed:" %}</p>
-                                    <br>
-                                    <h2 class="subtitle is-5 title_card">{% trans "1. Upload Your Content:" %}</h2>
-                                    <p class="message-content">{% trans "Prepare a PDF file including the following details for your custom AI website Chat Page:" %}</p>
-                                    <ul>
-                                        <li class="message-content bullet-point">{% trans "Page Title: The name shown on the browser tab." %}</li>
-                                        <li class="message-content bullet-point">{% trans "Page Header: The main title or heading on your page." %}</li>
-                                        <li class="message-content bullet-point">{% trans "Navigation Links: List of navigation items and their URLs." %}</li>
-                                        <li class="message-content bullet-point">{% trans "Default Chat Message: A greeting message for visitors." %}</li>
-                                        <li class="message-content bullet-point">{% trans "Products: Detailed descriptions of your products." %}</li>
-                                        <li class="message-content bullet-point">{% trans "Context Information: Any additional information, questions, and answers you want the AI to use for personalized responses." %}</li>
-                                    </ul>
-                                    <br>
-                                    <h2 class="subtitle is-5 title_card">{% trans "2. Test and Monitor:" %}</h2>
-                                    <ul>
-                                    <li class="message-content bullet-point">{% trans "Use this chat to consult the details of your site and monitor the progress. Once your content is processed, a custom link to your AI Chat Page will be available." %}</li>
-                                    
-                                    <li class="message-content bullet-point">{% trans "Remember, the AI will respond based on the information provided in your uploaded files, ensuring a tailored experience for your visitors." %}</li>
-                                    </ul>
-                                    <br>
-                                    <p class="message-content">{% trans "We're here to help you every step of the way!" %}</p>
-                                    
-                                    <p class="message-content">{% trans "Get started now by uploading your file and let's create an amazing AI Chat Experience together!" %}</p>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-                                    <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-                                    <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-            </div>  
-            </div>
+</div>
+
+
+
+    <div class="container px-4" style="padding-top: 10rem; padding-bottom: 10rem; ">
+        
+        <div class="columns is-multiline">
+            <div class="column is-full">
+                
             
-            <div class="chat-footer">
-                <div class="loading-dots-container">
-                    <div class="loading-dots">
-                        <span class="dot dot-1"></span>
-                        <span class="dot dot-2"></span>
-                        <span class="dot dot-3"></span>
-                    </div>
-                </div>
-                <div class="columns is-mobile is-centered is-vcentered" style="border-radius: 20px">
-                    <div class="column is-full-mobile is-full-tablet is-full-desktop no-padding-footer">
-                        <div class="field is-grouped">
-                            <div class="buttons-container">
-                                
-                                {% if context_value == 'panel-admin' or context_value == 'main' %}
-                                    <!-- Input escondido para subir archivos -->
-                                    <input type="file" style="display: none;" id="fileInput" name="uploaded_files" accept=".pdf,.txt,.png" onchange="uploadFile(event)">
-                                    <label for="fileInput" class="button btn-send">
-                                        <i class="fa-sharp fa-solid fa-paperclip" style="padding-left: 2px;"></i> <!-- Icono de cargar archivo -->
-                                    </label>
-                                {% endif %}
-                            </div>
-                            <div class="textarea-container">
-                                <textarea class="form_input" id="userMessage" placeholder="Send a message..." onkeydown="handleKeyDown(event, '{{context_value}}')"></textarea>
-                            </div>
-                            <div class="buttons-container">
-                                <div class="control">
-                                    <button class="button btn-send" onclick="sendMessageStream()">
-                                        <i class="fas fa-paper-plane"></i> <!-- Icono de enviar mensaje -->
-                                    </button>
-                                </div>
-                               
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>            
+
+
+
+
+
+                          
+
+                            <!-- Static messages iffed up -->
+                            
+                                <div  id="chatBox">
+                                    <!-- Main Page -->
+
+                                    {% if context_value == "main" %}
+                                       
+                                            <div class="card card_background_static">
+                                                <div class="card-content">
+                                                    
+                                                    <h2 class="title is-4 title_card">{% trans "Website Creation Service with AI" %}</h2>
+                                                    
+                                                    {% if user.is_authenticated %}
+                                                        <br>
+                                                        <p class="message-content">{% trans "Welcome to AI Team" %} {{ user.email }}</p>
+                                                        <p class="message-content">{% trans "Ask your questions about our services" %}</p>
+                                                    {% endif %}
+                                                    <p class="message-content">{% trans "24/7 customer service better than a human being with the best AIs. Integration with database and systems of your website or app. Create an AI chat that is an expert in your business in 5 minutes that sends emails and processes payments and orders." %}</p>
+                                                </div>
+                                                
+                                                <footer class="card-footer" style="border-top: none; background-color: transparent;" >
+                                                    <div style="display: flex; align-items: center;">
+                                                        <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
+                                                                <span class="icon is-small">
+                                                                    <i class="fas fa-clipboard"></i>
+                                                            </span>
+                                                        </button>
+                                                        <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
+                                                            <span class="icon is-small">    
+                                                                <i class="fas fa-thumbs-up"></i>
+                                                                
+                                                            </span>
+                                                        </button>
+                                                        <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
+                                                            <span class="icon is-small">    
+                                                                
+                                                                <i class="fas fa-thumbs-down"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </footer>
+                                            </div>
+                                       
+
+                                    <!-- Subscriptions info subscribed and link to plans-->
+                                    {% elif context_value == "subscription" %}
+                                        {% if user.is_subscribe %}
+                                           
+                                                <div class="card card_background_static">
+                                                    <div class="card-content">
+                                                        <h2 class="title is-4 title_card">{% trans "Information about your subscription:" %}</h2>
+                                                        <p class="message-content">{% trans "Your Current Plan:" %}</p>
+                                                        <p class="message-content">{{ user.subscription_detail.plan_name }}</p>
+                                                        
+                                                        <p class="message-content">{% trans "Subscription Status:" %}</p>
+                                                        <p class="message-content">{{ user.subscription_status }}</p>
+                                                        
+                                                        <p class="message-content">{% trans "Pay with:" %}</p>
+                                                        <p class="message-content">Paypal</p>
+                                                        
+                                                        <p class="message-content">{% trans "The Plan Expires:" %}</p>
+                                                        <p class="message-content">{{ user.next_date_pay }}</p>
+                                                        
+                                                        <p class="message-content">{% trans "Subscribed from Date:" %}</p>
+                                                        <p class="message-content">{{ user.date_subscription }}</p>
+                                                        
+                                                        <p class="message-content">{% trans "If you wanna upgrade your current subscription visit the "%}<a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscription" %}</strong></a> {% trans "page" %}</p>
+                                                        
+                                                        <footer class="card-footer" style="border-top: none; background-color: transparent;" >
+                                                            <div style="display: flex; align-items: center;">
+                                                                <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
+                                                                        <span class="icon is-small">
+                                                                            <i class="fas fa-clipboard"></i>
+                                                                    </span>
+                                                                </button>
+                                                                <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
+                                                                    <span class="icon is-small">    
+                                                                        <i class="fas fa-thumbs-up"></i>
+                                                                        
+                                                                    </span>
+                                                                </button>
+                                                                <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
+                                                                    <span class="icon is-small">    
+                                                                        
+                                                                        <i class="fas fa-thumbs-down"></i>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </footer>
+                                                    </div>
+                                                </div>
+                                            
+                                        
+                                        <!-- subscription info not subscribed -->
+                                            {% else %}
+
+                                           
+                                                <div class="card card_background_static">
+                                                    <div class="card-content">
+                                                        <h2 class="title is-4 title_card">{% trans "Discover Our Subscription Plans" %}</h2>
+                                                        <p class="message-content">{% trans "We are thrilled to introduce our range of subscription plans tailored to enhance your experience on our website. These plans are designed to provide you with exclusive benefits and access to premium features, ensuring you get the most out of your online journey with us:" %}</p>
+                                                        <br>
+                                                        <p class="message-content">{% trans "Our plans include:" %}</p>
+                                                        <br>
+                                                        <p class="message-content"><strong>{% trans "1 Basic Plan" %}</strong></p>
+                                                        <ul>
+                                                            <li class="message-content bullet-point">{% trans "AI website" %}</li>
+                                                            <li class="message-content bullet-point">{% trans "AI 24/7 customer service" %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Links 🔗 for payment" %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Links 🔗 for website" %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Real human client service" %}</li>
+                                                            <li class="message-content bullet-point">{% trans "SEO optimized with AI" %}</li>
+                                                        <ul>
+                                                        <br>
+                                                        <p class="message-content"><strong>{% trans "2 Premium Plan" %}</strong></p>
+                                                        </ul>
+                                                            <li class="message-content bullet-point">{% trans "Everything in basic" %}</li>
+                                                            <li class="message-content bullet-point">{% trans "1 business integration per month subject to approval." %}</li>
+                                                        </ul>
+                                                        <br>
+                                                        <p class="message-content"><strong>{% trans "3 Enterprise Plan" %}</strong></p>
+                                                        <ul>
+                                                            <li class="message-content bullet-point">{% trans "Everything in basic and premium." %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Unlimited integrations" %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Get quote." %}</li>
+                                                        </ul>
+                                                        <br>
+                                                        <br>
+                                                        <p class="message-content">{% trans "If you want to ask questions about anything, just send a message AITeam is here to help." %}</p>
+                                                        <p class="message-content">{% trans "We still have one subscription integration available this month." %} <a href="{% url 'subscription' %}" title="see our subscription plans"><strong class="white-link">{% trans "Subscriptions" %}</strong></a></p>
+                                                    </div>
+                                                    <footer class="card-footer" style="border-top: none; background-color: transparent;" >
+                                                        <div style="display: flex; align-items: center;">
+                                                            <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
+                                                                    <span class="icon is-small">
+                                                                        <i class="fas fa-clipboard"></i>
+                                                                </span>
+                                                            </button>
+                                                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
+                                                                <span class="icon is-small">    
+                                                                    <i class="fas fa-thumbs-up"></i>
+                                                                    
+                                                                </span>
+                                                            </button>
+                                                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
+                                                                <span class="icon is-small">    
+                                                                    
+                                                                    <i class="fas fa-thumbs-down"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </footer>
+                                                </div>
+                                            
+                                        {% endif %}
+                                        {% elif context_value == "panel-admin" %}
+                                        <!-- Page creator UI  -->
+                                            
+                                                <div class="card card_background_static">
+                                                    <div class="card-content">
+                                                        <h2 class="title is-4 title_card">{% trans "Welcome to our AI Chat Page Creation Tool!" %}</h2>
+                                                        <p class="message-content">{% trans "With this tool, you can craft a unique AI Chat Experience by providing information through uploaded files (PDF or TXT). Here's how to proceed:" %}</p>
+                                                        <br>
+                                                        <h2 class="subtitle is-5 title_card">{% trans "1. Upload Your Content:" %}</h2>
+                                                        <p class="message-content">{% trans "Prepare a PDF file including the following details for your custom AI website Chat Page:" %}</p>
+                                                        <ul>
+                                                            <li class="message-content bullet-point">{% trans "Page Title: The name shown on the browser tab." %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Page Header: The main title or heading on your page." %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Navigation Links: List of navigation items and their URLs." %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Default Chat Message: A greeting message for visitors." %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Products: Detailed descriptions of your products." %}</li>
+                                                            <li class="message-content bullet-point">{% trans "Context Information: Any additional information, questions, and answers you want the AI to use for personalized responses." %}</li>
+                                                        </ul>
+                                                        <br>
+                                                        <h2 class="subtitle is-5 title_card">{% trans "2. Test and Monitor:" %}</h2>
+                                                        <ul>
+                                                        <li class="message-content bullet-point">{% trans "Use this chat to consult the details of your site and monitor the progress. Once your content is processed, a custom link to your AI Chat Page will be available." %}</li>
+                                                        
+                                                        <li class="message-content bullet-point">{% trans "Remember, the AI will respond based on the information provided in your uploaded files, ensuring a tailored experience for your visitors." %}</li>
+                                                        </ul>
+                                                        <br>
+                                                        <p class="message-content">{% trans "We're here to help you every step of the way!" %}</p>
+                                                        
+                                                        <p class="message-content">{% trans "Get started now by uploading your file and let's create an amazing AI Chat Experience together!" %}</p>
+                                                    </div>
+                                                    <footer class="card-footer" style="border-top: none; background-color: transparent;" >
+                                                        <div style="display: flex; align-items: center;">
+                                                            <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
+                                                                    <span class="icon is-small">
+                                                                        <i class="fas fa-clipboard"></i>
+                                                                </span>
+                                                            </button>
+                                                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
+                                                                <span class="icon is-small">    
+                                                                    <i class="fas fa-thumbs-up"></i>
+                                                                    
+                                                                </span>
+                                                            </button>
+                                                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
+                                                                <span class="icon is-small">    
+                                                                    
+                                                                    <i class="fas fa-thumbs-down"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </footer>
+                                                </div>
+                                            
+                                        {% endif %}
+                            </div>  
+                            
+            </div>        
         </div>
     </div>
-    
     {% include "hidden-ai-team.html" %}
     {% include 'modal-cancel-subscrition.html' %}
+    
 
+
+
+
+
+    <!-- Input Text Box -->
+    <div class="chat-footer" style="margin: 2rem;">
+        <div class="loading-dots-container">
+            <div class="loading-dots">
+                <span class="dot dot-1"></span>
+                <span class="dot dot-2"></span>
+                <span class="dot dot-3"></span>
+            </div>
+        </div>
+        <div class="columns is-mobile is-centered is-vcentered" style="border-radius: 20px">
+            <div class="column is-full-mobile is-full-tablet is-full-desktop no-padding-footer">
+                <div class="field is-grouped">
+                    <div class="buttons-container">
+                        
+                        {% if context_value == 'panel-admin' or context_value == 'main' %}
+                            <!-- Input escondido para subir archivos -->
+                            <input type="file" style="display: none;" id="fileInput" name="uploaded_files" accept=".pdf,.txt,.png" onchange="uploadFile(event)">
+                            <label for="fileInput" style="background: none; border: none; cursor: pointer; " class="button btn-send">
+                                <i class="fa-sharp fa-solid fa-paperclip" style="padding-left: 2px;"></i> <!-- Icono de cargar archivo -->
+                            </label>
+                        {% endif %}
+                    </div>
+                    <div class="textarea-container" >
+                        <textarea class="form_input" style="resize: none; outline: none; border: none;" id="userMessage" placeholder="Send a message..." onkeydown="handleKeyDown(event, '{{context_value}}')"></textarea>
+                    </div>
+                    <div class="buttons-container">
+                        <div class="control">
+                            <button class="button btn-send" style="background: none; border: none; cursor: pointer; " onclick="sendMessageStream()">
+                                <i class="fas fa-paper-plane"></i> <!-- Icono de enviar mensaje -->
+                            </button>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>            
+    
 </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+
+<script>
+
+
+    async function copyTextToClipboard() {
+    try {
+            const text = document.querySelector('.card-text').innerText;
+            await navigator.clipboard.writeText(text);
+            alert('Text copied to clipboard!');
+        } catch (error) {
+            console.error('Error copying text: ', error);
+        }
+    }
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Opcionalmente, jQuery y Bootstrap JS al final justo antes de cerrar la etiqueta </body> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

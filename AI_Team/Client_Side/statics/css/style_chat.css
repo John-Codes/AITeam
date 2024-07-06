@@ -227,19 +227,46 @@ h2.reset-styles {
     overflow-wrap: normal;
     min-height: 50vh;
 }
-.chat-body {
+/* .chat-body {
     /* width: 70%;
     margin-left: auto;
     margin-right: auto;
     z-index: 900;
     position: relative;/* Asegura que el chat-body no exceda la altura de la ventana
     overflow-y: auto; Añade esta línea para manejar el scroll dentro de chat-body */
-    max-height: 170vh;
-    min-height: 50vh;
-    flex-direction: column;
-    z-index: 900;
+    /* max-height: 170vh; */
+    /* min-height: 50vh;
+    /* flex-direction: column; 
+    z-index: 900; 
 }
 
+*/
+.card-footer {
+    border-top: none!important;
+    }
+    .no-border {
+        border: none!important;
+        outline: none!important;
+    }
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.5rem; /* Space between buttons */
+}
+/* .card-stream
+{
+    padding: 5rem;
+} */
+ 
+.fas:hover {
+    color: gray;  
+}
+
+.fas {
+    color: white;  
+  }
 /* Estilo básico para el scrollbar 
 .chat-body::-webkit-scrollbar {
     width: 10px; Ancho del scrollbar 
@@ -504,6 +531,7 @@ table {
     font-family: "Montserrat", Arial, sans-serif; 
     background-color: black; 
   }
+
 
   .btn-send, .message {
     flex-basis: auto;

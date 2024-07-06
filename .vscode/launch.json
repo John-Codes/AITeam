@@ -10,10 +10,10 @@
             "request": "launch",
             "program": "${workspaceFolder}/AI_Team/manage.py",
             "args": [
-                "runserver"
+                "runserver", "--noreload", "--nothreading"
             ],
             "django": true,
-            "autoStartBrowser": false
+            "autoStartBrowser": true
         }
     ]
 }

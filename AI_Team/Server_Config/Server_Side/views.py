@@ -554,22 +554,28 @@ class Subscription(View):
     template_name = "subscription.html"
     
     def get(self, request, *args, **kwargs):
+        
         """
         Render the subscription page with all plan details.
         """
-        plans = SubscriptionDetail.objects.filter(name__in=["Basic AI Team Subscription", "Premium AI Team Subscription" ])
-        
-        for plan in plans:
-            plan.features_list = json.loads(plan.features_list)
-            plan.market_place = json.loads(plan.market_place)
+        try:
+            plans = SubscriptionDetail.objects.filter(name__in=["Basic AI Team Subscription", "Premium AI Team Subscription" ])
             
-        context = {
-            "plans": plans,  # Cambiado a "plans" para que sea más claro en el template
-            "user": request.user,
-            'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY,
-        }
-        
-        return render(request, self.template_name, context)
+            for plan in plans:
+                plan.features_list = json.loads(plan.features_list)
+                plan.market_place = json.loads(plan.market_place)
+                
+            context = {
+                "plans": plans,  # Cambiado a "plans" para que sea más claro en el template
+                "user": request.user,
+                'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY,
+            }
+            
+            
+            return render(request, self.template_name, context)
+        except Exception as sg:
+            print(sg)
+            raise
     
     def post(self, request, *args, **kwargs):
         # Asegúrate de tener esta función definida
@@ -598,22 +604,26 @@ class Subscription(View):
                 # Código no encontrado
                 return JsonResponse({"error": "Código no encontrado"}, status=404)
         elif plan_id:
-            access_token = generate_access_token()
-            if access_token:
-                agreement_response = create_subscription_agreement(request, access_token, plan_id)
+            try:
+                access_token = generate_access_token()
+                if access_token:
+                    agreement_response = create_subscription_agreement(request, access_token, plan_id)
 
-                if agreement_response.status_code == 201:
-                    # Suscripción creada con éxito
-                    subscription_data = agreement_response.json()
-                    subscription_id = subscription_data.get('id')
-                    status = subscription_data.get('status')
-                    approval_url = next((link['href'] for link in subscription_data['links'] if link['rel'] == 'approve'), None)
-                    if approval_url:
-                        # Guardar datos de la suscripción en tu modelo, si es necesario
-                        return redirect(approval_url)
-                    else:
-                        # N0  se pudo obtener la URL de aprobación
-                        return JsonResponse({"error": "No se pudo obtener la URL de aprobación"}, status=500)     
+                    if agreement_response.status_code == 201:
+                        # Suscripción creada con éxito
+                        subscription_data = agreement_response.json()
+                        subscription_id = subscription_data.get('id')
+                        status = subscription_data.get('status')
+                        approval_url = next((link['href'] for link in subscription_data['links'] if link['rel'] == 'approve'), None)
+                        if approval_url:
+                            # Guardar datos de la suscripción en tu modelo, si es necesario
+                            return redirect(approval_url)
+                        else:
+                            # N0  se pudo obtener la URL de aprobación
+                            return JsonResponse({"error": "No se pudo obtener la URL de aprobación"}, status=500)     
+            except Exception as pos:
+                print("Subscription error",pos)
+                raise
 
 def create_subscription_view(request):
     print("create_subscription_view")

@@ -1,10 +1,26 @@
 <div class="message-left glass">
     <p class="message-content">{{ message|safe }} <br>
-    <div class="mt-2">
     </p>
-        <button class="btn btn-light btn-sm me-2" title="Copiar"><i class="bi bi-clipboard"></i></button>
-        <button class="btn btn-light btn-sm me-2" title="Me gusta"><i class="bi bi-hand-thumbs-up"></i></button>
-        <button class="btn btn-light btn-sm" title="No me gusta"><i class="bi bi-hand-thumbs-down"></i></button>
-    </div>
+    <footer class="card-footer" style="border-top: none; background-color: transparent;" >
+        <div style="display: flex; align-items: center;">
+            <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
+                    <span class="icon is-small">
+                        <i class="fas fa-clipboard"></i>
+                </span>
+            </button>
+            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
+                <span class="icon is-small">    
+                    <i class="fas fa-thumbs-up"></i>
+                    
+                </span>
+            </button>
+            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
+                <span class="icon is-small">    
+                    
+                    <i class="fas fa-thumbs-down"></i>
+                </span>
+            </button>
+        </div>
+    </footer>
 </div>
 <div class="clearfix"></div>
