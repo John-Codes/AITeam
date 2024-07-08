@@ -1,125 +1,4 @@
 
-async function sendMessageStream() {
-
-    const csrfToken = getCookie('csrftoken');
-    const message = document.getElementById("userMessage").value;
-    const chatBox = document.getElementById("chatBox");
-    const languagePrefix = getLanguagePrefix();
-    const urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
-
-    // Verificar si estamos esperando el correo del usuario
-    if (sessionStorage.getItem('awaitingContactEmail') === 'true') {
-        // Enviar el correo a un nuevo endpoint
-        document.getElementById("userMessage").value = "";
-        const emailEndpoint = `/${languagePrefix}/send-contact-email/`;
-        const response = await fetch(emailEndpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken
-            },
-            body: JSON.stringify({ 'email': message })
-        });
-        const responseData = await response.json();
-        if (response.ok) {
-            // Limpiar la marca de la sesión
-            sessionStorage.removeItem('awaitingContactEmail');
-        }
-        chatBox.insertAdjacentHTML('beforeend', responseData.message);
-        document.body.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth' // Desplazamiento suave
-        });
-        // chatBox.scrollTop = chatBox.scrollHeight;
-        return;
-    }
-
-    chatBox.insertAdjacentHTML('beforeend', `
-        <div class="message-right glass float-end" style="padding: 1rem !important; max-width: 80%; overflow-wrap: break-word !important;">
-            <p class="message-content" style="padding: 1rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${message}</p>
-        </div>
-        <div class="clearfix"></div>
-    `);
-    // chatBox.scrollTop = chatBox.scrollHeight;
-    document.body.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth' // Desplazamiento suave
-    });
-    toggleDotsAnimation(true); // Activar animaciones
-    document.getElementById("userMessage").value = "";
-    const aiMessageId = 'aiMessage' + Date.now(); // Generar un ID único para el elemento
-    list_messages.push({"role": "user", "content": message});
-    var response = await fetch(urlEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 'list_messages': list_messages, 'current_chat':currentContext, 'action': 'call-stream-ia' })
-            });
-    
-    var reader = response.body.getReader();
-    var decoder = new TextDecoder('utf-8');
-    toggleDotsAnimation(false); // Activar animaciones
-    chatBox.insertAdjacentHTML('beforeend', `
-        <div class="card card_background_static"  >
-            
-            <div class="card-content card-stream"  >
-            
-                <p class="message-content" id="${aiMessageId}" style="padding: rem !important; text-overflow ellipsis; word-wrap break-word;"  > </p>
-            
-            </div>
-                    <footer class="card-footer" style="border-top: none; background-color: transparent;" >
-                        <div style="display: flex; align-items: center;">
-                            <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
-                                    <span class="icon is-small">
-                                        <i class="fas fa-clipboard"></i>
-                                </span>
-                            </button>
-                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
-                                <span class="icon is-small">    
-                                    <i class="fas fa-thumbs-up"></i>
-                                    
-                                </span>
-                            </button>
-                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
-                                <span class="icon is-small">    
-                                    
-                                    <i class="fas fa-thumbs-down"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </footer>
-        </div>
-        
-    `);
-    document.body.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth' // Desplazamiento suave
-    });
-    let aiMessage = '';
-
-    reader.read().then(function processResult(result) {
-        if (result.done) {
-            // Add AI message to history after the entire response is received
-            list_messages.push({"role": "assistant", "content": aiMessage});
-            return;
-        }
-        let token = decoder.decode(result.value);
-        aiMessage += token;
-         let htmlContent = marked.parse(aiMessage);
-         htmlContent = addCustomClasses(htmlContent);
-        document.getElementById(aiMessageId).innerHTML = htmlContent;
-        // chatBox.scrollTop = chatBox.scrollHeight;
-        document.body.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth' // Desplazamiento suave
-        });
-        return reader.read().then(processResult);
-    });
-}
-
-
-
 const urlDictionary = {
     'main': 'main-query-temp-rag',
     'subscription': 'stream-chat',
@@ -305,7 +184,7 @@ function uploadFile(event) {
             return response.json();
         })
         .then(data => {
-            // Creates UI message with the uploaded file's name.
+            // Realizar acciones adicionales después de cargar el archivo
             console.log('File uploaded successfully:', data);
             const chatBox = document.getElementById("chatBox");
             if (data.message) {
@@ -400,8 +279,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-//Modal functions
 document.addEventListener('DOMContentLoaded', () => {
     // Función para abrir el modal
     const openModal = () => {
