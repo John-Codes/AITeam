@@ -316,45 +316,47 @@
 
 
 
-    <!-- Input Text Box -->
-    <div class="chat-footer" style="margin: 2rem;">
-        <div class="loading-dots-container">
+    <div class="chat-footer"  style=" background-color: transparent;">
+        <div class="loading-dots-container" style="background-color: transparent;">
             <div class="loading-dots">
                 <span class="dot dot-1"></span>
                 <span class="dot dot-2"></span>
                 <span class="dot dot-3"></span>
             </div>
         </div>
-        <div class="columns is-mobile is-centered is-vcentered" style="border-radius: 20px">
-            <div class="column is-full-mobile is-full-tablet is-full-desktop no-padding-footer">
-                <div class="field is-grouped">
-                    <div class="buttons-container">
+        
+        
+        <!-- Input Text Box -->
+        <div class="navbar is-fixed-bottom" style="border-radius: 20px; background-color: black;">
+            
+                
+                    <div class="buttons-container" >
                         
                         {% if context_value == 'panel-admin' or context_value == 'main' %}
-                            <!-- Input escondido para subir archivos -->
-                            <input type="file" style="display: none;" id="fileInput" name="uploaded_files" accept=".pdf,.txt,.png" onchange="uploadFile(event)">
-                            <label for="fileInput" style="background: none; border: none; cursor: pointer; " class="button btn-send">
-                                <i class="fa-sharp fa-solid fa-paperclip" style="padding-left: 2px;"></i> <!-- Icono de cargar archivo -->
-                            </label>
+                        <!-- Input escondido para subir archivos -->
+                        <input type="file" style="display: none;" id="fileInput" name="uploaded_files" accept=".pdf,.txt,.png" onchange="uploadFile(event)">
+                        <label for="fileInput" style="background: none; border: none; cursor: pointer; " class="button btn-send">
+                            <i class="fa-sharp fa-solid fa-paperclip" style="padding-left: 2px;"></i> <!-- Icono de cargar archivo -->
+                        </label>
                         {% endif %}
                     </div>
                     <div class="textarea-container" >
                         <textarea class="form_input" style="resize: none; outline: none; border: none;" id="userMessage" placeholder="Send a message..." onkeydown="handleKeyDown(event, '{{context_value}}')"></textarea>
                     </div>
-                    <div class="buttons-container">
+                    <div class="buttons-container" >
                         <div class="control">
                             <button class="button btn-send" style="background: none; border: none; cursor: pointer; " onclick="sendMessageStream()">
                                 <i class="fas fa-paper-plane"></i> <!-- Icono de enviar mensaje -->
                             </button>
                         </div>
-                       
+                        
                     </div>
-                </div>
-            </div>
+               
+            
         </div>
-    </div>            
-    
-</body>
+        
+    </div>     
+    </body>
     
 
 
