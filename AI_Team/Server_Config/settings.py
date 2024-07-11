@@ -33,7 +33,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = ['https://efexzium.net','efexzium.net', '127.0.0.1', 'localhost', '0.0.0.0','216.172.109.33']
 
-CSRF_TRUSTED_ORIGINS = ['https://efexzium.net', 'https://localhost']
+CSRF_TRUSTED_ORIGINS = ['https://efexzium.net', 'https://localhost','https://efexzium.net/en/chat/main/','https://efexzium.net/en/password-reset/' ]
 # Use a secure cookie for the session
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
@@ -45,8 +45,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # email send config
-email_sender =os.environ.get('email_sender')
-password_sender =os.environ.get('password_sender')
+email_sender =os.getenv('email_sender')
+password_sender =os.getenv('password_sender')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
@@ -214,3 +214,6 @@ STRIPE_SECRET_KEY = "sk_test_51IoDMBCJRk9RYTua3odVBYUrbIJoLxUD7i14lhDAfj11oHrBaF
 STRIPE_PUBLIC_KEY = "pk_test_51IoDMBCJRk9RYTualhwP2KRwI1TivJcJEcRMVQ95XaCjCp00hVVDjkSapy6NJg7trBSn5iK4dBWwVIfuNDOS97iO00LCTnGwX9"
 
 AUTH_USER_MODEL = 'Server_Side.Client'
+
+
+
