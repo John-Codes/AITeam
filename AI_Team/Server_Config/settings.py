@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
-print('!!!!!!!base dir:',BASE_DIR)
+#print('!!!!!!!base dir:',BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -32,8 +32,8 @@ SECRET_KEY = "django-insecure-x#@g(83fg26+c*bpz*0vepc=#eei3a&58zj3x@8z_k(2)*3n+_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-#ALLOWED_HOSTS = ['https://efexzium.net','efexzium.net', '127.0.0.1', 'localhost', '0.0.0.0','216.172.109.33']
+#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://efexzium.net','efexzium.net', '127.0.0.1', 'localhost', '0.0.0.0','216.172.109.33']
 
 CSRF_TRUSTED_ORIGINS = ['https://efexzium.net', 'https://localhost']
 # Use a secure cookie for the session
