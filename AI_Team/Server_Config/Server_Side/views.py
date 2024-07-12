@@ -18,21 +18,21 @@ from .models import ClienContext, SubscriptionDetail
 from django.contrib.auth import logout 
 from django.shortcuts import render,redirect, get_object_or_404
 from django.template.loader import render_to_string
-from AI_Team.Logic.ollama.ollama_json_generator import jsonPageDescriptionOllama
-from AI_Team.Logic.Memory import *
-from AI_Team.Logic.response_utils import * # IA message render templates method
-from AI_Team.Logic.sender_mails import Contac_us_mail, notice_error_forms
-from AI_Team.Logic.Data_Saver import DataSaver
-from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
-from AI_Team.Logic.Cancel_Subscription import cancel_subscription
-from AI_Team.Logic.Charge_Context import Charge_Context
-from AI_Team.Logic.chat_history_endpoint_utils  import validate_request_data, get_chat_history_from_session, get_ai_handler_from_session, update_session_with_chat_history
-from AI_Team.Logic.Chat.pdf_handling import *
-from AI_Team.Logic.Chat.handle_temporal_rag import process_temp_context_chat
-from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
-from AI_Team.Logic.sender_mails import notice_error
-from AI_Team.Logic.AI_Instructions.get_ai_instructions import get_instructions
-#from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag
+from Logic.ollama.ollama_json_generator import jsonPageDescriptionOllama
+from Logic.Memory import *
+from Logic.response_utils import * # IA message render templates method
+from Logic.sender_mails import Contac_us_mail, notice_error_forms
+from Logic.Data_Saver import DataSaver
+from Logic.ollama.ollama_rag_Module import OllamaRag
+from Logic.Cancel_Subscription import cancel_subscription
+from Logic.Charge_Context import Charge_Context
+from Logic.chat_history_endpoint_utils  import validate_request_data, get_chat_history_from_session, get_ai_handler_from_session, update_session_with_chat_history
+from Logic.Chat.pdf_handling import *
+from Logic.Chat.handle_temporal_rag import process_temp_context_chat
+from Logic.AIManager.llm_api_Handler_module import ai_Handler
+from Logic.sender_mails import notice_error
+from Logic.AI_Instructions.get_ai_instructions import get_instructions
+
 from .create_paypal import *
 from hashids import Hashids
 

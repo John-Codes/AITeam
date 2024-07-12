@@ -17,9 +17,11 @@ __import__('sqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('sqlite3')
     
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+
+print('!!!!!!!base dir:',BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -116,7 +118,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "AI_Team.Server_Config.wsgi.application"
+WSGI_APPLICATION = "Server_Config.wsgi.application"
 
 
 # Database
@@ -187,7 +189,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "Client_Side", "statics")] # path django searches the static files (images, styles in css and java scripts) for loaded 
 STATIC_ROOT = os.path.join(BASE_DIR, "Client_Side", "statics_deployment")
 # define la carpeta mediaroot para los archivos estaticos que suben los usuarios

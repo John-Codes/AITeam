@@ -11,6 +11,13 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "landingpage.settings")
+try:
 
-application = get_asgi_application()
+    application = get_asgi_application()
+
+except Exception as e:
+    #print error in asgi message  in red
+    print(f"ASGI   \033[91m{e}\033[0m")
+
+
+

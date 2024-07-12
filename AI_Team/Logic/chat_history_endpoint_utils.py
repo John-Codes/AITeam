@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from .Chat.chat_history_module import Chat_history
-from AI_Team.Logic.AIManager.llm_api_Handler_module import ai_Handler
+from Logic.AIManager.llm_api_Handler_module import ai_Handler
 def validate_request_data(data):
     
     current_chat = data.get('current_chat')

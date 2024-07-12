@@ -1,7 +1,7 @@
-from AI_Team.Logic.context_messages import CONTEXT_MESSAGES
-from AI_Team.Logic.Chat.chat_history_module import Chat_history as messages
-#from AITeam.AI_Team.Logic.Chat.chat_history_module import Chat_history as messages
-from AI_Team.Logic.ollama.ollama_rag_Module import OllamaRag as o
+from Logic.context_messages import CONTEXT_MESSAGES
+from Logic.Chat.chat_history_module import Chat_history as messages
+
+from Logic.ollama.ollama_rag_Module import OllamaRag as o
 #from ollama.ollama_rag_Module import OllamaRag as o
 
 

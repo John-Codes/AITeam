@@ -1,4 +1,4 @@
-from AI_Team.Logic.context_messages import CONTEXT_MESSAGES
+from Logic.context_messages import CONTEXT_MESSAGES
 
 class Chat_history:
     def __init__(self):

@@ -2,7 +2,7 @@ import os
 import openai
 import json
 import google.generativeai as palm
-from AI_Team.Logic.Chat.chat_history_module import Chat_history
+from Logic.Chat.chat_history_module import Chat_history
 from langchain.prompts import PromptTemplate
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import LLMChain

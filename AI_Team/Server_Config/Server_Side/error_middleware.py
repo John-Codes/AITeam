@@ -3,7 +3,7 @@ import datetime
 import json
 import traceback
 from django.http import JsonResponse
-from AI_Team.Logic.sender_mails import notice_error_forms# Asegúrate de importar correctamente tu función
+from Logic.sender_mails import notice_error_forms# Asegúrate de importar correctamente tu función
 
 class ErrorHandlingMiddleware:
     def __init__(self, get_response):
@@ -11,6 +11,7 @@ class ErrorHandlingMiddleware:
 
     def __call__(self, request):
         response = self.get_response(request)
+        print("Response: ", response)
         return response
 
     def process_exception(self, request, exception):
