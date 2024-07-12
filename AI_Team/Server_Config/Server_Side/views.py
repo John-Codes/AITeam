@@ -49,7 +49,7 @@ from django.dispatch import receiver
 
 import paypalrestsdk
 from django.conf import settings
-from AI_Team.Logic.Payments import plans_data
+from Logic.Payments import plans_data
 from datetime import datetime, timedelta
 #from .models import Current_Plan, PaymentMethod, SubscriptionStatus
 from django.utils.translation import gettext as _
