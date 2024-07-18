@@ -283,7 +283,17 @@ class Conversation():
             
             #list_messages = self.ai_handler.update_messages(last_ia_response, message)
             # CLient Side add ia response
-            return StreamingHttpResponse(chat_ollama.stream_query_ollama(list_messages), content_type='text/event-stream')
+            response=StreamingHttpResponse(chat_ollama.stream_query_ollama(list_messages), content_type='text/plain')
+            response['Cache-Control'] = 'no-cache'
+            response['X-Accel-Buffering'] = 'no'
+            response['Transfer-Encoding'] = 'chunked'
+            
+        print('_____________________')
+        print('Text Stream:')
+        for chunk in response.streaming_content:
+            print(chunk.decode('utf-8'), end='', flush=True)  # Print each chunk
+
+            return response
         else:
             return JsonResponse({'error': 'Invalid request method'}, status=400)
         
@@ -291,34 +301,53 @@ class Conversation():
     
     @method_decorator(csrf_exempt)
     def main_query_temp_rag_if_it_exist(self, request):
-        data = json.loads(request.body)
-        current_chat = data.get('current_chat')
-        # get the list messages
-        list_messages = data.get('list_messages')
-        # get the last message of the user
-        message = list_messages[-1]['content']
+        try:
+            data = json.loads(request.body)
+            current_chat = data.get('current_chat')
+            # get the list messages
+            list_messages = data.get('list_messages')
+            # get the last message of the user
+            message = list_messages[-1]['content']
 
-        # if there is a temp collection
-        if request.session.get('temp_collection_exist', False):
-            
-            #get the collection by name using the temp_uuid
-            collection_name = request.session['temp_collection_exist']['temp_uuid']
-            metadata = request.session['temp_collection_exist']['pdf_path']
-            collection = self.ai_handler.get_collection_by_name(collection_name)
+            # if there is a temp collection
+            if request.session.get('temp_collection_exist', False):
+                
+                #get the collection by name using the temp_uuid
+                collection_name = request.session['temp_collection_exist']['temp_uuid']
+                metadata = request.session['temp_collection_exist']['pdf_path']
+                collection = self.ai_handler.get_collection_by_name(collection_name)
 
-            # then call ai_handler method: call_ai_temp_rag that returns a formatted prompt with the context
-            formatted_prompt = self.ai_handler.query_user_collection_with_chat_context(metadata, message, collection)
+                # then call ai_handler method: call_ai_temp_rag that returns a formatted prompt with the context
+                formatted_prompt = self.ai_handler.query_user_collection_with_chat_context(metadata, message, collection)
 
-            # update the last message with the formatted prompt
-            list_messages[-1]['content'] = formatted_prompt
-            list_messages = self.ai_handler.load_static_messages(list_messages, 'custom_chat')
-        else:
-            # if not temp collection then load static messages at the beginning of the list of messages
-            list_messages = self.ai_handler.load_static_messages(list_messages, current_chat)
+                # update the last message with the formatted prompt
+                list_messages[-1]['content'] = formatted_prompt
+                list_messages = self.ai_handler.load_static_messages(list_messages, 'custom_chat')
+            else:
+                # if not temp collection then load static messages at the beginning of the list of messages
+                list_messages = self.ai_handler.load_static_messages(list_messages, current_chat)
 
-        return StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/event-stream')
+            # return StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/event-stream')
         
-    
+            response=StreamingHttpResponse(self.ai_handler.call_ollama_stream(list_messages), content_type='text/plain')
+            response['Cache-Control'] = 'no-cache'
+            response['X-Accel-Buffering'] = 'no'
+            # response['Transfer-Encoding'] = 'chunked'
+            
+            print('_____________________')
+            print('Text Stream:')
+            print(response)
+
+            return response
+            
+        except Exception as e:
+            print('Error in main_query_temp_rag_if_it_exist: ', e)
+            return StreamingHttpResponse('Error in main_query_temp_rag_if_it_exist: ' + str(e), content_type='text/event-stream')
+        
+
+
+
+
     @method_decorator(csrf_exempt)
     def main_query_perm_rag_if_it_exist(self, request):
         #call reset_chat_history if its necessary

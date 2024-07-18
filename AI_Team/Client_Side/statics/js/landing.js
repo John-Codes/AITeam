@@ -1,120 +1,124 @@
-
 async function sendMessageStream() {
-
     const csrfToken = getCookie('csrftoken');
     const message = document.getElementById("userMessage").value;
     const chatBox = document.getElementById("chatBox");
     const languagePrefix = getLanguagePrefix();
     const urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
-
-    // Verificar si estamos esperando el correo del usuario
-    if (sessionStorage.getItem('awaitingContactEmail') === 'true') {
-        // Enviar el correo a un nuevo endpoint
+    try {
+        displayUserMessage(chatBox, message);
+        scrollToBottom();
+        toggleDotsAnimation(true);
         document.getElementById("userMessage").value = "";
-        const emailEndpoint = `/${languagePrefix}/send-contact-email/`;
-        const response = await fetch(emailEndpoint, {
+        const aiMessageId = 'aiMessage' + Date.now();
+        list_messages.push({"role": "user", "content": message});
+        const response = await fetch(urlEndpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken
             },
-            body: JSON.stringify({ 'email': message })
+            body: JSON.stringify({ 'list_messages': list_messages, 'current_chat': currentContext, 'action': 'call-stream-ia' })
         });
-        const responseData = await response.json();
-        if (response.ok) {
-            // Limpiar la marca de la sesión
-            sessionStorage.removeItem('awaitingContactEmail');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        chatBox.insertAdjacentHTML('beforeend', responseData.message);
-        document.body.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth' // Desplazamiento suave
-        });
-        // chatBox.scrollTop = chatBox.scrollHeight;
-        return;
+        displayAIMessageContainer(chatBox, aiMessageId);
+        scrollToBottom();
+        const reader = response.body.getReader();
+        let aiMessage = '';
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            
+            const chunk = new TextDecoder().decode(value);
+            aiMessage += chunk;
+            
+            // Process this chunk immediately
+            updateAIMessage(aiMessageId, aiMessage);
+            scrollToBottom();
+            
+            // Allow UI to update
+            await new Promise(resolve => setTimeout(resolve, 0));
+        }
+        list_messages.push({"role": "assistant", "content": aiMessage});
+        toggleDotsAnimation(false);
+    } 
+    catch (error) {
+        toggleDotsAnimation(false);
+        console.error('Streaming error:', error);
+        displayErrorMessage(chatBox, error.message);
     }
+}
 
+function updateAIMessage(aiMessageId, aiMessage) {
+    const messageElement = document.getElementById(aiMessageId);
+    if (!messageElement) return;
+
+    // Only parse and update if there's new content
+    if (messageElement.textContent !== aiMessage) {
+        const newContent = marked.parse(aiMessage);
+        if (messageElement.innerHTML !== newContent) {
+            messageElement.innerHTML = addCustomClasses(newContent);
+        }
+    }
+}
+function displayUserMessage(chatBox, message) {
     chatBox.insertAdjacentHTML('beforeend', `
         <div class="message-right glass float-end" style="padding: 1rem !important; max-width: 80%; overflow-wrap: break-word !important;">
             <p class="message-content" style="padding: 1rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${message}</p>
         </div>
         <div class="clearfix"></div>
     `);
-    // chatBox.scrollTop = chatBox.scrollHeight;
-    document.body.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth' // Desplazamiento suave
-    });
-    toggleDotsAnimation(true); // Activar animaciones
-    document.getElementById("userMessage").value = "";
-    const aiMessageId = 'aiMessage' + Date.now(); // Generar un ID único para el elemento
-    list_messages.push({"role": "user", "content": message});
-    var response = await fetch(urlEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 'list_messages': list_messages, 'current_chat':currentContext, 'action': 'call-stream-ia' })
-            });
-    
-    var reader = response.body.getReader();
-    var decoder = new TextDecoder('utf-8');
-    toggleDotsAnimation(false); // Activar animaciones
-    chatBox.insertAdjacentHTML('beforeend', `
-        <div class="card card_background_static"  >
-            
-            <div class="card-content card-stream"  >
-            
-                <p class="message-content" id="${aiMessageId}" style="padding: rem !important; text-overflow ellipsis; word-wrap break-word;"  > </p>
-            
-            </div>
-                    <footer class="card-footer" style="border-top: none; background-color: transparent;" >
-                        <div style="display: flex; align-items: center;">
-                            <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
-                                    <span class="icon is-small">
-                                        <i class="fas fa-clipboard"></i>
-                                </span>
-                            </button>
-                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
-                                <span class="icon is-small">    
-                                    <i class="fas fa-thumbs-up"></i>
-                                    
-                                </span>
-                            </button>
-                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
-                                <span class="icon is-small">    
-                                    
-                                    <i class="fas fa-thumbs-down"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </footer>
-        </div>
-        
-    `);
-    document.body.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth' // Desplazamiento suave
-    });
-    let aiMessage = '';
+}
 
-    reader.read().then(function processResult(result) {
-        if (result.done) {
-            // Add AI message to history after the entire response is received
-            list_messages.push({"role": "assistant", "content": aiMessage});
-            return;
-        }
-        let token = decoder.decode(result.value);
-        aiMessage += token;
-         let htmlContent = marked.parse(aiMessage);
-         htmlContent = addCustomClasses(htmlContent);
-        document.getElementById(aiMessageId).innerHTML = htmlContent;
-        // chatBox.scrollTop = chatBox.scrollHeight;
-        document.body.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth' // Desplazamiento suave
-        });
-        return reader.read().then(processResult);
+function displayAIMessageContainer(chatBox, aiMessageId) {
+    chatBox.insertAdjacentHTML('beforeend', `
+        <div class="card card_background_static">
+            <div class="card-content card-stream">
+                <p class="message-content" id="${aiMessageId}" style="padding: 1rem !important; text-overflow: ellipsis; word-wrap: break-word;"></p>
+            </div>
+            <footer class="card-footer" style="border-top: none; background-color: transparent;">
+                <div style="display: flex; align-items: center;">
+                    <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
+                        <span class="icon is-small">
+                            <i class="fas fa-clipboard"></i>
+                        </span>
+                    </button>
+                    <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Me gusta"> 
+                        <span class="icon is-small">    
+                            <i class="fas fa-thumbs-up"></i>
+                        </span>
+                    </button>
+                    <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="No me gusta"> 
+                        <span class="icon is-small">    
+                            <i class="fas fa-thumbs-down"></i>
+                        </span>
+                    </button>
+                </div>
+            </footer>
+        </div>
+    `);
+}
+//More resilient to real world conditions like slow internet connection and server lags.
+function updateAIMessage(aiMessageId, aiMessage) {
+    const htmlContent = marked.parse(aiMessage);
+    document.getElementById(aiMessageId).innerHTML = addCustomClasses(htmlContent);
+}
+
+function displayErrorMessage(chatBox, errorMessage) {
+    chatBox.insertAdjacentHTML('beforeend', `
+        <div class="card card_background_static">
+            <div class="card-content card-stream">
+                <p class="message-content" style="color: red;">Error: ${errorMessage}. Please try again.</p>
+            </div>
+        </div>
+    `);
+}
+
+function scrollToBottom() {
+    document.body.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
     });
 }
 
@@ -162,8 +166,6 @@ function getLanguagePrefix() {
 }
 
 
-//Stream messages
- 
 
 function addCustomClasses(htmlContent) {
     // Create a temporary DOM element to manipulate the HTML
@@ -206,7 +208,10 @@ function addCustomClasses(htmlContent) {
     });
     return tempDiv.innerHTML;
 }
-// Function to send the user's message and receive the response.
+
+
+
+// Modal send messages
 function sendMessage() {
     const message = document.getElementById("userMessage").value.trim();
     let formData = new FormData();
@@ -336,7 +341,7 @@ function uploadFile(event) {
                         </div>
                     </footer>
                     </div>
-                    <div class="clearfix"></div>
+                    <div class="clearfix"></div>obs
                 `);
             }
             chatBox.scrollTop = chatBox.scrollHeight; 
@@ -462,9 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-// Initialize event listeners.
-//document.getElementById("userMessage").addEventListener("input", checkAndAutocomplete);
-
+//Humburguer Menu events
 document.addEventListener("DOMContentLoaded", function() {
     // Selección de elementos del DOM
     const hamburgerToggle = document.querySelector("#hamburgerToggle");

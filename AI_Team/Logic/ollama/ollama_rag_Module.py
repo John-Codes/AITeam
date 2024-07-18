@@ -1,4 +1,7 @@
+import random
 import os
+import sys
+import time
 import ollama
 import json
 #import bs4
@@ -450,7 +453,11 @@ class OllamaRag:
                 trans_table = str.maketrans('', '', ':')
                 content = chunk['message']['content'].translate(trans_table)  # Remove colons using translate
                 print(content, end='', flush=True)
+                #create a 1-3 seconds delay
+                #REMOVE THIS
+                time.sleep(random.randint(1,1))
                 yield content
+                sys.stdout.flush()
         except Exception as e:
             print(e)
 
