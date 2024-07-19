@@ -274,86 +274,85 @@ function handleKeyDown(event) {
     }
 }
 
-function uploadFile(event) {
+async function uploadFile(event) {
     toggleDotsAnimation(true);
-    const file = event.target.files[0]; // Obtener el primer archivo seleccionado
-    const formData = new FormData();
-    
-    // Agregar el archivo al FormData si está presente
-    if (file) {
-        formData.append("uploaded_files", file);
-        formData.append("context_value", currentContext); // Asumiendo que currentContext está definido globalmente
-        //if currentContext == main: action == create-rag
-        if (currentContext == "main") {
-            formData.append("action", "create-temp-rag");
-        } else if (currentContext == "panel-admin") {
-            formData.append("action", "create-perm-rag");
-        }
-        
+    const file = event.target.files[0];
 
-        // Realizar la solicitud para procesar el archivo
+    if (!file) {
+        toggleDotsAnimation(false);
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("uploaded_files", file);
+    formData.append("context_value", currentContext);
+
+    const action = currentContext === "main" ? "create-temp-rag" : "create-perm-rag";
+    formData.append("action", action);
+
+    try {
         const csrfToken = getCookie('csrftoken');
         const languagePrefix = getLanguagePrefix();
-        let urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
-        
-        fetch(urlEndpoint, {
+        const urlEndpoint = `/${languagePrefix}/chat/${currentContext}/`;
+
+        const response = await fetch(urlEndpoint, {
             method: "POST",
             body: formData,
             headers: {
                 "X-CSRFToken": csrfToken
             }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Creates UI message with the uploaded file's name.
-            console.log('File uploaded successfully:', data);
-            const chatBox = document.getElementById("chatBox");
-            if (data.message) {
-                chatBox.insertAdjacentHTML('beforeend', data.message);
-            } else  if (data.error) {
-                chatBox.insertAdjacentHTML('beforeend', `
-                    <div class="message-left glass">
-                        <p class="message-content">File upload failed.</p>
-                        <footer class="card-footer" style="border-top: none; background-color: transparent;" >
-                        <div style="display: flex; align-items: center;">
-                            <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar"> 
-                                    <span class="icon is-small">
-                                        <i class="fas fa-clipboard"></i>
-                                </span>
-                            </button>
-                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="Me gusta"> 
-                                <span class="icon is-small">    
-                                    <i class="fas fa-thumbs-up"></i>
-                                    
-                                </span>
-                            </button>
-                            <button class=" is-small no-border no-outline"  style="margin-left: 1rem;" title="No me gusta"> 
-                                <span class="icon is-small">    
-                                    
-                                    <i class="fas fa-thumbs-down"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </footer>
-                    </div>
-                    <div class="clearfix"></div>obs
-                `);
-            }
-            chatBox.scrollTop = chatBox.scrollHeight; 
-            list_messages = [];
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        })
-        .finally(() => {
-            toggleDotsAnimation(false); // Desactivar animaciones
         });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('File uploaded successfully:', data);
+
+        const message = data.message || createErrorMessage();
+        displayMessage(message);
+
+        list_messages = [];
+    } catch (error) {
+        console.error('Error:', error);
+    } finally {
+        toggleDotsAnimation(false);
     }
+}
+
+function createErrorMessage() {
+    return `
+        <div class="message-left glass">
+            <p class="message-content">File upload failed.</p>
+            <footer class="card-footer" style="border-top: none; background-color: transparent;">
+                <div style="display: flex; align-items: center;">
+                    <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Copiar">
+                        <span class="icon is-small">
+                            <i class="fas fa-clipboard"></i>
+                        </span>
+                    </button>
+                    <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="Me gusta">
+                        <span class="icon is-small">
+                            <i class="fas fa-thumbs-up"></i>
+                        </span>
+                    </button>
+                    <button class="is-small no-border no-outline" style="margin-left: 1rem;" title="No me gusta">
+                        <span class="icon is-small">
+                            <i class="fas fa-thumbs-down"></i>
+                        </span>
+                    </button>
+                </div>
+            </footer>
+        </div>
+        <div class="clearfix"></div>
+    `;
+}
+
+function displayMessage(message) {
+    const chatBox = document.getElementById("chatBox");
+    chatBox.insertAdjacentHTML('beforeend', message);
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
 //handle default messages
 document.addEventListener("DOMContentLoaded", function() {
