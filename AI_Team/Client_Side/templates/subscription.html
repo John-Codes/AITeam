@@ -68,50 +68,57 @@
  <div class="columns is-centered" >
     <div class="column is-6" style="min-width: 3rem; min-height: 10rem;">
             <br>
-            <div class="card card_background_static cont-card"style="min-width: 3rem; min-height: 10rem;">
-                    <div class="card-header glass-header">
-                        <h2 class="title is-4" style="color: white;">{% trans "Special Code" %}</h2>
+            <div class="card card_background_static cont-card"style=" min-height: 5rem; margin:2rem">
+                
+                    <div class="card-header " style= "border: none !important; background: transparent !important;">
+                        <h2 class="title is-4" style="color: white; ">{% trans "Special Code" %}</h2>
                     </div>
-                    <div class="card-body glass-body" id="planDetails">
+                    <div class="card-body glass-body" style= "border: none !important; background: transparent !important;" id="planDetails">
                         <br>
                         <form id="specialCodeForm">
                             {% csrf_token %}
-                            <input type="text" name="special_code" placeholder="Ingresa tu código" class="input" style="min-width: 3rem;">
-                            <button type="submit" class="button is-primary" style="margin-top: 1rem;">{% trans "Send Code" %} </style></button>
+                            <input type="text" name="special_code" placeholder="Ingresa tu código" class="input" style="min-width: 3rem; ">
+                            <br>
+                            <button type="submit"  class="button is-primary" style="margin-top: 1rem;">{% trans "Send Code" %} </style></button>
                     </form>
                     </div>
+                
             </div>
             <br>
                 {% for plan in plans %}
                     <div class="card cont-card card_background_static" style="min-height: 10rem; margin: 2rem;">
-                        <div class="card-header glass-header">
-                            <h2 class="title is-4" style="color: white;">{{ plan.name }}</h2> <!-- Nombre del plan -->
+                        <div class="card-header " style= "border: none !important; background: transparent !important;">
+                            <h2 class="title is-4" style="color: white; ">{{ plan.name }}</h2> <!-- Nombre del plan -->
                         </div>
-                        <div class="card-body glass-body" style="min-height: 11rem;">
-                            <p><strong style="color: white;">{% trans "Plan Name" %}</strong> {{ plan.plan_name }}</p>
-                            <p><strong style="color: white;">{% trans "Price" %}</strong> ${{ plan.price }} USD</p>
-                            <p><strong style="color: white;">{% trans "Subscription Status" %}</strong> {{ plan.subscription_status }}</p>
+                        <div class="card-body glass-body" style="min-height: 11rem; border: none !important; background: transparent !important; ">
+                            <!-- <p><strong style="color: white;">{% trans "Plan Name" %}</strong> {{ plan.plan_name }}</p> -->
+                            <p><strong style="color: white;">{% trans "Price" %}</strong> </p>
+                            <br>
+                            <p>${{ plan.price }} USD</p>
+                            <!-- <p><strong style="color: white;">{% trans "Subscription Status" %}</strong> {{ plan.subscription_status }}</p> -->
+                            <br>
                             <br>
                             <h5 class="title is-5" style="color: white;">{% trans "Features" %}</h5>
-                            <ul class="features-list" >
+                            <ul class="features-list"  style="list-style-type: disc; padding-left: 2rem;">
                                 {% for feature in plan.features_list %}
-                                <li>{{ feature }}</li>
+                                <li style="margin-bottom: 5px;">{{ feature }}</li>
                                 {% endfor %}
                             </ul>
                             {% if plan.target_market %}
                             <h5 class="title is-5">{% trans "Target Market" %}</h5>
-                            <ul class="features-list">
+                            <ul class="features-list" style="list-style-type: disc; padding-left: 20px;">
                                 {% for target_market in plan.market_place %}
-                                <li>{{ target_market }}</li>
+                                <li style="margin-bottom: 5px;">{{ target_market }}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
-                            <div class="pay-buttons buttons-group" style="margin-top: 1rem;">
+                            <br>
+                            <div class="pay-buttons buttons-group" style="margin-top: 1rem; ">
                                 <!-- PayPal -->
                                 <form class="paypal-form" action="{% url 'subscription' %}" method="post">
                                     {% csrf_token %}
                                     <input type="hidden" name="plan_id" value="{{ plan.plan_id }}">
-                                    <button type="submit" class="button is-primary">{% trans "Pay with PayPal" %}</button>
+                                    <button type="submit"  class="button is-primary">{% trans "Pay with PayPal" %}</button>
                                 </form>
                             </div>
                         </div>
