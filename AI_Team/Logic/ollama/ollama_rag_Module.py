@@ -455,7 +455,7 @@ class OllamaRag:
                 print(content, end='', flush=True)
                 #create a 1-3 seconds delay
                 #REMOVE THIS
-                time.sleep(random.randint(1,1))
+                #time.sleep(random.randint(1,1))
                 yield content
                 sys.stdout.flush()
         except Exception as e:
