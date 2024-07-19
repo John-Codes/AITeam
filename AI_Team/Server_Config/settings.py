@@ -13,14 +13,18 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 __import__('sqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('sqlite3')
     
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-
+ENV_PATH = BASE_DIR / 'AI_Team'/ '.env'
+load_dotenv(ENV_PATH)
+print('__________________')
+print('Env Vars:')
+print(dict(os.environ))
 #print('!!!!!!!base dir:',BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
@@ -44,7 +48,7 @@ SECURE_HSTS_SECONDS = 3600  # Puedes aumentar este valor después de probar
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+# Load environment variables from .env file in AI_Team/env
 
 # email send config
 email_sender =os.environ.get('email_sender')
