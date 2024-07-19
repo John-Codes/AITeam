@@ -66,9 +66,9 @@
 
 
  <div class="columns is-centered" >
-    <div class="column is-6" style="min-width: 5rem; min-height: 10rem;">
+    <div class="column is-6" style="min-width: 3rem; min-height: 10rem;">
             <br>
-            <div class="card card_background_static cont-card">
+            <div class="card card_background_static cont-card"style="min-width: 3rem; min-height: 10rem;">
                     <div class="card-header glass-header">
                         <h2 class="title is-4" style="color: white;">{% trans "Special Code" %}</h2>
                     </div>
@@ -76,7 +76,7 @@
                         <br>
                         <form id="specialCodeForm">
                             {% csrf_token %}
-                            <input type="text" name="special_code" placeholder="Ingresa tu código" class="input">
+                            <input type="text" name="special_code" placeholder="Ingresa tu código" class="input" style="min-width: 3rem;">
                             <button type="submit" class="button is-primary" style="margin-top: 1rem;">{% trans "Send Code" %} </style></button>
                     </form>
                     </div>
@@ -88,7 +88,7 @@
                             <h2 class="title is-4" style="color: white;">{{ plan.name }}</h2> <!-- Nombre del plan -->
                         </div>
                         <div class="card-body glass-body" style="min-height: 11rem;">
-                            <!-- <p><strong style="color: white;">{% trans "Plan Name" %}</strong> {{ plan.plan_name }}</p> -->
+                            <p><strong style="color: white;">{% trans "Plan Name" %}</strong> {{ plan.plan_name }}</p>
                             <p><strong style="color: white;">{% trans "Price" %}</strong> ${{ plan.price }} USD</p>
                             <p><strong style="color: white;">{% trans "Subscription Status" %}</strong> {{ plan.subscription_status }}</p>
                             <br>

@@ -1,9 +1,28 @@
 import os
 from distutils.util import strtobool
 
+# in prod async server:
+#Doesnt stream...
+# gunicorn -c gunicorn_conf.py Server_Config.asgi:application --worker-class uvicorn.workers.UvicornWorker
+
+# For streaming responses with long inference times
+# worker_class = 'uvicorn.workers.UvicornWorker'
+
+#sync mode:
+#streams
+#gunicorn -c gunicorn_conf.py Server_Config.wsgi:application
+
 #print new line
 print('_______________________________')
 print('guni conf opened')
+#print in green color settings.py set Server_Config.settings.py'
+print('\033[92m' + 'settings.py set Server_Config.settings.py' + '\033[0m')
+# Set the DJANGO_SETTINGS_MODULE environment variable
+os.environ['DJANGO_SETTINGS_MODULE'] = 'Server_Config.settings'
+
+
+# Continue with your Gunicorn configuration...
+
 # command =  '/miniconda3/envs/AIteam/bin/gunicorn'
 pythonpath ='/AITeam/AI_Team'
 #bind = '137.184.129.216:8000'
@@ -11,8 +30,6 @@ pythonpath ='/AITeam/AI_Team'
 bind = "127.0.0.1:8000"
 # gunicorn_conf.py
 
-# For streaming responses with long inference times
-worker_class = 'uvicorn.workers.UvicornWorker'
 workers = 2
 threads = 1
 worker_connections = 100

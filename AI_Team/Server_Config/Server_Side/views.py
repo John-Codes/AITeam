@@ -588,8 +588,10 @@ class Subscription(View):
         Render the subscription page with all plan details.
         """
         try:
-            plans = SubscriptionDetail.objects.filter(name__in=["Basic AI Team Subscription", "Premium AI Team Subscription" ])
-            
+            #plans = SubscriptionDetail.objects.filter(name__in=["Basic AI Team Subscription", "Premium AI Team Subscription" ])
+            plans = SubscriptionDetail.objects.filter(plan_name__in=["AI Team Basic Plan", "Plan Premium"])
+
+
             for plan in plans:
                 plan.features_list = json.loads(plan.features_list)
                 plan.market_place = json.loads(plan.market_place)

@@ -19,12 +19,44 @@ import sys
 sys.modules['sqlite3'] = sys.modules.pop('sqlite3')
     
 BASE_DIR = Path(__file__).resolve().parent.parent
+#print new line in blue
+print('\033[94m' +'________________________________'+ '\033[0m')
+#print in blue color Setting ENV Vars
+print('\033[94m' + "Setting Environment Variables..." + '\033[0m')
+# Load environment variables from .env file
+ENV_PATH = BASE_DIR / '.env'
+print(f"Looking for .env file at: {ENV_PATH.absolute()}")
+print(f".env file exists: {ENV_PATH.exists()}")
 
-ENV_PATH = BASE_DIR / 'AI_Team'/ '.env'
-load_dotenv(ENV_PATH)
-print('__________________')
-print('Env Vars:')
-print(dict(os.environ))
+if ENV_PATH.exists():
+    print(f"Loading .env file from {ENV_PATH}")
+    load_dotenv(ENV_PATH)
+    print("Environment variables after loading:")
+    # print(f"PCI: {os.getenv('PCI')}")
+    # print(f"PCS: {os.getenv('PCS')}")
+    #print if env vars have value print true in green
+    # if os.getenv('PCI'):
+    #     print('\033[92m' + "Env Vars Set" + '\033[0m')
+
+    # Print all environment variables (be careful with sensitive info)
+    # print("All environment variables:")
+    #for key, value in os.environ.items():
+    #     print(f"{key}: {value}")
+    for key, value in os.environ.items():
+          print('\033[92m' + (f'{key}: true' if value else f"{key}: {value}") + '\033[0m')
+
+else:
+    print(f"ERROR: .env file not found at {ENV_PATH.absolute()}")
+    print("Current working directory:", os.getcwd())
+    print("Contents of AI_Team directory:")
+    ai_team_dir = BASE_DIR / 'AI_Team'
+    if ai_team_dir.exists():
+        print(list(ai_team_dir.iterdir()))
+    else:
+        print("AI_Team directory not found")
+
+#print new line in blue
+print('\033[94m' +'________________________________'+ '\033[0m')
 #print('!!!!!!!base dir:',BASE_DIR)
 
 # Quick-start development settings - unsuitable for production

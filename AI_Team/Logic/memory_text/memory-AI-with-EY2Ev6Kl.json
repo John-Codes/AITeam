@@ -1,19 +1,19 @@
 {
-    "title": "Unresolved Repair Alert",
-    "header": "Unresolved Repair: Mrs. Johnson's Case",
-    "description": "Unresolved repair case with Mrs. Johnson highlights system challenges. Despite efforts, repair remains pending due to safety concerns over a defective streetlight on Elm Street. Follow-up calls highlight prioritization issues.",
+    "title": "La Noche de Veldimor",
+    "header": "La noche lluviosa de Veldimor.",
+    "description": "La noche lluviosa es el escenario para las reflexiones y planes de Veldimor mientras carga un fardo incierto. ¿Qué conspiración está cociendo en su mente?",
     "keywords": [
-        "Unresolved case",
-        "repair delay",
-        "follow-up calls",
-        "defective streetlight",
-        "safety concerns",
-        "pending repair",
-        "priority issue",
-        "customer concern",
-        "streetlight maintenance",
-        "efficient response"
+        "Veldimor",
+        "rainy night",
+        "tragic events",
+        "mystery",
+        "Palacio",
+        "Rey Leonard",
+        "Klein",
+        "dark intentions",
+        "unexpected twists",
+        "dramatic revelations"
     ],
-    "default_message": "Welcome to our Chat",
+    "default_message": "Bienvenido al chat",
     "list_items": []
 }

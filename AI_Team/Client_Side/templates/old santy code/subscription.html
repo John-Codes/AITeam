@@ -40,7 +40,7 @@
 
                     
                         <li cy-data="login-link"><a href="/es/login/" title="login to AI Team for more"><h2 class="reset-styles">{% trans "Login"%}</h2></a></li>
-                        <li><a href="{% url 'signup' %}" title="login to AI Team for more"><h2 class="reset-styles">{% trans "Singup"%}</h2></a></li>
+                        <li><a href="{% url 'signup' %}" title="log in to AI Team for more"><h2 class="reset-styles">{% trans "Singup"%}</h2></a></li>
                         <li><a href="{% url 'password_reset' %}" data-template="faqs_messages" title="Reset password"><h2 class="reset-styles">{% trans "Reset Password"%}</h2></a></li>
                         
                         {% if user.is_superuser %}
@@ -220,7 +220,7 @@
         
               hamburgerIcon.className = this.checked ? 'bi bi-x-lg' : 'bi bi-list';
         
-                menuItems.style.transform = this.checked ? 'translateX(0)' : 'translateX(-100%)';
+              menuItems.style.transform = this.checked ? 'translateX(0)' : 'translateX(-100%)';
             });
         });
     </script>
