@@ -418,6 +418,9 @@ class Conversation():
                 request.session['temp_collection_exist'] = {'pdf_path': pdf_file, 'temp_uuid': temp_uuid} 
                 #delete_temp_pdfs(pdf_file)
                 html_message = render_to_string('chat_messages/temp_rag_success.html')
+                # create a 3 min delay
+                
+                #time.sleep(180)  # 180 seconds equals 3 minutes
                 return JsonResponse({'message': html_message})
             elif pdf_file == 'no path':
                 return JsonResponse({'message': 'No path for PDF file', 'upload_success': upload_success})
