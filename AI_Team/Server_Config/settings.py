@@ -227,8 +227,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "Client_Side", "statics")] # path django searches the static files (images, styles in css and java scripts) for loaded 
-STATIC_ROOT = os.path.join(BASE_DIR, "Client_Side", "statics_deployment")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "Client_Side", "static")] # path django searches the static files (images, styles in css and java scripts) for loaded 
+# STATIC_ROOT = os.path.join(BASE_DIR, "Client_Side", "statics_deployment")
 # define la carpeta mediaroot para los archivos estaticos que suben los usuarios
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "Client_Side",'media_products')

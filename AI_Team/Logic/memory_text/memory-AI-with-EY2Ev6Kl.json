@@ -1,19 +1,19 @@
 {
-    "title": "La Noche de Veldimor",
-    "header": "La noche lluviosa de Veldimor.",
-    "description": "La noche lluviosa es el escenario para las reflexiones y planes de Veldimor mientras carga un fardo incierto. ¿Qué conspiración está cociendo en su mente?",
+    "title": "Gray Tunic's Secret",
+    "header": "Llegada enigmática al monasterio",
+    "description": "Mysterious arrival at the abbey of Klein sparks ominous events. Aimless traveler donning King Leonard's gray tunic stirs uncertainty amidst torrential downpour and thunderous backdrop. A turning point unfolds, but what lies ahead?",
     "keywords": [
-        "Veldimor",
-        "rainy night",
-        "tragic events",
-        "mystery",
-        "Palacio",
-        "Rey Leonard",
-        "Klein",
-        "dark intentions",
-        "unexpected twists",
-        "dramatic revelations"
+        "Gray tunic",
+        "King Leonard",
+        "Abbey of Klein",
+        "Mysterious arrival",
+        "Aimless journey",
+        "Tragedy unfolding",
+        "Thunderous backdrop",
+        "Anxiety mounts",
+        "Fate's uncertainty",
+        "Turning point revealed"
     ],
-    "default_message": "Bienvenido al chat",
+    "default_message": "Welcome to our mysterious conversation! We're discussing a intriguing scene involving the arrival of a person wearing a gray tunic and the subsequent events that unfold. Explore the story with us, analyzing clues, motivations, and hidden meanings behind the arrival of this enigmatic figure.",
     "list_items": []
 }
