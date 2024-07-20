@@ -66,7 +66,7 @@ print('\033[94m' +'________________________________'+ '\033[0m')
 SECRET_KEY = "django-insecure-x#@g(83fg26+c*bpz*0vepc=#eei3a&58zj3x@8z_k(2)*3n+_"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 #ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = ['https://efexzium.net','efexzium.net', '127.0.0.1', 'localhost', '0.0.0.0','216.172.109.33']
