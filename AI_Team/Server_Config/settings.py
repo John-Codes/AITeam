@@ -70,7 +70,7 @@ DEBUG = False
 
 #ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = ['https://efexzium.net','efexzium.net', '127.0.0.1', 'localhost', '0.0.0.0','216.172.109.33']
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['https://efexzium.net','efexzium.net','127.0.0.1', 'localhost']
 
 CSRF_TRUSTED_ORIGINS = ['https://efexzium.net', 'https://localhost']
 # Use a secure cookie for the session
