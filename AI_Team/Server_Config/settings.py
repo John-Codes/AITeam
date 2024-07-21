@@ -35,7 +35,8 @@ STATIC_URL = "/static/"
 
 # STATICFILES_DIRS: Directories where Django will look for additional static files.
 # These are typically your development static files.
-STATICFILES_DIRS = [BASE_DIR / "Client_Side" / "static"]
+STATICFILES_DIRS = [BASE_DIR / "Client_Side"/ "static" ]
+#STATICFILES_DIR exists: /home/john/2024WBAITeam/AITeam/AI_Team/Client_Side/static
 
 # STATIC_ROOT: The directory where Django will collect all static files for deployment.
 # This is used when you run the 'collectstatic' management command.

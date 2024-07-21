@@ -28,3 +28,5 @@ urlpatterns = i18n_patterns(
     path("django-check-seo/", include("django_check_seo.urls")),
 )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

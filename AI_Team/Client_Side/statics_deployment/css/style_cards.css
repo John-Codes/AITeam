@@ -1,0 +1,79 @@
+.card_background {
+    background:linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #ffffff;
+    max-width:  30rem!important;
+}
+
+.card_background_static {
+    background:linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #ffffff;
+    max-width:  100% !important;
+}
+
+.title_card {
+    color: #ffffff;
+}
+.content_card {
+    font-weight: 400;
+}
+
+/* Ajuste para aplicar el estilo de borde circular directamente a la imagen */
+.card-image-profile {
+    width: 10rem;  
+    height: 10rem;
+    border-radius:50%;
+    object-fit: cover;
+    object-position: 50% 50%; 
+}
+/*Ajuste especial para imagen de developer, donde el object position es más alto, para que se vea mejor*/
+.card-image-profile-developer {
+    width: 15rem;  
+    height: 19rem;
+    border-radius:50%;
+    object-fit: cover;
+    object-position: 20% 40%; 
+
+    /* necesito que tenga menos zoom para que se vea mejor*/
+    zoom: 0.5;
+}
+
+/* Para pantallas muy pequeñas (menos de 600px de ancho) */
+@media (max-width: 600px) {
+    .card_background {
+        max-width: 17rem!important; /* Ajusta el max-width para pantallas muy pequeñas */
+    }
+    .card-image-profile {
+        width: 8rem;  
+        height: 8rem;
+    }
+    .card-image-profile-developer {
+        width: 10rem;  
+        height: 14rem;
+    }
+}
+
+/* Para pantallas medianas (entre 600px y 900px de ancho) */
+@media (min-width: 600px) and (max-width: 900px) {
+    .card_background {
+        max-width: 25rem!important; /* Ajusta el max-width para pantallas medianas */
+    }
+}
+
+/* Para pantallas grandes (más de 900px de ancho) */
+@media (min-width: 900px) {
+    .card_background {
+        max-width: 30rem!important; /* Ajusta el max-width para pantallas grandes */
+    }
+}
