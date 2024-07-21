@@ -18,7 +18,53 @@ __import__('sqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('sqlite3')
     
+import os
+from pathlib import Path
+
+# ANSI color codes
+RED = '\033[91m'
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+RESET = '\033[0m'
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = "/static/"
+
+# STATICFILES_DIRS: Directories where Django will look for additional static files.
+# These are typically your development static files.
+STATICFILES_DIRS = [BASE_DIR / "Client_Side" / "static"]
+
+# STATIC_ROOT: The directory where Django will collect all static files for deployment.
+# This is used when you run the 'collectstatic' management command.
+STATIC_ROOT = os.path.join(BASE_DIR, "Client_Side", "statics_deployment")
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "Client_Side" / 'media_products'
+
+# Function to check all directories
+def check_directories():
+    directories = [
+        ('BASE_DIR', BASE_DIR),
+        ('STATIC_ROOT', Path(STATIC_ROOT)),
+        ('MEDIA_ROOT', MEDIA_ROOT)
+    ] + [('STATICFILES_DIR', dir) for dir in STATICFILES_DIRS]
+
+    for name, path in directories:
+        if not Path(path).exists():
+            print(f"{YELLOW}WARNING: {name} does not exist: {path}{RESET}")
+        else:
+            print(f"{GREEN}{name} exists: {path}{RESET}")
+
+    if any(Path(STATIC_ROOT) == Path(dir) for dir in STATICFILES_DIRS):
+        print(f"{RED}ERROR: STATIC_ROOT should not be in STATICFILES_DIRS{RESET}")
+
+# Run the check
+check_directories()
+
 #print new line in blue
 print('\033[94m' +'________________________________'+ '\033[0m')
 #print in blue color Setting ENV Vars
@@ -223,15 +269,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "Client_Side", "static")] # path django searches the static files (images, styles in css and java scripts) for loaded 
-# STATIC_ROOT = os.path.join(BASE_DIR, "Client_Side", "statics_deployment")
-# define la carpeta mediaroot para los archivos estaticos que suben los usuarios
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "Client_Side",'media_products')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
