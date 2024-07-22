@@ -37,7 +37,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "Client_Side" / "static"]
 
 # STATIC_ROOT: The directory where Django will collect all static files for deployment.
-STATIC_ROOT = BASE_DIR / "collected_static"
+STATIC_ROOT = BASE_DIR / "collected_static/static/"
 
 # Media files
 MEDIA_URL = '/media/'
