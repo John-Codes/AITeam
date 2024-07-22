@@ -66,6 +66,33 @@ def check_directories():
 # Run the check
 check_directories()
 
+def check_static_files():
+    static_files = [
+        "css/style_chat.css",
+        "css/style_cards.css",
+        "js/landing.js",
+        "js/interactions-users-messages.js"
+    ]
+
+    missing_files = []
+
+    for file_path in static_files:
+        full_path = os.path.join(STATIC_ROOT, file_path)
+        if os.path.exists(full_path):
+            print(f"{GREEN}File exists: {full_path}{RESET}")
+        else:
+            missing_files.append(file_path)
+
+    if missing_files:
+        print(f"\n{RED}The following static files are missing in the deployment directory:{RESET}")
+        for file_path in missing_files:
+            print(f"- {file_path}")
+    else:
+        print(f"\n{GREEN}All static files exist in the deployment directory.{RESET}")
+
+# Run the check
+check_static_files()
+
 #print new line in blue
 print('\033[94m' +'________________________________'+ '\033[0m')
 #print in blue color Setting ENV Vars
@@ -89,8 +116,10 @@ if ENV_PATH.exists():
     # print("All environment variables:")
     #for key, value in os.environ.items():
     #     print(f"{key}: {value}")
-    for key, value in os.environ.items():
-          print('\033[92m' + (f'{key}: true' if value else f"{key}: {value}") + '\033[0m')
+
+    #CHECK ENVVARS Exist
+    # for key, value in os.environ.items():
+    #       print('\033[92m' + (f'{key}: true' if value else f"{key}: {value}") + '\033[0m')
 
 else:
     print(f"ERROR: .env file not found at {ENV_PATH.absolute()}")
@@ -113,7 +142,7 @@ print('\033[94m' +'________________________________'+ '\033[0m')
 SECRET_KEY = "django-insecure-x#@g(83fg26+c*bpz*0vepc=#eei3a&58zj3x@8z_k(2)*3n+_"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 #ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = ['https://efexzium.net','efexzium.net', '127.0.0.1', 'localhost', '0.0.0.0','216.172.109.33']
