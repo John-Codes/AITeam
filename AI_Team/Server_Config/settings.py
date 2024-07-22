@@ -34,13 +34,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = "/static/"
 
 # STATICFILES_DIRS: Directories where Django will look for additional static files.
-# These are typically your development static files.
-STATICFILES_DIRS = [BASE_DIR / "Client_Side"/ "static" ]
-#STATICFILES_DIR exists: /home/john/2024WBAITeam/AITeam/AI_Team/Client_Side/static
+STATICFILES_DIRS = [BASE_DIR / "Client_Side" / "static"]
 
 # STATIC_ROOT: The directory where Django will collect all static files for deployment.
-# This is used when you run the 'collectstatic' management command.
-STATIC_ROOT = os.path.join(BASE_DIR, "Client_Side", "statics_deployment")
+STATIC_ROOT = BASE_DIR / "collected_static"
 
 # Media files
 MEDIA_URL = '/media/'
@@ -50,17 +47,17 @@ MEDIA_ROOT = BASE_DIR / "Client_Side" / 'media_products'
 def check_directories():
     directories = [
         ('BASE_DIR', BASE_DIR),
-        ('STATIC_ROOT', Path(STATIC_ROOT)),
+        ('STATIC_ROOT', STATIC_ROOT),
         ('MEDIA_ROOT', MEDIA_ROOT)
     ] + [('STATICFILES_DIR', dir) for dir in STATICFILES_DIRS]
 
     for name, path in directories:
-        if not Path(path).exists():
+        if not path.exists():
             print(f"{YELLOW}WARNING: {name} does not exist: {path}{RESET}")
         else:
             print(f"{GREEN}{name} exists: {path}{RESET}")
 
-    if any(Path(STATIC_ROOT) == Path(dir) for dir in STATICFILES_DIRS):
+    if STATIC_ROOT in STATICFILES_DIRS:
         print(f"{RED}ERROR: STATIC_ROOT should not be in STATICFILES_DIRS{RESET}")
 
 # Run the check
