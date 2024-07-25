@@ -477,17 +477,16 @@ class OllamaRag:
 #define a class named open router
 class OpenRouter():
     def __init__(self):
-        # self.OPENROUTER_API_KEY = os.environ['OPENROUTER_API_KEY']
+        self.OPENROUTER_API_KEY = os.environ['OPENROUTER_API_KEY']
         # self.siteURL= os.environ['SITE_URL']
         # self.APP_NAME=os.environ['APP_NAME']
-        pass
-
+        
     def inference(self, messages):
         try:
             response = requests.post(
             url="https://openrouter.ai/api/v1/chat/completions",
             headers={
-                "Authorization": f"Bearer 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",
+                "Authorization": f"Bearer {self.OPENROUTER_API_KEY}",
                 "HTTP-Referer": f"Efexzium.net", # Optional, for including your app on openrouter.ai rankings.
                 "X-Title": f"AI Client Service", # Optional. Shows in rankings on openrouter.ai.
             },
