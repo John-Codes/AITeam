@@ -451,6 +451,8 @@ class OllamaRag:
         try:
         
             response = self.ORouter.inference(messages)
+            print("_________________________")
+            print("Response LLama3", response)
             if response == None:
             
                 chat = ollama_api.chat(

@@ -98,11 +98,13 @@ print('\033[94m' + "Setting Environment Variables..." + '\033[0m')
 ENV_PATH = BASE_DIR / '.env'
 print(f"Looking for .env file at: {ENV_PATH.absolute()}")
 print(f".env file exists: {ENV_PATH.exists()}")
-
 if ENV_PATH.exists():
     print(f"Loading .env file from {ENV_PATH}")
     load_dotenv(ENV_PATH)
     print("Environment variables after loading:")
+    OR = os.getenv("OPENROUTER_API_KEY")
+    if OR is not None:
+        print("Open Router",True)
     # print(f"PCI: {os.getenv('PCI')}")
     # print(f"PCS: {os.getenv('PCS')}")
     #print if env vars have value print true in green
