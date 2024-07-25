@@ -592,7 +592,7 @@ class Subscription(View):
         """
         try:
             #plans = SubscriptionDetail.objects.filter(name__in=["Basic AI Team Subscription", "Premium AI Team Subscription" ])
-            plans = SubscriptionDetail.objects.filter(plan_name__in=["AI Team Basic Plan", "Plan Premium"])
+            plans = SubscriptionDetail.objects.filter(plan_name__in=["Entry Plan","AI Team Basic Plan", "Plan Premium"])
 
 
             for plan in plans:
