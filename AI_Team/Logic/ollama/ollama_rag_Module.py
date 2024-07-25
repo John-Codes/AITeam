@@ -1,3 +1,6 @@
+import requests
+import json
+
 import random
 import os
 import sys
@@ -47,6 +50,7 @@ class OllamaRag:
         self.vectorstore = None
         self.client = None
         self.chroma_client = chromadb.PersistentClient(path=base_directory)
+        self.ORouter = OpenRouter()
 
 
 
@@ -443,31 +447,90 @@ class OllamaRag:
         return stream['message']["content"]
         
     def stream_query_ollama(self, messages):
-        chat = ollama_api.chat(
-        model='llama3',
-        messages=messages,
-        stream=True)
+        
         try:
-            for chunk in chat:
-              # Create a translation table mapping colons to None (removal)
-                trans_table = str.maketrans('', '', ':')
-                content = chunk['message']['content'].translate(trans_table)  # Remove colons using translate
-                print(content, end='', flush=True)
-                #create a 1-3 seconds delay
-                #REMOVE THIS
-                #time.sleep(random.randint(1,1))
-                yield content
-                sys.stdout.flush()
+        
+            response = self.ORouter.inference(messages)
+            if response == None:
+            
+                chat = ollama_api.chat(
+                model='llama3',
+                messages=messages,
+                stream=True)
+                for chunk in chat:
+                # Create a translation table mapping colons to None (removal)
+                    trans_table = str.maketrans('', '', ':')
+                    content = chunk['message']['content'].translate(trans_table)  # Remove colons using translate
+                    print(content, end='', flush=True)
+                    #create a 1-3 seconds delay
+                    #REMOVE THIS
+                    #time.sleep(random.randint(1,1))
+                    yield content
+                    sys.stdout.flush()
+            else:
+                yield response
         except Exception as e:
             print(e)
 
 
 
+#define a class named open router
+class OpenRouter():
+    def __init__(self):
+        # self.OPENROUTER_API_KEY = os.environ['OPENROUTER_API_KEY']
+        # self.siteURL= os.environ['SITE_URL']
+        # self.APP_NAME=os.environ['APP_NAME']
+        pass
+
+    def inference(self, messages):
+        try:
+            response = requests.post(
+            url="https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer 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",
+                "HTTP-Referer": f"Efexzium.net", # Optional, for including your app on openrouter.ai rankings.
+                "X-Title": f"AI Client Service", # Optional. Shows in rankings on openrouter.ai.
+            },
+            data=json.dumps({
+                "model": "meta-llama/llama-3-8b-instruct:free", # Optional
+                "messages": messages,
+            })
+            )
+            #if response.status_code == 200:
+            if response.status_code == 200:
+                return self.extract_message_content(response)
+            else:
+                return None
+            
+        except Exception as e:
+            print(e)
+            return None
+        
+    def extract_message_content(self, response_json):
+        try:
+            response_json = response_json.json()
+            print("_____________________________")
+            print("Response JSON:", response_json)
+            # Directly check if 'choices' exists and has at least one item
+            if 'choices' in response_json and len(response_json['choices']) > 0:
+                # Assuming the first choice's message content is what we want
+                return response_json['choices'][0]['message']['content']
+            else:
+                return None
+        except Exception as e:
+            print(e)
+            return None
+
+                
+    
+
 
 if __name__ == "__main__":
 
        try:
-            
+            # OR = OpenRouter()
+            # print(OR.inference())
+
             o = OllamaRag()
             o.add_pdf_to_new_temp_rag(pathpdf)
             result = o.query_temp_rag_single_question("Who is Johnny?")
